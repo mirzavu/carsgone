@@ -1,2 +1,2 @@
 * text=auto
-database/migrations/2016_07_31_024929_create_postal_codes_table.php filter=lfs diff=lfs merge=lfs -text
+database/seeds/PostalCodesTableSeeder.php filter=lfs diff=lfs merge=lfs -text

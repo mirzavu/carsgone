@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ChangeLocale;
+use App\Models\User;
+use App\Models\Vehicle;
+use App\Models\Dealer;
+use App\Models\Province;
+use App\Models\Make;
 
 class HomeController extends Controller
 {
@@ -14,6 +19,22 @@ class HomeController extends Controller
 	 */
 	public function index()
 	{
+		$provinces = Province::withCount(['vehicles' => function($query) {
+		    $query->active();
+		}])->orderBy('province_name', 'asc')->get();
+
+		$makes = Make::withCount(['vehicles' => function($query) {
+		    $query->active();
+		}])->orderBy('make_name', 'asc')->get();
+
+		foreach ($provinces as $province) {
+		    echo $province->province_name." ".$province->vehicles_count." \n";
+		}
+		exit;
+
+		$count = Vehicle::where('status_id', 1)->count();
+		$phone = User::find(1)->role;
+		var_dump('1');exit;
 		return view('front.index');
 	}
 

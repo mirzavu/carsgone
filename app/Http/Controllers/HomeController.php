@@ -8,6 +8,7 @@ use App\Models\Vehicle;
 use App\Models\Dealer;
 use App\Models\Province;
 use App\Models\Make;
+use App\Models\BodyStyleGroup;
 
 class HomeController extends Controller
 {
@@ -19,6 +20,7 @@ class HomeController extends Controller
 	 */
 	public function index()
 	{
+		$total = Vehicle::active()->count();
 		$provinces = Province::withCount(['vehicles' => function($query) {
 		    $query->active();
 		}])->orderBy('province_name', 'asc')->get();
@@ -26,6 +28,10 @@ class HomeController extends Controller
 		$makes = Make::withCount(['vehicles' => function($query) {
 		    $query->active();
 		}])->orderBy('make_name', 'asc')->get();
+
+		$body_style_groups = BodyStyleGroup::withCount(['vehicles' => function($query) {
+		    $query->active();
+		}])->orderBy('body_style_group_name', 'asc')->get();
 
 		foreach ($provinces as $province) {
 		    echo $province->province_name." ".$province->vehicles_count." \n";

@@ -21,6 +21,7 @@ class CreateVehiclesTable extends Migration
             $table->integer('status_id');
             $table->integer('condition_id');
             $table->integer('body_style_id')->nullable();
+            $table->integer('body_style_group_id')->nullable();
             $table->integer('year')->nullable();
             $table->decimal('price', 10, 2)->nullable();
             $table->decimal('mrp', 10, 2)->nullable();

@@ -14,6 +14,8 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
+    ini_set('memory_limit', '3G');
+
 require __DIR__.'/../vendor/autoload.php';
 
 /*

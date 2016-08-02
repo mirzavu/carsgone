@@ -5,5 +5,5 @@ bootstrap/cache/
 .env
 .env.*.php
 .env.php
-database/migrations/2016_07_31_024929_create_postal_codes_table.php
+database/seeds/PostalCodesTableSeeder.php
 

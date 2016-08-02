@@ -39,7 +39,7 @@ return [
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://localhost:8000',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -170,6 +170,7 @@ return [
 		App\Providers\RouteServiceProvider::class,
 		App\Services\Html\HtmlServiceProvider::class,
 		Bestmomo\Filemanager\FilemanagerServiceProvider::class,
+		Orangehill\Iseed\IseedServiceProvider::class,
 
 	],
 

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Role, App\Models\User, App\Models\Contact, App\Models\Post, App\Models\Tag, App\Models\PostTag, App\Models\Comment;
+use App\Models\Role, App\Models\User, App\Models\Contact, App\Models\Post, App\Models\Tag, App\Models\PostTag, App\Models\Comment, App\Models\Condition, App\Models\Partner;
 use App\Services\LoremIpsumGenerator;
 
 class DatabaseSeeder extends Seeder {
@@ -121,19 +121,7 @@ class DatabaseSeeder extends Seeder {
 <p>Odio fringilla class aliquam metus ipsum lorem luctus pharetra dictum, vehicula tempus in venenatis gravida ut gravida proin orci, quis sed platea mi quisque hendrerit semper hendrerit. Facilisis ante sapien faucibus ligula commodo vestibulum rutrum pretium, varius sem aliquet himenaeos dolor cursus nunc habitasse, aliquam ut curabitur ipsum luctus ut rutrum. Odio condimentum donec suscipit molestie est etiam sit rutrum dui nostra, sem aliquet conubia nullam sollicitudin rhoncus venenatis vivamus rhoncus netus, risus tortor non mauris turpis eget integer nibh dolor. Commodo venenatis ut molestie semper adipiscing amet cras, class donec sapien malesuada auctor sapien arcu inceptos, aenean consequat metus litora mattis vivamus.</p>
 
 <pre>
-<code class="language-php">protected function getUserByRecaller($recaller)
-{
-	if ($this-&gt;validRecaller($recaller) &amp;&amp; ! $this-&gt;tokenRetrievalAttempted)
-	{
-		$this-&gt;tokenRetrievalAttempted = true;
-
-		list($id, $token) = explode("|", $recaller, 2);
-
-		$this-&gt;viaRemember = ! is_null($user = $this-&gt;provider-&gt;retrieveByToken($id, $token));
-
-		return $user;
-	}
-}</code></pre>
+</pre>
 
 <p>Feugiat arcu adipiscing mauris primis ante ullamcorper ad nisi, lobortis arcu per orci malesuada blandit metus tortor, urna turpis consectetur porttitor egestas sed eleifend. Eget tincidunt pharetra varius tincidunt morbi malesuada elementum mi torquent mollis, eu lobortis curae purus amet vivamus amet nulla torquent, nibh eu diam aliquam pretium donec aliquam tempus lacus. Tempus feugiat lectus cras non velit mollis sit et integer, egestas habitant auctor integer sem at nam massa himenaeos, netus vel dapibus nibh malesuada leo fusce tortor. Sociosqu semper facilisis semper class tempus faucibus tristique duis eros, cubilia quisque habitasse aliquam fringilla orci non vel, laoreet dolor enim justo facilisis neque accumsan in.</p>
 
@@ -220,6 +208,48 @@ class DatabaseSeeder extends Seeder {
 			'user_id' => 3,
 			'post_id' => 1
 		]);
+
+		Condition::create([
+			'condition' => 'Used'
+		]);
+
+		Condition::create([
+			'condition' => 'New'
+		]);
+
+		Partner::create([
+			'partner' => 'Strathcom'
+		]);
+
+		Partner::create([
+			'partner' => 'Boost'
+		]);
+
+		Partner::create([
+			'partner' => 'C-Demo'
+		]);
+
+		\DB::table('drive_types')->delete();
+		\DB::table('drive_types')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'drive_type' => 'Front Wheel Drive',
+            ),
+            array (
+                'id' => 2,
+                'drive_type' => 'Rear Wheel Drive',
+            ),
+            array (
+                'id' => 3,
+                'drive_type' => 'All Wheel Drive',
+            ),
+            array (
+                'id' => 4,
+                'drive_type' => 'Four Wheel Drive',
+            ),
+        ));
+
 
 	}
 

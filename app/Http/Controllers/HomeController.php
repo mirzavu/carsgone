@@ -20,10 +20,11 @@ class HomeController extends Controller
 	 */
 	public function index()
 	{
+		$provinces = Province::find(1)->vehicles;
 		$total = Vehicle::active()->count();
-		$provinces = Province::withCount(['vehicles' => function($query) {
+		$provinces = Province::where('id','>',5)->withCount(['vehicles' => function($query) {
 		    $query->active();
-		}])->orderBy('province_name', 'asc')->get();
+		}])->having('vehicles_count', '>', 0)->orderBy('province_name', 'asc')->get();
 
 		$makes = Make::withCount(['vehicles' => function($query) {
 		    $query->active();

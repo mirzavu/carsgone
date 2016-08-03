@@ -5,5 +5,4 @@ bootstrap/cache/
 .env
 .env.*.php
 .env.php
-database/seeds/PostalCodesTableSeeder.php
 

@@ -1,3 +1,34 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9491e06842f150ddad9f1f34e8411c035389b780f549a0e80ec22af9f2786ade
-size 1460
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreatePostalCodesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('postal_codes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('postal_code');
+            $table->float('latitude');
+            $table->float('longitude');
+            $table->integer('province_id')->unsigned();
+            $table->integer('city_id')->unsigned();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('postal_codes');
+    }
+}

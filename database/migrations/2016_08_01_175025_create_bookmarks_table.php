@@ -18,12 +18,6 @@ class CreateBookmarksTable extends Migration
             $table->integer('vehicle_id')->unsigned();
             $table->timestamps();
         });
-
-        Schema::table('bookmarks', function(Blueprint $table) {
-            $table->foreign('user_id')
-                        ->references('id')
-                        ->on('users');
-        });
     }
 
     /**
@@ -33,9 +27,6 @@ class CreateBookmarksTable extends Migration
      */
     public function down()
     {
-        Schema::table('bookmarks', function(Blueprint $table) {
-            $table->dropForeign('bookmarks_user_id_foreign');
-        }); 
         Schema::drop('bookmarks');
     }
 }

@@ -17,12 +17,6 @@ class CreateCitiesTable extends Migration
             $table->increments('id');
             $table->string('city_name');
         });
-
-        Schema::table('cities', function(Blueprint $table) {
-            $table->foreign('province_id')
-                        ->references('id')
-                        ->on('provinces');
-        });
     }
 
     /**
@@ -32,9 +26,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::table('cities', function(Blueprint $table) {
-            $table->dropForeign('cities_province_id_foreign');
-        }); 
         Schema::drop('cities');
     }
 }

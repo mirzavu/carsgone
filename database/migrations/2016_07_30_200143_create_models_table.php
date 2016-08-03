@@ -18,14 +18,6 @@ class CreateModelsTable extends Migration
             $table->integer('make_id')->unsigned();
         });
 
-        Schema::table('models', function(Blueprint $table) {
-            $table->foreign('make_id')
-                        ->references('id')
-                        ->on('makes')
-                        ->onDelete('restrict')
-                        ->onUpdate('restrict');
-        });
-
     }
 
     /**
@@ -35,9 +27,6 @@ class CreateModelsTable extends Migration
      */
     public function down()
     {
-        Schema::table('models', function(Blueprint $table) {
-            $table->dropForeign('models_make_id_foreign');
-        }); 
         Schema::drop('models');
     }
 }

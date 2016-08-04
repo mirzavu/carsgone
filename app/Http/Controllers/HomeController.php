@@ -9,6 +9,7 @@ use App\Models\Dealer;
 use App\Models\Province;
 use App\Models\Make;
 use App\Models\BodyStyleGroup;
+use DB;
 
 class HomeController extends Controller
 {
@@ -21,28 +22,48 @@ class HomeController extends Controller
 	public function index()
 	{
 		$provinces = Province::find(1)->vehicles;
-		$total = Vehicle::active()->count();
-		$provinces = Province::where('id','>',5)->withCount(['vehicles' => function($query) {
+		$data['total'] = Vehicle::active()->count();
+		$data['provinces'] = Province::where('id','>',5)->withCount(['vehicles' => function($query) {
 		    $query->active();
 		}])->having('vehicles_count', '>', 0)->orderBy('province_name', 'asc')->get();
 
-		$makes = Make::withCount(['vehicles' => function($query) {
+		$data['makes'] = Make::withCount(['vehicles' => function($query) {
 		    $query->active();
 		}])->orderBy('make_name', 'asc')->get();
 
-		$body_style_groups = BodyStyleGroup::withCount(['vehicles' => function($query) {
+		$data['body_style_groups'] = BodyStyleGroup::withCount(['vehicles' => function($query) {
 		    $query->active();
 		}])->orderBy('body_style_group_name', 'asc')->get();
 
-		foreach ($provinces as $province) {
-		    echo $province->province_name." ".$province->vehicles_count." \n";
+		$data['prices'] = DB::table('vehicles')->select(DB::raw('concat(300*floor(price/300),"-",300*floor(price/300) + 300) as `range`,count(*) as `count`'))->groupBy('range')->get();
+		//var_dump($prices);
+		foreach ($data['prices'] as $price) {
+			//dd($price);
+		    echo $price->range." ";
 		}
-		exit;
-
+		
 		$count = Vehicle::where('status_id', 1)->count();
 		$phone = User::find(1)->role;
-		var_dump('1');exit;
-		return view('front.index');
+		return view('front.index', $data);
+	}
+
+	public function searchterm($term)
+	{
+		$terms = explode(" ",$term);
+		$flags = array('make' => 0,'model' =>0, 'province'=>0, 'city'=>0 );
+		foreach ($terms as $key) {
+			$make = Make::where('make_name','=',$key)-count();
+			if(Make::where('make_name','=',$key)-count() && $flags['make']==0)
+			{
+				$searchparam += "make-".$key;
+			}
+			elseif (Province::where('province_name','=',$key)-count()  && $flags['province']==0) 
+			{
+				$searchparam += "province-".$key;
+			}
+
+		}
+		return Response::json($searchparam);
 	}
 
 	/**

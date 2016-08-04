@@ -7,6 +7,9 @@ Route::group(['middleware' => ['web']], function () {
 		'uses' => 'HomeController@index', 
 		'as' => 'home'
 	]);
+
+	Route::get('/searchterm/{term}', 'HomeController@searchterm');
+
 	Route::get('language/{lang}', 'HomeController@language')->where('lang', '[A-Za-z_-]+');
 
 

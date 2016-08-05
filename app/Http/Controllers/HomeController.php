@@ -21,12 +21,12 @@ class HomeController extends Controller
 	 */
 	public function index()
 	{
-		$provinces = Province::find(1)->vehicles;
+		//$provinces = Province::find(1)->vehicles;
 		$data['total'] = Vehicle::active()->count();
 		$data['provinces'] = Province::where('id','>',5)->withCount(['vehicles' => function($query) {
 		    $query->active();
-		}])->having('vehicles_count', '>', 0)->orderBy('province_name', 'asc')->get();
-
+		}]);
+		$data['provinces']->having('vehicles_count', '>', 0)->orderBy('province_name', 'asc')->get();
 		$data['makes'] = Make::withCount(['vehicles' => function($query) {
 		    $query->active();
 		}])->orderBy('make_name', 'asc')->get();
@@ -47,20 +47,23 @@ class HomeController extends Controller
 		return view('front.index', $data);
 	}
 
-	public function searchterm($term)
+	public function searchTerm($term)
 	{
 		$terms = explode(" ",$term);
 		$flags = array('make' => 0,'model' =>0, 'province'=>0, 'city'=>0 );
+		$searchparam ='';
 		foreach ($terms as $key) {
-			$make = Make::where('make_name','=',$key)-count();
-			if(Make::where('make_name','=',$key)-count() && $flags['make']==0)
+			if(Make::where('make_name',"LIKE","%$key%")->count() && $flags['make']==0)
 			{
-				$searchparam += "make-".$key;
+				$param = Make::where('make_name',"LIKE","%$key%")->first();
+				$searchparam += "make-".$param;
 			}
-			elseif (Province::where('province_name','=',$key)-count()  && $flags['province']==0) 
-			{
-				$searchparam += "province-".$key;
+			elseif (Province::where('province_name',"LIKE","%$key%")->count()  && $flags['province']==0) 
+			{	
+				$param = Province::where('province_name',"LIKE","%$key%")->first();
+				$searchparam += "province-".$param;
 			}
+			$searchparam += "/";
 
 		}
 		return Response::json($searchparam);

@@ -37,7 +37,7 @@
 
 	<header role="banner">
 
-		<div class="brand">{{ trans('front/site.title') }}</div>
+		<!--<div class="brand">{{ trans('front/site.title') }}</div>-->
 		<div class="address-bar">{{ trans('front/site.sub-title') }}</div>
 		<div id="flags" class="text-center"></div>
 		<nav class="navbar navbar-default" role="navigation">

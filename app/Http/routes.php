@@ -10,7 +10,8 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/searchterm/{term}', 'HomeController@searchTerm');
 
-	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');;
+	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
+	Route::post('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
 
 	Route::get('language/{lang}', 'HomeController@language')->where('lang', '[A-Za-z_-]+');
 

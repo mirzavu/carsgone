@@ -10,7 +10,7 @@ class Make extends Model
 	
     public function models()
     {
-        return $this->hasMany('App\Models\Model');
+        return $this->hasMany('App\Models\VehicleModel');
     }
 
     public function vehicles()

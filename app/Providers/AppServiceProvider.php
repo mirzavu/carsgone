@@ -3,6 +3,7 @@
 use Illuminate\Support\ServiceProvider;
 use Validator;
 use App\Services\Validation;
+use DB;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -17,6 +18,11 @@ class AppServiceProvider extends ServiceProvider {
 		{
 		    return new Validation($translator, $data, $rules, $messages);
 		});
+		DB::listen(function ($query) {
+            echo $query->sql."<br>";
+            var_dump($query->bindings);echo "<br>";
+            echo $query->time;echo "<br>";
+        });
 	}
 
 	/**

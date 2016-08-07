@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ChangeLocale;
+use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Dealer;
@@ -19,8 +20,9 @@ class HomeController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
+		$loc = getLocation($request);
 		//$provinces = Province::find(1)->vehicles;
 		$data['total'] = Vehicle::active()->count();
 		$data['provinces'] = Province::where('id','>',5)->withCount(['vehicles' => function($query) {
@@ -41,9 +43,9 @@ class HomeController extends Controller
 			//dd($price);
 		    echo $price->range." ";
 		}
+
 		
 		$count = Vehicle::where('status_id', 1)->count();
-		$phone = User::find(1)->role;
 		return view('front.index', $data);
 	}
 

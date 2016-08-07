@@ -39,3 +39,21 @@ if (!function_exists('classActiveOnlySegment')) {
 		return '';
 	}
 }
+
+if (!function_exists('getLocation')) {
+	function getLocation($request)
+	{
+		if ($request->session()->has('zip')) {
+			$loc['zip'] = $request->session()->get('zip');
+			$loc['city'] = $request->session()->get('city');
+		}
+		else
+		{
+			$ip = $request->ip();
+			$loc = json_decode(file_get_contents('http://ip-api.com/json/123.237.131.97'),'true');
+			$request->session()->put('zip', $loc['zip']);
+			$request->session()->put('city', $loc['city']);
+		}
+		return $loc;
+	}
+}

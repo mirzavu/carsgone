@@ -1,7 +1,11 @@
 <?php
 
 Route::group(['middleware' => ['web']], function () {
-
+	Event::listen('illuminate.query', function($query)
+{
+    var_dump($query);
+});
+	
 	// Home
 	Route::get('/', [
 		'uses' => 'HomeController@index', 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Vehicle extends Model
 {
@@ -31,6 +32,10 @@ class Vehicle extends Model
             return $q;
         })->whereHas('model', function($q) use ($conditions) {
             return $q->where(['model_name'=>'CL']);
+        })->whereHas('dealer', function($q) use ($conditions) {
+            $lat = $conditions->get('lat');
+            $lon = $conditions->get('lon');
+            return $q->select(DB::raw("id, ( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) AS distance"))->having('distance','<',10000); //3959 for miles
         });
     }
 }

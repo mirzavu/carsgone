@@ -23,6 +23,7 @@ class HomeController extends Controller
 	public function index(Request $request)
 	{
 		$loc = getLocation($request);
+		dd($loc);
 		//$provinces = Province::find(1)->vehicles;
 		$data['total'] = Vehicle::active()->count();
 		$data['provinces'] = Province::where('id','>',5)->withCount(['vehicles' => function($query) {

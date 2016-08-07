@@ -46,6 +46,8 @@ if (!function_exists('getLocation')) {
 		if ($request->session()->has('zip')) {
 			$loc['zip'] = $request->session()->get('zip');
 			$loc['city'] = $request->session()->get('city');
+			$loc['lat'] = $request->session()->get('lat');
+			$loc['lon'] = $request->session()->get('lon');
 		}
 		else
 		{
@@ -53,6 +55,8 @@ if (!function_exists('getLocation')) {
 			$loc = json_decode(file_get_contents('http://ip-api.com/json/123.237.131.97'),'true');
 			$request->session()->put('zip', $loc['zip']);
 			$request->session()->put('city', $loc['city']);
+			$request->session()->put('lat', $loc['lat']);
+			$request->session()->put('lon', $loc['lon']);
 		}
 		return $loc;
 	}

@@ -22,6 +22,9 @@ class SearchController extends Controller
 				$conditions->put($value[0],$value[1]);
 			}
 		}
+		$loc = getLocation($request);
+		$conditions->put('lat',$loc['lat']);
+		$conditions->put('lon',$loc['lon']);
 		//dd($conditions);
 		/*$vehicles = new Vehicle();
         if($request->input('model'))

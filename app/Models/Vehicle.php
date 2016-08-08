@@ -25,13 +25,16 @@ class Vehicle extends Model
     public function scopeApplyFilter($query, $conditions)
     {
         return $query->where(function($q) use ($conditions){
-            if ($conditions->get('dealer_i')) {
-                $q->where('dealer_id', $conditions->get('dealer_id'));
+            if ($conditions->has('content')) {
+                $q->where('text', $conditions->get('content'));
             }
 
             return $q;
         })->whereHas('model', function($q) use ($conditions) {
-            return $q->where(['model_name'=>'CL']);
+            if ($conditions->has('model')) {
+                $q->where('model_name', $conditions->get('model'));
+            }
+            return $q;
         })->whereHas('dealer', function($q) use ($conditions) {
             $lat = $conditions->get('lat');
             $lon = $conditions->get('lon');

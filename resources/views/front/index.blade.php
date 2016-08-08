@@ -5,11 +5,8 @@
 		<div class="box">
 			<div class="col-lg-12">
 				<hr>
-				<form action="/search/sdf-sg/dealer_id-15/ewfw" method="POST">
-				    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-				    <input type="text" name="model">
-				    <input type="submit" name="">
-				</form>
+				    <input id="ss" type="text" name="searchText">
+				    <input id="sss" type="button" value="submit" >
 				<h2 class="intro-text text-center"><strong>Comitem</strong></h2>
 				<hr>
 				<img class="img-responsive img-left" src="img/laravel-l-slant.png" alt="">

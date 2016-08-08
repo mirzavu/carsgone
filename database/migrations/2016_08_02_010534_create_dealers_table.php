@@ -26,8 +26,8 @@ class CreateDealersTable extends Migration
             $table->string('fax', 20);
             $table->string('url');
             $table->string('postal_code',10);
-            $table->float('latitude');
-            $table->float('longitude');
+            $table->double('latitude', 5, 8);
+            $table->double('longitude', 5, 8);
             $table->boolean('featured')->default(false);
             $table->dateTime('featured_expires');
             $table->integer('status');

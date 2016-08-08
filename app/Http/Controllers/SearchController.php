@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
+use App\Models\Make;
+use App\Models\Province;
 
 use App\Http\Requests;
 use DB;
@@ -13,7 +15,8 @@ class SearchController extends Controller
     public function searchHandler(Request $request, $params)
 	{
 
-		$conditions = collect($request->only(['province','city','model', 'make', 'year', 'minPrice', 'maxPrice']));
+
+		$conditions = collect($request->only(['province','city','model', 'make', 'year', 'minPrice', 'maxPrice','content']));
 		$param = explode('/', $params);
 		foreach ($param as $key => &$value) {
 			if($this->checkKey($value))
@@ -36,31 +39,38 @@ class SearchController extends Controller
             });
 
         }
-
         $vehicles = $vehicles->where('dealer_id', '=', '15');
 
         $result = $vehicles->get();
         dd($result);*/
         $vehicles = Vehicle::applyFilter($conditions);
-		$vehicles->select(DB::raw('count(*) as total'))->groupBy('dealer_id');
+		
 		$result = $vehicles->get();
+
+		if(!$conditions->has('make'))
+		{
+			$makes = Vehicle::applyFilter($conditions)->whereHas('make', function($q){
+	            return $q->select('make_name')->groupBy('id');
+	        });
+		}
+		//$vehicles->select(DB::raw('count(*) as total'))->groupBy('dealer_id');
 		dd($result);
 
 		$vehicles = Vehicle::where(function($q) use ($conditions){
-		    if ($conditions->get('dealer_i')) {
+		    if ($conditions->has('dealer_i')) {
 		        $q->where('dealer_id', $conditions->get('dealer_id'));
 		    }
-
 		    return $q;
 		})->whereHas('model', function($q) use ($conditions) {
-		    return $q->where(['model_name'=>'CL']);
+		    if ($conditions->has('model')) {
+		        $q->where('model_name', $conditions->get('model'));
+		    }
+		    return $q;
 		});
 		//$t=$vehicles->replicate();
 		$vehicles->select(DB::raw('count(*) as total'))->groupBy('dealer_id');
 		$result = $vehicles->get();
 		dd($result);
-		
-
 	}
 
     public function checkKey($key)

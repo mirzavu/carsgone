@@ -27,6 +27,7 @@
 		{!! HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800') !!}
 		{!! HTML::style('http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic') !!}
 
+
 	</head>
 
   <body>
@@ -128,7 +129,23 @@
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 	{!! HTML::script('js/plugins.js') !!}
 	{!! HTML::script('js/main.js') !!}
+	{!! HTML::script('js/application.js') !!}
+	<script>
+	$('#sss').on('click',function(){
+		var k = $('#ss').val();
+		var response = '';
+		$.ajax({ type: "GET",   
+		         url: "{{ url('searchterm/') }}/"+k,   
+		         async: false,
+		         success : function(text)
+		         {
+		             response = text;
+		             console.log(response);
+		         }
+		});
 
+	})
+	</script>
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 	<script>
 		(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

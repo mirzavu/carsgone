@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\ChangeLocale;
 use Illuminate\Http\Request;
+
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Dealer;
@@ -23,7 +24,6 @@ class HomeController extends Controller
 	public function index(Request $request)
 	{
 		$loc = getLocation($request);
-		dd($loc);
 		//$provinces = Province::find(1)->vehicles;
 		$data['total'] = Vehicle::active()->count();
 		$data['provinces'] = Province::where('id','>',5)->withCount(['vehicles' => function($query) {
@@ -54,22 +54,27 @@ class HomeController extends Controller
 	{
 		$terms = explode(" ",$term);
 		$flags = array('make' => 0,'model' =>0, 'province'=>0, 'city'=>0 );
-		$searchparam ='';
-		foreach ($terms as $key) {
-			if(Make::where('make_name',"LIKE","%$key%")->count() && $flags['make']==0)
+		$search_param ='';
+		foreach ($terms as $key => $keyword) {
+			if(Make::where('make_name',"LIKE","%$keyword%")->count() && $flags['make']==0)
 			{
-				$param = Make::where('make_name',"LIKE","%$key%")->first();
-				$searchparam += "make-".$param;
+				$param = Make::where('make_name',"LIKE","%$keyword%")->first();
+				unset($terms[$key]);
+				$search_param .= "make-".$param->make_name."/";
 			}
-			elseif (Province::where('province_name',"LIKE","%$key%")->count()  && $flags['province']==0) 
+			elseif (Province::where('province_name',"LIKE","%$keyword%")->count()  && $flags['province']==0) 
 			{	
-				$param = Province::where('province_name',"LIKE","%$key%")->first();
-				$searchparam += "province-".$param;
+				$param = Province::where('province_name',"LIKE","%$keyword%")->first();
+				$search_param .= "province-".$param->province."/";
+				unset($terms[$key]);
 			}
-			$searchparam += "/";
-
 		}
-		return Response::json($searchparam);
+		if(count($terms))
+		{
+			$content_param = implode(" ", $terms);
+			$search_param.= "content-".$content_param;
+		}
+		echo $search_param;exit;
 	}
 
 	/**

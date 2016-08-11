@@ -61,12 +61,14 @@ class HomeController extends Controller
 				$param = Make::where('make_name',"LIKE","%$keyword%")->first();
 				unset($terms[$key]);
 				$search_param .= "make-".$param->make_name."/";
+				$flags['make']=1;
 			}
-			elseif (Province::where('province_name',"LIKE","%$keyword%")->count()  && $flags['province']==0) 
+			elseif (Province::where('province_name',"=","$keyword")->count()  && $flags['province']==0) 
 			{	
-				$param = Province::where('province_name',"LIKE","%$keyword%")->first();
-				$search_param .= "province-".$param->province."/";
+				$param = Province::where('province_name',"=","$keyword")->first();
+				$search_param .= "province-".$param->province_name."/";
 				unset($terms[$key]);
+				$flags['province']=1;
 			}
 		}
 		if(count($terms))

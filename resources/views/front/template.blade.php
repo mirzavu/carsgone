@@ -137,10 +137,9 @@
 		$.ajax({ type: "GET",   
 		         url: "{{ url('searchterm/') }}/"+k,   
 		         async: false,
-		         success : function(text)
+		         success : function(response)
 		         {
-		             response = text;
-		             console.log(response);
+		             window.location = "{{ url('search/') }}/"+response;
 		         }
 		});
 

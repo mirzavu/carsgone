@@ -7,14 +7,16 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "backpack/base": "^0.6.12"
+        "backpack/base": "^0.6.12",
+        "backpack/crud": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
         "symfony/css-selector": "2.8.*|3.0.*",
-        "symfony/dom-crawler": "2.8.*|3.0.*"
+        "symfony/dom-crawler": "2.8.*|3.0.*",
+        "backpack/generators": "^1.1"
     },
     "autoload": {
         "classmap": [

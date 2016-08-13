@@ -3,10 +3,10 @@
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\MakeRequest as StoreRequest;
-use App\Http\Requests\MakeRequest as UpdateRequest;
+use App\Http\Requests\VehicleModelRequest as StoreRequest;
+use App\Http\Requests\VehicleModelRequest as UpdateRequest;
 
-class MakeCrudController extends CrudController {
+class VehicleModelCrudController extends CrudController {
 
 	public function __construct() {
         parent::__construct();
@@ -16,9 +16,38 @@ class MakeCrudController extends CrudController {
 		| BASIC CRUD INFORMATION
 		|--------------------------------------------------------------------------
 		*/
-        $this->crud->setModel("App\Models\Make");
-        $this->crud->setRoute("admin/make");
-        $this->crud->setEntityNameStrings('make', 'makes');
+        $this->crud->setModel("App\Models\VehicleModel");
+        $this->crud->setRoute("admin/model");
+        $this->crud->setEntityNameStrings('Model', 'Models');
+
+        $this->crud->addColumn([
+                                'name' => 'model_name',
+                                'label' => 'Model'
+                            ]);
+        $this->crud->addColumn([
+                                'label' => "Make",
+                                'type' => 'select',
+                                'name' => 'make_id',
+                                'entity' => 'make',
+                                'attribute' => 'make_name',
+                                'model' => "App\Models\Make"
+                            ]);
+
+        $this->crud->addField([    // TEXT
+                                'name' => 'model_name',
+                                'label' => 'Model Name',
+                                'type' => 'text',
+                            ]);
+        $this->crud->addField([    // SELECT
+                                'label' => "Make Name",
+                                'type' => 'select2',
+                                'name' => 'make_id',
+                                'entity' => 'make',
+                                'attribute' => 'make_name',
+                                'model' => "App\Models\Make"
+                            ]);
+        $this->crud->enableAjaxTable();
+
 
         /*
 		|--------------------------------------------------------------------------
@@ -26,13 +55,12 @@ class MakeCrudController extends CrudController {
 		|--------------------------------------------------------------------------
 		*/
 
-		$this->crud->setFromDb();
+		//$this->crud->setFromDb();
 
 		// ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
-        $this->crud->removeField('created_at', 'both');
-        $this->crud->enableAjaxTable();
+        // $this->crud->removeField('name', 'update/create/both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
 
         // ------ CRUD COLUMNS

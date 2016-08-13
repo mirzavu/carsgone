@@ -27,4 +27,5 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 Route::group(['namespace' => 'Admin','middleware' => 'admin', 'prefix' => config('backpack.base.route_prefix')], function () {
 	CRUD::resource('make', 'MakeCrudController');
+	CRUD::resource('model', 'VehicleModelCrudController');
 	});

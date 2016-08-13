@@ -1,44 +1,66 @@
-@extends('front.template')
+@extends('layouts.app')
 
-@section('main')
-	<div class="row">
-		<div class="box">
-			<div class="col-lg-12">
-				@if(session()->has('error'))
-					@include('partials/error', ['type' => 'danger', 'message' => session('error')])
-				@endif	
-				<hr>	
-				<h2 class="intro-text text-center">{{ trans('front/login.connection') }}</h2>
-				<hr>
-				<p>{{ trans('front/login.text') }}</p>				
-				
-				{!! Form::open(['url' => 'auth/login', 'method' => 'post', 'role' => 'form']) !!}	
-				
-				<div class="row">
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Login</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                        {{ csrf_field() }}
 
-					{!! Form::control('text', 6, 'log', $errors, trans('front/login.log')) !!}
-					{!! Form::control('password', 6, 'password', $errors, trans('front/login.password')) !!}
-					{!! Form::submit(trans('front/form.send'), ['col-lg-12']) !!}
-					{!! Form::check('memory', trans('front/login.remind')) !!}
-					{!! Form::text('address', '', ['class' => 'hpet']) !!}		  
-					<div class="col-lg-12">					
-						{!! link_to('password/email', trans('front/login.forget')) !!}
-					</div>
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
-				</div>
-				
-				{!! Form::close() !!}
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
 
-				<div class="text-center">
-					<hr>
-						<h2 class="intro-text text-center">{{ trans('front/login.register') }}</h2>
-					<hr>	
-					<p>{{ trans('front/login.register-info') }}</p>
-					{!! link_to('auth/register', trans('front/login.registering'), ['class' => 'btn btn-default']) !!}
-				</div>
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-			</div>
-		</div>
-	</div>
-@stop
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label for="password" class="col-md-4 control-label">Password</label>
 
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" name="password">
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember"> Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-sign-in"></i> Login
+                                </button>
+
+                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

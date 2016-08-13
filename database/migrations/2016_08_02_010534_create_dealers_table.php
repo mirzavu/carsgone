@@ -14,7 +14,7 @@ class CreateDealersTable extends Migration
     {
         Schema::create('dealers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code', 30)->unique();
+            $table->string('code', 30);
             $table->string('name', 50);
             $table->string('email', 50)->unique();
             $table->string('address', 100);
@@ -26,8 +26,8 @@ class CreateDealersTable extends Migration
             $table->string('fax', 20);
             $table->string('url');
             $table->string('postal_code',10);
-            $table->double('latitude', 5, 8);
-            $table->double('longitude', 5, 8);
+            $table->double('latitude', 9, 5);
+            $table->double('longitude', 9, 5);
             $table->boolean('featured')->default(false);
             $table->dateTime('featured_expires');
             $table->integer('status');

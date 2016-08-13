@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ChangeLocale;
+use App\Http\Requests;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -21,9 +22,15 @@ class HomeController extends Controller
 	 *
 	 * @return Response
 	 */
+
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 	public function index(Request $request)
 	{
-		$loc = getLocation($request);
+		//$loc = getLocation($request);
 		//$provinces = Province::find(1)->vehicles;
 		$data['total'] = Vehicle::active()->count();
 		$data['provinces'] = Province::where('id','>',5)->withCount(['vehicles' => function($query) {
@@ -44,7 +51,7 @@ class HomeController extends Controller
 			//dd($price);
 		    echo $price->range." ";
 		}
-
+		exit;
 		
 		$count = Vehicle::where('status_id', 1)->count();
 		return view('front.index', $data);
@@ -77,23 +84,6 @@ class HomeController extends Controller
 			$search_param.= "content-".$content_param;
 		}
 		echo $search_param;exit;
-	}
-
-	/**
-	 * Change language.
-	 *
-	 * @param  App\Jobs\ChangeLocaleCommand $changeLocale
-	 * @param  String $lang
-	 * @return Response
-	 */
-	public function language( $lang,
-		ChangeLocale $changeLocale)
-	{		
-		$lang = in_array($lang, config('app.languages')) ? $lang : config('app.fallback_locale');
-		$changeLocale->lang = $lang;
-		$this->dispatch($changeLocale);
-
-		return redirect()->back();
 	}
 
 }

@@ -18,6 +18,7 @@
 	]);
 
 	Route::get('/searchterm/{term}', 'HomeController@searchTerm');
+	Route::get('/auto-loans/{slug}', 'ContentController@viewPage');
 
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
 	Route::post('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
@@ -29,4 +30,5 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin', 'prefix' => config
 	CRUD::resource('make', 'MakeCrudController');
 	CRUD::resource('model', 'VehicleModelCrudController');
 	CRUD::resource('dealer', 'DealerCrudController');
+	CRUD::resource('content', 'ContentPageCrudController');
 	});

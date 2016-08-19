@@ -10,6 +10,7 @@ class VehiclesTableSeeder extends Seeder{
 		foreach(range(1,25) as $index)
 		{		
 			Dealer::create([
+				'email' => str_random(9).'@gmail.com',
 				'province_id' => rand(1,13),
 				'city_id' => rand(0,60),
 				'latitude' => rand(9*1000,11*1000)/1000,

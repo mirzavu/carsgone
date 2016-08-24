@@ -29,17 +29,21 @@ class HomeController extends Controller
     }
 
 	public function index(Request $request)
-	{
+	{	
 		//$loc = getLocation($request);
 		//$provinces = Province::find(1)->vehicles;
 		$data['total'] = Vehicle::active()->count();
-		$data['provinces'] = Province::where('id','>',5)->withCount(['vehicles' => function($query) {
+		$data['provinces'] = Province::withCount(['vehicles' => function($query) {
 		    $query->active();
-		}]);
-		$data['provinces']->having('vehicles_count', '>', 0)->orderBy('province_name', 'asc')->get();
+		}])->orderBy('province_name', 'asc')->get();
+		// dd($data['provinces'][0]);
+		// $data['provinces'] = Province::where('id','>',5)->withCount(['vehicles' => function($query) {
+		//     $query->active();
+		// }]);
+		// $data['provinces']->having('vehicles_count', '>', 0)->orderBy('province_name', 'asc')->get();
 		$data['makes'] = Make::withCount(['vehicles' => function($query) {
 		    $query->active();
-		}])->orderBy('make_name', 'asc')->get();
+		}])->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
 
 		$data['body_style_groups'] = BodyStyleGroup::withCount(['vehicles' => function($query) {
 		    $query->active();
@@ -47,14 +51,10 @@ class HomeController extends Controller
 
 		$data['prices'] = DB::table('vehicles')->select(DB::raw('concat(300*floor(price/300),"-",300*floor(price/300) + 300) as `range`,count(*) as `count`'))->groupBy('range')->get();
 		//var_dump($prices);
-		foreach ($data['prices'] as $price) {
-			//dd($price);
-		    echo $price->range." ";
-		}
-		exit;
+		
 		
 		$count = Vehicle::where('status_id', 1)->count();
-		return view('front.index', $data);
+		return view('front.home', $data);
 	}
 
 	public function searchTerm($term)

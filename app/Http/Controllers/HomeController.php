@@ -11,8 +11,10 @@ use App\Models\Vehicle;
 use App\Models\Dealer;
 use App\Models\Province;
 use App\Models\Make;
+use App\Models\VehicleModel;
 use App\Models\BodyStyleGroup;
 use DB;
+use Log;
 
 class HomeController extends Controller
 {
@@ -30,7 +32,7 @@ class HomeController extends Controller
 
 	public function index(Request $request)
 	{	
-		//$loc = getLocation($request);
+		$data['location'] = getLocation($request);
 		//$provinces = Province::find(1)->vehicles;
 		$data['total'] = Vehicle::active()->count();
 		$data['provinces'] = Province::withCount(['vehicles' => function($query) {
@@ -48,14 +50,28 @@ class HomeController extends Controller
 		$data['body_style_groups'] = BodyStyleGroup::withCount(['vehicles' => function($query) {
 		    $query->active();
 		}])->orderBy('body_style_group_name', 'asc')->get();
+		//dd($data['body_style_groups']);
 
-		$data['prices'] = DB::table('vehicles')->select(DB::raw('concat(300*floor(price/300),"-",300*floor(price/300) + 300) as `range`,count(*) as `count`'))->groupBy('range')->get();
-		//var_dump($prices);
-		
-		
-		$count = Vehicle::where('status_id', 1)->count();
+		$prices = DB::table('vehicles')->select(DB::raw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`'))->groupBy('range')->get();
+
+		$data['prices'] = $this->format_price_range($prices);
+		$data['count'] = Vehicle::where('status_id', 1)->count();
 		return view('front.home', $data);
 	}
+
+	public function format_price_range(&$prices)
+	{
+		foreach ($prices as &$price) 
+		{
+			$range = explode('-', $price->range);
+			$range[0] = '$'.$range[0];
+			$range[1] = '$'.$range[1];
+			$price->range = join(" - ", $range);
+		}
+		return $prices;
+	}
+
+		
 
 	public function searchTerm($term)
 	{
@@ -84,6 +100,13 @@ class HomeController extends Controller
 			$search_param.= "content-".$content_param;
 		}
 		echo $search_param;exit;
+	}
+
+	public function getModels($make_id)
+	{
+		$models = VehicleModel::where('make_id',"=",$make_id);
+		Log::info('Showing user profile for user: '.json_encode($models));
+		echo json_encode($models);
 	}
 
 }

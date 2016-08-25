@@ -26,6 +26,8 @@ class VehiclesTableSeeder extends Seeder{
 				'text' => str_random(40),
 				'make_id' => rand(1,50),
 				'model_id' => rand(1,100),
+				'body_style_group_id' => rand(1,8),
+				'price' => rand(1,60000),
 				]);
 		}
 	}

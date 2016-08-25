@@ -23,8 +23,8 @@
     <div class="header-upper">
         <div class="container">
             <ul class="upper-nav">
-                <li><a href="#"><i class="fa fa-map-marker"></i> Whitecourt</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> {{ $location['city']}}</a></li>
+                <li><a href="#">Contact: 123-456-7890</a></li>
             </ul>
             <ul class="upper-nav right">
                 <li><a href="#">Sign-Up</a></li>
@@ -46,8 +46,8 @@
           <a href="#" class="hero-btn"><span>Browse Cars</span></a>
           <div class="header-search">
           <div class="header-search-box">
-            <input type="text" value="" placeholder="Find vehicle now..." class="search-input" />
-            <input type="submit" value="&#xf002;" class="search-submit" />
+            <input id="search_text" type="text" value="" placeholder="Find vehicle now..." class="search-input" />
+            <input id="search_icon" type="submit" value="&#xf002;" class="search-submit" />
             </div>
           </div>
          
@@ -139,6 +139,33 @@
         $('.material').materialForm(); // Apply material
         
     });
+</script>
+<script>
+$('#search_icon').on('click',function(){
+    var term = $('#search_text').val();
+    var response = '';
+    $.ajax({ type: "GET",   
+             url: "{{ url('searchterm/') }}/"+term,   
+             async: false,
+             success : function(response)
+             {
+                 window.location = "{{ url('search/') }}/"+response;
+             }
+    });
+
+})
+
+function setModel(make) {
+    var id = make.value;  
+    $.ajax({ type: "GET",   
+             url: "{{ url('getModels/') }}/"+id,   
+             async: false,
+             success : function(response)
+             {
+                 console.log(response);
+             }
+    });
+}
 </script>
 </body>
 </html>

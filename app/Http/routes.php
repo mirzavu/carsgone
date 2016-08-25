@@ -18,6 +18,7 @@
 	]);
 
 	Route::get('/searchterm/{term}', 'HomeController@searchTerm');
+	Route::get('/getModels/{term}', 'HomeController@getModels');
 	Route::get('/auto-loans/{slug}', 'ContentController@viewPage');
 
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');

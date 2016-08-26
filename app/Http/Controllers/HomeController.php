@@ -34,22 +34,17 @@ class HomeController extends Controller
 	{	
 		$data['location'] = getLocation($request);
 		//$provinces = Province::find(1)->vehicles;
-		$data['total'] = Vehicle::active()->count();
-		$data['provinces'] = Province::withCount(['vehicles' => function($query) {
-		    $query->active();
-		}])->orderBy('province_name', 'asc')->get();
+		$data['total'] = Vehicle::count();
+
+		$data['provinces'] = Province::withCount('vehicles')->orderBy('province_name', 'asc')->get();
 		// dd($data['provinces'][0]);
 		// $data['provinces'] = Province::where('id','>',5)->withCount(['vehicles' => function($query) {
 		//     $query->active();
 		// }]);
 		// $data['provinces']->having('vehicles_count', '>', 0)->orderBy('province_name', 'asc')->get();
-		$data['makes'] = Make::withCount(['vehicles' => function($query) {
-		    $query->active();
-		}])->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
+		$data['makes'] = Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
 
-		$data['body_style_groups'] = BodyStyleGroup::withCount(['vehicles' => function($query) {
-		    $query->active();
-		}])->orderBy('body_style_group_name', 'asc')->get();
+		$data['body_style_groups'] = BodyStyleGroup::withCount('vehicles')->orderBy('body_style_group_name', 'asc')->get();
 		//dd($data['body_style_groups']);
 
 		$prices = DB::table('vehicles')->select(DB::raw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`'))->groupBy('range')->get();
@@ -104,7 +99,7 @@ class HomeController extends Controller
 
 	public function getModels($make_id)
 	{
-		$models = VehicleModel::where('make_id',"=",$make_id);
+		$models = VehicleModel::where('make_id',"=",$make_id)->get();
 		Log::info('Showing user profile for user: '.json_encode($models));
 		echo json_encode($models);
 	}

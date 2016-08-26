@@ -6,29 +6,33 @@ use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\Make;
 use App\Models\Province;
+use App\Models\City;
 
 use App\Http\Requests;
 use DB;
 
 class SearchController extends Controller
 {
+	protected $filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon');
+
     public function searchHandler(Request $request, $params)
 	{
 
-
-		$conditions = collect($request->only(['province','city','model', 'make', 'year', 'minPrice', 'maxPrice','content']));
+		$conditions = collect($request->only($this->filters));
 		$param = explode('/', $params);
 		foreach ($param as $key => &$value) {
-			if($this->checkKey($value))
-			{
-				$value = explode('-', $value);
-				$conditions->put($value[0],$value[1]);
-			}
+			$value = explode('-', $value, 2);
+			$conditions->put($value[0],$value[1]);
 		}
 		$loc = getLocation($request);
 		$conditions->put('lat',$loc['lat']);
 		$conditions->put('lon',$loc['lon']);
-		//dd($conditions);
+		$this->validateSaveConditions($request, $conditions);
+		dd($conditions);
+		
+
+		
+		$this->getFilterData($conditions);
 		/*$vehicles = new Vehicle();
         if($request->input('model'))
         {
@@ -46,15 +50,10 @@ class SearchController extends Controller
         $vehicles = Vehicle::applyFilter($conditions);
 		
 		$result = $vehicles->get();
-
-		if(!$conditions->has('make'))
-		{
-			$makes = Vehicle::applyFilter($conditions)->whereHas('make', function($q){
-	            return $q->select('make_name')->groupBy('id');
-	        });
-		}
-		//$vehicles->select(DB::raw('count(*) as total'))->groupBy('dealer_id');
 		dd($result);
+		
+		//$vehicles->select(DB::raw('count(*) as total'))->groupBy('dealer_id');
+		
 
 		$vehicles = Vehicle::where(function($q) use ($conditions){
 		    if ($conditions->has('dealer_i')) {
@@ -73,14 +72,48 @@ class SearchController extends Controller
 		dd($result);
 	}
 
+	public function getFilterData($conditions)
+	{
+		if(!$conditions->get('make'))
+		{
+			$filter_data['makes'] = Vehicle::ApplyFilter($conditions)->join('makes','makes.id','=','vehicles.make_id')->selectRaw('count(makes.id) as make_count, make_name')->groupBy('makes.make_name')->get();
+		}
+		if(!$conditions->get('city'))
+		{
+			//ApplyFilter($conditions)->
+			$ss = Vehicle::ApplyFilter($conditions)
+					->with(['dealer.province' => function($query) {
+					    return $query->groupBy('province_name');
+					}])->get();
+			dd($ss);
+			$ss = Province::where('province_name','=','Manitoba')->first()->cities()->withCount(['vehicles' => function ($query) use ($conditions) {
+					    $query->applyFilter($conditions);
+
+					}])->get();
+			foreach ($ss as $value) {
+				dd($value);
+			}
+		}
+		dd($filter_data);
+	}
+
     public function checkKey($key)
 	{
 		$keys = explode('-', $key);
-		$attributes = array('make', 'model', 'province', 'city','dealer_id');
-		if(count($keys)>1 && in_array($keys[0], $attributes))
+		if(count($keys)>1 && in_array($keys[0], $this->filters))
 			return true;
 		else
 			return false;
+	}
+
+    public function validateSaveConditions($request, &$conditions)
+	{
+		foreach ($conditions->all() as $key => $value) {
+			if(in_array($key, $this->filters) && $value)
+				$request->session()->put($key,  $value);
+			else
+				$conditions->forget($key);
+		}
 	}
 
 }

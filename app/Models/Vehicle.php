@@ -3,10 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\StatusScope;
 use DB;
 
 class Vehicle extends Model
 {
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new StatusScope);
+    }
+
     public function dealer()
     {
         return $this->belongsTo('App\Models\Dealer');
@@ -17,6 +25,11 @@ class Vehicle extends Model
         return $this->belongsTo('App\Models\VehicleModel');
     }
 
+    public function make()
+    {
+        return $this->belongsTo('App\Models\Make');
+    }
+
     public function scopeActive($query)
     {
         return $query->where('status_id', '=', 1);
@@ -24,15 +37,28 @@ class Vehicle extends Model
 
     public function scopeApplyFilter($query, $conditions)
     {
+
         return $query->where(function($q) use ($conditions){
-            if ($conditions->has('content')) {
+            if ($conditions->get('content')) {
                 $q->where('text', $conditions->get('content'));
+            }
+
+            if ($conditions->get('price')) {
+                $range = explode('-', $conditions->get('price'));
+
+                $q->where('price', '>=',$range[0]);
+                $q->where('price', '<=',$range[1]);
             }
 
             return $q;
         })->whereHas('model', function($q) use ($conditions) {
-            if ($conditions->has('model')) {
+            if ($conditions->get('model')) {
                 $q->where('model_name', $conditions->get('model'));
+            }
+            return $q;
+        })->whereHas('dealer.province', function($q) use ($conditions) {
+            if ($conditions->get('province')) {
+                $q->where('province_name', $conditions->get('province'));
             }
             return $q;
         })->whereHas('dealer', function($q) use ($conditions) {

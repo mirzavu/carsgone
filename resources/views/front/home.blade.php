@@ -3,6 +3,7 @@
 @section('title', 'Carsgone')
 
 @section('content')
+
 <!-- Banner start -->
 	<div class="banner-container">
     	<div class="container">
@@ -10,23 +11,24 @@
             	<div class="col-sm-12">
         			<h1>Free Auto Classifieds</h1>
             		<h2>Browse {{$count}} currently listed vehicles in Canada</h2>
-                    <div class="advance-search-container material">
+                    <div class="advance-search-container">
                     	<ul class="advance-search">
-                        	<li id="make-list">
-								<select name="make" placeholder="Select Make" onchange="alert('ss')">
-                                    @foreach ($makes as $make)
+                        	<li>
+								<select id="make-select" name="make" placeholder="Select Make">
+								@foreach ($makes as $make)
                                     <option value="{{$make['id']}}">{{$make['make_name']}}</option>
-                                    @endforeach
+                                @endforeach
                                 </select>
                             </li>
                             <li>
-                            	<select name="model" placeholder="Select Model">
-                        		</select>
+                            	<select id="model-select" name="model" placeholder="Select Model">
+                            		<option value="test">Select Model</option>
+                                </select>
                             
                                  
                             </li>
                             <li>
-                            	<button type="submit"><span>Quick Search</span></button>
+                            	<button id="quick_search" type="submit" class="waves-effect"><span>Quick Search</span></button>
                             </li>
                         </ul>
                     </div>
@@ -59,7 +61,7 @@
                 <h4>Provinces - New &amp; Used Vehicles For Sale</h4>
                 <ul class="item-list">
             	@foreach ($provinces as $province)
-                	<li><a href="#">{{$province['province_name']}} ({{$province['vehicles_count']}})</a></li>
+                	<li><a href="/search/province-{{$province['province_name']}}">{{$province['province_name']}} ({{$province['vehicles_count']}})</a></li>
                 @endforeach
                  </ul>
                </div>
@@ -72,7 +74,7 @@
                 <h4>Select a Make below to narrow your vehicle search</h4>
                 <ul class="item-list">
                 @foreach ($makes as $make)
-                	<li><a href="#">{{$make['make_name']}} ({{$make['vehicles_count']}})</a></li>
+                	<li><a href="/search/make-{{$make['make_name']}}">{{$make['make_name']}} ({{$make['vehicles_count']}})</a></li>
                 @endforeach
                 </ul>
                </div>
@@ -85,7 +87,10 @@
                 <h4 class="mar-40">Select a Vehicle Style below to narrow your search</h4>
                 <ul class="item-list">
                 @foreach ($body_style_groups as $body_style_group)
-                    <li><a href="#"><span><img src="assets/images/icon-convertible.png" alt="" /></span>{{$body_style_group['body_style_group_name']}} ({{$body_style_group['vehicles_count']}})</a></li>
+                    <li><a href="/search/body-{{$body_style_group['body_style_group_name']}}">
+                    	<span><img src="assets/images/icon-{{$body_style_group['body_style_group_name']}}.png" alt="" /></span>{{$body_style_group['body_style_group_name']}} ({{$body_style_group['vehicles_count']}})
+                    	</a>
+                    </li>
                 @endforeach
                </ul>
                </div>
@@ -346,4 +351,5 @@
         </div>
     </div>
     <!-- popular Container  end -->
-   @endsection
+
+@endsection

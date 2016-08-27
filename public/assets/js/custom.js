@@ -18,13 +18,14 @@ $('.sidebar-overlay').click(function(){
 var snapSlider = document.getElementById('price-range');
 
 noUiSlider.create(snapSlider, {
-	start: [ 0, 500 ],
+	start: [ 0, 60000 ],
 	snap: false,
 	connect: true,
+  step: 1000,
 	range: {
 		'min': 0,
 		
-		'max': 1000
+		'max': 60000
 	}
 });
   

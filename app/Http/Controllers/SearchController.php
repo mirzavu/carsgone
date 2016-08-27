@@ -17,7 +17,7 @@ class SearchController extends Controller
 
     public function searchHandler(Request $request, $params)
 	{
-
+		$data['location'] = getLocation($request);
 		$conditions = collect($request->only($this->filters));
 		$param = explode('/', $params);
 		foreach ($param as $key => &$value) {
@@ -28,11 +28,10 @@ class SearchController extends Controller
 		$conditions->put('lat',$loc['lat']);
 		$conditions->put('lon',$loc['lon']);
 		$this->validateSaveConditions($request, $conditions);
-		dd($conditions);
 		
 
-		
-		$this->getFilterData($conditions);
+
+		//$this->getFilterData($conditions);
 		/*$vehicles = new Vehicle();
         if($request->input('model'))
         {
@@ -47,29 +46,14 @@ class SearchController extends Controller
 
         $result = $vehicles->get();
         dd($result);*/
-        $vehicles = Vehicle::applyFilter($conditions);
-		
-		$result = $vehicles->get();
-		dd($result);
-		
+        $data['makes'] = Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
+        $data['vehicles'] = Vehicle::applyFilter($conditions)->paginate(15);
+
+        $data['conditions'] = $conditions;
+
 		//$vehicles->select(DB::raw('count(*) as total'))->groupBy('dealer_id');
 		
-
-		$vehicles = Vehicle::where(function($q) use ($conditions){
-		    if ($conditions->has('dealer_i')) {
-		        $q->where('dealer_id', $conditions->get('dealer_id'));
-		    }
-		    return $q;
-		})->whereHas('model', function($q) use ($conditions) {
-		    if ($conditions->has('model')) {
-		        $q->where('model_name', $conditions->get('model'));
-		    }
-		    return $q;
-		});
-		//$t=$vehicles->replicate();
-		$vehicles->select(DB::raw('count(*) as total'))->groupBy('dealer_id');
-		$result = $vehicles->get();
-		dd($result);
+		return view('front.search', $data);
 	}
 
 	public function getFilterData($conditions)

@@ -20,6 +20,11 @@ class Vehicle extends Model
         return $this->belongsTo('App\Models\Dealer');
     }
 
+    public function bodyStyleGroup()
+    {
+        return $this->belongsTo('App\Models\BodyStyleGroup');
+    }
+
     public function model()
     {
         return $this->belongsTo('App\Models\VehicleModel');

@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Carsgone</title>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
-<link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="assets/css/materialize.css" rel="stylesheet" type="text/css">
-<link href="assets/css/slick.css" rel="stylesheet" type="text/css">
-<link href="assets/css/style.css" rel="stylesheet" type="text/css">
-<script src="assets/js/modernizr.js"></script> <!-- Modernizr -->
+<link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/materialize.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/slick.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+<script src="/assets/js/modernizr.js"></script> <!-- Modernizr -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -43,7 +43,7 @@
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><img src="assets/images/logo.png" alt="" /></a>
+          <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" alt="" /></a>
           <a href="#" class="hero-btn"><span>Browse Cars</span></a>
           <div class="header-search">
           <div class="header-search-box">
@@ -75,7 +75,7 @@
         	<div class="container">
             	<div class="row">
                     <div class="col-sm-4 footer-box">
-                    	    <a href="index.html" class="footer-logo"><img src="assets/images/footer-logo.png" alt="" /></a>
+                    	    <a href="index.html" class="footer-logo"><img src="/assets/images/footer-logo.png" alt="" /></a>
                             <h5>Contact</h5>
                             <p>198 West 21th Street, Suite 721, New York NY5109 Pacific Coast Highway, Los Angeles CA</p>
                             <p>Email: <a href="mailto:youremail@yourdomain.com">youremail@yourdomain.com</a></p>
@@ -127,13 +127,13 @@
         
     </footer>
     <!-- footer end -->
-<script type="text/javascript" src="assets/js/jquery-2.2.2.min.js"></script> 
-<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="assets/js/materialize.min.js"></script>
-<script type="text/javascript" src="assets/js/slick.min.js"></script>
-<script type="text/javascript" src="assets/js/main.js"></script>
-<script type="text/javascript" src="assets/js/nouislider.min.js"></script>
-<script type="text/javascript" src="assets/js/custom.js"></script> 
+<script type="text/javascript" src="/assets/js/jquery-2.2.2.min.js"></script> 
+<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/js/materialize.min.js"></script>
+<script type="text/javascript" src="/assets/js/slick.min.js"></script>
+<script type="text/javascript" src="/assets/js/main.js"></script>
+<script type="text/javascript" src="/assets/js/nouislider.min.js"></script>
+<script type="text/javascript" src="/assets/js/custom.js"></script> 
 <script type="text/javascript">
 $('#make-select').on('change',function(){
     var id = $('#make-select').val();
@@ -143,7 +143,7 @@ $('#make-select').on('change',function(){
              async: false,
              success : function(data)
              {  var models = jQuery.parseJSON(data);
-                model_html = '';
+                model_html = '<option value="" disabled selected>Select Model</option>';
                 $.each(models, function( index, value ) {
                   model_html += '<option value="'+value.model_name+'">'+value.model_name+'</option>';
                 });

@@ -14,7 +14,8 @@
                     <div class="advance-search-container">
                     	<ul class="advance-search">
                         	<li>
-								<select id="make-select" name="make" placeholder="Select Make">
+								<select id="make-select" name="make">
+                                <option value="" disabled selected>Select Make</option>
 								@foreach ($makes as $make)
                                     <option value="{{$make['id']}}">{{$make['make_name']}}</option>
                                 @endforeach
@@ -22,7 +23,7 @@
                             </li>
                             <li>
                             	<select id="model-select" name="model" placeholder="Select Model">
-                            		<option value="test">Select Model</option>
+                            		<option value="" disabled selected>Select Model</option>
                                 </select>
                             
                                  

@@ -16,6 +16,7 @@ class VehiclesTableSeeder extends Seeder{
 				'city_id' => rand(0,60),
 				'latitude' => rand(9*1000,11*1000)/1000,
 				'latitude' => rand(75.7*1000,77*1000)/1000,
+				'featured' => rand(0,1)
 				]);			
 		}
 		foreach(range(1,25000) as $index)
@@ -29,7 +30,9 @@ class VehiclesTableSeeder extends Seeder{
 				'model_id' => rand(1,100),
 				'body_style_group_id' => rand(1,8),
 				'price' => rand(1,60000),
-				'year' => rand(2000,2016)
+				'year' => rand(2000,2016),
+				'odometer' => rand(1,60000),
+				'condition' => rand(0,1)
 				]);
 		}
 	}

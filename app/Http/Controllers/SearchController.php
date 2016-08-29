@@ -10,27 +10,49 @@ use App\Models\City;
 
 use App\Http\Requests;
 use DB;
+use Log;
 
 class SearchController extends Controller
 {
-	protected $filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon');
+	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer');
+	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer');
+	protected $url_filters = array('make','model', 'province', 'city', 'body','year');
+	protected $post_filters = array('sort','condition', 'price', 'lat', 'lon','odometer');
+	protected $url_params;
 
-    public function searchHandler(Request $request, $params)
+    public function searchHandler(Request $request, $params=false)
 	{
-		$data['location'] = getLocation($request);
-		$conditions = collect($request->only($this->filters));
-		$param = explode('/', $params);
-		foreach ($param as $key => &$value) {
-			$value = explode('-', $value, 2);
-			$conditions->put($value[0],$value[1]);
+		$conditions = collect();
+		$this->sessionToConditions($request, $conditions);
+		if($params){
+			$param = explode('/', $params);
+			foreach ($param as $key => &$value) {
+				$value = explode('-', $value, 2);
+				$conditions->put($value[0],$value[1]);
+			}
 		}
-		$loc = getLocation($request);
-		$conditions->put('lat',$loc['lat']);
-		$conditions->put('lon',$loc['lon']);
+
+
+		if(!$conditions->get('province'))  // set local area if no province in url
+		{
+			$data['location'] = getLocation($request);
+			$loc = getLocation($request);
+			$conditions->put('lat',$loc['lat']);
+			$conditions->put('lon',$loc['lon']);
+		}
+
 		$this->validateSaveConditions($request, $conditions);
 		
-
-
+		//Sorting set
+		if($conditions->get('sort'))
+		{
+			list($sort,$direction) = explode('-',$conditions->get('sort'));
+		}
+		else
+		{
+			$sort = 'created_at';
+			$direction = 'desc';
+		}
 		//$this->getFilterData($conditions);
 		/*$vehicles = new Vehicle();
         if($request->input('model'))
@@ -46,14 +68,33 @@ class SearchController extends Controller
 
         $result = $vehicles->get();
         dd($result);*/
-        $data['makes'] = Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
-        $data['vehicles'] = Vehicle::applyFilter($conditions)->paginate(15);
 
-        $data['conditions'] = $conditions;
+        // $result = Vehicle::applyFilter($conditions)->with(['dealer.province'])->groupBy('province_id')->get();
+        // foreach ($result as $key => $value) {
+        // 	dd($value);
+        // }
+        // dd($result->count());
+     //    $data['makes'] = City::where('province_id',2)->withCount(['vehicles' => function($query) use ($conditions){
+					//     return $query->applyFilter($conditions);
+					// }])->having('vehicles_count', '>', 0)->orderBy('city_name', 'asc')->get();
+        // dd($data['makes']);
+        $data['makes'] = Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
+        $data['sort'] = $conditions->get('sort');
+        $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy($sort, $direction)->paginate(15);
+        $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
+        $data['applied_filters'] = $this->getAppliedFilters($conditions);
+        $data['url_params'] = $params;
 
 		//$vehicles->select(DB::raw('count(*) as total'))->groupBy('dealer_id');
 		
 		return view('front.search', $data);
+	}
+
+	public function sessionToConditions(Request $request, &$conditions)
+	{
+		foreach ($request->session()->all() as $key => $value) {
+			$conditions->put($key, $request->session()->get($key));
+		}
 	}
 
 	public function getFilterData($conditions)
@@ -81,7 +122,45 @@ class SearchController extends Controller
 		dd($filter_data);
 	}
 
-    public function checkKey($key)
+	public function removeFilter(Request $request, $params)
+	{
+		list($filter_raw, $url_params) = explode('|', $params);
+		$filter = array_map('trim', explode(':', $filter_raw));  //Explode and trim
+		$param_list = explode('/', $url_params);
+		$param_array = [];
+		if($url_params)
+		{
+			foreach ($param_list as $key => &$value) {
+				$value = explode('-', $value, 2);
+				$param_array[$value[0]] = $value[1];
+			}
+		}
+
+		if(array_key_exists($filter[0],$param_array))
+			unset($param_array[$filter[0]]);
+		else
+			$request->session()->forget($filter[0]);
+		$param_list = [];
+		foreach ($param_array as $key => $value) {
+			array_push($param_list,"$key-$value");
+		}
+		$param_list = implode("/", $param_list);
+		echo $param_list;
+	}
+
+	public function getAppliedFilters($conditions)
+	{
+		foreach ($conditions->all() as $key => $value) {
+			if(!in_array($key, $this->applied_filters))
+			{
+				$conditions->forget($key);
+			}
+		}
+		return $conditions;
+	}
+	
+
+    public function checkKey($key)  //not used
 	{
 		$keys = explode('-', $key);
 		if(count($keys)>1 && in_array($keys[0], $this->filters))
@@ -93,11 +172,14 @@ class SearchController extends Controller
     public function validateSaveConditions($request, &$conditions)
 	{
 		foreach ($conditions->all() as $key => $value) {
-			if(in_array($key, $this->filters) && $value)
-				$request->session()->put($key,  $value);
-			else
+			if(!in_array($key, $this->filters) && $value)
 				$conditions->forget($key);
 		}
+	}
+
+	public function setSessionKeyValue(Request $request, $key, $value)
+	{
+		$request->session()->put($key,$value);
 	}
 
 }

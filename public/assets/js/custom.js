@@ -19,6 +19,8 @@ var snapSlider = document.getElementById('price-range');
 
 noUiSlider.create(snapSlider, {
 	start: [ 0, 60000 ],
+  decimals: 0,
+  thousand: ',',
 	snap: false,
 	connect: true,
   step: 1000,
@@ -26,7 +28,11 @@ noUiSlider.create(snapSlider, {
 		'min': 0,
 		
 		'max': 60000
-	}
+	},
+  format: wNumb({
+    decimals: 0,
+    thousand: ','
+  })
 });
   
 
@@ -39,6 +45,35 @@ snapSlider.noUiSlider.on('update', function( values, handle ) {
 	snapValues[handle].innerHTML = values[handle];
 });
 
+var odometerSlider = document.getElementById('odometer-range');
+
+noUiSlider.create(odometerSlider, {
+  start: [ 0, 80000 ],
+  decimals: 0,
+  thousand: ',',
+  snap: false,
+  connect: true,
+  step: 1000,
+  range: {
+    'min': 0,
+    
+    'max': 60000
+  },
+  format: wNumb({
+    decimals: 0,
+    thousand: ','
+  })
+});
+  
+
+var odometerValues = [
+  document.getElementById('min-odometer'),
+  document.getElementById('max-odometer')
+];
+
+odometerSlider.noUiSlider.on('update', function( values, handle ) {
+  odometerValues[handle].innerHTML = values[handle];
+});
 /** featured corousel **/
 $('.featured-slider').slick({
   dots: false,

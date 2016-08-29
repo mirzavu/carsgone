@@ -42,7 +42,7 @@
                         </div>
                         <div class="panel-body">
                           <ul class="applied-list">
-                          @foreach ($conditions->all() as $key => $value)
+                          @foreach ($applied_filters->all() as $key => $value)
                             <li>
                               <span>{{$key.' : '.$value}}</span>
                               <a href="#" class="applied-remove">x</a>
@@ -100,138 +100,83 @@
                   <!-- panel end -->
                   
                   
-                  <!-- panel start -->
+                  <!-- price panel start -->
                 	<div class="panel">
                         <div class="panel-heading">
                           <h3 class="panel-title">Filter by Price</h3>
                         </div>
                         <div class="panel-body">
                            <div class="price-range-container">
-                           	 <div id="price-range"></div>
-                                <a class="waves-effect waves-light btn">FILTER</a>
+                           	 <div id="price-range" class="filter-margin"></div>
+                                <button type="submit" id="price-filter" class="waves-effect waves-light btn">FILTER</button>
                                 <p class="price-range-output">
                                 	<span>$<b id="min-price"></b></span> &mdash;
                                     <span>$<b id="max-price"></b></span>
                                 </p>
+                                
+
  							 </div>
                         </div>
                       </div>
                   <!-- panel end -->
+
+                  <!-- Odometer panel start -->
+                  <div class="panel">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Filter by Odometer</h3>
+                        </div>
+                        <div class="panel-body">
+                           <div class="price-range-container">
+                             <div id="odometer-range" class="filter-margin"></div>
+                                <button id="odometer-filter" class="waves-effect waves-light btn">FILTER</button>
+                                <p class="price-range-output">
+                                  <span><b id="min-odometer"></b>Km</span> &mdash;
+                                    <span><b id="max-odometer"></b>Km</span>
+                                </p>
+               </div>
+                        </div>
+                      </div>
+                  <!-- panel end -->
+
                </div>
          <!-- Sidebar end -->
          <!-- Main Container Start -->
             	<div class="main-container">
                 	<!-- Featured Container start -->
+                  @if($featured_vehicles->count())
                 	<div class="panel">
                         <div class="panel-heading">
                           <h3 class="panel-title">Our Featured List</h3>
                         </div>
                         <div class="panel-body">
                           <div class="featured-list featured-slider">
+                          @foreach($featured_vehicles as $vehicle)
                           	<!-- fetured-box start -->
                             <div>
                           	<div class="fetured-box">
                             <a href="#">
-                            	<h4>AIRIDE HONDA</h4>
+                            	<h4>{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}</h4>
                                 <div class="featured-img">
                                 	<img src="/assets/images/item-img.jpg" alt="" />
                                     <span class="overlay"></span>
                                 </div>
                                 <div class="featured-details">
-                                	<div class="price"><i class="fa fa-tag"></i> $40,900</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> 62,768KM</div>
+                                	<div class="price"><i class="fa fa-tag"></i> ${{number_format($vehicle->price)}}</div>
+                                    <div class="run"><i class="fa fa-dashboard"></i> {{number_format($vehicle->odometer)}}KM</div>
                                 </div>
                                 
                                 </a>
                             </div>
                             </div>
+                            @endforeach
                             <!-- fetured-box end -->
                             
-                            <!-- fetured-box start -->
-                            <div>
-                          	<div class="fetured-box">
-                            <a href="#">
-                            	<h4>AIRIDE HONDA</h4>
-                                <div class="featured-img">
-                                	<img src="/assets/images/item-img.jpg" alt="" />
-                                    <span class="overlay"></span>
-                                </div>
-                                <div class="featured-details">
-                                	<div class="price"><i class="fa fa-tag"></i> $40,900</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> 62,768KM</div>
-                                </div></a>
-                            </div>
-                            </div>
-                            <!-- fetured-box end -->
-                            <!-- fetured-box start -->
-                            <div>
-                          	<div class="fetured-box">
-                            <a href="#">
-                            	<h4>AIRIDE HONDA</h4>
-                                <div class="featured-img">
-                                	<img src="/assets/images/item-img.jpg" alt="" />
-                                    <span class="overlay"></span>
-                                </div>
-                                <div class="featured-details">
-                                	<div class="price"><i class="fa fa-tag"></i> $40,900</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> 62,768KM</div>
-                                </div></a>
-                            </div>
-                            </div>
-                            <!-- fetured-box end -->
-                            <!-- fetured-box start -->
-                            <div>
-                          	<div class="fetured-box">
-                            <a href="#">
-                            	<h4>AIRIDE HONDA</h4>
-                                <div class="featured-img">
-                                	<img src="/assets/images/item-img.jpg" alt="" />
-                                    <span class="overlay"></span>
-                                </div>
-                                <div class="featured-details">
-                                	<div class="price"><i class="fa fa-tag"></i> $40,900</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> 62,768KM</div>
-                                </div></a>
-                            </div>
-                            </div>
-                            <!-- fetured-box end -->
-                            <!-- fetured-box start -->
-                            <div>
-                          	<div class="fetured-box">
-                            <a href="#">
-                            	<h4>AIRIDE HONDA</h4>
-                                <div class="featured-img">
-                                	<img src="/assets/images/item-img.jpg" alt="" />
-                                    <span class="overlay"></span>
-                                </div>
-                                <div class="featured-details">
-                                	<div class="price"><i class="fa fa-tag"></i> $40,900</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> 62,768KM</div>
-                                </div></a>
-                            </div>
-                            </div>
-                            <!-- fetured-box end -->
-                              <!-- fetured-box start -->
-                            <div>
-                          	<div class="fetured-box">
-                            <a href="#">
-                            	<h4>AIRIDE HONDA</h4>
-                                <div class="featured-img">
-                                	<img src="/assets/images/item-img.jpg" alt="" />
-                                    <span class="overlay"></span>
-                                </div>
-                                <div class="featured-details">
-                                	<div class="price"><i class="fa fa-tag"></i> $40,900</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> 62,768KM</div>
-                                </div></a>
-                            </div>
-                            </div>
-                            <!-- fetured-box end -->
                             
                             
                           </div>
                         </div>
                       </div>
+                  @endif
                   <!-- Featured Container end -->
                   <!-- Alert start -->
                    <div class="alert" role="alert"> {{ $vehicles->total() }} Vehicles were found with the given criteria</div>
@@ -240,10 +185,10 @@
                  <!-- Filter start -->
                    <div class="filter-container">
                    		<div class="filter-box">Sort By</div>
-                        <div class="filter-box">Date<a href="#" class="up"></a><a href="#" class="down active"></a></div>
-                        <div class="filter-box">Price<a href="#" class="up"></a><a href="#" class="down"></a></div>
-                        <div class="filter-box">Mileage<a href="#" class="up"></a><a href="#" class="down"></a></div>
-                        <div class="filter-box">Make<a href="#" class="up"></a><a href="#" class="down"></a></div>
+                        <div class="filter-box">Date<a id="created_at-asc" href="#" class="up"></a><a id="created_at-desc" href="#" class="down"></a></div>
+                        <div class="filter-box">Price<a id="price-asc" href="#" class="up"></a><a id="price-desc" href="#" class="down"></a></div>
+                        <div class="filter-box">Odometer<a id="odometer-asc" href="#" class="up"></a><a id="odometer-desc" href="#" class="down"></a></div>
+                        <div class="filter-box">Year<a id="year-asc" href="#" class="up"></a><a id="year-desc" href="#" class="down"></a></div>
                    </div>
                  <!-- Filter end -->
                  
@@ -287,7 +232,8 @@
                   </div>
                 <!-- Result Container end -->  
                 <!-- Pagination Container end -->    
-                 <div class="pagination-container">
+                {{ $vehicles->links() }}
+{{--                  <div class="pagination-container">
                  	<ul class="pagination">
                         <li><a href="#">&lt;</a></li>
                         <li><a href="#" class="active">1</a></li>
@@ -295,7 +241,7 @@
                         <li><a href="#">3</a></li>
                         <li><a href="#">&gt;</a></li>
                       </ul>
-                 </div>
+                 </div> --}}
                <!-- Pagination Container end -->  
                 </div>
             </div>
@@ -305,4 +251,56 @@
 </div>
 <!-- main container outer end -->
 
+@endsection
+
+@section('javascript')
+<script src="/assets/js/wNumb.min.js"></script>
+<script type="text/javascript">
+$('.applied-remove').on('click',function(e){
+  e.preventDefault();
+  data = $(this).prev().html();
+  //console.log(data);
+  $(this).parent().hide('slow');
+    $.ajax({ type: "GET",   
+       url: "{{ url('removeFilter/') }}/"+data+'|{{$url_params}}',   
+       accepts: {
+          text: "application/json"
+      },
+       async: false,
+       success : function(data)
+       {  
+          console.log(data);
+          window.location.href = '/search/'+data;
+       }
+    });
+})
+
+$('#price-filter').on('click',function(e){
+  min = $('#min-price').html().replace(',', '');
+  max = $('#max-price').html().replace(',', '');
+  $.get( "/setSessionKeyValue/price/"+min+'-'+max, function( data ) {
+  location.reload();
+});
+  //window.location.href = window.location.href+'/price-'+min+'-'+max;
+});
+$('#odometer-filter').on('click',function(e){
+  min = $('#min-odometer').html().replace(',', '');
+  max = $('#max-odometer').html().replace(',', '');
+  $.get( "/setSessionKeyValue/odometer/"+min+'-'+max, function( data ) {
+    location.reload();
+  });
+});
+$('.filter-box a').on('click',function(e){
+  e.preventDefault();
+  $.get( "/setSessionKeyValue/sort/"+$(this).attr('id'), function( data ) {
+    location.reload();
+  });
+});
+if('{{$sort}}'=='')
+  $('#created_at-desc').addClass('active');
+else
+  $('#{{$sort}}').addClass('active');
+
+
+</script>
 @endsection

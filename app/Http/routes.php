@@ -17,12 +17,15 @@
 		'as' => 'home'
 	]);
 
-	Route::get('/searchterm/{term}', 'HomeController@searchTerm');
+	Route::get('/searchterm/{term}', 'HomeController@searchTerm');  //from homepage
 	Route::get('/getModels/{term}', 'HomeController@getModels');
 	Route::get('/auto-loans/{slug}', 'ContentController@viewPage');
 
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
-	Route::post('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
+	Route::post('/search/{params}', 'SearchController@searchHandler')->where('params', '.*'); //search page
+	Route::get('/setSessionKeyValue/{key}/{value}', 'SearchController@setSessionKeyValue');
+	Route::get('/search', 'SearchController@searchHandler');
+	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
 
 Route::auth();
 

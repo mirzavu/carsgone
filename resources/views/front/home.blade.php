@@ -104,7 +104,7 @@
                 <h4 class="mar-40">Select a Price below to narrow your search</h4>
                 <ul class="item-list">
                 @foreach ($prices as $price)
-                    <li><a href="#">{{$price->range}} ({{$price->count}})</a></li>
+                    <li><a href="/search/price-{{$price->range}}">{{$price->formatrange}} ({{$price->count}})</a></li>
                 @endforeach
                  </ul>
                </div>

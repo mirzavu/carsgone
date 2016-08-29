@@ -24,7 +24,7 @@
 	<div class="header-upper">
     	<div class="container">
         	<ul class="upper-nav">
-            	<li><a href="#"><i class="fa fa-map-marker"></i> {{ $location['city']}}</a></li>
+            	<li><a href="#"><i class="fa fa-map-marker"></i> {{ $location['place']}}</a></li>
                 <li><a href="#">Contact: 123-456-7890</a></li>
             </ul>
             <ul class="upper-nav right">
@@ -44,7 +44,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" alt="" /></a>
-          <a href="#" class="hero-btn"><span>Browse Cars</span></a>
+          <a href="/search" class="hero-btn"><span>Browse Cars</span></a>
           <div class="header-search">
           <div class="header-search-box">
           	<input id="search_text" type="text" value="" placeholder="Find vehicle now..." class="search-input" />
@@ -55,7 +55,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" class="hero-nav"><span>Browse Cars</span></a></li>
+                <li><a href="/search" class="hero-nav"><span>Browse Cars</span></a></li>
                 <li><a href="#"><span>Post Ad</span></a></li>
                 <li><a href="#"><span>Dealers</span></a></li>
                 <li><a href="#"><span>Car Loans</span></a></li>
@@ -174,5 +174,6 @@ $('#quick_search').on('click',function(){
     window.location = "{{ url('search/') }}/make-"+make+'/model-'+model;
 })
 </script>
+@yield('javascript')
 </body>
 </html>

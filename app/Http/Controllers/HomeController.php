@@ -61,7 +61,7 @@ class HomeController extends Controller
 			$range = explode('-', $price->range);
 			$range[0] = '$'.$range[0];
 			$range[1] = '$'.$range[1];
-			$price->range = join(" - ", $range);
+			$price->formatrange = join(" - ", $range);
 		}
 		return $prices;
 	}

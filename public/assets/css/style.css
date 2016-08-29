@@ -255,7 +255,7 @@ label{margin:0;}
 .filter-dropdown .btn{color:#fff; font-weight:700; text-transform:capitalize; font-size:14px;}
 .filter-dropdown .btn:hover{color:#fff;}
 .price-range-container{width:100%; float:left; padding:20px;}
-#price-range{margin-bottom:30px;}
+.filter-margin{margin-bottom:30px;}
 .price-range-container .btn{background:#cfdbe6; float:left; color:#666; font-weight:400; box-shadow:none; }
 .price-range-container .price-range-output{float:right;margin-top: 19px;font-weight:400;color:#009cdf;font-size: 12px;line-height: 16px;}
 .price-range-container .price-range-output b{font-weight:400;}

@@ -24,7 +24,7 @@
 	<div class="header-upper">
     	<div class="container">
         	<ul class="upper-nav">
-            	<li><a href="#"><i class="fa fa-map-marker"></i> {{ $location['place']}}</a></li>
+            	<li><a href="#"><i class="fa fa-map-marker"></i> {{ $location['place'] or 'Location'}}</a></li>
                 <li><a href="#">Contact: 123-456-7890</a></li>
             </ul>
             <ul class="upper-nav right">

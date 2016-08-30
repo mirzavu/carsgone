@@ -32,7 +32,7 @@ class VehiclesTableSeeder extends Seeder{
 				'price' => rand(1,60000),
 				'year' => rand(2000,2016),
 				'odometer' => rand(1,60000),
-				'condition' => rand(0,1)
+				'condition_id' => rand(0,1)
 				]);
 		}
 	}

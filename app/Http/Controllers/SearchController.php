@@ -78,6 +78,7 @@ class SearchController extends Controller
 					//     return $query->applyFilter($conditions);
 					// }])->having('vehicles_count', '>', 0)->orderBy('city_name', 'asc')->get();
         // dd($data['makes']);
+
         $data['makes'] = Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
         $data['sort'] = $conditions->get('sort');
         $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy($sort, $direction)->paginate(15);

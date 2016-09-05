@@ -19,7 +19,7 @@ class CreateVehiclesTable extends Migration
             $table->integer('make_id');
             $table->integer('model_id');
             $table->integer('status_id');
-            $table->integer('condition_id');
+            $table->string('condition')->nullable();
             $table->integer('body_style_id')->nullable();
             $table->integer('body_style_group_id')->nullable();
             $table->integer('year')->nullable();
@@ -32,7 +32,8 @@ class CreateVehiclesTable extends Migration
             $table->integer('doors')->nullable();
             $table->boolean('featured')->default(false)->nullable();
             $table->dateTime('featured_expires')->nullable();
-            $table->integer('transmission_id')->nullable();
+            $table->string('transmission')->nullable();
+            $table->integer('transmission_type_id')->nullable();
             $table->integer('fuel_id')->nullable();
             $table->integer('ext_color_id')->nullable();
             $table->integer('int_color_id')->nullable();

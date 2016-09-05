@@ -19,9 +19,8 @@ class VehiclesTableSeeder extends Seeder{
 				'featured' => rand(0,1)
 				]);			
 		}
-		foreach(range(1,25000) as $index)
+		foreach(range(1,50000) as $index)
 		{
-
 			Vehicle::create([
 				'status_id' => rand(0,1),
 				'dealer_id' => rand(1,25),
@@ -32,7 +31,8 @@ class VehiclesTableSeeder extends Seeder{
 				'price' => rand(1,60000),
 				'year' => rand(2000,2016),
 				'odometer' => rand(1,60000),
-				'condition_id' => rand(0,1)
+				'condition' => rand(0, 1) ? 'used' : 'new',
+				'transmission' => rand(0, 1) ? 'manual' : 'auto'
 				]);
 		}
 	}

@@ -20,6 +20,6 @@ class VehicleModel extends Model
 
     public function vehicles()
     {
-        return $this->hasMany('App\Models\Vehicle');
+        return $this->hasMany('App\Models\Vehicle', 'model_id');
     }
 }

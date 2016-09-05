@@ -47,6 +47,9 @@ class Vehicle extends Model
             if ($conditions->get('content')) {
                 $q->where('text', $conditions->get('content'));
             }
+            if ($conditions->get('condition')) {
+                $q->where('condition', $conditions->get('condition'));
+            }
 
             if ($conditions->get('price')) {
                 $range = explode('-', $conditions->get('price'));
@@ -84,7 +87,7 @@ class Vehicle extends Model
             if ($conditions->get('lat')) {
                 $lat = $conditions->get('lat');
                 $lon = $conditions->get('lon');
-                $q->select(DB::raw("id, ( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) AS distance"))->having('distance','<',10000); //3959 for miles
+                $q->select(DB::raw("id, ( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) AS distance"))->having('distance','<',$conditions->get('distance')); //3959 for miles
             }
             return $q;
         });

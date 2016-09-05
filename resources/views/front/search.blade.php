@@ -12,7 +12,8 @@
     <a href="#" class="slide-nav"><i class="fa fa-filter" aria-hidden="true"></i> Filter</a>
           
             <!-- Sidebar Start -->
-            	<div class="sidebar">
+            	<div class="sidebar fix-sidebar">
+         
                 <!-- panel start -->
                 	<div class="panel">
                         <div class="panel-heading">
@@ -43,6 +44,9 @@
                         <div class="panel-body">
                           <ul class="applied-list">
                           @foreach ($applied_filters->all() as $key => $value)
+                            @if($key=="distance") 
+                              @php $value = (int)$value / 100 . " Km"; @endphp
+                            @endif
                             <li>
                               <span>{{$key.' : '.$value}}</span>
                               <a href="#" class="applied-remove">x</a>
@@ -52,7 +56,36 @@
                         </div>
                       </div>
                   <!-- panel end -->
-                  
+
+                  <div class="panel">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Distance within</h3>
+                        </div>
+                        <div class="panel-body">
+                          <ul class="link-list distance-list">
+                              <li><a id="20000" href="#">200 Km</a></li>
+                                <li><a id="30000" href="#">300 Km</a></li>
+                                <li><a id="40000" href="#">400 Km</a></li>
+                                <li><a id="50000" href="#">500 Km</a></li>
+                            </ul>
+                            </div>
+                      </div>
+                  <!-- panel end -->
+
+                    @if(!$applied_filters->has("condition"))
+                    <div class="panel">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Condition</h3>
+                        </div>
+                        <div class="panel-body">
+                           <div class="item-type-toggle">
+                                <input type="radio" name="condition" id="used" value="used" {{$applied_filters->get("condition")=="used"?'checked="checked"':""}}"/> <label for="used" class="waves-effect waves-light">USED</label>
+                                <input type="radio" name="condition" id="both" value="both" {{$applied_filters->has("condition")?"":'checked="checked"'}}" /> <label for="both" class="waves-effect waves-light"> BOTH</label>
+                                <input type="radio" name="condition" id="new" value="new" {{$applied_filters->get("condition")=="new"?'checked="checked"':""}}"/> <label for="new" class="waves-effect waves-light">NEW</label>
+                              </div>
+                        </div>
+                      </div>
+                      @endif
                   <!-- panel start -->
                 	<div class="panel">
                         <div class="panel-heading">
@@ -65,6 +98,40 @@
                          </div>
                         </div>
                       </div>
+                  <!-- panel end -->
+
+                   <!-- panel start -->
+                  @if(isset($sidebar_data["makes"]))
+                  <div class="panel">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Select Make</h3>
+                        </div>
+                        <div class="panel-body">
+                          <ul class="link-list">
+                          @foreach($sidebar_data["makes"] as $make)
+                              <li><a href="{{Request::url()}}/make-{{$make->make_name}}">{{$make->make_name}} ({{$make->make_count}})</a></li>
+                          @endforeach
+                            </ul>
+                            </div>
+                      </div>
+                  @endif
+                  <!-- panel end -->
+
+                  <!-- panel start -->
+                  @if(isset($sidebar_data["models"]))
+                  <div class="panel">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Select Model</h3>
+                        </div>
+                        <div class="panel-body">
+                          <ul class="link-list">
+                          @foreach($sidebar_data["models"] as $model)
+                              <li><a href="{{Request::url()}}/model-{{$model->model_name}}">{{$model->model_name}} ({{$model->vehicles_count}})</a></li>
+                          @endforeach
+                            </ul>
+                            </div>
+                      </div>
+                  @endif
                   <!-- panel end -->
                   
                   <!-- panel start -->
@@ -99,6 +166,27 @@
                       </div>
                   <!-- panel end -->
                   
+                   <!-- panel start -->
+                	<div class="panel">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Link List</h3>
+                        </div>
+                        <div class="panel-body">
+                        	<ul class="link-list">
+                            	<li><a href="#">Link Here</a></li>
+                                <li><a href="#" class="active">Link Here</a></li>
+                                <li><a href="#">Link Here</a></li>
+                                <li><a href="#">Link Here</a></li>
+                                <li><a href="#">Link Here</a></li>
+                                <li><a href="#">Link Here</a></li>
+                                <li><a href="#">Link Here</a></li>
+                                <li><a href="#">Link Here</a></li>
+                                <li><a href="#">Link Here</a></li>
+                                <li><a href="#">Link Here</a></li>
+                            </ul>
+                            </div>
+                      </div>
+                  <!-- panel end -->
                   
                   <!-- price panel start -->
                 	<div class="panel">
@@ -141,7 +229,7 @@
                </div>
          <!-- Sidebar end -->
          <!-- Main Container Start -->
-            	<div class="main-container">
+            	<div class="main-container fix-content">
                 	<!-- Featured Container start -->
                   @if($featured_vehicles->count())
                 	<div class="panel">
@@ -269,20 +357,22 @@ $('.applied-remove').on('click',function(e){
        async: false,
        success : function(data)
        {  
-          console.log(data);
-          window.location.href = '/search/'+data;
+          var pathname = '/search/'+data;
+          window.location.href = pathname.replace(/\/$/, ""); // remove trailing slash and redirect
        }
     });
 })
 
+//set price
 $('#price-filter').on('click',function(e){
   min = $('#min-price').html().replace(',', '');
   max = $('#max-price').html().replace(',', '');
   $.get( "/setSessionKeyValue/price/"+min+'-'+max, function( data ) {
   location.reload();
+  });
+  
 });
-  //window.location.href = window.location.href+'/price-'+min+'-'+max;
-});
+//set odometer
 $('#odometer-filter').on('click',function(e){
   min = $('#min-odometer').html().replace(',', '');
   max = $('#max-odometer').html().replace(',', '');
@@ -290,6 +380,7 @@ $('#odometer-filter').on('click',function(e){
     location.reload();
   });
 });
+//set sorting
 $('.filter-box a').on('click',function(e){
   e.preventDefault();
   $.get( "/setSessionKeyValue/sort/"+$(this).attr('id'), function( data ) {
@@ -300,6 +391,19 @@ if('{{$sort}}'=='')
   $('#created_at-desc').addClass('active');
 else
   $('#{{$sort}}').addClass('active');
+//condition on change
+$('input[name=condition]').change(function() { 
+        window.location.href += '/condition-'+this.value;
+    });
+//distance set
+$('.distance-list #{{$applied_filters->get("distance")}}').addClass('active').removeAttr("href");
+$('.distance-list a').on('click',function(e){
+  e.preventDefault();
+  $.get( "/setSessionKeyValue/distance/"+$(this).attr('id'), function( data ) {
+    location.reload();
+  });
+});
+
 
 
 </script>

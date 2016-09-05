@@ -109,4 +109,146 @@ $('.featured-slider').slick({
 });
 
 
+/** related corousel **/
+$('.related-slider').slick({
+  dots: false,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 5,
+  slidesToScroll: 5,
+  responsive: [
+    {
+      breakpoint: 1000,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+     
+      }
+    },
+	{
+      breakpoint: 800,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+     
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+   
+  ]
+});
+
+
+
+/** Item Gallery corousel **/
+$('.item-image-list').slick({
+  dots: false,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  responsive: [
+    
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
+    },
+  
+   
+  ]
+});
+
+
+/*==========================*/	
+/* Lighbox */	
+/*==========================*/	
+$('.item-gallery-container').magnificPopup({
+  delegate: 'a', // child items selector, by clicking on it popup will open
+  type: 'image',
+  // other options
+  gallery: {
+  enabled: true,
+  preload: [0,2], 
+  removalDelay: 300,
+  navigateByImgClick: true,
+  titleSrc: 'title', 
+  arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>', // markup of an arrow button
+
+  tPrev: 'Previous (Left arrow key)', // title for left button
+  tNext: 'Next (Right arrow key)', // title for right button
+  tCounter: '<span class="mfp-counter"></span>' // markup of counter
+}
+});
+
+
+
+$timeSlots = $('.link-list');
+$timeSlots.each(function() {
+    var $times = $(this).children();
+    if ($times.length > 5) {
+        $timeSlots.children(':nth-of-type(n+6)').hide();
+        $(this).append('<span class="more-times">+More</span>');
+    }
+});
+
+$timeSlots.on('click', '.more-times', function() {
+    $(this).prevAll().show().end().remove();
+});
+
+
+
 })
+
+
+
+var callback = function () {
+     
+if ($(window).width() > 1049) {
+$('.fix-sidebar, .fix-content')
+.theiaStickySidebar({
+	additionalMarginTop: 0
+});
+        
+};
+  };
+  $(document).ready(callback);
+  $(window).resize(callback);	
+
+
+
+
+
+var callback2 = function () {
+     
+if ($(window).width() > 992) {
+$('.half-left, .half-right')
+.theiaStickySidebar({
+	additionalMarginTop: 0
+});
+        
+};
+  };
+  $(document).ready(callback2);
+  $(window).resize(callback2);	
+
+
+	
+
+
+

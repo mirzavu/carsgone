@@ -29,7 +29,7 @@
                                  
                             </li>
                             <li>
-                            	<button id="quick_search" type="submit" class="waves-effect"><span>Quick Search</span></button>
+                            	<button id="quick_search" type="submit" class="waves-effect waves-light btn"><span>Quick Search</span></button>
                             </li>
                         </ul>
                     </div>
@@ -89,7 +89,7 @@
                 <ul class="item-list">
                 @foreach ($body_style_groups as $body_style_group)
                     <li><a href="/search/body-{{$body_style_group['body_style_group_name']}}">
-                    	<span><img src="assets/images/icon-{{$body_style_group['body_style_group_name']}}.png" alt="" /></span>{{$body_style_group['body_style_group_name']}} ({{$body_style_group['vehicles_count']}})
+                    	<span><img src="assets/images/icon-{{strtolower($body_style_group['body_style_group_name'])}}.png" alt="" /></span>{{$body_style_group['body_style_group_name']}} ({{$body_style_group['vehicles_count']}})
                     	</a>
                     </li>
                 @endforeach

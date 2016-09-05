@@ -7,6 +7,7 @@ use App\Models\Vehicle;
 use App\Models\Make;
 use App\Models\Province;
 use App\Models\City;
+use App\Models\VehicleModel;
 
 use App\Http\Requests;
 use DB;
@@ -14,10 +15,10 @@ use Log;
 
 class SearchController extends Controller
 {
-	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer');
-	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer');
+	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer', 'distance');
+	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance');
 	protected $url_filters = array('make','model', 'province', 'city', 'body','year');
-	protected $post_filters = array('sort','condition', 'price', 'lat', 'lon','odometer');
+	protected $session_filters = array('sort','condition', 'price', 'lat', 'lon','odometer', 'distance');
 	protected $url_params;
 
     public function searchHandler(Request $request, $params=false)
@@ -42,6 +43,12 @@ class SearchController extends Controller
 		}
 
 		$this->validateSaveConditions($request, $conditions);
+
+		//distance set
+		if(!$conditions->get('distance'))
+		{
+			$conditions->put('distance','20000');
+		}
 		
 		//Sorting set
 		if($conditions->get('sort'))
@@ -53,7 +60,7 @@ class SearchController extends Controller
 			$sort = 'created_at';
 			$direction = 'desc';
 		}
-		//$this->getFilterData($conditions);
+		$data['sidebar_data'] = $this->getSidebarData($conditions);
 		/*$vehicles = new Vehicle();
         if($request->input('model'))
         {
@@ -74,9 +81,7 @@ class SearchController extends Controller
         // 	dd($value);
         // }
         // dd($result->count());
-     //    $data['makes'] = City::where('province_id',2)->withCount(['vehicles' => function($query) use ($conditions){
-					//     return $query->applyFilter($conditions);
-					// }])->having('vehicles_count', '>', 0)->orderBy('city_name', 'asc')->get();
+
         // dd($data['makes']);
 
         $data['makes'] = Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
@@ -84,6 +89,7 @@ class SearchController extends Controller
         $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy($sort, $direction)->paginate(15);
         $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
         $data['applied_filters'] = $this->getAppliedFilters($conditions);
+
         $data['url_params'] = $params;
 
 		//$vehicles->select(DB::raw('count(*) as total'))->groupBy('dealer_id');
@@ -98,15 +104,27 @@ class SearchController extends Controller
 		}
 	}
 
-	public function getFilterData($conditions)
+	public function getSidebarData($conditions)
 	{
+		//Get makes
+		$sidebar_data = [];
 		if(!$conditions->get('make'))
 		{
-			$filter_data['makes'] = Vehicle::ApplyFilter($conditions)->join('makes','makes.id','=','vehicles.make_id')->selectRaw('count(makes.id) as make_count, make_name')->groupBy('makes.make_name')->get();
+			$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions)->join('makes','makes.id','=','vehicles.make_id')->selectRaw('count(makes.id) as make_count, make_name')->groupBy('makes.make_name')->orderBy('make_count','desc')->get();
 		}
-		if(!$conditions->get('city'))
+		if($conditions->get('make') && !$conditions->get('model'))
 		{
-			//ApplyFilter($conditions)->
+
+			$sidebar_data['models'] = Make::where('make_name',$conditions->get('make'))->first()->models()->withCount(['vehicles' => function($query) use ($conditions){
+				return $query->applyFilter($conditions);
+				}])->having('vehicles_count', '>', 0)->orderBy('vehicles_count', 'desc')->take(10)->get();
+
+		}
+
+
+		//Get city
+		if($conditions->get('province') && !$conditions->get('city'))
+		{
 			$ss = Vehicle::ApplyFilter($conditions)
 					->with(['dealer.province' => function($query) {
 					    return $query->groupBy('province_name');
@@ -120,7 +138,7 @@ class SearchController extends Controller
 				dd($value);
 			}
 		}
-		dd($filter_data);
+		return $sidebar_data;
 	}
 
 	public function removeFilter(Request $request, $params)
@@ -158,16 +176,6 @@ class SearchController extends Controller
 			}
 		}
 		return $conditions;
-	}
-	
-
-    public function checkKey($key)  //not used
-	{
-		$keys = explode('-', $key);
-		if(count($keys)>1 && in_array($keys[0], $this->filters))
-			return true;
-		else
-			return false;
 	}
 
     public function validateSaveConditions($request, &$conditions)

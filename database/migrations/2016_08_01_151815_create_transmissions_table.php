@@ -12,7 +12,7 @@ class CreateTransmissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transmissions', function (Blueprint $table) {
+        Schema::create('transmission_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('transmission');
         });

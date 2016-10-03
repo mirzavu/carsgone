@@ -46,28 +46,29 @@ p:last-child { margin-bottom:0; }
 .btn + .btn{margin-left:10px;}
 /* ============ Home Page Start ================= */
 /*Header start*/
-header{background:#6b6ca0; position:relative; font-size:15px; border-bottom:solid 2px #c0c1e8;}
+header{background:#fff; position:relative; font-size:15px;}
 .home header{border:0;}
-.header-upper{background:#c0c1e8; border-bottom:solid 1px #dbdfda;}
+.header-upper{background:#5fc0ed;}
 .header-left{float:left;}
 .header-right{float:right;}
 .header-search{float:left; margin-top:20px;}
 ul.upper-nav{float:left; margin:0; margin-left:-13px;}
 ul.upper-nav.right{float:right; margin:0; margin-right:-15px;}
-ul.upper-nav li{float:left; border-right:solid 1px #dbdfda;}
-ul.upper-nav.right li{border:0; border-left:solid 1px #dbdfda;}
-ul.upper-nav li a{float:left; padding:6px 15px; color:#6b6ca0; }
-ul.upper-nav li a:hover{color:#fff;}
+ul.upper-nav li:first-child{border-left:solid 1px #fff;}
+ul.upper-nav li{float:left; border-right:solid 1px #fff;}
+ul.upper-nav.right li{border-right:solid 1px #fff;}
+ul.upper-nav li a{float:left; color:#fff; padding:6px 15px; font-weight:700;}
+ul.upper-nav li a:hover{color:#6b6ca0;}
 .navbar-default{background:transparent; border:0;}
 .navbar{min-height:1px; margin:0;}
 .navbar-brand{height:auto; width:225px; padding-left:5px;}
-.navbar-default .navbar-nav > li > a,  .navbar-default .navbar-nav > li > a:focus{color:#c0c1e8; font-weight:700;  text-transform:uppercase; padding:8px 12px; border-radius:2px; margin-left:10px; position:relative;}
+.navbar-default .navbar-nav > li > a,  .navbar-default .navbar-nav > li > a:focus{color:#5fc0ed; font-weight:700;  text-transform:uppercase; padding:8px 12px; border-radius:2px; margin-left:10px; position:relative;}
 .navbar-default .navbar-nav > li:fist-child > a{margin-left:0;}
-.navbar-default .navbar-nav > li > a:hover {color: #6b6ca0; background-color: transparent;}
-.navbar-default .navbar-nav > li > a.hero-nav{ color:#6b6ca0; background:#fff;}
+.navbar-default .navbar-nav > li > a:hover {color: #fff; background-color: #5fc0ed;}
+.navbar-default .navbar-nav > li > a.hero-nav{color: #fff; background-color: #5fc0ed;}
 .navbar-nav{margin-top:19px;}
 .navbar-default .navbar-nav > li > a span{position:relative;}
-.navbar-default .navbar-nav > li > a:before {position: absolute; display: block; top: 0; left: 0; content: ''; background-color: #fff; height: 100%; width: 100%; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; opacity: 0; -ms-transform: scaleX(.2); -webkit-transform: scaleX(.2); transform: scaleX(.2); -webkit-transition: -webkit-transform .2s ease-out,opacity .2s ease-out; transition: transform .2s ease-out,opacity .2s ease-out; -webkit-backface-visibility: hidden;}
+.navbar-default .navbar-nav > li > a:before {position: absolute; display: block; top: 0; left: 0; content: ''; background-color: #5fc0ed; height: 100%; width: 100%; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; opacity: 0; -ms-transform: scaleX(.2); -webkit-transform: scaleX(.2); transform: scaleX(.2); -webkit-transition: -webkit-transform .2s ease-out,opacity .2s ease-out; transition: transform .2s ease-out,opacity .2s ease-out; -webkit-backface-visibility: hidden;}
 .navbar-default .navbar-nav > li > a:hover:before{opacity:1; -ms-transform: scaleX(1); -webkit-transform: scaleX(1); transform:scaleX(1);}
 .navbar-default .navbar-collapse{border:0;}
 .navbar-toggle { padding:0; border:0; background:transparent; right:0; left:auto; margin-top:24px; margin-left:12px;}
@@ -81,15 +82,16 @@ ul.upper-nav li a:hover{color:#fff;}
 .navbar-toggle .icon-bar:before { top:0; -webkit-transform:rotateZ(45deg); -moz-transform:rotateZ(45deg); -ms-transform:rotateZ(45deg); -o-transform:rotateZ(45deg); transform:rotateZ(45deg); }
 .navbar-toggle.collapsed .icon-bar:after { bottom:-8px; -webkit-transform:rotateZ(0deg); -moz-transform:rotateZ(0deg); -ms-transform:rotateZ(0deg); -o-transform:rotateZ(0deg); transform:rotateZ(0deg); }
 .navbar-toggle .icon-bar:after { bottom:0; -webkit-transform:rotateZ(-45deg); -moz-transform:rotateZ(-45deg); -ms-transform:rotateZ(-45deg); -o-transform:rotateZ(-45deg); transform:rotateZ(-45deg); }
-.hero-btn{float:right; color:#6b6ca0; font-weight:700;  text-transform:uppercase; padding:3px 10px; border-radius:2px; margin:22px 12px 0 12px; position:relative; background:#fff; display:none;}
-.hero-btn:hover, .navbar-default .navbar-nav > li > a.hero-nav:hover, .navbar-default .navbar-nav > li > a.hero-nav:focus {color:#fff;}
+.hero-btn{float:right; color:#fff; font-weight:700;  text-transform:uppercase; padding:3px 10px; border-radius:2px; margin:22px 12px 0 12px; position:relative; background:#5fc0ed; display:none;}
+.hero-btn:hover, .navbar-default .navbar-nav > li > a.hero-nav:hover, .navbar-default .navbar-nav > li > a.hero-nav:focus {color:#fff; }
+
 .hero-btn span{position:relative;}
-.hero-btn:before, .navbar-default .navbar-nav > li > a.hero-nav:before{position: absolute; display: block; top: 0; left: 0; content: ''; background-color:#c0c1e8; height: 100%; width: 100%; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; opacity: 0; -ms-transform: scaleX(.2); -webkit-transform: scaleX(.2); transform: scaleX(.2); -webkit-transition: -webkit-transform .2s ease-out,opacity .2s ease-out; transition: transform .2s ease-out,opacity .2s ease-out; -webkit-backface-visibility: hidden;}
+.hero-btn:before, .navbar-default .navbar-nav > li > a.hero-nav:before{position: absolute; display: block; top: 0; left: 0; content: ''; background-color:#0294d1; height: 100%; width: 100%; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; opacity: 0; -ms-transform: scaleX(.2); -webkit-transform: scaleX(.2); transform: scaleX(.2); -webkit-transition: -webkit-transform .2s ease-out,opacity .2s ease-out; transition: transform .2s ease-out,opacity .2s ease-out; -webkit-backface-visibility: hidden;}
 .hero-btn:hover:before, .navbar-default .navbar-nav > li > a.hero-nav:hover:before{opacity:1; -ms-transform: scaleX(1); -webkit-transform: scaleX(1); transform: scaleX(1);}
-.header-search-box{width: 340px;float:left;background:#fff;border:solid 2px #c0c1e8;position:relative;padding-right:28px;margin-left: 16px;}
+.header-search-box{width: 340px;float:left;background:#fff;border:solid 3px #5fc0ed;position:relative;padding-right:28px;margin-left: 16px;}
 .header-search-box .search-input{background:#fff; width:100%; border:0; height:30px; padding:0 10px; color:#6b6ca0; margin:0;}
 .header-search-box .search-input:focus{border:0 !important;}
-.header-search-box .search-submit{width:30px; height:30px; background:#6b6ca0; position:absolute; top:0; right:0; border:0; font-family:'fontAwesome'; text-align:center; border-left:solid 2px #c0c1e8; color:#fff; border-radius:0;}  
+.header-search-box .search-submit{width:30px; height:30px; background:#5fc0ed; position:absolute; top:0; right:0; border:0; font-family:'fontAwesome'; text-align:center; border-left:solid 2px #5cb9e4; color:#fff; border-radius:0;}  
 /*Header end*/
 /* Banner container start */
 .banner-container{ background:url(../images/banner.jpg) no-repeat center top; background-size:cover; padding:54px 0; position:relative;}
@@ -378,6 +380,68 @@ ul.table-list li a{color:#5fc0ed;}
 .panel-default > .panel-heading{background:#3e5062;}
 /* ============ Car Detail Page Start ================= */
 
+/* ============ Info Page Start ================= */
+.dealer-info{background-color:#ecf0f5; padding:40px 0 20px;}
+.panel.full .panel-heading{background:#3e5062;}
+.panel.full .panel-heading h2{text-transform:uppercase; font-family:'Lato'; font-weight:900; text-align:center; color:#fff; margin-bottom:0;}
+.panel.full .panel-body{padding:30px 60px; font-family: 'Raleway';}
+.panel.full .panel-body h3{color:#000; font-weight:400; text-transform:none; letter-spacing:0;}
+.panel.full .panel-body .btn{font-family:'Lato'; background:#5fc0ed;}
+.browse-dealership-outer{background:url(../images/browers-dealership.jpg) no-repeat left top; background-size:cover;}
+.browse-dealership{padding:20px 80px; color:#fff;}
+.browse-dealership h3{font-size:42px; line-height:50px; font-weight:700; font-family: 'Raleway'; letter-spacing:5px; word-spacing:11px; margin-bottom:0;}
+.browse-dealership p{font:400 18px/24px 'Lato'; margin-bottom:7px;}
+.browse-dealership p span{font-size:20px; font-weight:700;}
+.browse-dealership p:last-child{font-size:16px; line-height:20px; font-weight:700;}
+.btn.bordered{font:900 20px/22px 'Lato';border:2px solid #fff;background-color:transparent;padding: 18px 32px;margin-top: 32px;margin-left: 40px;}
+.btn.bordered:hover{border-color:#5fc0ed; background-color:#5fc0ed;}
+.membership-container{padding:30px 0;}
+.membership .panel-heading{background-color:#3e5062;}
+.membership .panel-heading img{float:left; margin-right:19px; margin-left:15px;}
+.membership .panel-heading h3{font:900 25px/30px 'Lato'; color:#fff; text-transform:uppercase; margin-bottom:5px;}
+.membership .panel-heading p{font-size:22px; line-height:30px; color:#fff; font-family: 'Raleway';}
+.membership .panel-body{padding:20px 33px; font-family: 'Raleway';}
+.membership .panel-body p{color:#808080; margin-bottom:12px;}
+.account-features{float:left; width:100%; margin-bottom:12px;}
+.account-features li{float:left; width:100%; margin-bottom:4px;}
+.account-features .icon{float:left; background:#3e5062; margin-right:20px;}
+.account-features h6{font-weight:700; color:#585858; margin-bottom:8px;}
+.account-features p{font-size:16px; line-height:24px; color:#9e9d9d;}
+.membership .panel-body .btn{font-size:18px; line-height:24px; background-color:#5fc0ed; font-weight:700;}
+/* ============ Info Page End ================= */
+
+/* ============ Autoloan Page Start ================= */
+.approval-outer{padding:50px 0;}
+.approval{background:#fff url(../images/approval-bg.jpg) no-repeat left top; background-size:cover; padding:40px 15px; float:left; width:100%; box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
+.approval > img{margin-bottom:7px;}
+.approval h4{font:700 18px/26px 'Raleway'; color:#fff; text-shadow:2px 3px 0 #000; text-transform:none; margin-bottom:24px;}
+.reqiured-list{float:left;}
+.reqiured-list li{background-color:#7bcff6; color:#fff; font:700 14px/18px 'Raleway'; text-transform:uppercase; padding:11px 17px; border-radius:20px; margin-bottom:12px;}
+.reqiured-list li:before{content:''; background:url(../images/icon-tick.png) no-repeat left top; background-size:cover; width:21px; height:16px; float:left; margin-right:7px;}
+.approval-link{float:left; margin-left:43px; margin-top:2px;}
+.btn-orange{background:#f7ac0c; border:solid 2px #fff; border-radius:5px; box-shadow:none; font-weight:900; font-size:20px; padding:18px;}
+.btn-orange:hover{background:#dc9808;}
+.approval .btn-orange{margin-bottom:30px;}
+.approval .clock{line-height:31px; font:700 14px/28px 'Raleway'; color:#fff;}
+.clock:before{content:''; background:url(../images/icon-clock.png) no-repeat left top; background-size:cover; width:31px; height:29px; float:left; margin-right:7px;}
+.canadian-autoloan,.autoloan-desc{margin-bottom:25px;}
+.canadian-autoloan .panel.full .panel-body{padding:20px 33px;}
+.canadian-autoloan .panel.full .panel-body h3{font-weight:700; margin-bottom:3px; color:#3e5062;}
+.autoloan-desc .panel.full .panel-body{padding:35px 42px;}
+.autoloan-desc .panel.full .panel-body p{font-weight:500; font-size:18px; line-height:30px; color:#000; margin-bottom:30px;}
+.autoloan-list ul.popular-item-list{margin-bottom:10px;}
+.canadian-autoloan .popular-container h4{text-align:center;}
+.autoloan-list ul.popular-item-list li a{text-align:center; padding:15px 0; font-weight:700; color:#3e5062; border:solid 4px #ecf0f5;}
+.autoloan-list ul.popular-item-list li a h6{font-weight:700; color:#3e5062; }
+.autoloan-list ul.popular-item-list li a:hover{border-color:#bbe5f9; color:#4dc3ff;}
+.autoloan-list ul.popular-item-list li a:hover h6{color:#4dc3ff;}
+.panel-body.auto-desc .excerpt{width:100%; display:inline-block; height:275px; overflow:hidden;  transition: all 0.3s ease-in; -moz-transition: all 0.3s ease-in; -o-transition: all 0.3s ease-in; -webkit-transition: all 0.3s ease-in; -ms-transition: all 0.3s ease-in;}
+.panel-body.auto-desc.show-all .excerpt{height:auto;}
+.panel-body.auto-desc.show-all .btn{display:none;}
+/* ============ Autoloan Page End ================= */
+
+
+
 /* ============================= */
 @media only screen and (max-width: 1140px) {
 .header-search-box{width:270px; margin-left:0;}
@@ -425,6 +489,8 @@ ul.popular-item-list{margin-bottom:30px;}
 .item-heading{padding:10px 15px;}
 .item-body{padding:15px;}
 .btn{font-size:14px;}
+
+.btn.bordered{font-size:18px; margin:0;}
 }
 
  
@@ -464,6 +530,34 @@ footer{font-size:14px;}
 .car-details-container .table > thead > tr > th, .car-details-container .table > tbody > tr > th, .car-details-container .table > tfoot > tr > th, .car-details-container .table > thead > tr > td, .car-details-container .table > tbody > tr > td, .car-details-container .table > tfoot > tr > td{padding:10px 15px;}
 .dealer-address-map{height:220px;}
 .single-description-lower{padding:0 15px;}
+
+.panel.full .panel-heading h2{font-size:20px;}
+.panel.full .panel-body,
+.canadian-autoloan .panel.full .panel-body,
+.autoloan-desc .panel.full .panel-body{padding:15px 20px;}
+.panel.full .panel-body h3{font-size:18px;}
+.browse-dealership{padding:15px 0;}
+.browse-dealership h3{font-size:18px; line-height:24px; letter-spacing:3px; word-spacing:0; margin-bottom:15px;}
+.browse-dealership p,
+.browse-dealership p span{font-size:16px; line-height:22px; margin-bottom:10px;}
+.browse-dealership p:last-child{font-size:15px; margin-bottom:30px;}
+.membership .panel-heading{text-align:center;}
+.membership .panel-heading img{float:none; display:block; margin:0 auto 8px;}
+.membership .panel-heading h3{font-size:20px; line-height:25px; margin-bottom:0;}
+.membership .panel-heading p{font-size:16px;}
+.membership .panel-body{padding:10px 15px; text-align:center;}
+.account-features .icon{float:none; width:57px; white-space:50px; margin:0 auto 10px;}
+.account-features p{font-size:14px; line-height:20px;}
+
+.approval-outer{padding:30px 0;}
+.approval{padding:25px 15px;}
+.approval h4{font-size:14px; line-height:18px; text-shadow:2px 2px 0 #000;}
+.canadian-autoloan .panel.full .panel-body,
+.canadian-autoloan .panel.full .panel-body .popular-container{padding-bottom:0;}
+.canadian-autoloan .panel.full .panel-body .popular-container h4{font-size:17px;}
+.autoloan-desc .panel.full .panel-body p{font-size:14px; line-height:22px; margin-bottom:15px;}
+.approval-link{margin-left:0; margin-top:15px; width:100%;}
+.approval .btn-orange{margin-bottom:10px;}
 }
 
 

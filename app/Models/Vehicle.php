@@ -4,15 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Scopes\StatusScope;
+use Cviebrock\EloquentSluggable\Sluggable;
 use DB;
 
 class Vehicle extends Model
 {
+    use Sluggable;
+    protected $fillable = ['dealer_id', 'partner_vehicle_id'];
     protected static function boot()
     {
         parent::boot();
 
         static::addGlobalScope(new StatusScope);
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => ['year', 'make.make_name', 'model.model_name','dealer.city.city_name','dealer.province.province_name'],
+                'separator' => '-'
+            ]
+        ];
     }
 
     public function dealer()
@@ -35,6 +48,31 @@ class Vehicle extends Model
         return $this->belongsTo('App\Models\Make');
     }
 
+    public function ext_color()
+    {
+        return $this->belongsTo('App\Models\Color', 'ext_color_id');
+    }
+
+    public function int_color()
+    {
+        return $this->belongsTo('App\Models\Color' , 'int_color_id');
+    }
+
+    public function photos()
+    {
+        return $this->hasMany('App\Models\VehiclePhoto');
+    }
+
+    public function photo()
+    {
+        return $this->photos()->where('position',1)->value('path');
+    }
+
+    public function options()
+    {
+        return $this->hasMany('App\Models\VehicleOption');
+    }
+
     public function scopeActive($query)
     {
         return $query->where('status_id', '=', 1);
@@ -50,7 +88,9 @@ class Vehicle extends Model
             if ($conditions->get('condition')) {
                 $q->where('condition', $conditions->get('condition'));
             }
-
+            if ($conditions->get('transmission')) {
+                $q->where('transmission', $conditions->get('transmission'));
+            }
             if ($conditions->get('price')) {
                 $range = explode('-', $conditions->get('price'));
 
@@ -62,6 +102,12 @@ class Vehicle extends Model
 
                 $q->where('odometer', '>=',$range[0]);
                 $q->where('odometer', '<=',$range[1]);
+            }
+            if ($conditions->get('year')) {
+                $range = explode('-', $conditions->get('year'));
+
+                $q->where('year', '>=',$range[0]);
+                $q->where('year', '<=',$range[1]);
             }
 
             return $q;

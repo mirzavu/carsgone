@@ -16,7 +16,7 @@
 		'uses' => 'HomeController@index', 
 		'as' => 'home'
 	]);
-
+Route::get('/fb', 'HomeController@fb');
 	Route::get('/searchterm/{term}', 'HomeController@searchTerm');  //from homepage
 	Route::get('/getModels/{term}', 'HomeController@getModels');
 	Route::get('/auto-loans/{slug}', 'ContentController@viewPage');
@@ -26,6 +26,7 @@
 	Route::get('/setSessionKeyValue/{key}/{value}', 'SearchController@setSessionKeyValue');
 	Route::get('/search', 'SearchController@searchHandler');
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
+	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
 
 Route::auth();
 

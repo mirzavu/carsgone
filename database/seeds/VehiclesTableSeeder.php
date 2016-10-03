@@ -7,7 +7,7 @@ class VehiclesTableSeeder extends Seeder{
 
 	public function run(){
 		$faker = Faker\Factory::create();
-		foreach(range(1,25) as $index)
+		foreach(range(1,2500) as $index)
 		{		
 			Dealer::create([
 				'name' => str_random(10),
@@ -16,7 +16,9 @@ class VehiclesTableSeeder extends Seeder{
 				'city_id' => rand(0,60),
 				'latitude' => rand(9*1000,11*1000)/1000,
 				'latitude' => rand(75.7*1000,77*1000)/1000,
-				'featured' => rand(0,1)
+				'featured' => rand(0,1),
+				'partner_id' => rand(1,3),
+				'partner_dealer_id' => rand(1,100)
 				]);			
 		}
 		foreach(range(1,50000) as $index)

@@ -15,10 +15,10 @@ use Log;
 
 class SearchController extends Controller
 {
-	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer', 'distance');
-	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance');
-	protected $url_filters = array('make','model', 'province', 'city', 'body','year');
-	protected $session_filters = array('sort','condition', 'price', 'lat', 'lon','odometer', 'distance');
+	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer', 'distance', 'transmission');
+	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission');
+	protected $url_filters = array('make','model', 'province', 'city', 'body');
+	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon','odometer', 'distance', 'transmission');
 	protected $url_params;
 
     public function searchHandler(Request $request, $params=false)
@@ -112,6 +112,7 @@ class SearchController extends Controller
 		{
 			$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions)->join('makes','makes.id','=','vehicles.make_id')->selectRaw('count(makes.id) as make_count, make_name')->groupBy('makes.make_name')->orderBy('make_count','desc')->get();
 		}
+		//Get models
 		if($conditions->get('make') && !$conditions->get('model'))
 		{
 

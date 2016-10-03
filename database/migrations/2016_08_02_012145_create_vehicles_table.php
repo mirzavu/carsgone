@@ -30,6 +30,7 @@ class CreateVehiclesTable extends Migration
             $table->integer('odometer')->nullable();
             $table->string('vin', 20)->nullable();
             $table->integer('doors')->nullable();
+            $table->integer('seats')->nullable();
             $table->boolean('featured')->default(false)->nullable();
             $table->dateTime('featured_expires')->nullable();
             $table->string('transmission')->nullable();

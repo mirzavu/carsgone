@@ -13,67 +13,8 @@ $('.sidebar-overlay').click(function(){
 	   });
 	   
 
-/** range slider **/
-	
-var snapSlider = document.getElementById('price-range');
 
-noUiSlider.create(snapSlider, {
-	start: [ 0, 60000 ],
-  decimals: 0,
-  thousand: ',',
-	snap: false,
-	connect: true,
-  step: 1000,
-	range: {
-		'min': 0,
-		
-		'max': 60000
-	},
-  format: wNumb({
-    decimals: 0,
-    thousand: ','
-  })
-});
-  
 
-var snapValues = [
-	document.getElementById('min-price'),
-	document.getElementById('max-price')
-];
-
-snapSlider.noUiSlider.on('update', function( values, handle ) {
-	snapValues[handle].innerHTML = values[handle];
-});
-
-var odometerSlider = document.getElementById('odometer-range');
-
-noUiSlider.create(odometerSlider, {
-  start: [ 0, 80000 ],
-  decimals: 0,
-  thousand: ',',
-  snap: false,
-  connect: true,
-  step: 1000,
-  range: {
-    'min': 0,
-    
-    'max': 60000
-  },
-  format: wNumb({
-    decimals: 0,
-    thousand: ','
-  })
-});
-  
-
-var odometerValues = [
-  document.getElementById('min-odometer'),
-  document.getElementById('max-odometer')
-];
-
-odometerSlider.noUiSlider.on('update', function( values, handle ) {
-  odometerValues[handle].innerHTML = values[handle];
-});
 /** featured corousel **/
 $('.featured-slider').slick({
   dots: false,
@@ -247,7 +188,96 @@ $('.half-left, .half-right')
   $(document).ready(callback2);
   $(window).resize(callback2);	
 
+/** range slider **/
+  
+var snapSlider = document.getElementById('price-range');
 
+noUiSlider.create(snapSlider, {
+  start: [ 0, 60000 ],
+  decimals: 0,
+  thousand: ',',
+  snap: false,
+  connect: true,
+  step: 1000,
+  range: {
+    'min': 0,
+    
+    'max': 60000
+  },
+  format: wNumb({
+    decimals: 0,
+    thousand: ','
+  })
+});
+  
+
+var snapValues = [
+  document.getElementById('min-price'),
+  document.getElementById('max-price')
+];
+
+snapSlider.noUiSlider.on('update', function( values, handle ) {
+  snapValues[handle].innerHTML = values[handle];
+});
+
+var odometerSlider = document.getElementById('odometer-range');
+
+noUiSlider.create(odometerSlider, {
+  start: [ 0, 80000 ],
+  decimals: 0,
+  thousand: ',',
+  snap: false,
+  connect: true,
+  step: 1000,
+  range: {
+    'min': 0,
+    
+    'max': 60000
+  },
+  format: wNumb({
+    decimals: 0,
+    thousand: ','
+  })
+});
+  
+
+var odometerValues = [
+  document.getElementById('min-odometer'),
+  document.getElementById('max-odometer')
+];
+
+odometerSlider.noUiSlider.on('update', function( values, handle ) {
+  odometerValues[handle].innerHTML = values[handle];
+});
+
+var yearSlider = document.getElementById('year-range');
+
+noUiSlider.create(yearSlider, {
+  start: [ 2000, 2017 ],
+  decimals: 0,
+  thousand: ',',
+  snap: false,
+  connect: true,
+  step: 1,
+  range: {
+    'min': 2000,
+    
+    'max': 2017
+  },
+  format: wNumb({
+    decimals: 0
+  })
+});
+  
+
+var yearValues = [
+  document.getElementById('min-year'),
+  document.getElementById('max-year')
+];
+
+yearSlider.noUiSlider.on('update', function( values, handle ) {
+  yearValues[handle].innerHTML = values[handle];
+});
 	
 
 

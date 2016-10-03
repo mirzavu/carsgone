@@ -29,7 +29,7 @@
                                  
                             </li>
                             <li>
-                            	<button id="quick_search" type="submit" class="waves-effect waves-light btn"><span>Quick Search</span></button>
+                                <i id="quick_search" class="waves-effect waves-light btn waves-input-wrapper" style=""><input type="submit" class="waves-button-input" value="Quick Search"></i>
                             </li>
                         </ul>
                     </div>

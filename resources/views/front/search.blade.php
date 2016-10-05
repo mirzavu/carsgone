@@ -385,6 +385,7 @@
      });
    });
 
+   //if image error
    $('img').one('error', function() { this.src = '/assets/images/placeholder.jpg'; });
    
    

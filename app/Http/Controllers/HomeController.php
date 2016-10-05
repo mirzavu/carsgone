@@ -84,7 +84,7 @@ class HomeController extends Controller
 			elseif (VehicleModel::where('model_name',"=","$keyword")->count()  && $flags['model']==0) 
 			{	
 				$param = VehicleModel::where('model_name',"=","$keyword")->first();
-				$search_param .= "model-".$param->model_name."/";
+				$search_param .= "make-".$param->make()->first()->make_name."/model-".$param->model_name."/";
 				unset($terms[$key]);
 				$flags['model']=1;
 			}

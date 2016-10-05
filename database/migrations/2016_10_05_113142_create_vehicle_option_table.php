@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransmissionsTable extends Migration
+class CreateVehicleOptionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class CreateTransmissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transmission_types', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('transmission');
+        Schema::create('vehicle_option', function (Blueprint $table) {
+            $table->integer('vehicle_id');
+            $table->integer('option_id');
         });
     }
 
@@ -25,6 +25,6 @@ class CreateTransmissionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('transmission_types');
+        Schema::drop('vehicle_option');
     }
 }

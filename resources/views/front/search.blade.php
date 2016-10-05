@@ -252,7 +252,7 @@
                      </a>
                      <div class="item-body">
                         <div class="item-body-left">
-                           <a href="#">
+                           <a href="/vehicle/{{$vehicle->slug}}">
                            <img src="{{$vehicle->photo()}}" alt="" />
                            <span class="overlay"></span>
                            </a>
@@ -277,7 +277,7 @@
                                     <div><i class="fa fa-dashboard"></i> {{number_format($vehicle->odometer)}}KM</div>
                                  </li>
                                  <li>
-                                    <div><i class="fa fa-phone"></i> (403) 945-8808</div>
+                                    <div><i class="fa fa-phone"></i>{{$vehicle->dealer->phone}}</div>
                                  </li>
                               </ul>
                            </div>

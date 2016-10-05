@@ -16,6 +16,7 @@ use App\Models\VehicleModel;
 use App\Models\BodyStyleGroup;
 use App\Models\Color;
 use App\Models\VehiclePhoto;
+use App\Models\Option;
 use DB;
 use Log;
 
@@ -247,6 +248,16 @@ class HomeController extends Controller
 				}
 				$vehicle->photos()->saveMany($photos);
 				//dd($vehicle->photo());
+
+				$vehicle->options()->delete();
+
+				$options = $xml->Features;
+				$option_ids =[];
+				foreach($options->Feature as $option) {
+					$option = Option::firstOrCreate(['option' =>  (string)$option]);
+					array_push($option_ids, $option->id);
+				}
+				$vehicle->options()->attach($option_ids);
             }
         }
         dd($email);

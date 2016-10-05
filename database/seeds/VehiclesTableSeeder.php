@@ -7,7 +7,7 @@ class VehiclesTableSeeder extends Seeder{
 
 	public function run(){
 		$faker = Faker\Factory::create();
-		foreach(range(1,2500) as $index)
+		/*foreach(range(1,2500) as $index)
 		{		
 			Dealer::create([
 				'name' => str_random(10),
@@ -36,7 +36,7 @@ class VehiclesTableSeeder extends Seeder{
 				'condition' => rand(0, 1) ? 'used' : 'new',
 				'transmission' => rand(0, 1) ? 'manual' : 'auto'
 				]);
-		}
+		}*/
 	}
 }
 

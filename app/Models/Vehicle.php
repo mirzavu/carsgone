@@ -70,7 +70,7 @@ class Vehicle extends Model
 
     public function options()
     {
-        return $this->hasMany('App\Models\VehicleOption');
+        return $this->belongsToMany('App\Models\Option', 'vehicle_option');
     }
 
     public function scopeActive($query)

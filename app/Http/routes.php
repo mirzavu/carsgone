@@ -28,7 +28,11 @@ Route::get('/fb', 'HomeController@fb');
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
 	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
 
-Route::auth();
+//Authentication
+	Route::post('/signup', 'UserController@postSignUp');
+	Route::post('/login', 'UserController@postSignIn');
+
+//Route::auth();
 
 Route::get('/home', 'HomeController@index');
 Route::group(['namespace' => 'Admin','middleware' => 'admin', 'prefix' => config('backpack.base.route_prefix')], function () {

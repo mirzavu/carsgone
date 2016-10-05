@@ -81,6 +81,13 @@ class HomeController extends Controller
 				unset($terms[$key]);
 				$flags['province']=1;
 			}
+			elseif (VehicleModel::where('model_name',"=","$keyword")->count()  && $flags['model']==0) 
+			{	
+				$param = VehicleModel::where('model_name',"=","$keyword")->first();
+				$search_param .= "model-".$param->model_name."/";
+				unset($terms[$key]);
+				$flags['model']=1;
+			}
 		}
 		if(count($terms))
 		{
@@ -230,7 +237,7 @@ class HomeController extends Controller
 				$vehicle->save();
 				//echo $vehicle->slug;exit;
 				$vehicle->photos()->delete();
-				$vehicle->options()->delete();
+				//$vehicle->options()->delete();
 
 				$images = $xml->Images;
 

@@ -83,7 +83,7 @@ class Vehicle extends Model
 
         return $query->where(function($q) use ($conditions){
             if ($conditions->get('content')) {
-                $q->where('text', $conditions->get('content'));
+                $q->where('text', 'like', '%'.$conditions->get('content').'%' );
             }
             if ($conditions->get('condition')) {
                 $q->where('condition', $conditions->get('condition'));

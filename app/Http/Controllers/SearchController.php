@@ -15,10 +15,10 @@ use Log;
 
 class SearchController extends Controller
 {
-	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer', 'distance', 'transmission');
-	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission');
-	protected $url_filters = array('make','model', 'province', 'city', 'body');
-	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon','odometer', 'distance', 'transmission');
+	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content');
+	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content');
+	protected $url_filters = array('make','model', 'province', 'city', 'body', 'content');
+	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content');
 	protected $url_params;
 
     public function searchHandler(Request $request, $params=false)

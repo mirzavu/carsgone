@@ -372,7 +372,7 @@ textarea.form-control{height:120px; resize:none;}
 .dealer-all-number .btn + .btn{margin:0; margin-left:2%;}
 .single-dealer-mid{padding:0;}
 ul.table-list{width:100%; display:inline-block; vertical-align:top;}
-ul.table-list li{width:100%; float:left; padding:8px 20px; font-weight:700;}
+ul.table-list li{width:100%; float:left; padding:8px 25px; font-weight:700;}
 ul.table-list li:nth-child(odd){background:#f5f9fd;}
 ul.table-list li a{color:#5fc0ed;}
 .single-dealer-lower{padding:15px; display:inline-block; vertical-align:top; width:100%;}
@@ -381,7 +381,7 @@ ul.table-list li a{color:#5fc0ed;}
 /* ============ Car Detail Page Start ================= */
 
 /* ============ Info Page Start ================= */
-.dealer-info{background-color:#ecf0f5; padding:40px 0 20px;}
+.dealer-info{background-color:#ecf0f5; padding:0px 0 10px 0px;}
 .panel.full .panel-heading{background:#3e5062;}
 .panel.full .panel-heading h2{text-transform:uppercase; font-family:'Lato'; font-weight:900; text-align:center; color:#fff; margin-bottom:0;}
 .panel.full .panel-body{padding:30px 60px; font-family: 'Raleway';}
@@ -440,7 +440,141 @@ ul.table-list li a{color:#5fc0ed;}
 .panel-body.auto-desc.show-all .btn{display:none;}
 /* ============ Autoloan Page End ================= */
 
+/* ============ Dealer Page Start ================= */
+.wrapper{padding:30px 3%;}
+.dealer-page-outer .panel.full .panel-heading .btn{padding:8px 20px;}
+.dealer-page-outer .panel.full .panel-body{padding:0;}
+.display-flex-outer{display:inline-block; width:100%; display:-webkit-flex; display:-ms-flexbox; display:flex;  -webkit-flex-wrap:wrap; -ms-flex-wrap:wrap; flex-wrap:wrap;}
+.display-flex{display: -webkit-flex; display: -ms-flexbox; display: flex;  -webkit-flex-wrap: wrap; -ms-flex-wrap: wrap; flex-wrap: wrap;}
+.dealer-info .panel.full .panel-body .left{float:left; width:41.66666667%; padding:25px 15px;}
+.dealer-info .panel.full .panel-body .right{float:left; width:58.33333333%;}
+.dealer-page-outer .panel.full .panel-body .btn-orange-border{margin-bottom:25px;}
+.btn-orange-border{background:#f7ac0c !important; border:solid 4px #e29c06; border-radius:50px; box-shadow:none; font-weight:900; font-size:23px; padding:4px 15px;letter-spacing:4px;}
+h6.btn-orange-border{cursor:default;}
+ul.dealer-info-list{text-align:center;display: inline-block;vertical-align: top;width: 100%;}
+.dealer-info-list li{display:inline-block; float:left; width:50%;}
+.dealer-page-outer .fetured-box{width:calc(100% - 20px);}
+.dealer-information{box-shadow:-5px 0 10px rgba(0, 0, 0, 0.25); padding:25px 0 10px;}
+.dealer-information .dealer-address-map{height:390px;}
+.dealer-information .single-dealer-mid{padding-top:10px;}
+.dealer-information .single-dealer-lower{padding:15px 25px;}
+.pad-20{padding:0 25px;}
+.pad-10{padding:0 10px;}
+.dealer-feature{background-color:#fff; box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); margin-bottom:0px;}
+.dealer-page-outer .cd-slider-nav{background:#3e5062;}
+.dealer-page-outer .cd-slider-nav .cd-marker{box-shadow:none; background:#5fc0ed;}
+.dealer-page-outer .cd-slider-nav nav{width:100%;}
+.dealer-page-outer .cd-slider-nav li a{font:700 26px/30px 'Raleway'; padding:15px 10px;}
+.dealer-page-outer .cd-slider-nav li + li{border-left:solid 1px #fff; position:relative;}
+.dealer-page-outer .cd-slider-nav li.selected a{color:#fff;}
+.dealer-page-outer .tab-content{padding:40px 30px 15px;}
+.popular-item-list.bordered li{margin-bottom:25px;}
+.popular-item-list.bordered li a{text-align: center; padding: 10px 0; font-weight: 700; color: #3e5062; border: solid 4px #ecf0f5;}
+.popular-item-list.bordered li a h6{color: #3e5062; font-weight: 700; transition:all 0.3s ease;}
+.popular-item-list.bordered li a:hover{border-color:#bbe5f9;}
+.popular-item-list.bordered li a:hover h6{color: #6fc6ef;}
+/* ============ Dealer Page End ================= */
 
+/* ============ Dashboard Page Start ================= */
+.dashboard-outer .panel.full .panel-body{padding:0;}
+.vertical-tab .cd-slider-nav{float:left; width:20%; background:#3e5062;}
+.vertical-tab:before{content: ''; width:20%; height:100%; background:#fff; position:absolute; top:0; left:0; box-shadow:4px 0px 6px -1px rgba(0,0,0,0.4); z-index:1;}
+.vertical-tab .cd-slider-nav nav{width:100%;}
+.vertical-tab .cd-slider-nav li{width:100%;}
+.vertical-tab .cd-slider-nav a{font-size:20px; line-height:26px; text-align:left; padding:12px 16px; border-bottom:solid 1px #fff;}
+.vertical-tab .cd-slider-nav li:last-child a{border-bottom:0;}
+.vertical-tab .cd-slider-nav li.selected a{color:#fff;}
+.vertical-tab .cd-slider-nav a i{font-style:normal;}
+.vertical-tab .cd-slider-nav a span{display:inline-block; width:40px; margin-right:5px; text-align:center;}
+.vertical-tab .cd-slider-nav .cd-marker{width:100%; height:25%; top:0; bottom:auto; box-shadow:none; background:#5fc0ed;}
+.vertical-tab .cd-slider-nav .cd-marker:before{content:'';border-left: solid 10px rgba(0,0,0,0.5);border-top: solid 10px transparent;border-bottom: solid 10px transparent;width: 0;height: 0;display: inline-block;position: absolute;top: calc(50% - 10px);right: -12px;-webkit-filter: blur(5px);-moz-filter: blur(5px);-o-filter: blur(5px);-ms-filter: blur(5px);filter: blur(3px);z-index: -1;}
+.vertical-tab .cd-slider-nav .cd-marker:after{content:'';border-left: solid 10px #5fc0ed;border-top: solid 10px transparent;border-bottom: solid 10px transparent;width: 0;height: 0;display: inline-block;position: absolute;top: calc(50% - 10px);right: -10px;}
+.vertical-tab .cd-slider-nav .cd-marker.item-2 { -webkit-transform: translateY(100%); -moz-transform: translateY(100%); -ms-transform: translateY(100%); -o-transform: translateY(100%); transform: translateY(100%); }
+.vertical-tab .cd-slider-nav .cd-marker.item-3 { -webkit-transform: translateY(200%); -moz-transform: translateY(200%); -ms-transform: translateY(200%); -o-transform: translateY(200%); transform: translateY(200%); }
+.vertical-tab .cd-slider-nav .cd-marker.item-4 { -webkit-transform: translateY(300%); -moz-transform: translateY(300%); -ms-transform: translateY(300%); -o-transform: translateY(300%); transform: translateY(300%); }
+.vertical-tab .cd-slider-nav .cd-marker.item-5 { -webkit-transform: translateY(400%); -moz-transform: translateY(400%); -ms-transform: translateY(400%); -o-transform: translateY(400%); transform: translateY(400%); }
+.vertical-tab .tab-content{padding:20px 30px;}
+.dashboard{text-align:center; margin-bottom:15px; display:inline-block; width:100%;}
+.dashboard .btn-orange-border{margin-bottom:15px; width:auto; white-space:normal;}
+.dashboard .item{text-align:left;}
+.dashboard .item-title{margin-top:0; margin-bottom:0; font-size:16px; text-transform:uppercase !important; color:#fff !important; line-height:24px; letter-spacing:1px !important; font-weight:700 !important; text-align:left;}
+.settings{max-width:550px;}
+.settings .contact-dealer-container h4{font-weight:700;}
+.current-info{box-shadow:0px 0px 3px #54d0e2;border-left: solid 10px #54d0e2;font-size: 16px;line-height: 1.2;text-transform: none;padding: 16px 18px;}
+.current-info > span:after{content:'|'; margin:0 6px;}
+/* ============ Dashboard Page End ================= */
+
+/* ============ Contact Page Start ================= */
+.contact-outer .panel.full .panel-heading{padding:13px 15px;}
+.contact-outer .panel.full .panel-body{padding:30px;}
+.contact-outer .contact-dealer-container{padding:0;}
+.contact-outer .contact-dealer-container .form-group{margin-bottom:25px;}
+.contact-box{background:#fff; border:3px solid #ccc; border-radius:5px; padding:20px 15px; margin-bottom:20px; float:left; width:100%;}
+.contact-box h6{color:#3e5062; text-transform:none;}
+.contact-box p{color:#969494; font-weight:600; font-family:'Raleway';}
+.contact-box > img{float:left; margin-right:18px;}
+.contact-box-right{position:relative; margin-right:31px; padding-left:90px;}
+.contact-box-right h3{margin-bottom:0; text-transform:none; color:#546e7a;}
+.contact-box-right p{margin-bottom:0; color:#212121;}
+.contact-box-right a{color:#5fc0ed;}
+.contact-box-right .phone{position:absolute; bottom:0; right:0;}
+.contact-info .single-dealer-lower{padding:0;}
+.contact-info .dealer-address-map{height:234px;}
+/* ============ Contact Page End ================= */
+
+/* ============ Help & Information Page Start ================= */
+.help-information{margin:54px 5%; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
+.help-information > h2{font-family:'Raleway'; font-weight:700; color:#3e5061; text-align:center; padding:22px 0; margin-bottom:0; /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fdfdfd+0,e3e3e3+100 */
+background: #fdfdfd; /* Old browsers */
+background: -moz-linear-gradient(top,  #fdfdfd 0%, #e3e3e3 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #fdfdfd 0%,#e3e3e3 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #fdfdfd 0%,#e3e3e3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdfdfd', endColorstr='#e3e3e3',GradientType=0 ); /* IE6-9 */
+}
+.help-information .panel{box-shadow:none; margin-bottom:0;}
+.help-information .collapsible{box-shadow:none;}
+.help-information .panel-heading{padding-left:60px; /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#12a5dc+0,bbecff+100 */
+background: #12a5dc; /* Old browsers */
+background: -moz-linear-gradient(left,  #12a5dc 0%, #bbecff 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #12a5dc 0%,#bbecff 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #12a5dc 0%,#bbecff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#12a5dc', endColorstr='#bbecff',GradientType=1 ); /* IE6-9 */
+}
+.help-information .panel-heading h4{font-family:'Raleway'; font-weight:700; color:#fff; margin-bottom:0;}
+.help-information .panel-body{padding:34px 36px;}
+.collapsible.popout > li{margin-bottom:20px; box-shadow: 0px 0px 5px rgba(0,0,0,.5);}
+.collapsible-header{font:700 18px/24px 'Raleway'; color:#3e5061; background-color:#f7f7f7; padding:12px 40px 12px 22px; position:relative;}
+.collapsible-header:after{content:'\f067'; font-family:'FontAwesome'; position:absolute; top:calc(50% - 12px); right:20px;}
+.collapsible-header.active:after{content:'\f068';}
+.collapsible-body p{font:500 16px/28px 'Raleway'; color:#373737;}
+.help-lower-content{margin:24px;}
+.help-lower-content p{font:500 16px/22px 'Raleway'; color:#000;}
+.help-lower-content p a{font-weight:700; color:#12a5dc;}
+
+/* ============ Help & Information Page End ================= */
+
+/* ============ Popup Start ================= */
+.modal.member{max-width:500px; bottom:auto;}
+.member .modal-content{box-shadow:none; border:0; border-radius:0; padding:19px 38px; position:relative;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b2e3f8+0,19a6e2+100 */
+background: #b2e3f8; /* Old browsers */
+background: -moz-linear-gradient(top,  #b2e3f8 0%, #19a6e2 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #b2e3f8 0%,#19a6e2 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #b2e3f8 0%,#19a6e2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b2e3f8', endColorstr='#19a6e2',GradientType=0 ); /* IE6-9 */
+}
+.member .modal-content h5{font:700 30px/40px 'Raleway'; color:#fff; text-align:center; text-transform:uppercase; text-shadow:0 0 5px rgba(0,0,0,.15); margin-bottom:18px;}
+.member .modal-content label,.member .modal-content .forgot{font:600 15px/18px 'Raleway'; color:#fff;}
+.member .modal-content .form-control{font-size:20px; border-color:#fff !important; border-radius:3px; padding:5px 13px;}
+.member .modal-content .form-control:focus{background-color:rgba(255,255,255,.4);}
+.member .modal-content .forgot{position:absolute; top:0; right:0;}
+.member .modal-content .form-group{position:relative;}
+.member .modal-content .close{position:absolute; top:10px; right:11px;}
+.member .modal-footer{padding:15px 40px; height:auto;}
+.member .modal-footer .btn{float:left; padding:9px 20px; min-width:210px;}
+.member .modal-footer .link{float:right; font:600 15px/18px 'Raleway'; color:#3c99c4; margin-top:16px;}
+.member .modal-footer .link i{margin-left:8px;}
+/* ============ Popup End ================= */
 
 /* ============================= */
 @media only screen and (max-width: 1140px) {
@@ -470,6 +604,14 @@ footer{font-size:15px;}
 .sidebar-overlay{position: fixed;  top: 0;  left: 0; right: 0; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 99998; opacity:0; visibility:hidden;}
 .sidebar-open	.sidebar-overlay{opacity:1; visibility:visible;}
 .btn{font-size:15px;}
+.btn-orange{font-size:20px;}
+
+.vertical-tab .cd-slider-nav a{font-size:16px; line-height:22px; padding:10px 12px;}
+.vertical-tab .cd-slider-nav a span{font-size:24px; line-height:30px; width:30px;}
+.dashboard ul.item-stats li{width:50%;}
+.contact-box-right .phone{position:relative;}
+
+.help-information .panel-body{padding:25px 10px;}
 }
 /*============================= 
 ! Layout for ipad portrait  
@@ -491,6 +633,23 @@ ul.popular-item-list{margin-bottom:30px;}
 .btn{font-size:14px;}
 
 .btn.bordered{font-size:18px; margin:0;}
+.btn-orange{font-size:20px;}
+
+.dealer-page-outer .cd-slider-nav li a{font-size:20px; line-height:26px; padding:12px 10px;}
+.dealer-page-outer .fetured-box{width:calc(100% - 2px); margin:1px;}
+.dealer-page-outer .wrapper{padding:30px 0;}
+.dealer-page-outer .pad-10{padding:0 1px;}
+
+.vertical-tab .cd-slider-nav a{text-align:center; padding:10px 5px;}
+.vertical-tab .cd-slider-nav a span{width:100%;}
+
+.contact-box{text-align:center;}
+.contact-box > img{float:none;}
+.contact-box-right{padding-left:0; margin-right:0;}
+
+.help-information{margin:54px 15px;}
+.dealer-information .dealer-address-map{height:300px;}
+.dealer-feature ul.popular-item-list{margin:0;}
 }
 
  
@@ -531,7 +690,7 @@ footer{font-size:14px;}
 .dealer-address-map{height:220px;}
 .single-description-lower{padding:0 15px;}
 
-.panel.full .panel-heading h2{font-size:20px;}
+.panel.full .panel-heading h2{font-size:19px;}
 .panel.full .panel-body,
 .canadian-autoloan .panel.full .panel-body,
 .autoloan-desc .panel.full .panel-body{padding:15px 20px;}
@@ -558,13 +717,46 @@ footer{font-size:14px;}
 .autoloan-desc .panel.full .panel-body p{font-size:14px; line-height:22px; margin-bottom:15px;}
 .approval-link{margin-left:0; margin-top:15px; width:100%;}
 .approval .btn-orange{margin-bottom:10px;}
+
+.wrapper{padding:30px 0;}
+.dealer-information{box-shadow:none;}
+.dealer-feature{margin-bottom:0;}
+.current-info{font-size:14px;}
+.dealer-info .panel.full .panel-body .left,.dealer-info .panel.full .panel-body .right{width:100%;}
+.dealer-info .panel.full .panel-body .right{padding:0;}
+.dealer-info .panel.full .panel-body .right .pad-25 .btn{white-space:normal;}
+.dealer-info{padding:0 0 10px;}
+.dealer-info-list li{width:33.33%;}
+.dealer-page-outer .fetured-box{width:calc(100% - 20px); margin:10px;}
+
+.help-information{margin:30px 0;}
+.help-information > h2{font-size:21px;}
+.help-information .panel-heading{padding-left:15px;}
+.help-information .panel-heading h4{font-size:18px;}
+.help-information .panel-body{padding:20px 0;}
+.collapsible.popout > li{margin:0 15px 15px;}
+.collapsible-header{font-size:14px; line-height:20px; padding:10px; padding-right:40px;}
+.collapsible-body p{font-size:14px; line-height:22px; padding:10px 15px;}
+.help-lower-content{margin:15px;}
+.help-lower-content p{font-size:14px;}
+.dealer-information .dealer-address-map{height:240px;}
 }
 
 
 @media screen and (max-width: 600px) {
-ul.item-stats li{width:100%; padding:0 7px;}
+ul.item-stats li,
+.dashboard ul.item-stats li{width:100%; padding:0 7px;}
 .item-body-right-lower h5{margin-bottom:6px;}
 .single-desc .cd-slider-nav a{font-size:12px;}
+
+.dealer-info-list li{width:50%;}
+
+.dealer-page-outer .cd-slider-nav li a{font-size:16px; line-height:22px; padding:10px;}
+.vertical-tab .cd-slider-nav a > i{display:none;}
+.vertical-tab .cd-slider-nav,.vertical-tab:before{width:55px;}
+.vertical-tab .tab-content{padding:15px;}
+.vertical-tab .contact-dealer-container{padding:0;}
+.current-info{padding:12px 5px;}
 }
 /* ============================= */
 /* ! Layout for mobile(portrait) version   */
@@ -590,9 +782,17 @@ ul.upper-nav.right li:last-child{border:0 !important;}
 .item-body-left{max-width:100%;}
 .dealer-all-number a {width: 96%;  float: left;  margin: 5px 2% !important;}
 
+.current-info > span{display:block;}
+
+.member .modal-content{padding:20px 15px;}
+.member .modal-footer{padding:15px; text-align:center;}
+.member .modal-footer .btn{width:100%; margin-bottom:10px;}
+.member .modal-footer .link{width:100%;}
+}
 @media screen and (max-width: 380px) {
 .navbar-brand {width: 140px; padding: 15px 5px;}
 .hero-btn{margin-top:14px;}
 .navbar-toggle{margin-top:16px; margin-right:10px;}
 
+.dealer-info-list li{width:100%;}
 }

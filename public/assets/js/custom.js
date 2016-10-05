@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+  $('.modal-trigger').leanModal();
 /** select box**/	
    $('select').material_select();
 /** sliding sidebar for mobile view **/	  
@@ -12,7 +14,12 @@ $('.sidebar-overlay').click(function(){
 	   return false;
 	   });
 	   
+    $('.auto-desc .btn').click(function(event){ /* find all a.read_more elements and bind the following code to them */
 
+        event.preventDefault(); /* prevent the a from changing the url */
+        $(this).closest('.auto-desc').toggleClass('show-all'); /* show the .more_text span */
+
+    });
 
 
 /** featured corousel **/

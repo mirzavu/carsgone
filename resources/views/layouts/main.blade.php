@@ -11,6 +11,8 @@
 <link href="/assets/css/materialize.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/slick.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/magnific-popup.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/nprogress.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/toastr.min.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
 <script src="/assets/js/modernizr.js"></script> <!-- Modernizr -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKsvinm7jgttOZYmtlyIEhEt5l7ZL7-yM"></script>
@@ -30,8 +32,8 @@
                 <li><a href="#">Contact: 123-456-7890</a></li>
             </ul>
             <ul class="upper-nav right">
-            	<li><a href="#">Sign-Up</a></li>
-                <li><a href="#">Login</a></li>
+            	<li><a class="modal-trigger" href="#signup">Sign-Up</a></li>
+              <li><a class="modal-trigger" href="#member">Login</a></li>
             </ul>
         </div>
     </div>
@@ -129,6 +131,49 @@
         
     </footer>
     <!-- footer end -->
+
+<div id="member" class="modal member">
+<div class="modal-content">
+  <h5>LOGIN</h5>
+  <div class="form-group">
+    <label>Email</label>
+    <input id="login-email" type="text" class="form-control"/>
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input id="login-password" type="password" class="form-control" />
+    <a href="#" class="forgot">Forgot It ?</a>
+  </div>
+  <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
+</div>
+<div class="modal-footer">
+  <input id="login-submit" type="submit" class="btn waves-effect waves-light waves-input-wrapper" value="Log In" />
+  <a id="signup-link" class="link" href="#">Sign Up <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+</div>
+
+</div>
+<div id="signup" class="modal member">
+<div class="modal-content">
+  <h5>SIGN UP</h5>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="text" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" class="form-control"/>
+  </div>
+  <div class="form-group">
+    <label>Confirm Password</label>
+    <input type="password" class="form-control" />
+  </div>
+  <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
+</div>
+<div class="modal-footer">
+  <input type="submit" class="btn waves-effect waves-light waves-input-wrapper" value="Signup" />
+  <a id="login-link" class="link" href="#">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+</div>
+</div>
 <script type="text/javascript" src="/assets/js/jquery-2.2.2.min.js"></script> 
 <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/assets/js/materialize.min.js"></script>
@@ -138,11 +183,12 @@
 <script type="text/javascript" src="/assets/js/wNumb.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery.magnific-popup.min.js"></script>
 <script type="text/javascript" src="/assets/js/theia-sticky-sidebar.js"></script>
+<script type="text/javascript" src="/assets/js/nprogress.js"></script>
+<script type="text/javascript" src="/assets/js/toastr.min.js"></script>
 <script type="text/javascript" src="/assets/js/custom.js"></script> 
 <script type="text/javascript">
 $('#make-select').on('change',function(){
     var id = $('#make-select').val();
-    console.log(id);
         $.ajax({ type: "GET",   
              url: "{{ url('getModels/') }}/"+id,   
              async: true,
@@ -187,7 +233,37 @@ $('#quick_search').on('click',function(){
     }
     window.location = "{{ url('search/') }}"+pathname;
 })
+
+$('#signup-link').on('click',function(e){
+  e.preventDefault();
+  $('#member').closeModal();
+  $('#signup').openModal();
+});
+
+$('#login-link').on('click',function(e){
+  e.preventDefault();
+  $('#signup').closeModal();
+  $('#member').openModal();
+});
+
+$('#login-submit').on('click',function(e){
+
+  toastr.success('You have logged in Successfully', 'Checkout your saved vehicles in dashboard')
+
+  NProgress.start();
+  var data = { email: $('#login-email').val(), password: $('#login-password').val(), "_token": "{{ csrf_token() }}"}
+  $.post( "/login", data).done(function( data ) {
+    NProgress.done();
+    console.log(data);
+  });
+  $('#signup').closeModal();
+  $('#member').openModal();
+});
+
+
+
 </script>
 @yield('javascript')
+
 </body>
 </html>

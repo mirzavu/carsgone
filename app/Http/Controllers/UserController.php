@@ -18,7 +18,7 @@ class UserController extends Controller
     	//if request ajax() need to check
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email|max:150|unique:users',
-            'first_name' => 'required|max:120',
+            'name' => 'required|max:120',
             'password' => 'required|min:6|max:100'
         ]);
 
@@ -27,17 +27,17 @@ class UserController extends Controller
         }
 
     	$email = $request['email'];
-    	$first_name = $request['first_name'];
+    	$name = $request['name'];
     	$password = bcrypt($request['password']);
     	$user = new User();
     	$user->email = $email;
-    	$user->name = $first_name;
+    	$user->name = $name;
     	$user->password = $password;
     	$user->save();
 
     	Auth::login($user);
     	$id = Auth::user()->id;
-    	return response()->json(['status' => 'success', 'id' => $id, 'email' => $email, 'name' => $first_name]);
+    	return response()->json(['status' => 'success', 'id' => $id, 'email' => $email, 'name' => $name]);
     }
 
     public function postSignIn(Request $request)
@@ -51,7 +51,7 @@ class UserController extends Controller
             return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
         }
 
-        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {	
             return response()->json(['status' => 'success', 'id' => Auth::user()->id, 'email' => Auth::user()->email, 'name' => Auth::user()->name]);
         }
         else
@@ -59,5 +59,10 @@ class UserController extends Controller
         	return response()->json(['status' => 'fail', 'error' => 'Email address or password is incorrect']);
         }
         
+    }
+
+    public function logout()
+    {
+        Auth::logout();
     }
 }

@@ -32,8 +32,13 @@
                 <li><a href="#">Contact: 123-456-7890</a></li>
             </ul>
             <ul class="upper-nav right">
-            	<li><a class="modal-trigger" href="#signup">Sign-Up</a></li>
-              <li><a class="modal-trigger" href="#member">Login</a></li>
+            @if (Auth::check())
+              <li id="dashboard-li"><a href="dashboard">Dashboard</a></li>
+              <li id="logout-li"><a href="/logout">Logout</a></li>
+            @else
+            	<li id="signup-li"><a class="modal-trigger" href="#signup">Sign-Up</a></li>
+              <li id="login-li"><a class="modal-trigger" href="#member">Login</a></li>
+            @endif
             </ul>
         </div>
     </div>
@@ -157,20 +162,24 @@
   <h5>SIGN UP</h5>
   <div class="form-group">
     <label>Email</label>
-    <input type="text" class="form-control" />
+    <input id="signup-email" type="text" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>Name</label>
+    <input id="signup-name" type="text" class="form-control" />
   </div>
   <div class="form-group">
     <label>Password</label>
-    <input type="password" class="form-control"/>
+    <input id="signup-password" type="password" class="form-control"/>
   </div>
   <div class="form-group">
     <label>Confirm Password</label>
-    <input type="password" class="form-control" />
+    <input id="signup-cpassword" type="password" class="form-control" />
   </div>
   <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
 </div>
 <div class="modal-footer">
-  <input type="submit" class="btn waves-effect waves-light waves-input-wrapper" value="Signup" />
+  <input id="signup-submit" type="submit" class="btn waves-effect waves-light waves-input-wrapper" value="Signup" />
   <a id="login-link" class="link" href="#">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a>
 </div>
 </div>
@@ -246,20 +255,60 @@ $('#login-link').on('click',function(e){
   $('#member').openModal();
 });
 
-$('#login-submit').on('click',function(e){
-
-  toastr.success('You have logged in Successfully', 'Checkout your saved vehicles in dashboard')
-
+$('#login-submit').parent().on('click',function(e){
   NProgress.start();
   var data = { email: $('#login-email').val(), password: $('#login-password').val(), "_token": "{{ csrf_token() }}"}
   $.post( "/login", data).done(function( data ) {
     NProgress.done();
+    if(data.status=="success")
+    {
+      toastr.success('You have logged in Successfully', 'Checkout your saved vehicles in dashboard')
+      $('#member').closeModal();
+      $('#signup-li').replaceWith( '<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
+      $('#login-li').replaceWith( '<li id="logout-li"><a href="#">Logout</a></li>');
+    }
+    else
+    {
+      toastr.error('Error',data.error)
+    }
     console.log(data);
   });
-  $('#signup').closeModal();
-  $('#member').openModal();
 });
 
+$('#signup-submit').parent().on('click',function(e){
+  NProgress.start();
+  if($('#signup-password').val() != $('#signup-cpassword').val())
+  {
+    toastr.error('Error','Passwords do not match')
+    NProgress.done();
+    return
+  }
+  var data = { email: $('#signup-email').val(), name: $('#signup-name').val(), password: $('#signup-password').val(), "_token": "{{ csrf_token() }}"}
+  $.post( "/signup", data).done(function( data ) {
+    NProgress.done();
+    if(data.status=="success")
+    {
+      toastr.success('You have registered Successfully', 'Checkout your saved vehicles in dashboard')
+      $('#signup').closeModal();
+      $('#signup-li').replaceWith( '<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
+      $('#login-li').replaceWith( '<li id="logout-li"><a href="#">Logout</a></li>');
+    }
+    else
+    {
+      toastr.error('Error',data.error)
+    }
+    console.log(data);
+  });
+});
+
+$('body').on('click', '#logout-li', function() {
+  NProgress.start();
+  $.get( "/logout").done(function( data ) {
+    NProgress.done();
+    toastr.success('You have logout Successfully')
+    location.reload();
+  });
+});
 
 
 </script>

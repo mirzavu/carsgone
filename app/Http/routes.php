@@ -31,6 +31,7 @@ Route::get('/fb', 'HomeController@fb');
 //Authentication
 	Route::post('/signup', 'UserController@postSignUp');
 	Route::post('/login', 'UserController@postSignIn');
+	Route::get('/logout', 'UserController@logout');
 
 //Route::auth();
 

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ChangeLocale;
-use App\Http\Requests;
+
 use Illuminate\Http\Request;
+use App\Http\Requests;
 
 use App\Models\User;
 use App\Models\Vehicle;
@@ -44,7 +45,7 @@ class HomeController extends Controller
 		$data['body_style_groups'] = BodyStyleGroup::withCount('vehicles')->orderBy('body_style_group_name', 'asc')->get();
 
 		$prices = DB::table('vehicles')->select(DB::raw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`'))->groupBy('range')->get();
-
+		
 		$data['prices'] = $this->format_price_range($prices);
 		$data['count'] = Vehicle::where('status_id', 1)->count();
 		return view('front.home', $data);
@@ -62,7 +63,7 @@ class HomeController extends Controller
 		return $prices;
 	}
 
-	public function searchTerm($term)
+	public function searchTerm(Request $request, $term)
 	{
 		$terms = explode(" ",$term);
 		$flags = array('make' => 0,'model' =>0, 'province'=>0, 'city'=>0 );
@@ -93,9 +94,9 @@ class HomeController extends Controller
 		if(count($terms))
 		{
 			$content_param = implode(" ", $terms);
-			$search_param.= "content-".$content_param;
+			$request->session()->put('content',$content_param);
 		}
-		echo $search_param;exit;
+		echo $search_param;
 	}
 
 	public function getModels($make_id)

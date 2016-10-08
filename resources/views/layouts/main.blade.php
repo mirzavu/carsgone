@@ -194,6 +194,7 @@
 <script type="text/javascript" src="/assets/js/toastr.min.js"></script>
 <script type="text/javascript" src="/assets/js/custom.js"></script> 
 <script type="text/javascript">
+toastr.success('Checkout your saved vehicles in dashboard','You have logged in Successfully')
 $('#make-select').on('change',function(){
     var id = $('#make-select').val();
         $.ajax({ type: "GET",   
@@ -260,31 +261,14 @@ $('#login-submit').on('click',function(e){
     NProgress.done();
     if(data.status=="success")
     {
-      toastr.success('You have logged in Successfully', 'Checkout your saved vehicles in dashboard')
+      toastr.success('Checkout your saved vehicles in dashboard','You have logged in Successfully')
       $('#member').closeModal();
       $('#signup-li').replaceWith( '<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
       $('#login-li').replaceWith( '<li id="logout-li"><a href="#">Logout</a></li>');
     }
     else
     {
-      toastr.options = {
-  "closeButton": true,
-  "debug": false,
-  "newestOnTop": false,
-  "tapToDismiss": false,
-  "positionClass": "toast-top-right",
-  "preventDuplicates": false,
-  "onclick": null,
-  "showDuration": "30000",
-  "hideDuration": "1000",
-  "timeOut": "50000",
-  "extendedTimeOut": "1000",
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
-}
-      toastr.error('Error',data.error)
+      toastr.error(data.error,'Error')
     }
     console.log(data);
   });
@@ -294,7 +278,7 @@ $('#signup-submit').on('click',function(e){
   NProgress.start();
   if($('#signup-password').val() != $('#signup-cpassword').val())
   {
-    toastr.error('Error','Passwords do not match')
+    toastr.error('Passwords do not match','Error')
     NProgress.done();
     return
   }

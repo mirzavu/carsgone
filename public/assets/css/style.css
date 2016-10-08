@@ -440,6 +440,7 @@ ul.table-list li a{color:#5fc0ed;}
 .panel-body.auto-desc.show-all .btn{display:none;}
 /* ============ Autoloan Page End ================= */
 
+.modal{max-height:85%}
 /* ============ Dealer Page Start ================= */
 .wrapper{padding:30px 3%;}
 .dealer-page-outer .panel.full .panel-heading .btn{padding:8px 20px;}
@@ -796,3 +797,5 @@ ul.upper-nav.right li:last-child{border:0 !important;}
 
 .dealer-info-list li{width:100%;}
 }
+#toast-container{top:0; right:0;}
+.toast-title{font-size:16px;}

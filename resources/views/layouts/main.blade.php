@@ -56,7 +56,7 @@
           <a href="/search" class="hero-btn"><span>Browse Cars</span></a>
           <div class="header-search">
           <div class="header-search-box">
-          	<input id="search_text" type="text" value="" placeholder="Find vehicle now..." class="search-input" />
+          	<input id="search_text" type="text" value="" placeholder="Full content search" class="search-input" />
             <input id="search_icon" type="submit" value="&#xf002;" class="search-submit" />
             </div>
           </div>
@@ -89,7 +89,6 @@
                             <p>198 West 21th Street, Suite 721, New York NY5109 Pacific Coast Highway, Los Angeles CA</p>
                             <p>Email: <a href="mailto:youremail@yourdomain.com">youremail@yourdomain.com</a></p>
                             <p>Phone: +88 (0) 101 0000 000</p>
-                            <p>Fax: +88 (0) 202 0000 001</p>
                             <ul class="social-links">
                             	<li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -113,10 +112,9 @@
                     	<div class="footer-box-content">
                     	<h5>Other Info</h5>
                         	<ul class="footer-links">
-                            	<li><a href="#">Links &amp; Resources</a></li>
-                                <li><a href="#">Questions &amp; Answers</a></li>
-                                <li><a href="#">Company Privacy Policy</a></li>
-                                <li><a href="#">Contact Us Here</a></li>
+                                <li><a href="/help">Questions &amp; Answers</a></li>
+                                <li><a href="/privacy">Privacy Policy</a></li>
+                                <li><a href="/contact">Contact Us</a></li>
                             </ul> 
                          </div>
                     </div>
@@ -128,7 +126,7 @@
         	<div class="container">
             	<div class="row">
                     <div class="col-sm-12">
-                    	<p class="copyright">&copy; 2012 AUTOandTRUCK.ca All Rights Reserved.</p>
+                    	<p class="copyright">&copy; {{ date("Y")}} Carsgone.com All Rights Reserved.</p>
                     </div>
                 </div>
             </div>
@@ -152,7 +150,7 @@
   <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
 </div>
 <div class="modal-footer">
-  <input id="login-submit" type="submit" class="btn waves-effect waves-light waves-input-wrapper" value="Log In" />
+  <a id="login-submit" class="btn waves-effect waves-light waves-input-wrapper">Login</a>
   <a id="signup-link" class="link" href="#">Sign Up <i class="fa fa-sign-in" aria-hidden="true"></i></a>
 </div>
 
@@ -172,14 +170,14 @@
     <label>Password</label>
     <input id="signup-password" type="password" class="form-control"/>
   </div>
-  <div class="form-group">
+  <div class="">
     <label>Confirm Password</label>
     <input id="signup-cpassword" type="password" class="form-control" />
   </div>
   <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
 </div>
 <div class="modal-footer">
-  <input id="signup-submit" type="submit" class="btn waves-effect waves-light waves-input-wrapper" value="Signup" />
+  <a id="signup-submit" class="btn waves-effect waves-light waves-input-wrapper">Signup</a>
   <a id="login-link" class="link" href="#">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a>
 </div>
 </div>
@@ -255,7 +253,7 @@ $('#login-link').on('click',function(e){
   $('#member').openModal();
 });
 
-$('#login-submit').parent().on('click',function(e){
+$('#login-submit').on('click',function(e){
   NProgress.start();
   var data = { email: $('#login-email').val(), password: $('#login-password').val(), "_token": "{{ csrf_token() }}"}
   $.post( "/login", data).done(function( data ) {
@@ -269,13 +267,30 @@ $('#login-submit').parent().on('click',function(e){
     }
     else
     {
+      toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": false,
+  "tapToDismiss": false,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "30000",
+  "hideDuration": "1000",
+  "timeOut": "50000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
       toastr.error('Error',data.error)
     }
     console.log(data);
   });
 });
 
-$('#signup-submit').parent().on('click',function(e){
+$('#signup-submit').on('click',function(e){
   NProgress.start();
   if($('#signup-password').val() != $('#signup-cpassword').val())
   {

@@ -33,6 +33,11 @@ Route::get('/fb', 'HomeController@fb');
 	Route::post('/login', 'UserController@postSignIn');
 	Route::get('/logout', 'UserController@logout');
 
+//Footer links
+	Route::get('/help', 'PageController@help');
+	Route::get('/privacy', 'PageController@privacy');
+	Route::get('/contact', 'PageController@contact');
+
 //Route::auth();
 
 Route::get('/home', 'HomeController@index');

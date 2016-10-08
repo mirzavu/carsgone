@@ -130,7 +130,6 @@ class SearchController extends Controller
 					->with(['dealer.province' => function($query) {
 					    return $query->groupBy('province_name');
 					}])->get();
-			dd($ss);
 			$ss = Province::where('province_name','=','Manitoba')->first()->cities()->withCount(['vehicles' => function ($query) use ($conditions) {
 					    $query->applyFilter($conditions);
 

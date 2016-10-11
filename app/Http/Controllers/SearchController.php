@@ -47,7 +47,7 @@ class SearchController extends Controller
 		//distance set
 		if(!$conditions->get('distance'))
 		{
-			$conditions->put('distance','20000');
+			$conditions->put('distance','200');
 		}
 		
 		//Sorting set

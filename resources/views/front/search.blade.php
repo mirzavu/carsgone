@@ -38,7 +38,7 @@
                      <ul class="applied-list">
                         @foreach ($applied_filters->all() as $key => $value)
                         @if($key=="distance") 
-                        @php $value = (int)$value / 100 . " Km"; @endphp
+                        @php $value = (int)$value. " KM"; @endphp
                         @endif
                         <li>
                            <span>{{$key.' : '.$value}}</span>
@@ -55,10 +55,10 @@
                   </div>
                   <div class="panel-body">
                      <ul class="link-list distance-list">
-                        <li><a id="20000" href="#">200 Km</a></li>
-                        <li><a id="30000" href="#">300 Km</a></li>
-                        <li><a id="40000" href="#">400 Km</a></li>
-                        <li><a id="50000" href="#">500 Km</a></li>
+                        <li><a id="200" href="#">200 Km</a></li>
+                        <li><a id="300" href="#">300 Km</a></li>
+                        <li><a id="400" href="#">400 Km</a></li>
+                        <li><a id="500" href="#">500 Km</a></li>
                      </ul>
                   </div>
                </div>
@@ -263,7 +263,7 @@
                                  <div class="item-detail-left"><img src="/assets/images/placeholder.jpg" alt="" /></div>
                                  <div class="item-detail-right">
                                     <h6>{{$vehicle->dealer->city->city_name}}, {{$vehicle->dealer->province->province_name}}  <span class="part">|</span>  <small>{{$vehicle->created_at->diffForHumans()}}</small></h6>
-                                    <p>{{$vehicle->bodyStyleGroup->body_style_group_name}} <span class="part">|</span> {{$vehicle->ext_color->color}} <span class="part">|</span> {{$vehicle->transmission}}</p>
+                                    <p>{{$vehicle->bodyStyleGroup->body_style_group_name or $vehicle->bodyStyle->body_style_name}} <span class="part">|</span> {{$vehicle->ext_color->color}} <span class="part">|</span> {{$vehicle->transmission}}</p>
                                  </div>
                               </div>
                            </div>
@@ -307,10 +307,22 @@
    </div>
    <!-- Main Container End -->
 </div>
+<script type="text/javascript">
+   @php $price = $applied_filters->get("price"); @endphp
+   var price_all = '{{ $price or '0-60000' }}';
+   var price = price_all.split("-");
+   @php $odometer = $applied_filters->get("odometer"); @endphp
+   var odometer_all = '{{ $odometer or '0-80000' }}';
+   var odometer = odometer_all.split("-");
+   @php $year = $applied_filters->get("year"); @endphp
+   var year_all = '{{ $year or '2000-2017' }}';
+   var year = year_all.split("-");
+</script>
 <!-- main container outer end -->
 @endsection
 @section('javascript')
 <script type="text/javascript">
+
    $('.applied-remove').on('click',function(e){
      e.preventDefault();
      data = $(this).prev().html();

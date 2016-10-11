@@ -200,7 +200,7 @@ $('.half-left, .half-right')
 var snapSlider = document.getElementById('price-range');
 
 noUiSlider.create(snapSlider, {
-  start: [ 0, 60000 ],
+  start: [  price[0], price[1] ],
   decimals: 0,
   thousand: ',',
   snap: false,
@@ -230,7 +230,7 @@ snapSlider.noUiSlider.on('update', function( values, handle ) {
 var odometerSlider = document.getElementById('odometer-range');
 
 noUiSlider.create(odometerSlider, {
-  start: [ 0, 80000 ],
+  start: [ odometer[0], odometer[1] ],
   decimals: 0,
   thousand: ',',
   snap: false,
@@ -239,7 +239,7 @@ noUiSlider.create(odometerSlider, {
   range: {
     'min': 0,
     
-    'max': 60000
+    'max': 80000
   },
   format: wNumb({
     decimals: 0,
@@ -260,7 +260,7 @@ odometerSlider.noUiSlider.on('update', function( values, handle ) {
 var yearSlider = document.getElementById('year-range');
 
 noUiSlider.create(yearSlider, {
-  start: [ 2000, 2017 ],
+  start: [ year[0], year[1] ],
   decimals: 0,
   thousand: ',',
   snap: false,

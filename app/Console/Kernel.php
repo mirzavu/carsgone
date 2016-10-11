@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\Inspire::class,
         Commands\Boost::class,
-
+        Commands\Cdemo::class,
+        Commands\Strathcom::class,
     ];
 
     /**
@@ -28,5 +29,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $filePath = "storage/logs/feeds/boost/".date("Y-m-d")."log";
+        $schedule->command('feed:boost')->dailyAt('13:00')->sendOutputTo($filePath);
+
+        $filePath = "storage/logs/feeds/cdemo/".date("Y-m-d")."log";
+        $schedule->command('feed:cdemo')->dailyAt('13:00')->sendOutputTo($filePath);
     }
 }

@@ -798,7 +798,7 @@ ul.upper-nav.right li:last-child{border:0 !important;}
 .dealer-info-list li{width:100%;}
 }
 #toast-container>.toast {
-    display: block !important;
+    display: block;
 }
 
 .toast-title {

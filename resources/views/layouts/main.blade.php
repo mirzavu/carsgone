@@ -194,7 +194,6 @@
 <script type="text/javascript" src="/assets/js/toastr.min.js"></script>
 <script type="text/javascript" src="/assets/js/custom.js"></script> 
 <script type="text/javascript">
-toastr.success('Checkout your saved vehicles in dashboard','You have logged in Successfully')
 $('#make-select').on('change',function(){
     var id = $('#make-select').val();
         $.ajax({ type: "GET",   
@@ -255,6 +254,7 @@ $('#login-link').on('click',function(e){
 });
 
 $('#login-submit').on('click',function(e){
+  toastr.clear()
   NProgress.start();
   var data = { email: $('#login-email').val(), password: $('#login-password').val(), "_token": "{{ csrf_token() }}"}
   $.post( "/login", data).done(function( data ) {
@@ -275,6 +275,7 @@ $('#login-submit').on('click',function(e){
 });
 
 $('#signup-submit').on('click',function(e){
+  toastr.clear()
   NProgress.start();
   if($('#signup-password').val() != $('#signup-cpassword').val())
   {
@@ -287,14 +288,14 @@ $('#signup-submit').on('click',function(e){
     NProgress.done();
     if(data.status=="success")
     {
-      toastr.success('You have registered Successfully', 'Checkout your saved vehicles in dashboard')
+      toastr.success( 'Checkout your saved vehicles in dashboard', 'Registered Successfully')
       $('#signup').closeModal();
       $('#signup-li').replaceWith( '<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
       $('#login-li').replaceWith( '<li id="logout-li"><a href="#">Logout</a></li>');
     }
     else
     {
-      toastr.error('Error',data.error)
+      toastr.error(data.error, 'Error')
     }
     console.log(data);
   });

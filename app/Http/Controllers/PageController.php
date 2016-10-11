@@ -8,19 +8,20 @@ use App\Http\Requests;
 
 class PageController extends Controller
 {
-    public function help()
+    public function help(Request $request)
 	{
 		return view('front.pages.help');
 	}
 
-	public function privacy()
+	public function privacy(Request $request)
 	{
 		return view('front.pages.privacy');
 	}
 
-	public function contact()
+	public function contact(Request $request)
 	{
-		return view('front.pages.contact');
+		$data['location'] = getLocation($request);
+		return view('front.pages.contact', $data);
 	}
 
 }

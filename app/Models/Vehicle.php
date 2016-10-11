@@ -38,6 +38,11 @@ class Vehicle extends Model
         return $this->belongsTo('App\Models\BodyStyleGroup');
     }
 
+    public function bodyStyle()
+    {
+        return $this->belongsTo('App\Models\BodyStyle');
+    }
+
     public function model()
     {
         return $this->belongsTo('App\Models\VehicleModel');
@@ -131,8 +136,11 @@ class Vehicle extends Model
                 $q->where('featured', 1);
             }
             if ($conditions->get('lat')) {
+                //$conditions->put('distance',5000);
                 $lat = $conditions->get('lat');
                 $lon = $conditions->get('lon');
+                $lat = 56.7264;
+                $lon = -111.3803;
                 $q->select(DB::raw("id, ( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) AS distance"))->having('distance','<',$conditions->get('distance')); //3959 for miles
             }
             return $q;

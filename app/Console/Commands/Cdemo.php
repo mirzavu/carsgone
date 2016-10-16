@@ -92,7 +92,7 @@ class Cdemo extends Command
 
                     if((empty($dealer->latitude) || empty($dealer->longitude)) && !empty($dealer->postal_code))
                     {
-                        $loc_json = file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($dealer->postal_code));
+                        $loc_json = file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($dealer_xml->dealer_postal_code));
                         $loc_array = json_decode($loc_json);
                         $dealer->latitude = $loc_array->results[0]->geometry->location->lat;
                         $dealer->longitude = $loc_array->results[0]->geometry->location->lng;
@@ -119,7 +119,10 @@ class Cdemo extends Command
                         $email[$i++] = "Make ".(string) $vehicle_xml->make;
                         continue;
                     }
-                    $model_id = VehicleModel::where('model_name',(string) $vehicle_xml->model)->value('id');
+                    $model_id = VehicleModel::where([
+                        ['model_name', '=', (string) $vehicle_xml->Model],
+                        ['make_id', '=', $make_id]
+                    ])->value('id');
                     if($model_id)
                         $vehicle->model_id = $model_id;
                     else

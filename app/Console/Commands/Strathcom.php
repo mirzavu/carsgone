@@ -117,7 +117,10 @@ class Strathcom extends Command
                     $email[$i++] = "Make ".(string) $xml->Make;
                     continue;
                 }
-                $model_id = VehicleModel::where('model_name',(string) $xml->ModelDescription)->value('id');
+                $model_id = VehicleModel::where([
+                        ['model_name', '=', (string) $xml->ModelDescription],
+                        ['make_id', '=', $make_id]
+                    ])->value('id');
                 if($model_id)
                     $vehicle->model_id = $model_id;
                 else

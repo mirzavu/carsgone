@@ -4,6 +4,23 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+use App\Models\User;
+use App\Models\Vehicle;
+use App\Models\Dealer;
+use App\Models\Province;
+use App\Models\City;
+use App\Models\Make;
+use App\Models\VehicleModel;
+use App\Models\BodyStyleGroup;
+use App\Models\Color;
+use App\Models\VehiclePhoto;
+use App\Models\Option;
+use App\Models\BodyStyle;
+use App\Models\DriveType;
+use App\Models\FuelType;
+use App\Models\TransmissionType;
+use DB;
+
 class Strathcom extends Command
 {
     /**
@@ -59,13 +76,13 @@ class Strathcom extends Command
         // Raising this value may increase performance
         $buffer_size = 4096; // read 4kb at a time
         $out_file_name = str_replace('.gz', '', $file_name); 
-        /*$file = gzopen($file_name, 'rb');
+        $file = gzopen($file_name, 'rb');
         $out_file = fopen($out_file_name, 'wb'); 
         while (!gzeof($file)) {
             fwrite($out_file, gzread($file, $buffer_size));
         }
 
-        $out_file = null;*/
+        $out_file = null;
         $xmlReader = new \XMLReader();
         $xmlReader->open($out_file_name, null, 1 << 19);
         while ($xmlReader->read()) {

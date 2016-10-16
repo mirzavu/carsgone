@@ -56,7 +56,7 @@ class Boost extends Command
         ini_set("max_execution_time",0);
         $starttime = "\nProgram Start time:" . date(DATE_RFC822);
 
-        $xml_directory   = 'storage/feeds/boost/';
+        $xml_directory   = storage_path('feeds/boost/');
         $xml_filename = 'Export';
         $local_file = $xml_directory . $xml_filename . date("Y-m-d") . '.xml';
         $server_file = $xml_filename . '.xml';
@@ -113,12 +113,12 @@ class Boost extends Command
                 $dealer->province_id = $province_id;
                 $city = City::firstOrCreate(['city_name'=> (string)$xml->Dealership_City,'province_id'=> $province_id]);
                 $dealer->city_id = $city->id;
-                $dealer->postal_code = str_replace(' ', '', $xml->Dealership_Postal);
+                $dealer->postal_code = $xml->Dealership_Postal;
                 $dealer->status = 1;
 
                 if((empty($dealer->latitude) || empty($dealer->longitude)) && !empty($dealer->postal_code))
                 {
-                    $loc_json = file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($dealer->postal_code));
+                    $loc_json = file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($xml->Dealership_Postal));
                     $loc_array = json_decode($loc_json);
                     $dealer->latitude = $loc_array->results[0]->geometry->location->lat;
                     $dealer->longitude = $loc_array->results[0]->geometry->location->lng;
@@ -147,7 +147,10 @@ class Boost extends Command
                     $email[$i++] = "Make ".(string) $xml->Make;
                     continue;
                 }
-                $model_id = VehicleModel::where('model_name',(string) $xml->Model)->value('id');
+                $model_id = VehicleModel::where([
+                        ['model_name', '=', (string) $xml->Model],
+                        ['make_id', '=', $make_id]
+                    ])->value('id');
                 if($model_id)
                     $vehicle->model_id = $model_id;
                 else

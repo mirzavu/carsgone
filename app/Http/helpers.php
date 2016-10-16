@@ -52,6 +52,9 @@ if (!function_exists('getLocation')) {
 		else
 		{
 			$ip = $request->ip();
+			if ($ip[0]==':') {
+				$ip = '123.237.131.97';
+			}
 			$loc = json_decode(file_get_contents('http://ip-api.com/json/'.$ip),'true');
 			$loc['place'] = $loc['city'];
 			unset($loc['city']); //city is used in search page, so no clash

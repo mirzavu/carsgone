@@ -43,9 +43,7 @@ class HomeController extends Controller
 	public function index(Request $request)
 	{	
 		$data['total'] = Vehicle::count();
-		echo $request->session()->get('zip');
 		$data['location'] = getLocation($request);
-		echo $request->session()->get('place');
 		$data['provinces'] = Province::withCount('vehicles')->orderBy('province_name', 'asc')->get();
 		$data['makes'] = Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
 

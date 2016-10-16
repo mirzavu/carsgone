@@ -52,7 +52,7 @@ if (!function_exists('getLocation')) {
 		else
 		{
 			$ip = $request->ip();
-			$loc = json_decode(file_get_contents('http://ip-api.com/json/123.237.131.97'),'true');
+			$loc = json_decode(file_get_contents('http://ip-api.com/json/'.$ip),'true');
 			$loc['place'] = $loc['city'];
 			unset($loc['city']); //city is used in search page, so no clash
 			$request->session()->put('zip', $loc['zip']);

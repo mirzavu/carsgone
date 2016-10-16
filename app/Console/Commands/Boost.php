@@ -64,7 +64,7 @@ class Boost extends Command
         $ftp_user_name = 'carsgone';
         $ftp_user_pass = 'boost2carsgone';
 
-        //exec("curl -u carsgone:boost2carsgone 'ftp://ftp.boostmotorgroup.com/Export.xml' -o ".$local_file);
+        exec("curl -u carsgone:boost2carsgone 'ftp://ftp.boostmotorgroup.com/Export.xml' -o ".$local_file);
         $xmlReader = new \XMLReader;
         $xmlReader->open($local_file);
         $province_hash = array(
@@ -90,8 +90,6 @@ class Boost extends Command
         $vehicle_cnt = 0;
         $vehicle_upd = 0;
         $dealer_cnt = 0;
-        $abnormal_dealer ="";
-        $abnormal_dealer_cnt = 0;
         $new_dealer_cnt=0;
         $new_dealers = "";
         $email = [];$i=0;

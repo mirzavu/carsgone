@@ -33,6 +33,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('feed:boost')->dailyAt('13:00')->sendOutputTo($filePath);
 
         $filePath = "storage/logs/feeds/cdemo/".date("Y-m-d")."log";
-        $schedule->command('feed:cdemo')->dailyAt('13:00')->sendOutputTo($filePath);
+        $schedule->command('feed:cdemo')->dailyAt('14:00')->sendOutputTo($filePath);
     }
 }

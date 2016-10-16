@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "backpack/base": "^0.6.12",
         "backpack/crud": "^3.0",
-        "cviebrock/eloquent-sluggable": "^4.1"
+        "cviebrock/eloquent-sluggable": "^4.1",
+        "predis/predis": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

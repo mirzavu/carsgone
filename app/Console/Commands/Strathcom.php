@@ -114,9 +114,17 @@ class Strathcom extends Command
                     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($curl, CURLOPT_HEADER, false);
                     $loc_json = curl_exec($curl);
+                    $retry = 0;
+                    var_dump($loc_json);
+                    $loc_array = json_decode($loc_json);
+                    while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
+                        $loc_json = curl_exec($curl);
+                        $loc_array = json_decode($loc_json);
+                        $retry++;
+                    }
                     curl_close($curl);
 
-                    $loc_array = json_decode($loc_json);
+                    
                     $dealer->latitude = $loc_array->results[0]->geometry->location->lat;
                     $dealer->longitude = $loc_array->results[0]->geometry->location->lng;
                 }

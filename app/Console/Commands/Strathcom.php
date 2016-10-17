@@ -103,7 +103,7 @@ class Strathcom extends Command
                 $dealer->province_id = $province_id;
                 $city = City::firstOrCreate(['city_name'=> (string)$xml->Address->City,'province_id'=> $province_id]);
                 $dealer->city_id = $city->id;
-                $dealer->postal_code = strpos((string)$xml->Address->PostalCode, ' ') == false? substr_replace((string)$xml->Address->PostalCode, ' ', 3, 0):(string)$xml->Address->PostalCode; //add space in middle if not there
+                $dealer->postal_code = strpos((string)$xml->Address->PostalCode, ' ') == false && !empty((string)$xml->Address->PostalCode)? substr_replace((string)$xml->Address->PostalCode, ' ', 3, 0):(string)$xml->Address->PostalCode; //add space in middle if not there
                 $dealer->status = 1;
 
                 if((empty($dealer->latitude) || empty($dealer->longitude)) && !empty($dealer->postal_code))

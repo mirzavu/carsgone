@@ -113,16 +113,29 @@ class Boost extends Command
                 $dealer->province_id = $province_id;
                 $city = City::firstOrCreate(['city_name'=> (string)$xml->Dealership_City,'province_id'=> $province_id]);
                 $dealer->city_id = $city->id;
-                $dealer->postal_code = $xml->Dealership_Postal;
-                $dealer->status = 1;
 
+                $dealer->postal_code = strpos((string)$xml->Dealership_Postal, ' ') == false && !empty((string)$xml->Dealership_Postal)? substr_replace((string)$xml->Dealership_Postal, ' ', 3, 0):(string)$xml->Dealership_Postal; //add space in middle if not there
                 if((empty($dealer->latitude) || empty($dealer->longitude)) && !empty($dealer->postal_code))
                 {
-                    $loc_json = file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($xml->Dealership_Postal));
+                    $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($dealer->postal_code);
+                    $curl = curl_init();
+                    curl_setopt($curl, CURLOPT_URL, $url);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_HEADER, false);
+                    $loc_json = curl_exec($curl);
+                    $retry = 0;
                     $loc_array = json_decode($loc_json);
+                    while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
+                        $loc_json = curl_exec($curl);
+                        $loc_array = json_decode($loc_json);
+                        $retry++;
+                    }
+                    curl_close($curl);
                     $dealer->latitude = $loc_array->results[0]->geometry->location->lat;
                     $dealer->longitude = $loc_array->results[0]->geometry->location->lng;
                 }
+
+                $dealer->status = 1;
                 $dealer->save();
                 echo "\nDealer Name found in DB: " . $dealer->name . ' : Dealer ID: '.$dealer->id."\n";
                 $dealer_cnt++;

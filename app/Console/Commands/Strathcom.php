@@ -108,7 +108,14 @@ class Strathcom extends Command
 
                 if((empty($dealer->latitude) || empty($dealer->longitude)) && !empty($dealer->postal_code))
                 {
-                    $loc_json = file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($xml->Address->PostalCode)); //there is issue when striping space in postal code which has 5 alphanumerics, so using no stripped data
+                    $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($xml->Address->PostalCode);
+                    $curl = curl_init();
+                    curl_setopt($curl, CURLOPT_URL, $url);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_HEADER, false);
+                    $loc_json = curl_exec($curl);
+                    curl_close($curl);
+
                     $loc_array = json_decode($loc_json);
                     $dealer->latitude = $loc_array->results[0]->geometry->location->lat;
                     $dealer->longitude = $loc_array->results[0]->geometry->location->lng;

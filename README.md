@@ -2,7 +2,7 @@
 
 # Commands to install
 
-/etc/apache2/apache2.conf
+vim /etc/apache2/apache2.conf
 Include /etc/phpmyadmin/apache.conf  (at bottom)
 
 sudo apt-get install git
@@ -31,7 +31,7 @@ composer install
 create database
 configure .env
 cd docroot
-sudo chown -R carsgone:carsgone ./
+sudo chown -R mirza_ekm:mirza_ekm ./
 sudo find ./ -type f -exec chmod 644 {} \;
 
 php artisan migrate

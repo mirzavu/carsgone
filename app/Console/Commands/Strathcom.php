@@ -103,13 +103,14 @@ class Strathcom extends Command
                 $dealer->province_id = $province_id;
                 $city = City::firstOrCreate(['city_name'=> (string)$xml->Address->City,'province_id'=> $province_id]);
                 $dealer->city_id = $city->id;
-                $dealer->postal_code = str_replace(' ', '', $xml->Address->PostalCode);
+                $dealer->postal_code = strpos((string)$xml->Address->PostalCode, ' ') == false? substr_replace((string)$xml->Address->PostalCode, ' ', 3, 0):(string)$xml->Address->PostalCode; //add space in middle if not there
                 $dealer->status = 1;
 
                 if((empty($dealer->latitude) || empty($dealer->longitude)) && !empty($dealer->postal_code))
                 {
-                    $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($xml->Address->PostalCode);
+                    $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($dealer->postal_code);
                     $curl = curl_init();
+
                     curl_setopt($curl, CURLOPT_URL, $url);
                     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($curl, CURLOPT_HEADER, false);
@@ -123,8 +124,6 @@ class Strathcom extends Command
                         $retry++;
                     }
                     curl_close($curl);
-
-                    
                     $dealer->latitude = $loc_array->results[0]->geometry->location->lat;
                     $dealer->longitude = $loc_array->results[0]->geometry->location->lng;
                 }
@@ -137,6 +136,9 @@ class Strathcom extends Command
             if($xmlReader->name == 'Vehicle' && $xmlReader->nodeType == \XMLReader::ELEMENT) {
                 $xml = simplexml_load_string( $xmlReader->readOuterXML() );
                 $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['dealer_id' => $dealer->id, 'partner_vehicle_id' => (string)$xml->SMI_ID]);
+                if ($vehicle->exists) {
+                    continue;
+                }
                 $vehicle->condition = strtolower($xml->SaleClass); 
                 $vehicle->status_id = 1;
                 $vehicle->year = (string)$xml->ModelYear;

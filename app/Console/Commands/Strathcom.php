@@ -99,6 +99,7 @@ class Strathcom extends Command
                 $dealer->email = $xml->Contact->Email;
                 $province_name = (string)$xml->Address->StateOrProvince;
                 $province_name = ($province_name == "Newfoundland and Labrador")? "Newfoundland":$province_name; //Newfoundland and Labrador and Newfoundland are same
+                $province_name = ($province_name == "Yukon")? "Yukon Territory":$province_name; //Yukon Teritory and Yukon are same
                 $province_id = Province::where('province_name',$province_name)->value('id');
                 $dealer->province_id = $province_id;
                 $city = City::firstOrCreate(['city_name'=> (string)$xml->Address->City,'province_id'=> $province_id]);

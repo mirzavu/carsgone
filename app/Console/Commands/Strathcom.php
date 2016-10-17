@@ -115,7 +115,6 @@ class Strathcom extends Command
                     curl_setopt($curl, CURLOPT_HEADER, false);
                     $loc_json = curl_exec($curl);
                     $retry = 0;
-                    var_dump($loc_json);
                     $loc_array = json_decode($loc_json);
                     while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
                         $loc_json = curl_exec($curl);

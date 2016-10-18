@@ -24,4 +24,18 @@ class PageController extends Controller
 		return view('front.pages.contact', $data);
 	}
 
+	public function autoloan(Request $request)
+	{
+		$data['location'] = getLocation($request);
+		return view('front.pages.autoloan', $data);
+	}
+
+
+	public function viewLoanPage(Request $request, $slug)
+    {
+    	$data['location'] = getLocation($request);
+    	$data['content'] = ContentPage::where('slug', $slug)->value('content');
+    	return view('front.pages.loan_page', $data);
+    }
+
 }

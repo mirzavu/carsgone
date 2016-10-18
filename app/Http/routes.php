@@ -19,7 +19,8 @@
 Route::get('/fb', 'HomeController@fb');
 	Route::get('/searchterm/{term}', 'HomeController@searchTerm');  //from homepage
 	Route::get('/getModels/{term}', 'HomeController@getModels');
-	Route::get('/auto-loans/{slug}', 'ContentController@viewPage');
+	Route::get('/autoloans', 'PageController@autoloan');
+	Route::get('/autoloans/{slug}', 'PageController@viewLoanPage');
 
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
 	Route::post('/search/{params}', 'SearchController@searchHandler')->where('params', '.*'); //search page
@@ -37,6 +38,7 @@ Route::get('/fb', 'HomeController@fb');
 	Route::get('/help', 'PageController@help');
 	Route::get('/privacy', 'PageController@privacy');
 	Route::get('/contact', 'PageController@contact');
+
 
 //Route::auth();
 

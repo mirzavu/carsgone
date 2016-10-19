@@ -66,10 +66,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/search" class="hero-nav"><span>Browse Cars</span></a></li>
+                <li><a href="/search"><span>Browse Cars</span></a></li>
                 <li><a href="#"><span>Post Ad</span></a></li>
-                <li><a href="#"><span>Dealers</span></a></li>
-                <li><a href="#"><span>Car Loans</span></a></li>
+                <li><a href="/auto-dealers/info"><span>Dealers</span></a></li>
+                <li><a href="/autoloans"><span>Car Loans</span></a></li>
                 <li><a href="#"><span>Private</span></a></li>
            </ul>
         </div><!--/.nav-collapse -->

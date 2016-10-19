@@ -41,14 +41,28 @@
                         <div class="popular-container autoloan-list">
                         	<div class="row">
                                 <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
-                                    <h4>Alberta Auto Loans</h4>
+                                    <a href="{{ url('autoloans/alberta-auto-loans') }}"><h4>Alberta Auto Loans</h4></a>
                                     <ul class="popular-item-list">
                                         <li><a href="#"><h6>Edmonton Auto Loans</h6></a></li>
                                         <li><a href="#"><h6>Calgary Auto Loans</h6></a></li>
                                         <li><a href="#"><h6>Red Deer Auto Loans</h6></a></li>
                                         <li><a href="#"><h6>Hinton Auto Loans</h6></a></li>
                                     </ul>
-                                     <h4>BC Auto Loans</h4>
+                                    <h4>MANITOBA AUTO LOANS</h4>
+                                    <ul class="popular-item-list">
+                                        <li><a href="#"><h6>Winnipeg Auto Loans</h6></a></li>
+                                    </ul>
+                                    <h4>NOVA SCOTIA AUTO LOANS</h4>
+                                    <ul class="popular-item-list">
+                                        <li><a href="#"><h6>Halifax Auto Loans</h6></a></li>
+                                    </ul>
+                                    <h4>QUEBEC AUTO LOANS</h4>
+                                    <ul class="popular-item-list">
+                                        <li><a href="#"><h6>Montreal Auto Loans</h6></a></li>
+                                    </ul>  
+                                </div>
+                                <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
+                                    <h4>BC Auto Loans</h4>
                                     <ul class="popular-item-list">
                                         <li><a href="#"><h6>Kamloops Auto Loans</h6></a></li>
                                         <li><a href="#"><h6>Kelowna Auto Loans</h6></a></li>
@@ -56,44 +70,33 @@
                                         <li><a href="#"><h6>Vancouver Auto Loans</h6></a></li>
                                         <li><a href="#"><h6>Victoria Auto Loans</h6></a></li>
                                     </ul>
-                                </div>
-                                <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
-                                    <h4>MANITOBA AUTO LOANS</h4>
-                                    <ul class="popular-item-list">
-                                        <li><a href="#"><h6>Winnipeg Auto Loans</h6></a></li>
-                                    </ul>
+                                    
                                      <h4>NEW BRUNSWICK AUTO LOANS</h4>
                                     <ul class="popular-item-list">
                                         <li><a href="#"><h6>Moncton Auto Loans</h6></a></li>
                                     </ul>
-                                     <h4>NEWFOUNDLAND AUTO LOANS</h4>
+                                    <h4>NEWFOUNDLAND AUTO LOANS</h4>
                                     <ul class="popular-item-list">
                                         <li><a href="#"><h6>St. John's Auto Loans</h6></a></li>
                                     </ul>
-                                     <h4>NOVA SCOTIA AUTO LOANS</h4>
-                                    <ul class="popular-item-list">
-                                        <li><a href="#"><h6>Halifax Auto Loans</h6></a></li>
-                                    </ul>
+                                    
+                                    
+                                    
+                                </div>
+                                <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
                                     <h4>ONTARIO AUTO LOANS</h4>
                                     <ul class="popular-item-list">
                                         <li><a href="#"><h6>Hamilton Auto Loans</h6></a></li>
                                         <li><a href="#"><h6>Kitchener Auto Loans</h6></a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
-                                    <ul class="popular-item-list">
                                         <li><a href="#"><h6>London Auto Loans</h6></a></li>
                                         <li><a href="#"><h6>Ottawa Auto Loans</h6></a></li>
                                         <li><a href="#"><h6>Toronto Auto Loans</h6></a></li>
                                     </ul>
-                                     <h4>P E I AUTO LOANS</h4>
+                                    <h4>P E I AUTO LOANS</h4>
                                     <ul class="popular-item-list">
                                         <li><a href="#"><h6>Charlottetown Auto Loans</h6></a></li>
-                                    </ul>
-                                     <h4>QUEBEC AUTO LOANS</h4>
-                                    <ul class="popular-item-list">
-                                        <li><a href="#"><h6>Montreal Auto Loans</h6></a></li>
-                                    </ul>
+                                    </ul> 
+                                     
                                      <h4>SASKATCHEWAN AUTO LOANS</h4>
                                     <ul class="popular-item-list">
                                         <li><a href="#"><h6>Regina Auto Loans</h6></a></li>

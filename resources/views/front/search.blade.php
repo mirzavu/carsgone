@@ -18,7 +18,7 @@
                         <select id="make-select" name="make">
                            <option value="" disabled selected>Select Make</option>
                            @foreach ($makes as $make)
-                           <option value="{{$make['id']}}">{{$make['make_name']}}</option>
+                           <option value="{{$make->id}}">{{$make->make_name}}</option>
                            @endforeach
                         </select>
                         <select id="model-select" name="model">
@@ -115,7 +115,7 @@
                   <div class="panel-body">
                      <ul class="link-list">
                         @foreach($sidebar_data["models"] as $model)
-                        <li><a href="{{Request::url()}}/model-{{$model->model_name}}">{{$model->model_name}} ({{$model->vehicles_count}})</a></li>
+                        <li><a href="{{Request::url()}}/model-{{$model->model_name}}">{{$model->model_name}} ({{$model->model_count}})</a></li>
                         @endforeach
                      </ul>
                   </div>

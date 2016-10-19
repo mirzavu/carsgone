@@ -82,10 +82,13 @@ class SearchController extends Controller
         // }
         // dd($result->count());
 
-        // dd($data['makes']);
-
-        $data['makes'] = Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
+        $data['makes'] = DB::table('makes')
+			            ->join('vehicles', 'vehicles.make_id', '=', 'makes.id')
+			            ->select('makes.*')
+			            ->groupBy('makes.id')
+			            ->get();
         $data['sort'] = $conditions->get('sort');
+
         $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy($sort, $direction)->paginate(15);
         $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
         $data['applied_filters'] = $this->getAppliedFilters($conditions);
@@ -116,9 +119,11 @@ class SearchController extends Controller
 		if($conditions->get('make') && !$conditions->get('model'))
 		{
 
-			$sidebar_data['models'] = Make::where('make_name',$conditions->get('make'))->first()->models()->withCount(['vehicles' => function($query) use ($conditions){
-				return $query->applyFilter($conditions);
-				}])->having('vehicles_count', '>', 0)->orderBy('vehicles_count', 'desc')->take(10)->get();
+			$sidebar_data['models'] = Vehicle::ApplyFilter($conditions)->join('models','models.id','=','vehicles.model_id')->selectRaw('count(models.id) as model_count, model_name')->groupBy('models.model_name')->orderBy('model_count','desc')->get();
+
+			// $sidebar_data['models'] = Make::where('make_name',$conditions->get('make'))->first()->models()->withCount(['vehicles' => function($query) use ($conditions){
+			// 	return $query->applyFilter($conditions);
+			// 	}])->having('vehicles_count', '>', 0)->orderBy('vehicles_count', 'desc')->take(10)->get();
 
 		}
 

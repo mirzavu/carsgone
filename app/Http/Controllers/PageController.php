@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Models\ContentPage;
 
 class PageController extends Controller
 {
@@ -34,6 +35,7 @@ class PageController extends Controller
 	public function viewLoanPage(Request $request, $slug)
     {
     	$data['location'] = getLocation($request);
+    	$data['title'] = ContentPage::where('slug', $slug)->value('title');
     	$data['content'] = ContentPage::where('slug', $slug)->value('content');
     	return view('front.pages.loan_page', $data);
     }

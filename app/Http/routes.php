@@ -16,16 +16,15 @@
 		'uses' => 'HomeController@index', 
 		'as' => 'home'
 	]);
-Route::get('/fb', 'HomeController@fb');
+	Route::get('/fb', 'HomeController@fb');
 	Route::get('/searchterm/{term}', 'HomeController@searchTerm');  //from homepage
 	Route::get('/getModels/{term}', 'HomeController@getModels');
 	Route::get('/autoloans', 'PageController@autoloan');
 	Route::get('/autoloans/{slug}', 'PageController@viewLoanPage');
 
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
-	Route::post('/search/{params}', 'SearchController@searchHandler')->where('params', '.*'); //search page
-	Route::get('/setSessionKeyValue/{key}/{value}', 'SearchController@setSessionKeyValue');
 	Route::get('/search', 'SearchController@searchHandler');
+	Route::get('/setSessionKeyValue/{key}/{value}', 'SearchController@setSessionKeyValue');
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
 	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
 
@@ -38,14 +37,14 @@ Route::get('/fb', 'HomeController@fb');
 	Route::get('/help', 'PageController@help');
 	Route::get('/privacy', 'PageController@privacy');
 	Route::get('/contact', 'PageController@contact');
-
+	Route::get('/auto-dealers/info', 'DealerController@info');
 
 //Route::auth();
 
-Route::get('/home', 'HomeController@index');
-Route::group(['namespace' => 'Admin','middleware' => 'admin', 'prefix' => config('backpack.base.route_prefix')], function () {
-	CRUD::resource('make', 'MakeCrudController');
-	CRUD::resource('model', 'VehicleModelCrudController');
-	CRUD::resource('dealer', 'DealerCrudController');
-	CRUD::resource('content', 'ContentPageCrudController');
+	Route::group(['namespace' => 'Admin','middleware' => 'admin', 'prefix' => config('backpack.base.route_prefix')], function ()
+	{
+		CRUD::resource('make', 'MakeCrudController');
+		CRUD::resource('model', 'VehicleModelCrudController');
+		CRUD::resource('dealer', 'DealerCrudController');
+		CRUD::resource('content', 'ContentPageCrudController');
 	});

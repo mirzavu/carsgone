@@ -105,8 +105,11 @@ class Cdemo extends Command
                             $retry++;
                         }
                         curl_close($curl);
-                        $dealer->latitude = $loc_array->results[0]->geometry->location->lat;
-                        $dealer->longitude = $loc_array->results[0]->geometry->location->lng;
+                        if($loc_array->status == "OK")
+                        {
+                            $dealer->latitude = $loc_array->results[0]->geometry->location->lat;
+                            $dealer->longitude = $loc_array->results[0]->geometry->location->lng;
+                        }  
                     }
 
                     $dealer->status = 1;

@@ -47,6 +47,9 @@ class CreateVehiclesTable extends Migration
             $table->string('engine_config')->nullable();
             $table->string('engine_displacement')->nullable();
             $table->string('partner_vehicle_id')->nullable();
+            $table->index('dealer_id');
+            $table->index('make_id');
+            $table->index('model_id');
             $table->timestamps();
         });
     }

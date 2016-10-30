@@ -80,7 +80,7 @@
                                 <p>Get free online exposure for your vehicle inventory.</p>
                             </li>
                         </ul>
-                        <a href="#" class="waves-effect waves-light btn">Get Free Account</a>
+                        <a href="#dealer-signup" class="modal-trigger waves-effect waves-light btn">Get Free Account</a>
                     </div>
                 </div>
             </div>
@@ -126,6 +126,33 @@
     </div>
 </div>
 <!-- Membership start -->
+
+<div id="dealer-signup" class="modal member">
+<div class="modal-content">
+  <h5>SIGN UP</h5>
+  <div class="form-group">
+    <label>Email</label>
+    <input id="signup-email" type="text" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>Name</label>
+    <input id="signup-name" type="text" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input id="signup-password" type="password" class="form-control"/>
+  </div>
+  <div class="">
+    <label>Confirm Password</label>
+    <input id="signup-cpassword" type="password" class="form-control" />
+  </div>
+  <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
+</div>
+<div class="modal-footer">
+  <a id="signup-submit" class="btn waves-effect waves-light waves-input-wrapper">Signup</a>
+  <a id="login-link" class="link" href="#">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+</div>
+</div>
 
 @endsection
 

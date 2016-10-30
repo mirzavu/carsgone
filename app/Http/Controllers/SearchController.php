@@ -7,18 +7,21 @@ use App\Models\Vehicle;
 use App\Models\Make;
 use App\Models\Province;
 use App\Models\City;
+use App\Models\Dealer;
 use App\Models\VehicleModel;
 
-use App\Http\Requests;
+use App\Http\Requests; 
 use DB;
 use Log;
-
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 class SearchController extends Controller
 {
 	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content');
 	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content');
 	protected $url_filters = array('make','model', 'province', 'city', 'body');
 	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content');
+	protected $dealer_ids;
 	protected $url_params;
 
     public function searchHandler(Request $request, $params=false)
@@ -60,41 +63,29 @@ class SearchController extends Controller
 			$sort = 'created_at';
 			$direction = 'desc';
 		}
+		$lat = 53.421879;
+                $lon = - 113.4675614;
+		$this->dealer_ids = Dealer::addSelect(DB::raw("id, ( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) AS distance"))->havingRaw('distance < '.$conditions->get('distance'))->pluck('id')->toArray();
+		//$query = Vehicle::applyFilter($conditions, $dealer_ids)->orderBy($sort, $direction)->take(8)->get();
+		//dd($query);
+
 		$data['sidebar_data'] = $this->getSidebarData($conditions);
-		/*$vehicles = new Vehicle();
-        if($request->input('model'))
-        {
-           $vehicles =  $vehicles->whereHas('model', function($q)
-            {
-                $q->where('model_name', '=', 'CL');
 
-            });
-
-        }
-        $vehicles = $vehicles->where('dealer_id', '=', '15');
-
-        $result = $vehicles->get();
-        dd($result);*/
-
-        // $result = Vehicle::applyFilter($conditions)->with(['dealer.province'])->groupBy('province_id')->get();
-        // foreach ($result as $key => $value) {
-        // 	dd($value);
-        // }
-        // dd($result->count());
 
         $data['makes'] = DB::table('makes')
 			            ->join('vehicles', 'vehicles.make_id', '=', 'makes.id')
 			            ->select('makes.*')
 			            ->groupBy('makes.id')
 			            ->get();
-        $data['sort'] = $conditions->get('sort');
+        $data['sort'] = $conditions->get('sort'); 
+        $data['vehicles'] = Vehicle::applyFilter($conditions, $this->dealer_ids)->orderBy($sort, $direction)->paginate(15);
+  
 
-        $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy($sort, $direction)->paginate(15);
-        $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
-        $data['applied_filters'] = $this->getAppliedFilters($conditions);
+        $data['featured_vehicles'] = Vehicle::applyFilter($conditions, $this->dealer_ids, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
+        $data['applied_filters'] = $this->getAppliedFilters($conditions, $this->dealer_ids);
 
         $data['url_params'] = $params;
-
+        // dd($data);die;
 		//$vehicles->select(DB::raw('count(*) as total'))->groupBy('dealer_id');
 		
 		return view('front.search', $data);
@@ -113,13 +104,18 @@ class SearchController extends Controller
 		$sidebar_data = [];
 		if(!$conditions->get('make'))
 		{
-			$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions)->join('makes','makes.id','=','vehicles.make_id')->selectRaw('count(makes.id) as make_count, make_name')->groupBy('makes.make_name')->orderBy('make_count','desc')->get();
+			//$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions, $this->dealer_ids)->selectRaw('count(makes.id) as make_count, make_name')->groupBy('makes.make_name')->orderBy('make_count','desc')->get();
+			$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions, $this->dealer_ids)
+				    ->join('makes', 'vehicles.make_id', '=', 'makes.id')
+			            ->selectRaw('count(makes.id) as make_count, makes.make_name')
+				    ->groupBy('makes.make_name')
+			            ->orderBy('make_count','desc')->get();
 		}
 		//Get models
 		if($conditions->get('make') && !$conditions->get('model'))
 		{
 
-			$sidebar_data['models'] = Vehicle::ApplyFilter($conditions)->join('models','models.id','=','vehicles.model_id')->selectRaw('count(models.id) as model_count, model_name')->groupBy('models.model_name')->orderBy('model_count','desc')->get();
+			$sidebar_data['models'] = Vehicle::ApplyFilter($conditions, $this->dealer_ids)->join('models', 'vehicles.model_id', '=', 'models.id')->selectRaw('count(models.id) as model_count, model_name')->groupBy('models.model_name')->orderBy('model_count','desc')->get();
 
 			// $sidebar_data['models'] = Make::where('make_name',$conditions->get('make'))->first()->models()->withCount(['vehicles' => function($query) use ($conditions){
 			// 	return $query->applyFilter($conditions);
@@ -140,7 +136,7 @@ class SearchController extends Controller
 
 					}])->get();
 			foreach ($ss as $value) {
-				dd($value);
+				// dd($value);
 			}
 		}
 		return $sidebar_data;

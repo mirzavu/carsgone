@@ -211,7 +211,7 @@ class Vehicle extends Model
             $query->join('provinces', 'dealers.province_id', '=', 'provinces.id');
             $query->where('province_name', $conditions->get('province'));
         }
-        $query->addSelect('vehicles.*');
+        //$query->addSelect('vehicles.*');
     //$query->join('makes', 'vehicles.make_id', '=', 'makes.id');
         // $query->addSelect('models.*');
         // $query->addSelect('makes.*');

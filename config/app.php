@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -159,6 +159,7 @@ return [
         Backpack\CRUD\CrudServiceProvider::class,
         Backpack\Generators\GeneratorsServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 

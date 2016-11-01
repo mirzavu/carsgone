@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dealer;
+use App\Models\Vehicle;
 use App\Http\Requests;
 
 class DealerController extends Controller
@@ -52,7 +53,25 @@ class DealerController extends Controller
 	public function showDealer(Request $request, $slug)
 	{	
 		$data['location'] = getLocation($request);
-		$data['dealer'] = Dealer::where('slug',$slug)->first();
+		$data['dealer'] = Dealer::where('slug',$slug)->first();	
+		$data['recent'] = Vehicle::where('dealer_id',$data['dealer']->id)->orderBy('created_at', 'desc')->take(6)->get();
+		
+		$data['makes'] = Vehicle::where('dealer_id',$data['dealer']->id)->join('makes', 'vehicles.make_id', '=', 'makes.id')
+			            ->selectRaw('count(makes.id) as make_count, makes.make_name')
+				    	->groupBy('makes.make_name')
+			            ->orderBy('make_count','desc')->get();
+		$data['body'] = Vehicle::where('dealer_id',$data['dealer']->id)->join('body_style_groups', 'vehicles.body_style_group_id', '=', 'body_style_groups.id')
+			            ->selectRaw('count(body_style_groups.id) as body_count, body_style_groups.body_style_group_name')
+				    	->groupBy('body_style_groups.body_style_group_name')
+			            ->orderBy('body_count','desc')->get();
+		$data['year'] = Vehicle::where('dealer_id',$data['dealer']->id)
+						->selectRaw('count(year) as year_count, year')
+						->groupBy('year')
+						->orderBy('year_count','desc')->get();
+		$data['price'] = Vehicle::where('dealer_id',$data['dealer']->id)
+						->selectRaw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`')
+						->groupBy('range')->get();
+
 		return view('front.dealer.show', $data);
 	}
 

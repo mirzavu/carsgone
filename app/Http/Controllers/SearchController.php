@@ -54,7 +54,7 @@ class SearchController extends Controller
 		}
 		
 		//Sorting set
-		if($conditions->get('sort'))
+		if($conditions->get('sort') && $conditions->get('sort')!="name-desc")
 		{
 			list($sort,$direction) = explode('-',$conditions->get('sort'));
 		}
@@ -63,8 +63,14 @@ class SearchController extends Controller
 			$sort = 'created_at';
 			$direction = 'desc';
 		}
+
 		$lat = 53.421879;
-                $lon = - 113.4675614;
+        $lon = - 113.4675614;
+        // A different method - replace whereIn with join for dealers
+        //    $ss = Vehicle::join('dealers', 'vehicles.dealer_id', '=', 'dealers.id')
+     // ->select(DB::raw("dealers.id"))
+     // ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < 200")->paginate(15);
+     // dd($ss);exit;
 		$this->dealer_ids = Dealer::addSelect(DB::raw("id, ( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) AS distance"))->havingRaw('distance < '.$conditions->get('distance'))->pluck('id')->toArray();
 		//$query = Vehicle::applyFilter($conditions, $dealer_ids)->orderBy($sort, $direction)->take(8)->get();
 		//dd($query);
@@ -77,7 +83,7 @@ class SearchController extends Controller
 			            ->select('makes.*')
 			            ->groupBy('makes.id')
 			            ->get();
-        $data['sort'] = $conditions->get('sort'); 
+        $data['sort'] = $sort.'-'.$direction; 
         $data['vehicles'] = Vehicle::applyFilter($conditions, $this->dealer_ids)->orderBy($sort, $direction)->paginate(15);
   
 

@@ -35,7 +35,7 @@
                     <p>Looking for a car dealership near you? Dealerships across Canada list vehicles  with Carsgone.com. Have a look!</p>
                 </div>
                 <div class="col-md-4">
-                    <a href="#" class="waves-effect waves-light btn bordered">Browse Dealers</a>
+                    <a href="/auto-dealers" class="waves-effect waves-light btn bordered">Browse Dealers</a>
                 </div>
             </div>
         </div>

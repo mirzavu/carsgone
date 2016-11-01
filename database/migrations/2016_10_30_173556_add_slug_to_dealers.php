@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSlugToVehicles extends Migration
+class AddSlugToDealers extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class AddSlugToVehicles extends Migration
      */
     public function up()
     {
-        Schema::table('vehicles', function($table) {
+        Schema::table('dealers', function($table) {
             $table->string('slug')->after('id');
             $table->index('slug');
         });
@@ -25,7 +25,7 @@ class AddSlugToVehicles extends Migration
      */
     public function down()
     {
-        Schema::table('vehicles', function($table) {
+        Schema::table('dealers', function($table) {
             $table->dropColumn('slug');
         });
     }

@@ -33,11 +33,16 @@
 	Route::post('/login', 'UserController@postSignIn');
 	Route::get('/logout', 'UserController@logout');
 
+//Dealers
+	Route::get('/auto-dealers/info', 'DealerController@info');
+	Route::get('/auto-dealers', 'DealerController@listing');
+	Route::get('/auto-dealers/{params}', 'DealerController@listing')->where('params', '.*');
+	Route::get('/dealer/{slug}', 'DealerController@showDealer')->where('slug', '.*');
+
 //Footer links
 	Route::get('/help', 'PageController@help');
 	Route::get('/privacy', 'PageController@privacy');
 	Route::get('/contact', 'PageController@contact');
-	Route::get('/auto-dealers/info', 'DealerController@info');
 
 //Route::auth();
 

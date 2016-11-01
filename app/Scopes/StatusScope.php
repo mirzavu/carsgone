@@ -17,6 +17,6 @@ class StatusScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        return $builder->where('status_id', '=', 1);
+        return $builder->where('vehicles.status_id', '=', 1);
     }
 }

@@ -30,7 +30,7 @@ class CreateDealersTable extends Migration
             $table->double('longitude', 10, 6);
             $table->boolean('featured')->default(false);
             $table->dateTime('featured_expires');
-            $table->integer('status');
+            $table->integer('status_id');
             $table->string('image');
             $table->timestamps();
         });

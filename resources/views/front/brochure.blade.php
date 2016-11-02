@@ -218,106 +218,26 @@
                         <div class="panel-body">
                           <div class="featured-list related-slider">
                           	<!-- fetured-box start -->
+                            @foreach($related as $vehicle)
                             <div>
                           	<div class="fetured-box">
-                            <a href="#">
-                            	<h4>AIRIDE HONDA</h4>
+                            <a href="/vehicle/{{$vehicle->slug}}">
+                            	<h4>{{$vehicle->make->make_name.' '.$vehicle->model->model_name}}</h4>
                                 <div class="featured-img">
-                                	<img src="include/images/item-img.jpg" alt="" />
+                                	<img src="{{$vehicle->photo()}}" alt="" />
                                     <span class="overlay"></span>
                                 </div>
                                 <div class="featured-details">
-                                	<div class="price"><i class="fa fa-tag"></i> $40,900</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> 62,768KM</div>
+                                	<div class="price"><i class="fa fa-tag"></i> ${{number_format($vehicle->price)}}</div>
+                                    <div class="run"><i class="fa fa-dashboard"></i> {{number_format($vehicle->odometer)}}KM</div>
                                 </div>
                                 
                                 </a>
                             </div>
                             </div>
+                            @endforeach
                             <!-- fetured-box end -->
-                            
-                            <!-- fetured-box start -->
-                            <div>
-                          	<div class="fetured-box">
-                            <a href="#">
-                            	<h4>AIRIDE HONDA</h4>
-                                <div class="featured-img">
-                                	<img src="include/images/item-img.jpg" alt="" />
-                                    <span class="overlay"></span>
-                                </div>
-                                <div class="featured-details">
-                                	<div class="price"><i class="fa fa-tag"></i> $40,900</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> 62,768KM</div>
-                                </div></a>
-                            </div>
-                            </div>
-                            <!-- fetured-box end -->
-                            <!-- fetured-box start -->
-                            <div>
-                          	<div class="fetured-box">
-                            <a href="#">
-                            	<h4>AIRIDE HONDA</h4>
-                                <div class="featured-img">
-                                	<img src="include/images/item-img.jpg" alt="" />
-                                    <span class="overlay"></span>
-                                </div>
-                                <div class="featured-details">
-                                	<div class="price"><i class="fa fa-tag"></i> $40,900</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> 62,768KM</div>
-                                </div></a>
-                            </div>
-                            </div>
-                            <!-- fetured-box end -->
-                            <!-- fetured-box start -->
-                            <div>
-                          	<div class="fetured-box">
-                            <a href="#">
-                            	<h4>AIRIDE HONDA</h4>
-                                <div class="featured-img">
-                                	<img src="include/images/item-img.jpg" alt="" />
-                                    <span class="overlay"></span>
-                                </div>
-                                <div class="featured-details">
-                                	<div class="price"><i class="fa fa-tag"></i> $40,900</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> 62,768KM</div>
-                                </div></a>
-                            </div>
-                            </div>
-                            <!-- fetured-box end -->
-                            <!-- fetured-box start -->
-                            <div>
-                          	<div class="fetured-box">
-                            <a href="#">
-                            	<h4>AIRIDE HONDA</h4>
-                                <div class="featured-img">
-                                	<img src="include/images/item-img.jpg" alt="" />
-                                    <span class="overlay"></span>
-                                </div>
-                                <div class="featured-details">
-                                	<div class="price"><i class="fa fa-tag"></i> $40,900</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> 62,768KM</div>
-                                </div></a>
-                            </div>
-                            </div>
-                            <!-- fetured-box end -->
-                              <!-- fetured-box start -->
-                            <div>
-                          	<div class="fetured-box">
-                            <a href="#">
-                            	<h4>AIRIDE HONDA</h4>
-                                <div class="featured-img">
-                                	<img src="include/images/item-img.jpg" alt="" />
-                                    <span class="overlay"></span>
-                                </div>
-                                <div class="featured-details">
-                                	<div class="price"><i class="fa fa-tag"></i> $40,900</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> 62,768KM</div>
-                                </div></a>
-                            </div>
-                            </div>
-                            <!-- fetured-box end -->
-                            
-                            
+                      
                           </div>
                         </div>
                       </div>

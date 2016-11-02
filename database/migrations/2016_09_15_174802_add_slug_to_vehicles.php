@@ -13,8 +13,7 @@ class AddSlugToVehicles extends Migration
     public function up()
     {
         Schema::table('vehicles', function($table) {
-            $table->string('slug')->after('id');
-            $table->index('slug');
+            $table->string('slug')->after('id')->unique();
         });
     }
 

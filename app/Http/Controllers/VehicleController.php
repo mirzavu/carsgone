@@ -28,13 +28,7 @@ class VehicleController extends Controller
 		$data['location'] = getLocation($request);
 		$data['vehicle'] = Vehicle::with('dealer')->where('slug',$slug)->first();
 		
-		// foreach ($data['vehicle']->photos()->get() as $photo)
-		// {
-		// 	dd($photo->path);
-		// }
-		// exit;
-		// dd($data['vehicle']->photos()->first());
-		// dd($data['vehicle']);
+		$data['related'] = $data['vehicle']->dealer->vehicles->take(10);
 		return view('front.brochure', $data);
 	}
 

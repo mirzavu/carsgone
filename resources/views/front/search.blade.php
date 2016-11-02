@@ -209,10 +209,10 @@
                         <!-- fetured-box start -->
                         <div>
                            <div class="fetured-box">
-                              <a href="#">
+                              <a href="/vehicle/{{$vehicle->slug}}">
                                  <h4>{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}</h4>
                                  <div class="featured-img">
-                                    <img src="/assets/images/item-img.jpg" alt="" />
+                                    <img src="{{$vehicle->photo()}}" alt="" />
                                     <span class="overlay"></span>
                                  </div>
                                  <div class="featured-details">

@@ -85,7 +85,12 @@ class SearchController extends Controller
 			            ->get();
         $data['sort'] = $sort.'-'.$direction; 
         $data['vehicles'] = Vehicle::applyFilter($conditions, $this->dealer_ids)->orderBy($sort, $direction)->paginate(15);
-  
+        // dd($data['vehicles']);
+  		// foreach ($data['vehicles'] as $key => $value) {
+  		// 	echo $value->id;
+  		// 	//echo $value->photo();echo "<br>";
+  		// }
+  		// exit;
 
         $data['featured_vehicles'] = Vehicle::applyFilter($conditions, $this->dealer_ids, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
         $data['applied_filters'] = $this->getAppliedFilters($conditions, $this->dealer_ids);

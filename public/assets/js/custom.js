@@ -121,8 +121,25 @@ $('.item-image-list').slick({
    
   ]
 });
+var sfw = $("#wizard_example").stepFormWizard({
+			theme: 'sun',
+			height: 'auto',
+			markPrevSteps: true,
+	nextBtn: $('<a class="next-btn sf-right sf-btn btn waves-effect waves-light " href="#">NEXT <i class="icofont icofont-rounded-right"></i></a>'),
+	prevBtn: $('<a class="prev-btn sf-left sf-btn btn grey waves-effect waves-light  " href="#"><i class="icofont icofont-rounded-left"></i> PREV</a>'),
+	finishBtn: $(''),
 
+		});
+sfw.refresh();
 
+$('input.promote-check').on('change', function() {
+    $('input.promote-check').not(this).prop('checked', false);  
+});
+
+$("#wizard_example").on('sf-step-after', function(e, from, to, data) {
+	$('html, body').animate({scrollTop: $('.sf-content').offset().top -60}, 300);
+	e.preventDefault();
+})
 /*==========================*/	
 /* Lighbox */	
 /*==========================*/	
@@ -143,6 +160,8 @@ $('.item-gallery-container').magnificPopup({
   tCounter: '<span class="mfp-counter"></span>' // markup of counter
 }
 });
+
+
 
 
 

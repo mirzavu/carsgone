@@ -15,6 +15,8 @@
 <link href="/assets/css/magnific-popup.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/nprogress.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/toastr.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/step-form-wizard-all.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/dropzone.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
 <script src="/assets/js/modernizr.js"></script> <!-- Modernizr -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKsvinm7jgttOZYmtlyIEhEt5l7ZL7-yM"></script>
@@ -67,7 +69,7 @@
         <div id="navbar" class="navbar-collapse collapse">
            <ul class="nav navbar-nav navbar-right">
                 <li><a href="/search"><span>Browse Cars</span></a></li>
-                <li><a href="#"><span>Post Ad</span></a></li>
+                <li><a href="/post"><span>Post Ad</span></a></li>
                 <li><a href="/auto-dealers/info"><span>Dealers</span></a></li>
                 <li><a href="/autoloans"><span>Car Loans</span></a></li>
                 <li><a href="#"><span>Private</span></a></li>
@@ -189,11 +191,14 @@
 <script type="text/javascript" src="/assets/js/slick.min.js"></script>
 <script type="text/javascript" src="/assets/js/main.js"></script>
 <script type="text/javascript" src="/assets/js/nouislider.min.js"></script>
+<script type="text/javascript" src="/assets/js/dropzone.js"></script>
+<script type="text/javascript" src="/assets/js/step-form-wizard.js"></script>
 <script type="text/javascript" src="/assets/js/wNumb.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery.magnific-popup.min.js"></script>
 <script type="text/javascript" src="/assets/js/theia-sticky-sidebar.js"></script>
 <script type="text/javascript" src="/assets/js/nprogress.js"></script>
 <script type="text/javascript" src="/assets/js/toastr.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.1/jquery.validate.js"></script>
 <script type="text/javascript" src="/assets/js/custom.js"></script> 
 <script type="text/javascript">
 $('#make-select').on('change',function(){

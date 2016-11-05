@@ -148,7 +148,7 @@ class Vehicle extends Model
 
     function scopeApplyFilter($query, $conditions, $dealer_ids, $featured = 0)
     {
-        $query->where(function ($q) use($conditions, $dealer_ids)
+        $query->select('vehicles.*')->where(function ($q) use($conditions, $dealer_ids)
             {
                 if ($conditions->get('content'))
                 {

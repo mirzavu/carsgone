@@ -28,6 +28,11 @@
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
 	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
 
+	Route::get('/post', 'PostController@post_ad');
+	Route::post('/save-image', 'PostController@save_image');
+	Route::post('/remove-image', 'PostController@remove_image');
+	Route::post('/rotate-image', 'PostController@rotate_image');
+
 //Authentication
 	Route::post('/signup', 'UserController@postSignUp');
 	Route::post('/login', 'UserController@postSignIn');

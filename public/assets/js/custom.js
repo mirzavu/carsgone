@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+
   $('.modal-trigger').leanModal();
 /** select box**/	
    $('select').material_select();

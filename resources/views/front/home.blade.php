@@ -29,7 +29,9 @@
                                  
                             </li>
                             <li>
-                                <i id="quick_search" class="waves-effect waves-light btn waves-input-wrapper" style=""><input type="submit" class="waves-button-input" value="Quick Search"></i>
+                                <i id="quick_search" class="waves-effect waves-light btn waves-input-wrapper" style="">
+                                    <input type="submit" class="waves-button-input" value="Quick Search">
+                                </i>
                             </li>
                         </ul>
                     </div>
@@ -116,18 +118,30 @@
 	</div> <!-- .cd-hero -->
  
     <!-- Tabs end -->
-    <!-- Ad Container  start -->
-    <div class="ad-container">
-    	<div class="container">
-          <div class="row">
-        	<div class="col-sm-12">
-    			<div class="ad-box"><a href="#"><img src="assets/images/ad.jpg" alt="" /></a></div>
-        	</div>
-          </div>
+    <!-- approval start -->
+    <div class="approval-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="approval">
+                        <img src="assets/images/approval-image.png" alt="">
+                        <h4>if you meet these 3 requirements, you're approved:</h4>
+                        <ul class="reqiured-list">
+                            <li>Canadian citizen</li>
+                            <li>At least 18 years old</li>
+                            <li>Currently Employed</li>
+                        </ul>
+                        <div class="approval-link">
+                            <a href="#" class="waves-effect waves-light btn btn-orange">Get Approved Now</a>
+                            <p class="clock">Easy 60-Second Application</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- Ad Container  end -->
-    
+    <!-- approval end -->
+
     <!-- popular Container  start -->
     <div class="popular-container">
     	<div class="container">

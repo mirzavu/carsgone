@@ -48,7 +48,13 @@ p:last-child { margin-bottom:0; }
 /*Header start*/
 header{background:#fff; position:relative; font-size:15px;}
 .home header{border:0;}
-.header-upper{background:#5fc0ed;}
+.header-upper{background:#5fc0ed;/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#94dcfd+0,2a9bcf+100 */
+background: #94dcfd; /* Old browsers */
+background: -moz-linear-gradient(top,  #94dcfd 0%, #2a9bcf 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #94dcfd 0%,#2a9bcf 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #94dcfd 0%,#2a9bcf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#94dcfd', endColorstr='#2a9bcf',GradientType=0 ); /* IE6-9 */
+}
 .header-left{float:left;}
 .header-right{float:right;}
 .header-search{float:left; margin-top:20px;}
@@ -98,31 +104,33 @@ ul.upper-nav li a:hover{color:#6b6ca0;}
 .banner-container:before{content:''; width:100%; height:30px; float:left; position:absolute; left:0; right:0; top:0; background:url(../images/header-shadow.png) no-repeat center top; background-size:100% 30px;}
 .banner-container h1{color:#323232;font-size:48px;line-height: 58px;text-align:center;font-weight:700;margin-bottom: 5px;}
 .banner-container h2{color:#323232;font-size:32px;line-height: 40px;text-align:center;font-weight:400;}
-.advance-search-container{width:88%; display:inline-block; vertical-align:top; padding:33px 49px 26px 49px; margin:60px 6% 112px; position:relative; background: #001b5e; background: -moz-linear-gradient(left,  #001b5e 0%, #4a7fc1 100%); background: -webkit-linear-gradient(left,  #001b5e 0%,#4a7fc1 100%); background: linear-gradient(to right,  #001b5e 0%,#4a7fc1 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#001b5e', endColorstr='#4a7fc1',GradientType=1 );}
+.advance-search-container{width:88%; display:inline-block; vertical-align:top; padding:33px 49px 26px 49px; margin:60px 6% 112px; position:relative; background: #3a68aa; background: -moz-linear-gradient(top,  #3a68aa 0%, #092668 100%); background: -webkit-linear-gradient(top,  #3a68aa 0%,#092668 100%);  background: linear-gradient(to bottom,  #3a68aa 0%,#092668 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a68aa', endColorstr='#092668',GradientType=0 );    outline: solid 8px rgba(227,246,255,0.48);}
 .advance-search-container:before{content:''; width:100%; height:30px; float:left; position:absolute; left:0; right:0; top:100%; background:url(../images/search-shadow.png) no-repeat center top; background-size:100% 38px;}
 ul.advance-search{width:100%; display:inline-block; vertical-align:top; }
 ul.advance-search > li{width: 36%; float: left; padding: 10px 15px; position:relative; z-index:8;}
 ul.advance-search > li:first-child{z-index:9;}
 ul.advance-search > li:last-child{width: 28%; z-index:7;}
 ul.advance-search > li select{width:100%; padding:10px;}
-ul.advance-search > li .btn{float:right;width:100%;height:56px;line-height: 32px;font-weight: 700;text-transform: none;border-radius: 0;font-size: 18px;}
+ul.advance-search > li .btn{float:right;width:100%;height:56px;line-height: 24px;font-weight: 700;text-transform: none;border:solid 4px #fff;border-radius: 2px;font-size: 18px;}
 
 
-ul.advance-search .select-wrapper input.select-dropdown{background:#fff; border:solid 3px #e0e0e0; margin:0; height:51px; text-indent:13px; font-size:16px; color:#666;}
+ul.advance-search .select-wrapper input.select-dropdown{background:#fff; border:solid 3px #e0e0e0; margin:0; height:51px; text-indent:13px; font-size:16px; color:#666; border-radius:2px;}
+ul.advance-search .dropdown-content{max-height:270px;}
 ul.advance-search .dropdown-content li{min-height:56px; line-height:56px !important;}
  
 /* Banner container end */
 /* Tab container start */
-.cd-hero { position: relative; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.cd-hero { position: relative; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; background-color:#fff;}
 .cd-hero-slider { position: relative; overflow: hidden; }
 .cd-hero-slider > li { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-transform: translateX(100%); -moz-transform: translateX(100%); -ms-transform: translateX(100%); -o-transform: translateX(100%); transform: translateX(100%); }
 .cd-hero-slider > li.selected { position: relative; -webkit-transform: translateX(0); -moz-transform: translateX(0); -ms-transform: translateX(0); -o-transform: translateX(0); transform: translateX(0); }
 .cd-hero-slider > li.move-left { -webkit-transform: translateX(-100%); -moz-transform: translateX(-100%); -ms-transform: translateX(-100%); -o-transform: translateX(-100%); transform: translateX(-100%); }
 .cd-hero-slider > li.is-moving, .cd-hero-slider > li.selected {-webkit-transition: -webkit-transform 0.5s; -moz-transition: -moz-transform 0.5s; transition: transform 0.5s; }
-.cd-slider-nav { position: relative; width: 100%;  z-index: 2; text-align: center; background: #001b5e; background: -moz-linear-gradient(left,  #001b5e 0%, #4a7fc1 100%); background: -webkit-linear-gradient(left,  #001b5e 0%,#4a7fc1 100%); background: linear-gradient(to right,  #001b5e 0%,#4a7fc1 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#001b5e', endColorstr='#4a7fc1',GradientType=1 ); }
+.cd-slider-nav { position: relative; width: 100%;  z-index: 2; text-align: center; background: #234b8d; background: -moz-linear-gradient(top,  #234b8d 0%, #001b5e 100%); background: -webkit-linear-gradient(top,  #234b8d 0%,#001b5e 100%); background: linear-gradient(to bottom,  #234b8d 0%,#001b5e 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#234b8d', endColorstr='#001b5e',GradientType=0 ); /* IE6-9 */
+ }
 .cd-slider-nav nav, .cd-slider-nav ul, .cd-slider-nav li, .cd-slider-nav a { height: 100%; }
 .cd-slider-nav nav { display: inline-block; position: relative; vertical-align:top; width:88%; box-shadow:none; }
-.cd-slider-nav .cd-marker { position: absolute; bottom: 0; left: 0; width: 25%; height: 100%; color: #f9a026; background-color: #f2f2f2; box-shadow: inset 0 3px 0 currentColor; -webkit-transition: -webkit-transform 0.2s, box-shadow 0.2s; -moz-transition: -moz-transform 0.2s, box-shadow 0.2s; transition: transform 0.2s, box-shadow 0.2s; }
+.cd-slider-nav .cd-marker { position: absolute; bottom: 0; left: 0; width: 25%; height: 100%; color: #f9a026; background-color: #fff; box-shadow: inset 0 3px 0 currentColor; -webkit-transition: -webkit-transform 0.2s, box-shadow 0.2s; -moz-transition: -moz-transform 0.2s, box-shadow 0.2s; transition: transform 0.2s, box-shadow 0.2s; }
 .cd-slider-nav .cd-marker.item-2 { -webkit-transform: translateX(100%); -moz-transform: translateX(100%); -ms-transform: translateX(100%); -o-transform: translateX(100%); transform: translateX(100%); }
 .cd-slider-nav .cd-marker.item-3 { -webkit-transform: translateX(200%); -moz-transform: translateX(200%); -ms-transform: translateX(200%); -o-transform: translateX(200%); transform: translateX(200%); }
 .cd-slider-nav .cd-marker.item-4 { -webkit-transform: translateX(300%); -moz-transform: translateX(300%); -ms-transform: translateX(300%); -o-transform: translateX(300%); transform: translateX(300%); }
@@ -142,8 +150,8 @@ ul.advance-search .dropdown-content li{min-height:56px; line-height:56px !import
 .tab-content h4{text-align:center; font-weight:300; font-size:24px; line-height:32px;}
 ul.item-list{margin: 24px -7px 0;display: block; display: inline-block;}
 ul.item-list li{width:25%; float:left; padding:7px;}
-ul.item-list li a{width:100%; float:left; background:#fff; padding:15px 8px;  text-align:center; border-radius:0px; box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); color:#4dc3ff;}
-ul.item-list li a:hover{box-shadow:0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); color:#1585cf;}
+ul.item-list li a{width:100%; float:left; background:#fff; padding:15px 8px;  text-align:center; border-radius:0px; box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); color:#4dc3ff;  border: solid 4px #ecf0f5;}
+ul.item-list li a:hover{box-shadow:0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); color:#1585cf; border-color: #bbe5f9;}
 ul.item-list li a span{display:block;}
 /* Tab container end */
 /* Ad Box start */

@@ -2,6 +2,7 @@
 /vendor/
 /node_modules/
 /bootstrap/cache/
+/public/uploads/vehicle/
 .env
 .env.*.php
 .env.php

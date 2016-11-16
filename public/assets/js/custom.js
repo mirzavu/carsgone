@@ -1,5 +1,11 @@
 $(document).ready(function(){
+$.validator.setDefaults({ // Post - To include hidden fields validation of Jquery
+       ignore: []
+ });
 
+$('select').on('change', function() {  // Post - Remove error on select
+  $(this).parent().parent().children('label').remove()
+})
 
   $('.modal-trigger').leanModal();
 /** select box**/	
@@ -128,7 +134,89 @@ var sfw = $("#wizard_example").stepFormWizard({
 			markPrevSteps: true,
 	nextBtn: $('<a class="next-btn sf-right sf-btn btn waves-effect waves-light " href="#">NEXT <i class="icofont icofont-rounded-right"></i></a>'),
 	prevBtn: $('<a class="prev-btn sf-left sf-btn btn grey waves-effect waves-light  " href="#"><i class="icofont icofont-rounded-left"></i> PREV</a>'),
-	finishBtn: $(''),
+	// finishBtn: $(''),
+  onNext: function(i, wizard) {
+      var form = $("#vehicle-form");
+      form.validate({
+            rules: {
+            },
+            // errorClass: "invalid form-error",       
+        // errorElement : 'div',       
+        errorPlacement: function(error, element) {
+            console.log(typeof element)
+            if(element.is('select'))
+            {
+              error.appendTo( element.parent().parent() );
+            }
+            else
+            {
+              error.appendTo( element.parent() );
+            }
+            
+        },
+            focusInvalid: false,
+    invalidHandler: function(form, validator) {
+
+        if (!validator.numberOfInvalids())
+            return;
+        $('html, body').animate({
+            scrollTop: $(validator.errorList[0].element).parent().offset().top-20
+        }, 500);
+        $(validator.errorList[0].element).focus()
+
+    },
+    submitHandler: function (form) {
+                     console.log('test');
+                     $.get( "/loggedInUser", function( data ) {
+                         if(data.status=="success")
+                         {
+                                $.ajax({
+                                url: form.action,
+                                type: form.method,
+                                data: $(form).serialize(),
+                                success: function(response) {
+                                    if(response.status=="paypal")
+                                    {
+                                      window.location = response.url;
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                }            
+                            });
+                         }
+                         else
+                         {
+                            $('#post-member').openModal();
+                         }
+                      });
+                     // $.ajax({
+                     //      url: form.action,
+                     //      type: form.method,
+                     //      data: $(form).serialize(),
+                     //      success: function(response) {
+                     //          if(response.status=="paypal")
+                     //          {
+                     //            window.location = response.url;
+                     //          }
+                     //          else
+                     //          {
+
+                     //          }
+                     //      }            
+                     //  });
+                          }
+          })
+      if (form.valid() == true){
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+      }
+
 
 		});
 sfw.refresh();

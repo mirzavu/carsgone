@@ -160,7 +160,7 @@ return [
         Backpack\Generators\GeneratorsServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-
+        Netshell\Paypal\PaypalServiceProvider::class,
     ],
 
     /*
@@ -206,7 +206,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Paypal' => Netshell\Paypal\Facades\Paypal::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];

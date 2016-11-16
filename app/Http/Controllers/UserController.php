@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 use Validator;
+use Debugbar;
 use App\Http\Requests;
 use App\Models\User;
-
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +59,17 @@ class UserController extends Controller
         	return response()->json(['status' => 'fail', 'error' => 'Email address or password is incorrect']);
         }
         
+    }
+
+    public function loggedInUser(Request $request)
+    {
+        if ($request->user()) {
+            return response()->json(['status' => 'success', 'id' => $request->user()->id]);
+        }
+        else
+        {
+            return response()->json(['status' => 'fail']);
+        }
     }
 
     public function logout()

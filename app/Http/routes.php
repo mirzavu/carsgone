@@ -28,7 +28,9 @@
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
 	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
 
-	Route::get('/post', 'PostController@post_ad');
+	Route::get('/post', 'PostController@new');
+	Route::get('/post/done', 'PostController@getDone');
+	Route::post('/post/create', 'PostController@create');
 	Route::post('/save-image', 'PostController@save_image');
 	Route::post('/remove-image', 'PostController@remove_image');
 	Route::post('/rotate-image', 'PostController@rotate_image');
@@ -37,6 +39,7 @@
 	Route::post('/signup', 'UserController@postSignUp');
 	Route::post('/login', 'UserController@postSignIn');
 	Route::get('/logout', 'UserController@logout');
+	Route::get('/loggedInUser', 'UserController@loggedInUser');
 
 //Dealers
 	Route::get('/auto-dealers/info', 'DealerController@info');

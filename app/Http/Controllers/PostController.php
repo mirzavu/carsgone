@@ -36,7 +36,7 @@ class PostController extends Controller
 	}
     
 
-    public function new(Request $request)
+    public function newPost(Request $request)
 	{	
 		
 		// echo "<pre>";print_r(curl_version());exit;

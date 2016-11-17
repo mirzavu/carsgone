@@ -28,7 +28,7 @@
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
 	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
 
-	Route::get('/post', 'PostController@new');
+	Route::get('/post', 'PostController@newPost');
 	Route::get('/post/done', 'PostController@getDone');
 	Route::post('/post/create', 'PostController@create');
 	Route::post('/save-image', 'PostController@save_image');

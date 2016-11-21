@@ -290,7 +290,7 @@
                      <div class="col-sm-12">
                         <div class="form-group text-center">
                            <!-- Change /upload-target to your upload address -->
-                           <form action="/save-image" class="dropzone" id="my-awesome-dropzone">
+                           <div action="/save-image" class="dropzone" id="my-awesome-dropzone">
                               <div class="dz-default dz-message">
                                  <img src="/assets/images/upload-image.png" alt=""/><br />
                                  <img src="/assets/images/upload-btn.jpg" alt=""/><br/>
@@ -319,7 +319,7 @@
                                  </div>
                               </div>
                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                           </form>
+                           </div>
                         </div>
                      </div>
                   </div>

@@ -290,7 +290,7 @@
                      <div class="col-sm-12">
                         <div class="form-group text-center">
                            <!-- Change /upload-target to your upload address -->
-                           <div action="/save-image" class="dropzone" id="my-awesome-dropzone">
+                           <div class="dropzone" id="my-awesome-dropzone">
                               <div class="dz-default dz-message">
                                  <img src="/assets/images/upload-image.png" alt=""/><br />
                                  <img src="/assets/images/upload-btn.jpg" alt=""/><br/>
@@ -320,6 +320,7 @@
                               </div>
                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
                            </div>
+                           <input id="file_names" type="hidden" name="file_names">
                         </div>
                      </div>
                   </div>
@@ -416,136 +417,142 @@
 @section('javascript')
 
 <script>
-         $(function() {
-            var previewNode = document.querySelector("#template");
-            previewNode.id = "";
-            var previewTemplate = previewNode.parentNode.innerHTML;
-            previewNode.parentNode.removeChild(previewNode);
-            var file_prefix = Math.random().toString(36).substr(2, 9); // create a random file prefix to avoid overrite
+$(function() {
+    var previewNode = document.querySelector("#template");
+    previewNode.id = "";
+    var previewTemplate = previewNode.parentNode.innerHTML;
+    previewNode.parentNode.removeChild(previewNode);
+    var file_prefix = Math.random().toString(36).substr(2, 9); // create a random file prefix to avoid overrite
 
-            //console.log(previewTemplate);
-            // var myDropzone = new Dropzone("#my-awesome-dropzone");
-            Dropzone.options.myAwesomeDropzone = {
-              // addRemoveLinks: true,
-             paramName: "file", // The name that will be used to transfer the file
-             //maxFilesize: 0.1, // MB
-             // previewsContainer: "#previews",
-             // dictRemoveFile:         'asdasd',
-             acceptedFiles: "image/*",
-             maxFiles: "10",
-             maxFilesize: "5",
-             renameFilename: function (filename) {
-                return file_prefix + '_' + filename;
-            },
-            removedfile: function (file) {
-            	$(document).find(file.previewElement).remove();
-            	console.log(file)
-                var filename = file_prefix + '_' + file.name;
-                var data = { file_name: filename, "_token": "{{ csrf_token() }}"}
-                $.post( "/remove-image", data).done(function( data ) {
-				    if(data.status=="success")
-				    {
-				      toastr.success( 'Image removed')
-				    }
-				    else
-				    {
-				      toastr.error('Error removing image')
-				    }
-				  });
-            },
-             previewTemplate: previewTemplate,
-             accept: function(file, done) {
-               if (file.name == "justinbieber.jpg") {
-                 done("Naha, you don't.");
-               }
-               else { done(); }
-             }
-             };
+    //console.log(previewTemplate);
+    // var myDropzone = new Dropzone("#my-awesome-dropzone");
+    Dropzone.options.myAwesomeDropzone = {
+        // addRemoveLinks: true,
+        url: "/save-image",
+        paramName: "file", // The name that will be used to transfer the file
+        headers: {
+            'X-CSRF-Token': $('input[name="_token"]').val()
+        },
+        maxFilesize: 20, // MB
+        // previewsContainer: "#previews",
+        // dictRemoveFile:         'asdasd',
+        acceptedFiles: "image/*",
+        maxFiles: "10",
+        renameFilename: function(filename) {
+            return file_prefix + '_' + filename;
+        },
+        removedfile: function(file) {
+            $(document).find(file.previewElement).remove();
+            console.log(file)
+            var filename = file_prefix + '_' + file.name;
+            var data = {
+                file_name: filename,
+                "_token": "{{ csrf_token() }}"
+            }
+            $.post("/remove-image", data).done(function(data) {
+                if (data.status == "success") {
+                    toastr.success('Image removed')
+                } else {
+                    toastr.error('Error removing image')
+                }
+            });
+        },
+        previewTemplate: previewTemplate,
+        accept: function(file, done) {
+          var files = $('#file_names').val()
+          $('#file_names').val(files+file_prefix + '_' + file.name+' ')
+        }
+    };
 
-             $(document.body).on('click', '.rotate' ,function(){
-                var img = $(this).parent().siblings('.dz-image').children('img');
-                var file_name = $(this).parent().siblings('.dz-details').find('span').text();
-                var degree = parseInt(img.attr('degree'));
-                degree+=90;
-                $(this).parent().siblings('.dz-image').children('img').css({
-                    "-webkit-transform": "rotate("+degree+"deg)",
-                    "-moz-transform": "rotate("+degree+"deg)",
-                    "transform": "rotate("+degree+"deg)" /* For modern browsers(CSS3)  */
-                });
-                img.attr('degree',degree)
-                var data = { file_name: file_name, "_token": "{{ csrf_token() }}"}
-                $.post( "/rotate-image", data).done(function( data ) {
-				    
-				  });
+    $(document.body).on('click', '.rotate', function() {
+        var img = $(this).parent().siblings('.dz-image').children('img');
+        var file_name = $(this).parent().siblings('.dz-details').find('span').text();
+        var degree = parseInt(img.attr('degree'));
+        degree += 90;
+        $(this).parent().siblings('.dz-image').children('img').css({
+            "-webkit-transform": "rotate(" + degree + "deg)",
+            "-moz-transform": "rotate(" + degree + "deg)",
+            "transform": "rotate(" + degree + "deg)" /* For modern browsers(CSS3)  */
+        });
+        img.attr('degree', degree)
+        var data = {
+            file_name: file_name,
+            "_token": "{{ csrf_token() }}"
+        }
+        $.post("/rotate-image", data).done(function(data) {
 
-             })
+        });
 
-         })
-      </script>
+    })
 
-    <script type="text/javascript">
-      $('#post-signup-link').on('click',function(e){
-  e.preventDefault();
-  $('#post-member').closeModal();
-  $('#post-signup').openModal();
+})
+</script>
+
+<script type="text/javascript">
+$('#post-signup-link').on('click', function(e) {
+    e.preventDefault();
+    $('#post-member').closeModal();
+    $('#post-signup').openModal();
 });
 
-$('#post-login-link').on('click',function(e){
-  e.preventDefault();
-  $('#post-signup').closeModal();
-  $('#post-member').openModal();
+$('#post-login-link').on('click', function(e) {
+    e.preventDefault();
+    $('#post-signup').closeModal();
+    $('#post-member').openModal();
 });
 
-$('#post-login-submit').on('click',function(e){
-  toastr.clear()
-  NProgress.start();
-  var data = { email: $('#post-login-email').val(), password: $('#post-login-password').val(), "_token": "{{ csrf_token() }}"}
-  $.post( "/login", data).done(function( data ) {
-    NProgress.done();
-    if(data.status=="success")
-    {
-      toastr.success('Checkout your saved vehicles in dashboard','You have logged in Successfully')
-      $('#post-member').closeModal();
-      $('#signup-li').replaceWith( '<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
-      $('#login-li').replaceWith( '<li id="logout-li"><a href="#">Logout</a></li>');
-      console.log('aaa')
-      $('#vehicle-form').submit();
+$('#post-login-submit').on('click', function(e) {
+    toastr.clear()
+    NProgress.start();
+    var data = {
+        email: $('#post-login-email').val(),
+        password: $('#post-login-password').val(),
+        "_token": "{{ csrf_token() }}"
     }
-    else
-    {
-      toastr.error(data.error,'Error')
-    }
-    console.log(data);
-  });
+    $.post("/login", data).done(function(data) {
+        NProgress.done();
+        if (data.status == "success") {
+            toastr.success('Checkout your saved vehicles in dashboard', 'You have logged in Successfully')
+            $('#post-member').closeModal();
+            $('#signup-li').replaceWith('<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
+            $('#login-li').replaceWith('<li id="logout-li"><a href="#">Logout</a></li>');
+            console.log('aaa')
+            $('#vehicle-form').submit();
+        } else {
+            toastr.error(data.error, 'Error')
+        }
+        console.log(data);
+    });
 });
 
-$('#post-signup-submit').on('click',function(e){
-  toastr.clear()
-  NProgress.start();
-  if($('#post-signup-password').val() != $('#post-signup-cpassword').val())
-  {
-    toastr.error('Passwords do not match','Error')
-    NProgress.done();
-    return
-  }
-  var data = { email: $('#post-signup-email').val(), name: $('#post-signup-name').val(), password: $('#post-signup-password').val(), "_token": "{{ csrf_token() }}"}
-  $.post( "/signup", data).done(function( data ) {
-    NProgress.done();
-    if(data.status=="success")
-    {
-      toastr.success( 'Checkout your saved vehicles in dashboard', 'Registered Successfully')
-      $('#post-signup').closeModal();
-      $('#signup-li').replaceWith( '<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
-      $('#login-li').replaceWith( '<li id="logout-li"><a href="#">Logout</a></li>');
-      console.log('aaxa')
-      $('#vehicle-form').submit();
+$('#post-signup-submit').on('click', function(e) {
+    toastr.clear()
+    NProgress.start();
+    if ($('#post-signup-password').val() != $('#post-signup-cpassword').val()) {
+        toastr.error('Passwords do not match', 'Error')
+        NProgress.done();
+        return
     }
-    else
-    {
-      toastr.error(data.error, 'Error')
+    var data = {
+        email: $('#post-signup-email').val(),
+        name: $('#post-signup-name').val(),
+        password: $('#post-signup-password').val(),
+        "_token": "{{ csrf_token() }}"
     }
-    console.log(data);
-  });
+    $.post("/signup", data).done(function(data) {
+        NProgress.done();
+        if (data.status == "success") {
+            toastr.success('Checkout your saved vehicles in dashboard', 'Registered Successfully')
+            $('#post-signup').closeModal();
+            $('#signup-li').replaceWith('<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
+            $('#login-li').replaceWith('<li id="logout-li"><a href="#">Logout</a></li>');
+            console.log('aaxa')
+            $('#vehicle-form').submit();
+        } else {
+            toastr.error(data.error, 'Error')
+        }
+        console.log(data);
+    });
 });
-    </script>
+</script>
 @endsection

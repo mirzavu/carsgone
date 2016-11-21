@@ -213,7 +213,7 @@ ul.social-links li a:hover{ background:#4dc3ff; color:#fff; }
 .overlay:before {content: "\f055"; font-family:'fontAwesome';  position: absolute; top: 60%;  left: 50%; display: inline-block; transition: .3s ease; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); font-size: 24px; line-height: 32px;  color:#fff;}
 .featured-img img{height:124px;}
 .featured-img,.item-body-left{overflow:hidden;}
-.featured-img img,.item-body-left img{transition:all .3s ease;}
+.featured-img img,.item-body-left img{transition:all .1s ease;}
 .featured-img:hover img,.item-body:hover .item-body-left img{transform:scale(1.1);}
 /*.fetured-box:hover .overlay, .item:hover .overlay {opacity: 1;}
 .fetured-box:hover .overlay:before, .item:hover .overlay:before {top: 50%;}*/
@@ -670,7 +670,7 @@ fieldset label{font-size:18px; font-weight:700; color:#3b4c5d; text-align:right;
 #toast-container>.toast { display: block; }
 .toast-title { float: left; width: 100%; display: block; font-size: 16px; line-height: 26px; }
 .toast-message { float: left; width: 100%; display: block; font-size: 16px; font-weight: bold; }
-button.toast-close-button { position: absolute; top: 1px; right: 6px; font-size: 28px; }
+button.toast-close-button { position: absolute; top: -1px; right: 4px; font-size: 23px; }
 
 /* ============================= */
 @media only screen and (max-width: 1140px) {

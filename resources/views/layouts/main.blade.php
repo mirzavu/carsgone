@@ -61,7 +61,8 @@
           <div class="header-search">
           <div class="header-search-box">
           	<input id="search_text" type="text" value="" placeholder="Full content search" class="search-input" />
-            <input id="search_icon" type="submit" value="&#xf002;" class="search-submit" />
+            {{-- fa-refresh fa-spin fa-search --}}
+            <button id="search_icon" type="submit" class="search-submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </div>
           </div>
          
@@ -201,6 +202,24 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.1/jquery.validate.js"></script>
 <script type="text/javascript" src="/assets/js/custom.js"></script> 
 <script type="text/javascript">
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "0",
+  "extendedTimeOut": "0",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+
 $('#make-select').on('change',function(){
     var id = $('#make-select').val();
         $.ajax({ type: "GET",   
@@ -219,7 +238,9 @@ $('#make-select').on('change',function(){
 });
 
 
-$('#search_icon').on('click',function(){
+$('#search_icon').on('mousedown',function(){
+    $(this).children('i').removeClass( "fa-search" ).addClass( "fa-refresh fa-spin" );
+    $(this).css({opacity:0.8})
     var term = $('#search_text').val();
     var response = '';
     $.ajax({ type: "GET",   

@@ -325,7 +325,8 @@
 <script type="text/javascript">
 
    $('.applied-remove').on('click',function(e){
-     e.preventDefault();
+      e.preventDefault();
+     $('.result-container').css({opacity:0.2}).before('<div class="progress"><div class="indeterminate"></div></div>')
      data = $(this).prev().html();
      //console.log(data);
      $(this).parent().hide('slow');

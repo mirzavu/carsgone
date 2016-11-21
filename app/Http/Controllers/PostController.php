@@ -52,10 +52,11 @@ class PostController extends Controller
 	{		
 		$request['model_id'] = VehicleModel::where('model_name', $request['model'])->value('id');
 		$request['user_id'] = Auth::user()->id;
+		//dd($request['year']);
 		$validator = Validator::make($request->all(), [
             'make_id' => 'required|integer|max:5',
             'model_id' => 'required|integer|max:5',
-            'year' => 'required|min:4|max:4|integer'
+            'year' => 'required|min:1970|max:2020|integer'
         ]);
 
         if ($validator->fails()) {
@@ -92,7 +93,7 @@ class PostController extends Controller
 
 		    $redirectUrls = PayPal::RedirectUrls();
 		    $redirectUrls->setReturnUrl(action('PostController@getDone').'?vehicle_id=1234');
-		    $redirectUrls->setCancelUrl(action('PostController@new'));
+		    $redirectUrls->setCancelUrl(action('PostController@newPost'));
 
 		    $payment = PayPal::Payment();
 		    $payment->setIntent('sale');

@@ -46,7 +46,7 @@
                      <div class="col-sm-6 display-table">
                         <label>Make</label>
                         <div class="select-box">
-                           <select id="make-select" name="make_id">
+                           <select id="make-select" name="make_id" required>
                                <option value="" disabled selected>Select Make</option>
                                @foreach ($makes as $make)
                                <option value="{{$make->id}}">{{$make->make_name}}</option>
@@ -59,7 +59,7 @@
                      <div class="col-sm-6 display-table">
                         <label>Model</label>
                         <div class="select-box">
-                           <select id="model-select" name="model">
+                           <select id="model-select" name="model" required>
                               <option value="" disabled selected>Select Model</option>
                            </select>
                         </div>
@@ -79,7 +79,7 @@
                      <div class="col-sm-6 display-table">
                         <label>Price</label>
                         <div class="input-box">
-                           <input type="text" class="form-control" name="price" placeholder="eg: $12,000" minlength="3" />
+                           <input type="text" class="form-control" name="price" placeholder="eg: $12,000" minlength="3" required/>
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">

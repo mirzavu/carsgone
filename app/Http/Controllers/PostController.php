@@ -64,6 +64,7 @@ class PostController extends Controller
         }
 		Vehicle::create($request->all());
 		if ($request->has('free')) {
+			$request->session()->flash('success', 'Vehicle has been posted Successfully!');
 		 	return response()->json(['status' => 'done']);
 		}
 		else
@@ -130,6 +131,7 @@ class PostController extends Controller
 	    $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
 	    dd($executePayment->id);
 	    Payment::create(['user_id' => $user_id, 'vehicle_id' => $vehicle_id, 'payment_id' => $executePayment->id, 'status' => $executePayment->status ]);
+	    $request->session()->flash('success', 'Vehicle has been posted Successfully!');
 	    // dd($executePayment);
 
 	    // Clear the shopping cart, write to database, send notifications, etc.

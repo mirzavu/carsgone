@@ -461,6 +461,7 @@ $(function() {
         accept: function(file, done) {
           var files = $('#file_names').val()
           $('#file_names').val(files+file_prefix + '_' + file.name+' ')
+          done();
         }
     };
 

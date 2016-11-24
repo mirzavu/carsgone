@@ -154,7 +154,6 @@ $(document).ready(function() {
 
                 },
                 submitHandler: function(form) {
-                    console.log('test');
                     $.get("/loggedInUser", function(data) {
                         if (data.status == "success") {
                             $.ajax({

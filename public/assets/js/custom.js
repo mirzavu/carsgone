@@ -172,21 +172,6 @@ $(document).ready(function() {
                             $('#post-member').openModal();
                         }
                     });
-                    // $.ajax({
-                    //      url: form.action,
-                    //      type: form.method,
-                    //      data: $(form).serialize(),
-                    //      success: function(response) {
-                    //          if(response.status=="paypal")
-                    //          {
-                    //            window.location = response.url;
-                    //          }
-                    //          else
-                    //          {
-
-                    //          }
-                    //      }            
-                    //  });
                 }
             })
             if (form.valid() == true) {

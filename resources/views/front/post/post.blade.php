@@ -452,6 +452,11 @@ $(function() {
             $.post("/remove-image", data).done(function(data) {
                 if (data.status == "success") {
                     toastr.success('Image removed')
+                    var files = $('#file_names').val()
+                    files = files.replace(filename, "");
+                    files = files.replace("^^", "^");
+                    $('#file_names').val(files)
+                    console.log($('#file_names').val())
                 } else {
                     toastr.error('Error removing image')
                 }
@@ -460,7 +465,7 @@ $(function() {
         previewTemplate: previewTemplate,
         accept: function(file, done) {
           var files = $('#file_names').val()
-          $('#file_names').val(files+file_prefix + '_' + file.name+' ')
+          $('#file_names').val(files+file_prefix + '_' + file.name+'^') // Adding ^ as separator
           done();
         }
     };

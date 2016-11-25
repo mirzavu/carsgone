@@ -10,17 +10,19 @@ use App\Models\Make;
 use App\Models\BodyStyleGroup;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
+use App\Models\VehiclePhoto;
 use Barryvdh\Debugbar\Facade as Debugbar;
-use Storage;
+use File;
+use Log;
 
 class PostController extends Controller
 {
 	private $_apiContext;
-	protected $storage_path;
+	protected $upload_path;
 
 	public function __construct()
 	{
-		$this->storage_path = storage_path() . '/uploads/vehicle'; 
+		$this->upload_path = public_path() . '/uploads/vehicle'; 
 		$this->_apiContext = PayPal::ApiContext(
             config('services.paypal.client_id'),
             config('services.paypal.secret'));
@@ -30,7 +32,7 @@ class PostController extends Controller
             'service.EndPoint' => 'https://api.sandbox.paypal.com',
             'http.ConnectionTimeOut' => 300,
             'log.LogEnabled' => true,
-            'log.FileName' => storage_path('logs/paypal.log'),
+            'log.FileName' => public_path('logs/paypal.log'),
             'log.LogLevel' => 'FINE'
         ));
 	}
@@ -51,18 +53,31 @@ class PostController extends Controller
 	public function create(Request $request)
 	{		
 		$request['model_id'] = VehicleModel::where('model_name', $request['model'])->value('id');
-		$request['user_id'] = Auth::user()->id;
+		//$request['user_id'] = Auth::user()->id;
 		//dd($request['year']);
 		$validator = Validator::make($request->all(), [
-            'make_id' => 'required|integer|max:5',
-            'model_id' => 'required|integer|max:5',
+            'make_id' => 'required|integer',
+            'model_id' => 'required|integer',
             'year' => 'required|min:1970|max:2020|integer'
         ]);
 
         if ($validator->fails()) {
         	return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
         }
-		Vehicle::create($request->all());
+		$vehicle = Auth::user()->vehicles()->create($request->all());
+
+		$image_names = explode('^', $request['file_names']);
+		
+		$photos =[];$i=0;
+		foreach($image_names as $image) {
+			if(!empty($image))
+            	array_push($photos, new VehiclePhoto(['position' => $i++, 'path' => 'uploads/vehicle/'.$image]));
+        }
+        $vehicle->photos()->saveMany($photos);
+        Log::info($photos);
+        exit;
+		// Debugbar::info($vehicle);
+
 		if ($request->has('free')) {
 			$request->session()->flash('success', 'Vehicle has been posted Successfully!');
 		 	return response()->json(['status' => 'done']);
@@ -167,26 +182,26 @@ class PostController extends Controller
 	public function save_image(Request $request)
 	{		
 		if ($request->hasFile('file')) {
-			$request->file('file')->move($this->storage_path, $request->file('file')->getClientOriginalName());
+			$request->file('file')->move($this->upload_path, $request->file('file')->getClientOriginalName());
 		}
 	}
 
 	public function remove_image(Request $request)
 	{	
-		Storage::delete("vehicle/".$request->file_name);
+		File::delete("uploads/vehicle/".$request->file_name);
 		return response()->json(['status' => 'success']);
 	}
 
 	public function rotate_image(Request $request)
 	{	
-		$filename = $this->storage_path."/".$request->file_name;
+		$filename = $this->upload_path."/".$request->file_name;
 		// Load the image
 		$source = imagecreatefromjpeg($filename);
 		$degrees = -90;
 		// Rotate
 		$rotate = imagerotate($source, $degrees, 0);
 		//and save it on your server...
-		imagejpeg($rotate, $this->storage_path."/".$request->file_name);
+		imagejpeg($rotate, $this->upload_path."/".$request->file_name);
 		return response()->json(['status' => 'success']);
 	}
 }

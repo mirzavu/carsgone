@@ -161,11 +161,7 @@ $(document).ready(function() {
                                 type: form.method,
                                 data: $(form).serialize(),
                                 success: function(response) {
-                                    if (response.status == "paypal") {
-                                        window.location = response.url;
-                                    } else {
-
-                                    }
+                                    window.location = response.url;
                                 }
                             });
                         } else {

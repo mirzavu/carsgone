@@ -81,6 +81,21 @@
     </div>
     <!-- header lower end -->
 </header>
+
+@if(Session::has('success'))
+<div class="alert-outer">
+  <div class="container">
+    <div class="wrapper">
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <div class="icon"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong> {{ Session::get('success') }} </strong>
+      </div>
+      <!-- Use class alert-danger for error--> 
+    </div>
+  </div>
+</div>
+@endif
 <!-- header end --> 
  @yield('content')
     <!-- footer start -->

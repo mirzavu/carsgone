@@ -10,7 +10,7 @@ use DB;
 class Vehicle extends Model
 {
     use Sluggable;
-    protected $fillable = ['dealer_id', 'partner_vehicle_id'];
+    protected $fillable = ['dealer_id', 'partner_vehicle_id','doors'];
     protected static function boot()
     {
         parent::boot();

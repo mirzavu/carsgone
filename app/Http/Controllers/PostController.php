@@ -64,6 +64,7 @@ class PostController extends Controller
         if ($validator->fails()) {
         	return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
         }
+        Log::info($request->all());
 		$vehicle = Auth::user()->vehicles()->create($request->all());
 
 		$image_names = explode('^', $request['file_names']);
@@ -74,13 +75,10 @@ class PostController extends Controller
             	array_push($photos, new VehiclePhoto(['position' => $i++, 'path' => 'uploads/vehicle/'.$image]));
         }
         $vehicle->photos()->saveMany($photos);
-        Log::info($photos);
-        exit;
-		// Debugbar::info($vehicle);
 
 		if ($request->has('free')) {
 			$request->session()->flash('success', 'Vehicle has been posted Successfully!');
-		 	return response()->json(['status' => 'done']);
+		 	return response()->json(['status' => 'done', 'url' => url('post')]);
 		}
 		else
 		{

@@ -3,6 +3,23 @@
 @section('title', 'Carsgone')
 
 @section('content')
+
+<div class="alert-outer">
+  <div class="container">
+    <div class="wrapper">
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <div class="icon"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Well done! </strong> You successfully read this important alert message.
+      </div>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <div class="icon"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Warning!</strong> Better check yourself, you're not looking too good.
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Vehicle Post start -->
 <div class="vehicle-post-outer">
  <div class="container">

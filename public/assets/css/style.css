@@ -455,7 +455,7 @@ ul.table-list li a{color:#5fc0ed;}
 
 /* ============ Dealer Page Start ================= */
 .wrapper{padding:30px 3%;}
-.dealer-info{background-color:#ecf0f5; padding:0px 0 10px 0px;}
+.dealer-info{background-color:#ecf0f5; padding:30px 0 10px 0px;}
 .dealer-page-outer .panel.full .panel-heading .btn{padding:8px 20px;}
 .dealer-page-outer .panel.full .panel-body{padding:0;}
 .display-flex-outer{display:inline-block; width:100%; display:-webkit-flex; display:-ms-flexbox; display:flex;  -webkit-flex-wrap:wrap; -ms-flex-wrap:wrap; flex-wrap:wrap;}
@@ -617,7 +617,7 @@ background: linear-gradient(135deg,#e1f3fb 0%,#20a9e2 100%); filter:progid:DXIma
 fieldset label{font-size:18px; font-weight:700; color:#3b4c5d; text-align:right;}
 .select-box{width:60%; padding:15px; padding-right:0;}
 .select-box .select-wrapper{border:solid 2px #e0e0e0;}
-.select-box .select-wrapper input.select-dropdown{border:0; background-color:#f2f2f2; height:43px; margin-bottom:0; text-indent:13px;}
+.select-box .select-wrapper input.select-dropdown{border:0; background-color:#f2f2f2; height:43px; margin-bottom:0; text-indent:13px; box-shadow:none !important;}
 .select-box .btn{color:#fff; font-weight:700; text-transform:capitalize; font-size:14px;}
 .select-box .btn:hover{color:#fff;}
 .input-box{width:60%; padding:15px; padding-right:0;}
@@ -671,6 +671,20 @@ fieldset label{font-size:18px; font-weight:700; color:#3b4c5d; text-align:right;
 .toast-title { float: left; width: 100%; display: block; font-size: 16px; line-height: 26px; }
 .toast-message { float: left; width: 100%; display: block; font-size: 16px; font-weight: bold; }
 button.toast-close-button { position: absolute; top: -1px; right: 4px; font-size: 23px; }
+
+label.error { font-size: 11px;  font-weight: normal;  background: #d65454; border-radius: 3px; padding: 0 15px;  color: #fff !important; top: auto; z-index: 1; position:relative;}
+label.error:before {content: ""; width: 0;  height: 0; float: left; border-bottom: solid 7px #d65454; position: absolute; top: -7px;  left: 10px; border-left: solid 5px transparent; border-right: solid 5px transparent;}
+
+
+.alert-outer .wrapper{padding-bottom:0; padding-top:0;}
+.alert-outer .alert{margin-bottom:0;position:relative;padding-left: 70px;font-weight: 400;border: 0; margin-top:30px;}
+.alert .close{position: absolute; top: -10px; right: -10px; color: #555; font-size: 20px; line-height: 18px; width: 20px; height: 20px; background: #fff; border-radius: 50%; border: solid 1px #555; opacity: 1;}
+ .alert-outer .icon {position: absolute;left: 0;top: 0;font-size: 24px;height: 100%;width: 60px;border-right: solid 1px #ccc;line-height: 78px;padding-left: 15px;}
+.alert-outer .alert-success {background-color: #dff0d8;border-color: #d6e9c6;color: #3c763d;}
+.alert-outer .alert-danger {background-color: #f2dede; border-color: #ebccd1; color: #a94442;}
+.alert-outer .alert strong{display:block;}
+.wrapper > .dealer-info{padding-top:0;}
+.popular-item-list.bordered.four-col li{width:25%; padding:0 15px;}
 
 /* ============================= */
 @media only screen and (max-width: 1140px) {

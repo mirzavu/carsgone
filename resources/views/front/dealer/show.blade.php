@@ -84,245 +84,101 @@
       <ul class="cd-hero-slider">
         <li class="selected from-left">
           <div class="tab-content">
-            <div class="row">
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-            </div>
+            <ul class="popular-item-list bordered four-col">
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+            </ul>
           </div>
         </li>
         <li>
           <div class="tab-content">
-            <div class="row">
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-            </div>
+            <ul class="popular-item-list bordered four-col">
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+            </ul>
           </div>
         </li>
         <li>
           <div class="tab-content">
-            <div class="row">
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-            </div>
+            <ul class="popular-item-list bordered four-col">
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+            </ul>
           </div>
         </li>
         <li>
           <div class="tab-content">
-            <div class="row">
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <ul class="popular-item-list bordered">
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                  <li><a href="#">
-                    <h6>New Chevrolet Cruze</h6>
-                    </a></li>
-                </ul>
-              </div>
-            </div>
+            <ul class="popular-item-list bordered four-col">
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+              <li><a href="#">
+                <h6>New Chevrolet Cruze</h6>
+                </a></li>
+            </ul>
           </div>
         </li>
+        
       </ul>
       <!-- .cd-hero-slider --> 
     </div>

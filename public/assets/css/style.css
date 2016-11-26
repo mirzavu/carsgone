@@ -168,7 +168,7 @@ ul.popular-item-list li{width:100%;float:left;margin-bottom: 11px;}
 ul.popular-item-list li a{width:100%;float:left;background:#fff;padding: 10px 10px;border-radius:0; box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);color:#4dc3ff;}
 ul.popular-item-list li a:hover{box-shadow:0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); color:#1585cf;}
 ul.popular-item-list li a h6{margin:0;color:#4dc3ff;font-size:16px;line-height: 18px;font-weight:400;}
-ul.popular-item-list li a span{font-size:12px; color:#535353}
+ul.popular-item-list li a span{font-size:12px; color:#535353; display:block;}
 /* Popular Item end */
 /* Footer start */
 footer{background:#232f3e; color:#fff; font-weight:300; font-size:16px;}
@@ -481,9 +481,9 @@ ul.dealer-info-list{text-align:center;display: inline-block;vertical-align: top;
 .dealer-page-outer .cd-slider-nav li a{font:700 26px/30px 'Roboto'; padding:15px 10px;}
 .dealer-page-outer .cd-slider-nav li + li{border-left:solid 1px #fff; position:relative;}
 .dealer-page-outer .cd-slider-nav li.selected a{color:#fff;}
-.dealer-page-outer .tab-content{padding:40px 30px 15px;}
+.dealer-page-outer .tab-content{padding:40px 15px 15px;}
 .popular-item-list.bordered li{margin-bottom:25px;}
-.popular-item-list.bordered li a{text-align: center; padding: 10px 0; font-weight: 700; color: #3e5062; border: solid 4px #ecf0f5;}
+.popular-item-list.bordered li a{text-align: center; padding: 10px 0; font-weight: 700; color: #3e5062; border: solid 4px #ecf0f5; text-transform:uppercase; transition:box-shadow .3s ease,border .3s ease;}
 .popular-item-list.bordered li a h6{color: #3e5062; font-weight: 700; transition:all 0.3s ease;}
 .popular-item-list.bordered li a:hover{border-color:#bbe5f9;}
 .popular-item-list.bordered li a:hover h6{color: #6fc6ef;}
@@ -761,6 +761,8 @@ ul.popular-item-list{margin-bottom:30px;}
 .dealer-information .dealer-address-map{height:300px;}
 .dealer-feature ul.popular-item-list{margin:0;}
 .sf-nav li{font-size:17px;}
+
+.popular-item-list.bordered.four-col li{width:33.33333333%;}
 }
 
  
@@ -860,6 +862,7 @@ fieldset .display-table > *{display:block; width:100% !important; text-align:lef
 .promote-vehicle-right [type="checkbox"] + label{font-size:24px;}
 .sf-nav li{font-size:15px; padding:15px; text-align:left; position:relative;}
 .sf-nav li .sf-nav-number{padding-left:15px; font-size:20px; margin-right:5px;}
+.popular-item-list.bordered.four-col li{width:50%;}
 }
 
 
@@ -883,6 +886,7 @@ ul.item-stats li,
 .post-tab .tab-content > fieldset > h4{font-size:20px; padding-left:42px;}
 .sf-nav li{text-align:center;}
 .sf-nav-subtext{display:none;}
+.popular-item-list.bordered.four-col li{padding:0 10px;}
 }
 /* ============================= */
 /* ! Layout for mobile(portrait) version   */
@@ -918,6 +922,8 @@ ul.upper-nav.right li:last-child{border:0 !important;}
 .sf-nav li.sf-active:after{margin:-20px -20px; width:calc(41px - 0.3px); height:calc(41px - 0.35px);}
 .sf-nav li:before,.sf-nav li.sf-active:before{margin:-20px -20px; width:42px; height:42px;}
 .sf-nav li .sf-nav-number{float:none;}
+
+.popular-item-list.bordered.four-col li{width: 100%;}
 }
 @media screen and (max-width: 380px) {
 .navbar-brand {width: 140px; padding: 15px 5px;}

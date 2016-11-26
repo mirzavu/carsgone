@@ -62,7 +62,7 @@
             	<h3>Browse 7825 currently listed vehicles in Canada</h3>
                 <h4 class="mar-40">Select a Major Location from the List Below</h4>
                 <h4>Provinces - New &amp; Used Vehicles For Sale</h4>
-                <ul class="item-list">
+                <ul class="popular-item-list bordered four-col">
             	@foreach ($provinces as $province)
                 	<li><a href="/search/province-{{$province['province_name']}}">{{$province['province_name']}} ({{$province['vehicles_count']}})</a></li>
                 @endforeach
@@ -75,7 +75,7 @@
                 <div class="tab-content">
                 <h3>Browse 7825 currently listed vehicles in Canada</h3>
                 <h4>Select a Make below to narrow your vehicle search</h4>
-                <ul class="item-list">
+                <ul class="popular-item-list bordered four-col">
                 @foreach ($makes as $make)
                 	<li><a href="/search/make-{{$make['make_name']}}">{{$make['make_name']}} ({{$make['vehicles_count']}})</a></li>
                 @endforeach
@@ -88,7 +88,7 @@
                 <div class="tab-content">
             	<h3>Browse 7825 currently listed vehicles in Canada</h3>
                 <h4 class="mar-40">Select a Vehicle Style below to narrow your search</h4>
-                <ul class="item-list">
+                <ul class="popular-item-list bordered four-col">
                 @foreach ($body_style_groups as $body_style_group)
                     <li><a href="/search/body-{{$body_style_group['body_style_group_name']}}">
                     	<span><img src="assets/images/icon-{{strtolower($body_style_group['body_style_group_name'])}}.png" alt="" /></span>{{$body_style_group['body_style_group_name']}} ({{$body_style_group['vehicles_count']}})
@@ -104,7 +104,7 @@
                <div class="tab-content">
             	<h3>Browse 7825 currently listed vehicles in Canada</h3>
                 <h4 class="mar-40">Select a Price below to narrow your search</h4>
-                <ul class="item-list">
+                <ul class="popular-item-list bordered four-col">
                 @foreach ($prices as $price)
                     <li><a href="/search/price-{{$price->range}}">{{$price->formatrange}} ({{$price->count}})</a></li>
                 @endforeach

@@ -603,7 +603,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b2e3f8', end
 background: linear-gradient(135deg,#e1f3fb 0%,#20a9e2 100%); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e1f3fb',endColorstr='#20a9e2',GradientType=1);}
 .sf-nav li.sf-active:before{position:absolute;top:50%;left: -2px;z-index:9;margin:-23px -20px;width:calc(46px - 0.3px);height:calc(46px - 0.35px);transform:rotate(45deg);content:'';border-right: solid 2px #fff;border-top: solid 2px #fff;}
 .sf-nav li:first-child:before,.sf-nav li.sf-nav-mark-step:first-child:before{display:none;}
-.sf-viewport{overflow:visible; position:relative; z-index:99999; margin-bottom:40px;}
+.sf-viewport{overflow:visible; position:relative; z-index:100; margin-bottom:40px;}
 .sf-viewport .sf-step-name{display:none;}
 .sf-fieldwrap .sf-step{background-color:#fff; padding:40px 0; overflow:visible;}
 .sf-fieldwrap .sf-step:nth-child(1),.sf-fieldwrap .sf-step:nth-child(2){padding:18px 0;}

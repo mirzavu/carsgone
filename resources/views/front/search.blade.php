@@ -248,7 +248,9 @@
                      <a href="/vehicle/{{$vehicle->slug}}">
                      <div class="item-heading">
                         <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->dealer->city->city_name}}, {{$vehicle->dealer->province->province_name}}</h3>
+                        @if($logged_in )
                         <a class="waves-effect waves-light btn btn-save">save</a>
+                        @endif
                      </div>
                      </a>
                      <div class="item-body">

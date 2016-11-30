@@ -86,7 +86,7 @@
                      <div class="col-sm-6 display-table">
                         <label>Mileage</label>
                         <div class="input-box">
-                           <input type="text" class="form-control" name="mileage" placeholder="eg: 12,000" />
+                           <input type="text" class="form-control" name="odometer" placeholder="eg: 12,000" />
                         </div>
                      </div>
                   </div>
@@ -98,7 +98,7 @@
                      <div class="col-sm-6 display-table">
                         <label>Body Style</label>
                         <div class="select-box">
-                           <select name="body">
+                           <select name="body_style_group_id">
                               <option value="" disabled selected>Select Body Style</option>
                                @foreach ($body_style_groups as $body)
                                <option value="{{$body->id}}">{{$body->body_style_group_name}}</option>
@@ -112,8 +112,8 @@
                           
                            <select name="transmission">
                               <option value="" disabled selected>Select Transmission</option>
-                              <option value="1">Automatic</option>
-                              <option value="2">Standard</option>
+                              <option value="auto">Automatic</option>
+                              <option value="manual">Standard</option>
                            </select>
                         </div>
                      </div>
@@ -197,6 +197,7 @@
                         <label>Doors</label>
                         <div class="select-box">
                            <select name="doors">
+                              <option value="" disabled selected>Select Doors</option>
                               <option value="1">1</option>
                               <option value="2">2</option>
                               <option value="3">3</option>
@@ -209,7 +210,8 @@
                      <div class="col-sm-6 display-table">
                         <label>Passengers</label>
                         <div class="select-box">
-                           <select name="passengers">
+                           <select name="passenger">
+                              <option value="" disabled selected>Select Passengers</option>
                               @php 
                               for($i=1;$i<17;$i++)
                               {
@@ -224,7 +226,7 @@
                      <div class="col-sm-12 display-table textarea">
                         <label>Description</label>
                         <div class="input-box">
-                           <textarea class="form-control" name="description"></textarea>
+                           <textarea class="form-control" name="text"></textarea>
                         </div>
                      </div>
                   </div>
@@ -236,22 +238,27 @@
                      <div class="col-sm-6 display-table">
                         <label>Drive Train</label>
                         <div class="select-box">
-                           <select>
-                              <option value="1">Option 1</option>
-                              <option value="2">Option 2</option>
-                              <option value="3">Option 3</option>
-                              <option value="4">Option 4</option>
+                           <select name="drive_type_id">
+                              <option value="" disabled selected>Select Drive</option>
+                              <option value="1">Front Wheel Drive</option>
+                              <option value="2">Rear Wheel Drive</option>
+                              <option value="3">All Wheel Drive</option>
+                              <option value="4">Four Wheel Drive</option>
                            </select>
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
                         <label>Cylinders</label>
                         <div class="select-box">
-                           <select>
-                              <option value="1">Option 1</option>
-                              <option value="2">Option 2</option>
-                              <option value="3">Option 3</option>
-                              <option value="4">Option 4</option>
+                           <select name="engine_cylinders">
+                              <option value="" disabled selected>Select Cylinders</option>
+                              @php 
+                              for($i=2;$i<13;$i++)
+                              {
+                                echo '<option value="'.$i.'">'.$i.'</option>';
+                              }
+                              @endphp
+                              <option value="13">13+</option>
                            </select>
                         </div>
                      </div>
@@ -260,23 +267,20 @@
                      <div class="col-sm-6 display-table">
                         <label>Fuel Type</label>
                         <div class="select-box">
-                           <select>
-                              <option value="1">Option 1</option>
-                              <option value="2">Option 2</option>
-                              <option value="3">Option 3</option>
-                              <option value="4">Option 4</option>
-                           </select>
+                            <select name="fuel">
+                              <option value="" disabled selected>Select Fuel Type</option>
+                              <option>Unleaded</option>
+                              <option>Leaded</option>
+                              <option>Premium</option>
+                              <option>Diesel</option>
+                              <option>Electric</option>
+                            </select>
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
                         <label>Engine</label>
-                        <div class="select-box">
-                           <select>
-                              <option value="1">Option 1</option>
-                              <option value="2">Option 2</option>
-                              <option value="3">Option 3</option>
-                              <option value="4">Option 4</option>
-                           </select>
+                        <div class="input-box">
+                           <input name="engine_description" type="text" class="form-control" placeholder="Eg: 3.0L" />
                         </div>
                      </div>
                   </div>
@@ -303,7 +307,7 @@
                                        <img degree="0" data-dz-thumbnail />
                                     </div>
                                     <div class="dz-details">
-                                       <div class="dz-filename"><span data-dz-name></span></div>
+                                       <!-- <div class="dz-filename"><span data-dz-name></span></div> -->
                                        <div class="dz-size" data-dz-size></div>
                                     </div>
                                     <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
@@ -354,7 +358,7 @@
                   <img src="/assets/images/paypal.jpg" alt="" />
                   <h4>Total <span>$14.95</span></h4>
                   <div class="form-group submit-btn">
-                     <input class="finish-btn btn waves-effect waves-light" type="submit" value="Submit vehicle Now"/>
+                     <button id="submit-btn" class="finish-btn btn waves-effect waves-light" type="submit">Submit vehicle Now</button>
                   </div>
                </div>
             </div>

@@ -10,7 +10,7 @@ use DB;
 class Vehicle extends Model
 {
     use Sluggable;
-    protected $fillable = ['dealer_id', 'partner_vehicle_id','doors'];
+    protected $fillable = ['dealer_id', 'make_id', 'model_id', 'year','odometer', 'partner_vehicle_id', 'transmission', 'price', 'trim', 'body_style_group_id','ext_color_id', 'int_color_id','doors','passenger','text','drive_type_id', 'engine_cylinders', 'fuel_id', 'engine_description'  ];
     protected static function boot()
     {
         parent::boot();
@@ -80,6 +80,16 @@ class Vehicle extends Model
     public function scopeActive($query)
     {
         return $query->where('status_id', '=', 1);
+    }
+
+    public function setPriceAttribute($value)
+    {
+        $this->attributes['price'] = preg_replace('/[^0-9.]/', '', $value);;
+    }
+
+    public function setMileageAttribute($value)
+    {
+        $this->attributes['mileage'] = preg_replace('/[^0-9.]/', '', $value);;
     }
 
     // public function scopeApplyFilter($query, $conditions, $featured=0)

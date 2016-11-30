@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Vehicle');
     }
+
+    public function saved_vehicles()
+    {
+        return $this->belongsToMany('App\Models\Vehicle');
+    }
 }

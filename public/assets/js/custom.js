@@ -156,6 +156,7 @@ $(document).ready(function() {
                 submitHandler: function(form) {
                     $.get("/loggedInUser", function(data) {
                         if (data.status == "success") {
+                            $('#submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:2.0rem" aria-hidden="true"></i>  SAVING VEHICLE');
                             $.ajax({
                                 url: form.action,
                                 type: form.method,

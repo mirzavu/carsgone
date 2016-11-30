@@ -13,6 +13,7 @@ use App\Models\VehicleModel;
 use App\Http\Requests; 
 use DB;
 use Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 class SearchController extends Controller
@@ -96,6 +97,7 @@ class SearchController extends Controller
         $data['applied_filters'] = $this->getAppliedFilters($conditions, $this->dealer_ids);
 
         $data['url_params'] = $params;
+        $data['logged_in'] = Auth::check();
         // dd($data);die;
 		//$vehicles->select(DB::raw('count(*) as total'))->groupBy('dealer_id');
 		

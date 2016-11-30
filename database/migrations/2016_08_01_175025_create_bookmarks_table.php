@@ -12,7 +12,7 @@ class CreateBookmarksTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookmarks', function (Blueprint $table) {
+        Schema::create('vehicle_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('vehicle_id')->unsigned();
@@ -27,6 +27,6 @@ class CreateBookmarksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('bookmarks');
+        Schema::drop('vehicle_user');
     }
 }

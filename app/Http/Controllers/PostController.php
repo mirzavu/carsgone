@@ -9,8 +9,11 @@ use App\Http\Requests;
 use App\Models\Make;
 use App\Models\BodyStyleGroup;
 use App\Models\Vehicle;
+use App\Models\Color;
 use App\Models\VehicleModel;
 use App\Models\VehiclePhoto;
+use App\Models\DriveType;
+use App\Models\FuelType;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use File;
 use Log;
@@ -32,7 +35,7 @@ class PostController extends Controller
             'service.EndPoint' => 'https://api.sandbox.paypal.com',
             'http.ConnectionTimeOut' => 300,
             'log.LogEnabled' => true,
-            'log.FileName' => public_path('logs/paypal.log'),
+            'log.FileName' => storage_path('logs/paypal.log'),
             'log.LogLevel' => 'FINE'
         ));
 	}
@@ -53,8 +56,11 @@ class PostController extends Controller
 	public function create(Request $request)
 	{		
 		$request['model_id'] = VehicleModel::where('model_name', $request['model'])->value('id');
-		//$request['user_id'] = Auth::user()->id;
-		//dd($request['year']);
+		if(!empty($request['colour_exterior'])) $request['ext_color_id'] = Color::where('color', $request['colour_exterior'])->value('id');
+		if(!empty($request['colour_interior'])) $request['int_color_id'] = Color::where('color', $request['colour_interior'])->value('id');
+		if(!empty($request['fuel'])) $request['fuel_id'] = FuelType::where('fuel_type', $request['fuel'])->value('id');
+		//$request['status_id'] = 1;
+		// Log::info($request->all());
 		$validator = Validator::make($request->all(), [
             'make_id' => 'required|integer',
             'model_id' => 'required|integer',
@@ -66,7 +72,8 @@ class PostController extends Controller
         }
         Log::info($request->all());
 		$vehicle = Auth::user()->vehicles()->create($request->all());
-
+		$vehicle->slug = null;
+		$vehicle->save();
 		$image_names = explode('^', $request['file_names']);
 		
 		$photos =[];$i=0;
@@ -77,7 +84,14 @@ class PostController extends Controller
         $vehicle->photos()->saveMany($photos);
 
 		if ($request->has('free')) {
-			$request->session()->flash('success', 'Vehicle has been posted Successfully!');
+			if(Auth::user()->verified)
+			{
+				$request->session()->flash('success', 'Vehicle has been posted Successfully! Check <a href="/dashboard">Dashboard</a>');
+			}
+			else
+			{
+				$request->session()->flash('success', 'Vehicle has been posted Successfully! Verify your email address to publish your vehicle');
+			}
 		 	return response()->json(['status' => 'done', 'url' => url('post')]);
 		}
 		else

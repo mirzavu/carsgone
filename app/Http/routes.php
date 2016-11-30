@@ -40,6 +40,8 @@
 	Route::post('/login', 'UserController@postSignIn');
 	Route::get('/logout', 'UserController@logout');
 	Route::get('/loggedInUser', 'UserController@loggedInUser');
+	Route::get('/signup/confirm/{token}', 'UserController@confirmEmail');
+	Route::get('/dashboard', 'UserController@dashboard');
 
 //Dealers
 	Route::get('/auto-dealers/info', 'DealerController@info');

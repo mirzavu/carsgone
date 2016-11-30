@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Validator;
 use Debugbar;
 use App\Http\Requests;
+use App\Mailers\AppMailer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,7 +14,15 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function postSignUp(Request $request)
+    public function dashboard(Request $request)
+    {
+        $this->middleware('auth');
+        $vehicles = Auth::user()->vehicles()->take(10)->get();
+        $saved_vehicles = Auth::user()->saved_vehicles()->take(10)->get();
+        // $saved = saved_vehicles
+    }
+
+    public function postSignUp(Request $request, AppMailer $mailer)
     {
     	//if request ajax() need to check
     	$validator = Validator::make($request->all(), [
@@ -33,7 +42,9 @@ class UserController extends Controller
     	$user->email = $email;
     	$user->name = $name;
     	$user->password = $password;
+        $user->token = str_random(30);
     	$user->save();
+        $mailer->sendEmailConfirmationTo($user);
 
     	Auth::login($user);
     	$id = Auth::user()->id;
@@ -74,6 +85,15 @@ class UserController extends Controller
 
     public function logout()
     {
+        Auth::logout();
+    }
+
+    public function confirmEmail($token)
+    {
+        $user = User::whereToken($token)->firstOrFail();
+        $user->verified = true;
+        $user->token = null;
+        $user->save();
         Auth::logout();
     }
 }

@@ -8,18 +8,8 @@
 <div class="vehicle-post-outer">
  <div class="container">
     <div class="wrapper">
-       <div class="dealer-info">
-          <div class="panel full">
-             <div class="panel-heading">
-                <h2>CREATE A VEHICLE LISTING</h2>
-             </div>
-             <div class="panel-body">
-                <h3>POST YOUR AUTOMOTIVE CLASSIFIEDS FOR FREE!</h3>
-                <p>Carsgone.com makes finding the right vehicle for you an easy and painless experience, but did you know that you can also list your vehicle just as easily? We offer a fast solution to posting automotive classifieds for both dealerships and private sellers. By filling out the information on this page you are creating a quality listing that will be viewed by thousands of potential buyers, and the best part: it's completely FREE!</p>
-             </div>
-          </div>
-       </div>
-       <form id="vehicle-form" method="post" action="/post/create">
+       {{-- <form id="vehicle-form" method="post" action="/post/create"> --}}
+       {!! Form::model($vehicle, ['url' => '/vehicles/'.$vehicle->id, 'method' => 'PATCH', 'id' => 'vehicle-form']) !!}
        <div class="post-tab clearfix panel" id="wizard_example">
           
             <div class="form-section">
@@ -31,28 +21,13 @@
                      <div class="col-sm-6 display-table">
                         <label>Year</label>
                         <div class="select-box">
-                           <select name="year" required>
-                              <option value="" disabled selected>Select Year</option>
-                              <option value="2017">2017</option>
-                              <option value="2016">2016</option>
-                              <option value="2015">2015</option>
-                              <option value="2014">2014</option>
-                              <option value="2013">2013</option>
-                              <option value="2012">2012</option>
-                              <option value="2011">2011</option>
-                              <option value="2010">2010</option>
-                           </select>
+                           {!! Form::select('year', ['2017' => '2017','2016' => '2016','2015' => '2015','2014' => '2014','2013' => '2013','2012' => '2012','2011' => '2011','2010' => '2010'], null, ['required' ]) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
                         <label>Make</label>
                         <div class="select-box">
-                           <select id="make-select" name="make_id" required>
-                               <option value="" disabled selected>Select Make</option>
-                               @foreach ($makes as $make)
-                               <option value="{{$make->id}}">{{$make->make_name}}</option>
-                               @endforeach
-                           </select>
+                           {!! Form::select('make_id', $makes, null, ['id'=> 'make-select', 'required' ]) !!}
                         </div>
                      </div>
                   </div>
@@ -60,15 +35,13 @@
                      <div class="col-sm-6 display-table">
                         <label>Model</label>
                         <div class="select-box">
-                           <select id="model-select" name="model" required>
-                              <option value="" disabled selected>Select Model</option>
-                           </select>
+                           {!! Form::select('model_id', $models, null, ['id'=> 'model-select', 'required' ]) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
                         <label>Trim Code</label>
                         <div class="input-box">
-                           <input name="trim" type="text" class="form-control" placeholder="Enter Trim" />
+                           {!! Form::text('trim', null, ['class' => 'form-control', 'placeholder' => "Enter Trim"]) !!}
                         </div>
                      </div>
                   </div>
@@ -80,13 +53,13 @@
                      <div class="col-sm-6 display-table">
                         <label>Price</label>
                         <div class="input-box">
-                           <input type="text" class="form-control" name="price" placeholder="eg: $12,000" minlength="3" required/>
+                          {!! Form::text('price', null, ['class' => 'form-control', 'placeholder' => "eg: $12,000", 'minlength'=>'3', 'required']) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
                         <label>Mileage</label>
                         <div class="input-box">
-                           <input type="text" class="form-control" name="odometer" placeholder="eg: 12,000" />
+                           {!! Form::text('odometer', null, ['class' => 'form-control', 'placeholder' => "eg: 12,000", 'required']) !!}
                         </div>
                      </div>
                   </div>
@@ -98,23 +71,13 @@
                      <div class="col-sm-6 display-table">
                         <label>Body Style</label>
                         <div class="select-box">
-                           <select name="body_style_group_id">
-                              <option value="" disabled selected>Select Body Style</option>
-                               @foreach ($body_style_groups as $body)
-                               <option value="{{$body->id}}">{{$body->body_style_group_name}}</option>
-                               @endforeach
-                           </select>
+                           {!! Form::select('body_style_group_id', $body_style_groups, null) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
                         <label>Transmission</label>
                         <div class="select-box">
-                          
-                           <select name="transmission">
-                              <option value="" disabled selected>Select Transmission</option>
-                              <option value="auto">Automatic</option>
-                              <option value="manual">Standard</option>
-                           </select>
+                           {!! Form::select('transmission', [null=>'Select Transmission','auto' => 'Automatic','manual' => 'Manual'], null) !!}
                         </div>
                      </div>
                   </div>
@@ -122,73 +85,13 @@
                      <div class="col-sm-6 display-table">
                         <label>Exterior Colour</label>
                         <div class="select-box">
-                           <select name="colour_exterior">
-                            <option value="" disabled selected>Select Exterior Color</option>
-                            <option>Beige</option>
-                            <option>Black</option>
-                            <option>Blue</option>
-                            <option>Bronze</option>
-                            <option>Brown</option>
-                            <option>Burgundy</option>
-                            <option>Champagne</option>
-                            <option>Charcoal</option>
-                            <option>Dark Blue</option>
-                            <option>Dark Green</option>
-                            <option>Dark Grey</option>
-                            <option>Gold</option>
-                            <option>Green</option>
-                            <option>Grey</option>
-                            <option>Light Blue</option>
-                            <option>Light Green</option>
-                            <option>Maroon</option>
-                            <option>Off White</option>
-                            <option>Orange</option>
-                            <option>Pewter</option>
-                            <option>Plum</option>
-                            <option>Purple</option>
-                            <option>Red</option>
-                            <option>Silver</option>
-                            <option>Tan</option>
-                            <option>Teal</option>
-                            <option>White</option>
-                            <option>Yellow</option>
-                        </select>
+                          {!! Form::select('colour_exterior', $exterior_colors, null) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
                         <label>Interior Colour</label>
                         <div class="select-box">
-                           <select name="colour_interior">
-                            <option value="" disabled selected>Select Interior Color</option>
-                            <option>Beige</option>
-                            <option>Black</option>
-                            <option>Blue</option>
-                            <option>Bronze</option>
-                            <option>Brown</option>
-                            <option>Burgundy</option>
-                            <option>Champagne</option>
-                            <option>Charcoal</option>
-                            <option>Dark Blue</option>
-                            <option>Dark Green</option>
-                            <option>Dark Grey</option>
-                            <option>Gold</option>
-                            <option>Green</option>
-                            <option>Grey</option>
-                            <option>Light Blue</option>
-                            <option>Light Green</option>
-                            <option>Maroon</option>
-                            <option>Off White</option>
-                            <option>Orange</option>
-                            <option>Pewter</option>
-                            <option>Plum</option>
-                            <option>Purple</option>
-                            <option>Red</option>
-                            <option>Silver</option>
-                            <option>Tan</option>
-                            <option>Teal</option>
-                            <option>White</option>
-                            <option>Yellow</option>
-                        </select>
+                          {!! Form::select('colour_interior', $interior_colors, null) !!}
                         </div>
                      </div>
                   </div>
@@ -196,29 +99,13 @@
                      <div class="col-sm-6 display-table">
                         <label>Doors</label>
                         <div class="select-box">
-                           <select name="doors">
-                              <option value="" disabled selected>Select Doors</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6+</option>
-                           </select>
+                           {!! Form::select('doors', $doors, null) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
                         <label>Passengers</label>
                         <div class="select-box">
-                           <select name="passenger">
-                              <option value="" disabled selected>Select Passengers</option>
-                              @php 
-                              for($i=1;$i<17;$i++)
-                              {
-                                echo '<option value="'.$i.'">'.$i.'</option>';
-                              }
-                              @endphp
-                           </select>
+                           {!! Form::select('passenger', $passengers, null) !!}
                         </div>
                      </div>
                   </div>
@@ -226,7 +113,7 @@
                      <div class="col-sm-12 display-table textarea">
                         <label>Description</label>
                         <div class="input-box">
-                           <textarea class="form-control" name="text"></textarea>
+                           {!! Form::textarea('text', null, ['class' => 'form-control', 'placeholder' => "Enter Description"]) !!}
                         </div>
                      </div>
                   </div>
@@ -238,28 +125,13 @@
                      <div class="col-sm-6 display-table">
                         <label>Drive Train</label>
                         <div class="select-box">
-                           <select name="drive_type_id">
-                              <option value="" disabled selected>Select Drive</option>
-                              <option value="1">Front Wheel Drive</option>
-                              <option value="2">Rear Wheel Drive</option>
-                              <option value="3">All Wheel Drive</option>
-                              <option value="4">Four Wheel Drive</option>
-                           </select>
+                           {!! Form::select('drive_type_id', [null => 'Select Drive Type','1' => 'Front Wheel Drive','2' => 'Rear Wheel Drive','3' => 'All Wheel Drive','4' => 'Four Wheel Drive'], null) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
                         <label>Cylinders</label>
                         <div class="select-box">
-                           <select name="engine_cylinders">
-                              <option value="" disabled selected>Select Cylinders</option>
-                              @php 
-                              for($i=2;$i<13;$i++)
-                              {
-                                echo '<option value="'.$i.'">'.$i.'</option>';
-                              }
-                              @endphp
-                              <option value="13">13+</option>
-                           </select>
+                           {!! Form::select('engine_cylinders', $cylinders, null) !!}
                         </div>
                      </div>
                   </div>
@@ -267,20 +139,13 @@
                      <div class="col-sm-6 display-table">
                         <label>Fuel Type</label>
                         <div class="select-box">
-                            <select name="fuel">
-                              <option value="" disabled selected>Select Fuel Type</option>
-                              <option>Unleaded</option>
-                              <option>Leaded</option>
-                              <option>Premium</option>
-                              <option>Diesel</option>
-                              <option>Electric</option>
-                            </select>
+                            {!! Form::select('fuel', $fuels, null) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
                         <label>Engine</label>
                         <div class="input-box">
-                           <input name="engine_description" type="text" class="form-control" placeholder="Eg: 3.0L" />
+                          {!! Form::text('engine_description', null, ['class' => 'form-control', 'placeholder' => "Eg: 3.0L"]) !!}
                         </div>
                      </div>
                   </div>
@@ -323,7 +188,7 @@
                                     </div>
                                  </div>
                               </div>
-                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
                            </div>
                            <input id="file_names" type="hidden" name="file_names">
                         </div>
@@ -333,6 +198,9 @@
             </div>
             <div class="form-section">
                <legend>Promote Vehicle</legend>
+               @if($vehicle->featured)
+                <p>Featured already</p>
+               @else
                <div class="promote-vehicle">
                   <div class="promote-vehicle-left">
                      <h4>On Our Website!</h4>
@@ -357,14 +225,17 @@
                   <p>Payments are accepted through <span>PayPal</span>. Click <span>Submit</span> to continue.</p>
                   <img src="/assets/images/paypal.jpg" alt="" />
                   <h4>Total <span>$14.95</span></h4>
-                  <div class="form-group submit-btn">
-                     <button id="submit-btn" class="finish-btn btn waves-effect waves-light" type="submit">Submit vehicle Now</button>
-                  </div>
+                  
+               </div>
+               @endif
+               <div class="form-group submit-btn">
+                     <button id="submit-btn" class="finish-btn btn waves-effect waves-light" type="submit">Save Changes</button>
                </div>
             </div>
           
        </div>
-       </form>
+       {{-- </form> --}}
+       {!! Form::close() !!}
     </div>
  </div>
 </div>
@@ -427,7 +298,7 @@ $(function() {
     previewNode.id = "";
     var previewTemplate = previewNode.parentNode.innerHTML;
     previewNode.parentNode.removeChild(previewNode);
-    var file_prefix = Math.random().toString(36).substr(2, 9); // create a random file prefix to avoid overrite
+    var file_prefix = '{{ $image_key }}'; // create a random file prefix to avoid overrite
 
     //console.log(previewTemplate);
     // var myDropzone = new Dropzone("#my-awesome-dropzone");
@@ -452,16 +323,17 @@ $(function() {
             var filename = file_prefix + '_' + file.name;
             var data = {
                 file_name: filename,
+                vehicle_id: {{ $vehicle->id}},
                 "_token": "{{ csrf_token() }}"
             }
-            $.post("/remove-image", data).done(function(data) {
+            $.post("/remove-image-editpost", data).done(function(data) {
                 if (data.status == "success") {
                     toastr.success('Image removed')
-                    var files = $('#file_names').val()
-                    files = files.replace(filename, "");
-                    files = files.replace("^^", "^");
-                    $('#file_names').val(files)
-                    console.log($('#file_names').val())
+                    // var files = $('#file_names').val()
+                    // files = files.replace(filename, "");
+                    // files = files.replace("^^", "^");
+                    // $('#file_names').val(files)
+                    // console.log($('#file_names').val())
                 } else {
                     toastr.error('Error removing image')
                 }
@@ -469,9 +341,46 @@ $(function() {
         },
         previewTemplate: previewTemplate,
         accept: function(file, done) {
-          var files = $('#file_names').val()
-          $('#file_names').val(files+file_prefix + '_' + file.name+'^') // Adding ^ as separator
+          console.log(file)
+          console.log(file.name)
+          var image_path  = 'uploads/vehicle/'+file_prefix + '_' + file.name;
+          var data = {
+                image_path: image_path,
+                vehicle_id: {{ $vehicle->id}},
+                "_token": "{{ csrf_token() }}"
+            }
+          $.post("/save-image-editpost", data).done(function(data) {
+                if (data.status == "success") {
+                    toastr.success('Image Added')
+                    // var files = $('#file_names').val()
+                    // files = files.replace(filename, "");
+                    // files = files.replace("^^", "^");
+                    // $('#file_names').val(files)
+                    // console.log($('#file_names').val())
+                } else {
+                    toastr.error('Error adding image')
+                }
+            });
+          // var files = $('#file_names').val()
+          // $('#file_names').val(files+file_prefix + '_' + file.name+'^') // Adding ^ as separator
           done();
+        },
+        init: function(){
+          var files_json = '{!! $dropzone_files !!}';
+          // console.log(files_json)
+          var files_obj = JSON.parse(files_json)
+          drop = this
+          $.each(files_obj, function(key,image){
+            console.log(image)
+            var temp = image.path.split('/').pop().split('_');
+            temp.shift()
+            var name = temp.join('_')
+            var mockFile = { name: name, size: 1 };
+            drop.emit("addedfile", mockFile);
+            drop.emit("thumbnail", mockFile, '/'+image.path);
+            drop.emit("complete", mockFile);
+            drop.options.maxFiles = 10;
+          })
         }
     };
 
@@ -490,8 +399,9 @@ $(function() {
             file_name: file_name,
             "_token": "{{ csrf_token() }}"
         }
-        $.post("/rotate-image", data).done(function(data) {
-
+        $.post("/rotate-image", data).fail(function(xhr, status, error) {
+            var obj = JSON.parse(xhr.responseText);
+              toastr.error(obj.error.message)
         });
 
     })

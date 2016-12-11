@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('vehicle_id');
             $table->integer('user_id');
             $table->string('payment_id');
-            $table->string('state');
+            $table->string('state')->nullable();
             $table->timestamps();
         });
     }

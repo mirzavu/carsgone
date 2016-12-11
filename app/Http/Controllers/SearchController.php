@@ -18,10 +18,10 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 class SearchController extends Controller
 {
-	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content');
-	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content');
+	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content', 'dealer');
+	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer');
 	protected $url_filters = array('make','model', 'province', 'city', 'body');
-	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content');
+	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content', 'dealer');
 	protected $dealer_ids;
 	protected $url_params;
 
@@ -53,6 +53,12 @@ class SearchController extends Controller
 		{
 			$conditions->put('distance','200');
 		}
+
+		if($conditions->get('dealer')) 
+		{
+			$conditions->forget('distance');
+			$conditions->forget('province');
+		}
 		
 		//Sorting set
 		if($conditions->get('sort') && $conditions->get('sort')!="name-desc")
@@ -61,18 +67,23 @@ class SearchController extends Controller
 		}
 		else
 		{
-			$sort = 'created_at';
+			$sort = 'vehicles.created_at';
 			$direction = 'desc';
 		}
 
-		$lat = 53.421879;
-        $lon = - 113.4675614;
+		if(Auth::check())
+		{
+			$conditions->put('user',Auth::user()->id);
+		}
+
+		// $lat = 53.421879;
+  //       $lon = - 113.4675614;
         // A different method - replace whereIn with join for dealers
-        //    $ss = Vehicle::join('dealers', 'vehicles.dealer_id', '=', 'dealers.id')
+     //       $ss = Vehicle::join('dealers', 'vehicles.dealer_id', '=', 'dealers.id')
      // ->select(DB::raw("dealers.id"))
      // ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < 200")->paginate(15);
-     // dd($ss);exit;
-		$this->dealer_ids = Dealer::addSelect(DB::raw("id, ( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) AS distance"))->havingRaw('distance < '.$conditions->get('distance'))->pluck('id')->toArray();
+     
+		// $this->dealer_ids = Dealer::addSelect(DB::raw("id, ( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) AS distance"))->havingRaw('distance < '.$conditions->get('distance'))->pluck('id')->toArray();
 		//$query = Vehicle::applyFilter($conditions, $dealer_ids)->orderBy($sort, $direction)->take(8)->get();
 		//dd($query);
 
@@ -85,7 +96,7 @@ class SearchController extends Controller
 			            ->groupBy('makes.id')
 			            ->get();
         $data['sort'] = $sort.'-'.$direction; 
-        $data['vehicles'] = Vehicle::applyFilter($conditions, $this->dealer_ids)->orderBy($sort, $direction)->paginate(15);
+        $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy($sort, $direction)->paginate(15);
         // dd($data['vehicles']);
   		// foreach ($data['vehicles'] as $key => $value) {
   		// 	echo $value->id;
@@ -93,7 +104,8 @@ class SearchController extends Controller
   		// }
   		// exit;
 
-        $data['featured_vehicles'] = Vehicle::applyFilter($conditions, $this->dealer_ids, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
+        $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
+        // dd($data['featured_vehicles']);
         $data['applied_filters'] = $this->getAppliedFilters($conditions, $this->dealer_ids);
 
         $data['url_params'] = $params;
@@ -118,7 +130,7 @@ class SearchController extends Controller
 		if(!$conditions->get('make'))
 		{
 			//$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions, $this->dealer_ids)->selectRaw('count(makes.id) as make_count, make_name')->groupBy('makes.make_name')->orderBy('make_count','desc')->get();
-			$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions, $this->dealer_ids)
+			$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions)
 				    ->join('makes', 'vehicles.make_id', '=', 'makes.id')
 			            ->selectRaw('count(makes.id) as make_count, makes.make_name')
 				    ->groupBy('makes.make_name')
@@ -128,7 +140,7 @@ class SearchController extends Controller
 		if($conditions->get('make') && !$conditions->get('model'))
 		{
 
-			$sidebar_data['models'] = Vehicle::ApplyFilter($conditions, $this->dealer_ids)->join('models', 'vehicles.model_id', '=', 'models.id')->selectRaw('count(models.id) as model_count, model_name')->groupBy('models.model_name')->orderBy('model_count','desc')->get();
+			$sidebar_data['models'] = Vehicle::ApplyFilter($conditions)->join('models', 'vehicles.model_id', '=', 'models.id')->selectRaw('count(models.id) as model_count, model_name')->groupBy('models.model_name')->orderBy('model_count','desc')->get();
 
 			// $sidebar_data['models'] = Make::where('make_name',$conditions->get('make'))->first()->models()->withCount(['vehicles' => function($query) use ($conditions){
 			// 	return $query->applyFilter($conditions);

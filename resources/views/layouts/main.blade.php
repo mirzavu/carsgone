@@ -165,7 +165,7 @@
   <div class="form-group">
     <label>Password</label>
     <input id="login-password" type="password" class="form-control" />
-    <a href="#" class="forgot">Forgot It ?</a>
+    <a id="reset-link" href="#" class="forgot">Forgot It ?</a>
   </div>
   <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
 </div>
@@ -201,21 +201,37 @@
   <a id="login-link" class="link" href="#">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a>
 </div>
 </div>
-<script type="text/javascript" src="/assets/js/jquery-2.2.2.min.js"></script> 
-<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/assets/js/materialize.min.js"></script>
-<script type="text/javascript" src="/assets/js/slick.min.js"></script>
-<script type="text/javascript" src="/assets/js/main.js"></script>
-<script type="text/javascript" src="/assets/js/nouislider.min.js"></script>
-<script type="text/javascript" src="/assets/js/dropzone.js"></script>
-<script type="text/javascript" src="/assets/js/step-form-wizard.js"></script>
-<script type="text/javascript" src="/assets/js/wNumb.min.js"></script>
-<script type="text/javascript" src="/assets/js/jquery.magnific-popup.min.js"></script>
-<script type="text/javascript" src="/assets/js/theia-sticky-sidebar.js"></script>
-<script type="text/javascript" src="/assets/js/nprogress.js"></script>
-<script type="text/javascript" src="/assets/js/toastr.min.js"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.1/jquery.validate.js"></script>
-<script type="text/javascript" src="/assets/js/custom.js"></script> 
+
+
+<div id="reset" class="modal member">
+<div class="modal-content">
+  <h5>RESET PASSWORD</h5>
+  <div class="form-group">
+    <label>Email</label>
+    <input id="reset-email" type="text" class="form-control" />
+  </div>
+  <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
+</div>
+<div class="modal-footer">
+  <button id="reset-submit" class="btn waves-effect waves-light waves-input-wrapper">Reset</button>
+  <a id="reset-login-link" class="link" href="#">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+</div>
+</div>
+<script src="/assets/js/jquery-2.2.2.min.js"></script> 
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/materialize.min.js"></script>
+<script src="/assets/js/slick.min.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/nouislider.min.js"></script>
+<script src="/assets/js/dropzone.js"></script>
+<script src="/assets/js/step-form-wizard.js"></script>
+<script src="/assets/js/wNumb.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/theia-sticky-sidebar.js"></script>
+<script src="/assets/js/nprogress.js"></script>
+<script src="/assets/js/toastr.min.js"></script>
+<script src="/assets/js/jquery.validate.js"></script>
+<script src="/assets/js/custom.js"></script> 
 <script type="text/javascript">
 toastr.options = {
   "closeButton": true,
@@ -296,6 +312,18 @@ $('#login-link').on('click',function(e){
   $('#member').openModal();
 });
 
+$('#reset-login-link').on('click',function(e){
+  e.preventDefault();
+  $('#reset').closeModal();
+  $('#member').openModal();
+});
+
+$('#reset-link').on('click',function(e){
+  e.preventDefault();
+  $('#member').closeModal();
+  $('#reset').openModal();
+});
+
 $('#login-submit').on('click',function(e){
   toastr.clear()
   NProgress.start();
@@ -344,6 +372,25 @@ $('#signup-submit').on('click',function(e){
   });
 });
 
+$('#reset-submit').on('click',function(e){
+  toastr.clear()
+  NProgress.start();
+  var data = { email: $('#reset-email').val(), "_token": "{{ csrf_token() }}"}
+  $.post( "/send-reset-link", data).done(function( data ) {
+    NProgress.done();
+    if(data.status=="success")
+    {
+      toastr.success('A reset password link has been successfully sent to your email account.')
+      $('#reset').closeModal();
+    }
+    else
+    {
+      toastr.error(data.error,'Error')
+    }
+    console.log(data);
+  });
+});
+
 $('body').on('click', '#logout-li', function() {
   NProgress.start();
   $.get( "/logout").done(function( data ) {
@@ -353,7 +400,7 @@ $('body').on('click', '#logout-li', function() {
   });
 });
 
-
+var base_url = '{{ url('/') }}';
 </script>
 @yield('javascript')
 

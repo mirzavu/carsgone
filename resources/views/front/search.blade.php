@@ -249,7 +249,11 @@
                      <div class="item-heading">
                         <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->dealer->city->city_name}}, {{$vehicle->dealer->province->province_name}}</h3>
                         @if($logged_in )
-                        <a class="waves-effect waves-light btn btn-save">save</a>
+                           @if(empty($vehicle->saved))
+                           <button vehicle="{{$vehicle->id}}" class="btn save-btn btn-action waves-effect waves-light waves-input-wrapper">Save</button>
+                           @else
+                           <button vehicle="{{$vehicle->id}}" class="btn unsave-btn btn-action waves-effect waves-light waves-input-wrapper">Saved</button>
+                           @endif
                         @endif
                      </div>
                      </a>
@@ -311,6 +315,7 @@
    <!-- Main Container End -->
 </div>
 <script type="text/javascript">
+   //preset price, odometer, year
    @php $price = $applied_filters->get("price"); @endphp
    var price_all = '{{ $price or '0-60000' }}';
    var price = price_all.split("-");
@@ -325,7 +330,7 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-
+   // Filter remove
    $('.applied-remove').on('click',function(e){
       e.preventDefault();
      $('.result-container').css({opacity:0.2}).before('<div class="progress"><div class="indeterminate"></div></div>')
@@ -403,8 +408,52 @@
 
    //if image error
    $('img').one('error', function() { this.src = '/assets/images/placeholder.jpg'; });
-   
-   
+   $('.result-container')
+      .on('click','.save-btn', function(e){
+         e.preventDefault();
+      })
+      .on('mousedown','.save-btn', function(e){
+      var btn = $(this)
+      btn.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');     
+ 
+
+      $.ajax({ type: "POST",   
+               url: "/save-vehicle",   
+          accepts: {
+             text: "application/json"
+         },
+          async: true,
+          data: {vehicle_id: btn.attr('vehicle'), "_token": "{{ csrf_token() }}"},
+          success : function(data)
+          {  
+            btn.removeClass('save-btn').addClass('unsave-btn');
+            btn.prop('disabled', false).html('Saved')
+          }
+       });
+   })
+   $('.result-container')
+      .on('click','.unsave-btn',function(e){
+         e.preventDefault();
+      })
+      .on('mousedown','.unsave-btn',function(e){
+      var btn = $(this)
+      btn.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');     
+ 
+
+      $.ajax({ type: "POST",   
+               url: "/unsave-vehicle",   
+          accepts: {
+             text: "application/json"
+         },
+          async: true,
+          data: {vehicle_id: btn.attr('vehicle'), "_token": "{{ csrf_token() }}"},
+          success : function(data)
+          {  
+            btn.removeClass('unsave-btn').addClass('save-btn');
+            btn.prop('disabled', false).html('save')
+          }
+       });
+   })    
    
 </script>
 @endsection

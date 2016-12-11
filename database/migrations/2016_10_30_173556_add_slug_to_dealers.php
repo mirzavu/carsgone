@@ -13,7 +13,7 @@ class AddSlugToDealers extends Migration
     public function up()
     {
         Schema::table('dealers', function($table) {
-            $table->string('slug')->after('id');
+            $table->string('slug')->after('id')->unique();
             $table->index('slug');
         });
     }

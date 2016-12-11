@@ -1,9 +1,9 @@
 $(document).ready(function() {
-    $.validator.setDefaults({ // Post - To include hidden fields validation of Jquery
+    $.validator.setDefaults({ // Post - To include hidden fields(material select) validation of Jquery
         ignore: []
     });
 
-    $('select').on('change', function() { // Post - Remove error on select
+    $('select').on('change', function() { // Post - Remove error on material select
         $(this).parent().parent().children('label').remove()
     })
 
@@ -134,7 +134,6 @@ $(document).ready(function() {
                 // errorClass: "invalid form-error",       
                 // errorElement : 'div',       
                 errorPlacement: function(error, element) {
-                    console.log(typeof element)
                     if (element.is('select')) {
                         error.appendTo(element.parent().parent());
                     } else {

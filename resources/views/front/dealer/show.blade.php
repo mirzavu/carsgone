@@ -85,96 +85,44 @@
         <li class="selected from-left">
           <div class="tab-content">
             <ul class="popular-item-list bordered four-col">
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
+              @foreach($makes as $make)
+              <li><a class="dealer-tag" href="/search/make-{{$make->make_name}}">
+                <h6>{{$make->make_name}} ({{$make->make_count}})</h6>
                 </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
+              @endforeach
             </ul>
           </div>
         </li>
         <li>
           <div class="tab-content">
             <ul class="popular-item-list bordered four-col">
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
+              @foreach($body as $style)
+              <li><a class="dealer-tag" href="/search/body-{{$style->body_style_group_name}}">
+                <h6>{{$style->body_style_group_name}} ({{$style->body_count}})</h6>
                 </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
+              @endforeach
             </ul>
           </div>
         </li>
         <li>
           <div class="tab-content">
             <ul class="popular-item-list bordered four-col">
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
+              @foreach($prices as $price)
+              <li><a class="dealer-tag-price" range="{{$price->range}}" href="/search">
+                <h6>{{$price->range}} ({{$price->count}})</h6>
                 </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
+              @endforeach
             </ul>
           </div>
         </li>
         <li>
           <div class="tab-content">
             <ul class="popular-item-list bordered four-col">
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
+              @foreach($years as $year)
+              <li><a class="dealer-tag-year" year="{{$year->year}}" href="/search">
+                <h6>{{$year->year}} ({{$year->year_count}})</h6>
                 </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
-              <li><a href="#">
-                <h6>New Chevrolet Cruze</h6>
-                </a></li>
+              @endforeach
             </ul>
           </div>
         </li>
@@ -188,5 +136,20 @@
 </div>
 @endsection
 @section('javascript')
+<script type="text/javascript">
+  $('.dealer-tag').on('click',function(e){
+    // e.preventDefault();
+      $.get( "/setSessionKeyValue/dealer/{{$dealer->slug}}");
+  });
+  $('.dealer-tag-price').on('click',function(e){
+    // e.preventDefault();
+      $.get( "/setSessionKeyValue/price/"+$(this).attr('range'));
+      $.get( "/setSessionKeyValue/dealer/{{$dealer->slug}}");
+  });
+  $('.dealer-tag-year').on('click',function(e){
+    $.get( "/setSessionKeyValue/year/"+$(this).attr('year')+'-'+$(this).attr('year'));
+      $.get( "/setSessionKeyValue/dealer/{{$dealer->slug}}");
+  });
 
+</script>
 @endsection

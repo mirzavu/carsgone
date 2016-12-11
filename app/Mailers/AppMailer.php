@@ -64,11 +64,50 @@ class AppMailer
     public function sendEmailConfirmationTo(User $user)
     {
         $this->to = $user->email;
-        $this->subject = 'Subject Name';
+        $this->subject = 'Confirm Email Address';
         $this->view = 'emails.confirm';
         $this->data = compact('user');
         $this->deliver();
     }
+
+    public function sendEmailChangeConfirmationTo(User $user)
+    {
+        $this->to = $user->email;
+        $this->subject = 'Email Confirmation Change';
+        $this->view = 'emails.change_email';
+        $this->data = compact('user');
+        $this->deliver();
+    }
+
+    public function sendPasswordChangeNotificationTo(User $user)
+    {
+        $this->to = $user->email;
+        $this->subject = 'Password Changed';
+        $this->view = 'emails.change_password';
+        $this->data = compact('user');
+        $this->deliver();
+    }
+
+    public function sendResetPasswordLinkTo(User $user)
+    {
+        $this->to = $user->email;
+        $this->subject = 'Reset Password';
+        $this->view = 'emails.reset_password';
+        $this->data = compact('user');
+        $this->deliver();
+    }
+
+    public function sendCreditAppTo(User $user)
+    {
+        $this->from = $data->email;
+        $this->fromName = $data->name;
+        $this->to = config('mail.from.address');
+        $this->subject = 'Credit Application';
+        $this->view = 'emails.credit_app';
+        $this->data = compact('data');
+        $this->deliver();
+    }
+    
     /**
      * Deliver the email.
      *

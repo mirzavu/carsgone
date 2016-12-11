@@ -6,19 +6,31 @@ use Debugbar;
 use App\Http\Requests;
 use App\Mailers\AppMailer;
 use App\Models\User;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Log;
+use Hash;
 
 class UserController extends Controller
 {
     public function dashboard(Request $request)
     {
         $this->middleware('auth');
-        $vehicles = Auth::user()->vehicles()->take(10)->get();
-        $saved_vehicles = Auth::user()->saved_vehicles()->take(10)->get();
+        if(Auth::user()->verified)
+        {
+            $request->session()->flash('message', 'Verify your email address to enjoy uninterrupted services.');
+        }
+        $data['location'] = getLocation($request);
+        $data['email'] = Auth::user()->email;
+        $data['vehicles'] = Auth::user()->vehicles()->withoutGlobalScopes()->latest()->take(10)->get();
+        // dd($data['vehicles']->count());
+        $data['saved_vehicles'] = Auth::user()->saved_vehicles()->take(10)->get();
+        return view('front.dashboard', $data);
+
         // $saved = saved_vehicles
     }
 
@@ -96,4 +108,148 @@ class UserController extends Controller
         $user->save();
         Auth::logout();
     }
+
+    public function changeEmail(Request $request, AppMailer $mailer)
+    {
+        $validator = Validator::make($request->all(), [
+            'new_email' => 'required|email|max:150',
+            'confirm_email' => 'required|max:120',
+            'password' => 'required|min:6|max:100'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
+        }
+
+        if(!Auth::check()) return response()->json(['status' => 'fail', 'error' => 'Session expired. Please SignIn again.']);
+
+        $user = Auth::user();
+        $new_email = $request['new_email'];
+        $password = $request['password'];
+
+        
+        if(Hash::check($password, $user->password))
+        {
+            $emails_exists = User::where('email','=',$new_email)->first();
+            Log::info($emails_exists);
+            if($emails_exists)
+            {
+                return response()->json(['status' => 'fail', 'error' => 'Email already exists.']);
+            }
+            else
+            {
+                $user->email = $new_email;
+                $user->token = str_random(30);
+                $user->verified = false;
+                $user->save();
+                $mailer->sendEmailChangeConfirmationTo($user);
+                return response()->json(['status' => 'success', 'email' => $new_email]);
+            }
+        }
+        else
+        {
+            return response()->json(['status' => 'fail', 'error' => 'Incorrect Password. Please try again.']);
+        }
+        
+    }
+
+    public function changePassword(Request $request, AppMailer $mailer)
+    {
+        $validator = Validator::make($request->all(), [
+            'new_password' => 'required|min:6|max:100',
+            'confirm_new_password' => 'required|min:6|max:100',
+            'password' => 'required|min:6|max:100'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
+        }
+
+        if(!Auth::check()) return response()->json(['status' => 'fail', 'error' => 'Session expired. Please SignIn again.']);
+
+        $user = Auth::user();
+        $new_password = $request['new_password'];
+        $password = $request['password'];
+
+        Log::info($user->password);
+        if(Hash::check($password, $user->password))
+        {
+            $user->password = bcrypt($new_password);
+            $user->save();
+            $mailer->sendPasswordChangeNotificationTo($user);
+            return response()->json(['status' => 'success', 'message' => 'Your password is changed successfully!']);
+        }
+        else
+        {
+            return response()->json(['status' => 'fail', 'error' => 'Incorrect current Password. Please try again.']);
+        }
+        
+    }
+
+    public function sendResetLink(Request $request, AppMailer $mailer)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:150'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
+        }
+        $email = $request['email'];
+        $user = User::where('email','=',$email)->first();
+        if($user)
+        {
+            $user->token = str_random(30);
+            $user->save();
+            $mailer->sendResetPasswordLinkTo($user);
+            return response()->json(['status' => 'success', 'message' =>'Reset Passwork link is successfully sent to your email address']);
+        }
+        else
+        {
+            return response()->json(['status' => 'fail', 'error' => 'User not found in our records. Contact Us for any issues.']);
+        }
+        
+    }
+
+    public function getResetPassword(Request $request, AppMailer $mailer, $token='')
+    {
+        $user = User::whereToken($token)->firstOrFail();
+        $data['token'] = $token;
+        return view('front.pages.reset_password', $data);
+    }
+
+    public function postResetPassword(Request $request, AppMailer $mailer)
+    {
+        $user = User::whereToken($request['token'])->firstOrFail();
+        $user->password = bcrypt($request['new_password']);
+        Log::info($request['new_password']);
+        $user->token = null;
+        $user->save();
+        return response()->json(['status' => 'success', 'message' => 'Password changed successfully']);
+        
+    }
+
+    public function activateVehicle(Request $request)
+    {
+        $vehicle_id = $request['vehicle_id'];
+        $user = Auth::user();
+        if($user->verified)
+        {
+            Vehicle::withoutGlobalScopes()->whereId($vehicle_id)->update(['status_id' => 1]);
+            return response()->json(['status' => 'success']);
+        }
+        else
+        {
+            return response()->json(['status' => 'fail', 'message' => 'Please confirm your email address to activate']);
+        }
+    }
+
+    public function deactivateVehicle(Request $request)
+    {
+        $vehicle_id = $request['vehicle_id'];
+        $user = Auth::user();
+        Vehicle::withoutGlobalScopes()->whereId($vehicle_id)->update(['status_id' => 0]);
+        return response()->json(['status' => 'success']);
+    }
+    
 }

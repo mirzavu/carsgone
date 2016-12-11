@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-    protected $fillable = array('vehicle_id', 'user_id', 'payment_id','status');
+    protected $fillable = array('vehicle_id', 'user_id', 'payment_id','state');
 
 	
     public function vehicle()

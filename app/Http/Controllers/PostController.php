@@ -14,7 +14,9 @@ use App\Models\VehicleModel;
 use App\Models\VehiclePhoto;
 use App\Models\DriveType;
 use App\Models\FuelType;
+use App\Models\Payment;
 use Barryvdh\Debugbar\Facade as Debugbar;
+use Image;
 use File;
 use Log;
 
@@ -22,6 +24,10 @@ class PostController extends Controller
 {
 	private $_apiContext;
 	protected $upload_path;
+	protected $colors;
+	protected $doors;
+	protected $cylinders;
+	protected $fuel;
 
 	public function __construct()
 	{
@@ -38,6 +44,13 @@ class PostController extends Controller
             'log.FileName' => storage_path('logs/paypal.log'),
             'log.LogLevel' => 'FINE'
         ));
+
+        $this->colors = ['Beige','Black','Blue','Bronze','Brown','Burgundy','Champagne','Charcoal','Dark Blue','Dark Green','Dark Grey','Gold','Green','Grey','Light Blue','Light Green','Maroon','Off White','Orange','Pewter','Plum','Purple','Red','Silver','Tan','Teal','White','Yellow'];
+        // $this->doors = ['1','2','3','4','5','6']; 
+        $this->doors = range(1, 6);
+        $this->passengers = range(1, 16);
+        $this->cylinders = range(1, 13);
+        $this->fuels = ['Unleaded', 'Leaded', 'Premium', 'Diesel', 'Electric'];
 	}
     
 
@@ -76,7 +89,7 @@ class PostController extends Controller
 		$vehicle->save();
 		$image_names = explode('^', $request['file_names']);
 		
-		$photos =[];$i=0;
+		$photos =[];$i=1;
 		foreach($image_names as $image) {
 			if(!empty($image))
             	array_push($photos, new VehiclePhoto(['position' => $i++, 'path' => 'uploads/vehicle/'.$image]));
@@ -120,7 +133,7 @@ class PostController extends Controller
 		    $transaction->setDescription('Selling of new and used cars in Canada');
 
 		    $redirectUrls = PayPal::RedirectUrls();
-		    $redirectUrls->setReturnUrl(action('PostController@getDone').'?vehicle_id=1234');
+		    $redirectUrls->setReturnUrl(url('/post/done').'?vehicle_id='.$vehicle->id);
 		    $redirectUrls->setCancelUrl(action('PostController@newPost'));
 
 		    $payment = PayPal::Payment();
@@ -149,22 +162,18 @@ class PostController extends Controller
 	    $token = $request->get('token');
 	    $payer_id = $request->get('PayerID');
 	    $vehicle_id = $request->get('vehicle_id');
-	    $uer_id = Auth::user()->id;
+	    $user_id = Auth::user()->id;
 	    $payment = PayPal::getById($id, $this->_apiContext);
 
 	    $paymentExecution = PayPal::PaymentExecution();
 
 	    $paymentExecution->setPayerId($payer_id);
 	    $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
-	    dd($executePayment->id);
-	    Payment::create(['user_id' => $user_id, 'vehicle_id' => $vehicle_id, 'payment_id' => $executePayment->id, 'status' => $executePayment->status ]);
-	    $request->session()->flash('success', 'Vehicle has been posted Successfully!');
+	    Payment::create(['user_id' => $user_id, 'vehicle_id' => $vehicle_id, 'payment_id' => $executePayment->id, 'state' => $executePayment->state ]);
+	    Vehicle::withoutGlobalScopes()->whereId($vehicle_id)->update(['featured' => 1, 'featured_expires' => date('Y-m-d h:i:s', strtotime("+30 days"))]);
+	    $request->session()->flash('success', 'Your Vehicle is promoted to Featured List!');
 	    // dd($executePayment);
-
-	    // Clear the shopping cart, write to database, send notifications, etc.
-
-	    // Thank the user for the purchase
-	    return view('front.post.post');
+	    return redirect()->action('UserController@dashboard');
 	}
 
 	public function createWebProfile()
@@ -191,29 +200,181 @@ class PostController extends Controller
 	    return $createProfileResponse->getId(); //The new webprofile's id
 	}
 
-	public function save_image(Request $request)
+	public function saveImage(Request $request)
 	{		
 		if ($request->hasFile('file')) {
 			$request->file('file')->move($this->upload_path, $request->file('file')->getClientOriginalName());
 		}
 	}
 
-	public function remove_image(Request $request)
+	public function removeImage(Request $request)
 	{	
 		File::delete("uploads/vehicle/".$request->file_name);
 		return response()->json(['status' => 'success']);
 	}
 
-	public function rotate_image(Request $request)
+	public function removeImageEditPost(Request $request)
+	{	
+		$full_path = "uploads/vehicle/".$request->file_name;
+		File::delete($full_path);
+		Vehicle::withoutGlobalScopes()->where('id', $request->vehicle_id)->first()->photos()->where('path', $full_path)->delete();
+		return response()->json(['status' => 'success']);
+	}
+
+
+	
+	public function saveImageEditPost(Request $request)
+	{	
+		Vehicle::withoutGlobalScopes()->where('id', $request->vehicle_id)->first()->photos()->create([
+			'position' => 1,
+			'path' => $request->image_path
+		]);
+		return response()->json(['status' => 'success']);
+	}
+
+	public function rotateImage(Request $request)
 	{	
 		$filename = $this->upload_path."/".$request->file_name;
 		// Load the image
-		$source = imagecreatefromjpeg($filename);
-		$degrees = -90;
-		// Rotate
-		$rotate = imagerotate($source, $degrees, 0);
-		//and save it on your server...
-		imagejpeg($rotate, $this->upload_path."/".$request->file_name);
+		Log::info($filename);
+		$img = Image::make($filename);
+		$img->rotate(-90);
+		$img->save($filename);
+		// $source = imagecreatefromjpeg($filename);
+		// $degrees = -90;
+		// $rotate = imagerotate($source, $degrees, 0);
+		// imagejpeg($rotate, $this->upload_path."/".$request->file_name);
 		return response()->json(['status' => 'success']);
 	}
+
+	public function saveVehicle(Request $request)
+	{	
+		$vehicle_id = $request['vehicle_id'];
+		$user = Auth::user();
+		$user->saved_vehicles()->attach($vehicle_id);
+		return response()->json(['status' => 'success']);
+	}
+
+	public function unsaveVehicle(Request $request)
+	{	
+		$vehicle_id = $request['vehicle_id'];
+		$user = Auth::user();
+		$user->saved_vehicles()->detach($vehicle_id);
+		return response()->json(['status' => 'success']);
+	}
+
+	//Edit Vehicle
+	public function editVehicle(Request $request, $id)
+	{	
+		$data['location'] = getLocation($request);
+
+		// dd($data['makes']);
+		
+		$data['vehicle'] = Vehicle::withoutGlobalScopes()->findorFail($id);
+		$data['makes'] = Make::pluck('make_name', 'id');
+		// dd($data['vehicle']);
+		$data['vehicle']->model = $data['vehicle']->model_id; //to match with form builder
+		$data['models'] = $data['vehicle']->make()->first()->models()->pluck('model_name','id');
+		$data['body_style_groups'] = BodyStyleGroup::pluck('body_style_group_name', 'id')->prepend('Select Body Style', null);
+		$data['exterior_colors'] = array(null => 'Select Exterior Color') + array_combine($this->colors, $this->colors);
+		$data['vehicle']->colour_exterior = Color::where('id',$data['vehicle']->ext_color_id)->value('color');
+		$data['interior_colors'] = array(null => 'Select Interior Color') + array_combine($this->colors, $this->colors);
+		$data['vehicle']->colour_interior = Color::where('id',$data['vehicle']->int_color_id)->value('color');
+		$data['doors'] = array(null => 'Select Doors') + array_combine($this->doors, $this->doors);
+		$data['passengers'] = array(null => 'Select Passenger') + array_combine($this->passengers, $this->passengers);
+		$data['cylinders'] = array(null => 'Select Cylinders') + array_combine($this->cylinders, $this->cylinders);
+		$data['fuels'] = array(null => 'Select Fuel Type') + array_combine($this->fuels, $this->fuels);
+		$data['images'] = $data['vehicle']->photos()->get();
+
+		if($data['images']->count()) //extracting image key from url
+		{
+			$image = explode('/', $data['images'][0]['path']);
+			$data['image_key'] = explode('_', end($image))[0];
+		}
+		else
+		{
+			$data['image_key'] = str_random(15);
+		}
+		$data['dropzone_files'] = $data['images']->toJson();
+		return view('front.post.edit', $data);
+	}
+
+	public function updateVehicle(Request $request, $id)
+	{
+		if(!empty($request['colour_exterior'])) $request['ext_color_id'] = Color::where('color', $request['colour_exterior'])->value('id');
+		if(!empty($request['colour_interior'])) $request['int_color_id'] = Color::where('color', $request['colour_interior'])->value('id');
+		if(!empty($request['fuel'])) $request['fuel_id'] = FuelType::where('fuel_type', $request['fuel'])->value('id');
+		//$request['status_id'] = 1;
+		// Log::info($request->all());
+		$validator = Validator::make($request->all(), [
+            'make_id' => 'required|integer',
+            'model_id' => 'required|integer',
+            'year' => 'required|min:1970|max:2020|integer'
+        ]);
+
+        if ($validator->fails()) {
+        	return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
+        }
+        $vehicle = Vehicle::withoutGlobalScopes()->findorFail($id);
+		$vehicle->update($request->all());
+		if ($request->has('free')) {
+			if(Auth::user()->verified)
+			{
+				$request->session()->flash('success', 'Your changes are saved! Check <a href="/dashboard">Dashboard</a>');
+			}
+			else
+			{
+				$request->session()->flash('success', 'Your changes are saved! Verify your email address to publish your vehicle');
+			}
+		 	return response()->json(['status' => 'done', 'url' => url('post')]);
+		}
+		else
+		{
+			$payer = PayPal::Payer();
+		    $payer->setPaymentMethod('paypal');
+
+		    $amount = PayPal::Amount();
+		    $amount->setCurrency('CAD');
+		    $amount->setTotal(14.95); // This is the simple way,
+		    // you can alternatively describe everything in the order separately;
+		    // Reference the PayPal PHP REST SDK for details.
+
+		    $item = PayPal::Item();                            
+			$item->setQuantity(1);                         
+			$item->setName('Promote your vehicle');           
+			$item->setPrice(14.95);               
+			$item->setCurrency('CAD');          
+
+			$itemList = PayPal::ItemList();                    
+			$itemList->setItems(array($item));
+
+		    $transaction = PayPal::Transaction();
+		    $transaction->setAmount($amount);
+		    $transaction->setItemList($itemList);
+		    $transaction->setDescription('Selling of new and used cars in Canada');
+
+		    $redirectUrls = PayPal::RedirectUrls();
+		    $redirectUrls->setReturnUrl(action('PostController@getDone').'?vehicle_id='.$vehicle->id);
+		    $redirectUrls->setCancelUrl(action('PostController@newPost'));
+
+		    $payment = PayPal::Payment();
+		    $payment->setIntent('sale');
+		    $payment->setPayer($payer);
+		    $payment->setRedirectUrls($redirectUrls);
+		    $payment->setTransactions(array($transaction));
+		    $payment->setExperienceProfileId($this->createWebProfile());
+
+		    // $input = Paypal::InputFields();
+		    // $input->setNoShipping(1);
+
+		    $response = $payment->create($this->_apiContext);
+
+
+
+		    $redirectUrl = $response->links[1]->href;
+
+		    return response()->json(['status' => 'paypal', 'url' => $redirectUrl]);
+		}
+	}
+
 }

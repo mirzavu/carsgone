@@ -50,6 +50,6 @@ class User extends Authenticatable
 
     public function saved_vehicles()
     {
-        return $this->belongsToMany('App\Models\Vehicle');
+        return $this->belongsToMany('App\Models\Vehicle','vehicle_user');
     }
 }

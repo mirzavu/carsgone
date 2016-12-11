@@ -64,14 +64,14 @@ class DealerController extends Controller
 			            ->selectRaw('count(body_style_groups.id) as body_count, body_style_groups.body_style_group_name')
 				    	->groupBy('body_style_groups.body_style_group_name')
 			            ->orderBy('body_count','desc')->get();
-		$data['year'] = Vehicle::where('dealer_id',$data['dealer']->id)
+		$data['years'] = Vehicle::where('dealer_id',$data['dealer']->id)
 						->selectRaw('count(year) as year_count, year')
 						->groupBy('year')
 						->orderBy('year_count','desc')->get();
-		$data['price'] = Vehicle::where('dealer_id',$data['dealer']->id)
+		$data['prices'] = Vehicle::where('dealer_id',$data['dealer']->id)
 						->selectRaw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`')
 						->groupBy('range')->get();
-
+		   // dd($data['years']);
 		return view('front.dealer.show', $data);
 	}
 

@@ -21,6 +21,11 @@
 	Route::get('/getModels/{term}', 'HomeController@getModels');
 	Route::get('/autoloans', 'PageController@autoloan');
 	Route::get('/autoloans/{slug}', 'PageController@viewLoanPage');
+	Route::get('/credit-application', 'CreditController@create');
+
+	//edit post
+	Route::get('/vehicles/{id}/edit', 'PostController@editVehicle');
+	Route::patch('/vehicles/{id}', 'PostController@updateVehicle');
 
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
 	Route::get('/search', 'SearchController@searchHandler');
@@ -28,12 +33,22 @@
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
 	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
 
+	Route::post('/save-vehicle', 'PostController@saveVehicle');
+	Route::post('/unsave-vehicle', 'PostController@unsaveVehicle');
+
+
+	//Private Vehicles
+	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
+	Route::get('/search', 'SearchController@searchHandler');
+
 	Route::get('/post', 'PostController@newPost');
 	Route::get('/post/done', 'PostController@getDone');
 	Route::post('/post/create', 'PostController@create');
-	Route::post('/save-image', 'PostController@save_image');
-	Route::post('/remove-image', 'PostController@remove_image');
-	Route::post('/rotate-image', 'PostController@rotate_image');
+	Route::post('/save-image', 'PostController@saveImage');
+	Route::post('/remove-image', 'PostController@removeImage');
+	Route::post('/rotate-image', 'PostController@rotateImage');
+	Route::post('/remove-image-editpost', 'PostController@removeImageEditPost');
+	Route::post('/save-image-editpost', 'PostController@saveImageEditPost');
 
 //Authentication
 	Route::post('/signup', 'UserController@postSignUp');
@@ -41,7 +56,16 @@
 	Route::get('/logout', 'UserController@logout');
 	Route::get('/loggedInUser', 'UserController@loggedInUser');
 	Route::get('/signup/confirm/{token}', 'UserController@confirmEmail');
-	Route::get('/dashboard', 'UserController@dashboard');
+
+//Dashboard
+	Route::get('/dashboard', 'UserController@dashboard')->middleware('auth');
+	Route::post('/change-email', 'UserController@changeEmail');
+	Route::post('/change-password', 'UserController@changePassword');
+	Route::post('/send-reset-link', 'UserController@sendResetLink');
+	Route::post('/reset-password', 'UserController@postResetPassword');
+	Route::get('/reset-password/{token}', 'UserController@getResetPassword');
+	Route::post('/activate-vehicle', 'UserController@activateVehicle');
+	Route::post('/deactivate-vehicle', 'UserController@deactivateVehicle');
 
 //Dealers
 	Route::get('/auto-dealers/info', 'DealerController@info');

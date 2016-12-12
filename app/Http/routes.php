@@ -30,6 +30,8 @@
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
 	Route::get('/search', 'SearchController@searchHandler');
 	Route::get('/setSessionKeyValue/{key}/{value}', 'SearchController@setSessionKeyValue');
+	Route::get('/removeSessionAll', 'SearchController@removeSessionAll');
+	
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
 	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
 

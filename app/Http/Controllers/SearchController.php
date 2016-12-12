@@ -217,6 +217,13 @@ class SearchController extends Controller
 		$request->session()->put($key,$value);
 	}
 
+	public function removeSessionAll(Request $request)
+	{
+		$request->session()->flush();
+	}
+
+	
+
 }
 
 

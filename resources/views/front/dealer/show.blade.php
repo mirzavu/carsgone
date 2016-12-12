@@ -35,7 +35,7 @@
                             </li>
                             @endforeach
                         </ul>
-                        <div class="pad-10"><a href="#" class="waves-effect waves-light btn btn-block">View Inventory</a></div>
+                        <div class="pad-10"><a id="inventory-btn" href="/search" class="waves-effect waves-light btn btn-block">View Inventory</a></div>
                     </div>
                     </div>
                     <div class="display-flex right">
@@ -137,18 +137,28 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-  $('.dealer-tag').on('click',function(e){
-    // e.preventDefault();
+  $('#inventory-btn').on('click',function(e){
+      e.preventDefault();
+      $.get( "/removeSessionAll");
       $.get( "/setSessionKeyValue/dealer/{{$dealer->slug}}");
+      window.location = $(this).attr('href')
+  });
+  $('.dealer-tag').on('click',function(e){
+      e.preventDefault();
+      $.get( "/setSessionKeyValue/dealer/{{$dealer->slug}}");
+      window.location = $(this).attr('href')
   });
   $('.dealer-tag-price').on('click',function(e){
-    // e.preventDefault();
+      e.preventDefault();
       $.get( "/setSessionKeyValue/price/"+$(this).attr('range'));
       $.get( "/setSessionKeyValue/dealer/{{$dealer->slug}}");
+      window.location = "/search";
   });
   $('.dealer-tag-year').on('click',function(e){
-    $.get( "/setSessionKeyValue/year/"+$(this).attr('year')+'-'+$(this).attr('year'));
+      e.preventDefault();
+      $.get( "/setSessionKeyValue/year/"+$(this).attr('year')+'-'+$(this).attr('year'));
       $.get( "/setSessionKeyValue/dealer/{{$dealer->slug}}");
+      window.location = "/search";
   });
 
 </script>

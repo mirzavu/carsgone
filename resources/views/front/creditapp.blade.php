@@ -13,8 +13,6 @@
             <div class="form-section">
                <legend>Vehicle Type</legend>
                <fieldset>
-                  <span>1</span>
-                  <h4>Make &amp; Model</h4>
                   <div class="row">
                      <div class="col-sm-6 display-table">
                         <label>Year</label>
@@ -39,8 +37,6 @@
             <div class="form-section">
                <legend>Vehicle Info</legend>
                <fieldset>
-               <span>1</span>
-                  <h4>Personal Info</h4>
                   <div class="row">
                   	<div class="col-sm-6 display-table">
                         <label>Name</label>

@@ -79,6 +79,7 @@
 	Route::get('/help', 'PageController@help');
 	Route::get('/privacy', 'PageController@privacy');
 	Route::get('/contact', 'PageController@contact');
+	Route::post('/contact', 'PageController@contactSend');
 
 //Route::auth();
 

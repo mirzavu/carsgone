@@ -97,7 +97,7 @@ class AppMailer
         $this->deliver();
     }
 
-    public function sendCreditAppTo(User $user)
+    public function sendCreditApp($data)
     {
         $this->from = $data->email;
         $this->fromName = $data->name;
@@ -107,6 +107,18 @@ class AppMailer
         $this->data = compact('data');
         $this->deliver();
     }
+
+    public function sendContactForm($data)
+    {
+        $this->from = $data->email;
+        $this->fromName = $data->name;
+        $this->to = config('mail.from.address');
+        $this->subject = 'Contact Form';
+        $this->view = 'emails.contact_form';
+        $this->data = compact('data');
+        $this->deliver();
+    }
+    
     
     /**
      * Deliver the email.

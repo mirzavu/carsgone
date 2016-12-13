@@ -20,7 +20,7 @@ class CreditController extends Controller
 	public function send(Request $request, AppMailer $mailer)
 	{
 		$data = $request->all();
-		$mailer->sendCreditAppTo($data);
+		$mailer->sendCreditApp($data);
 		$request->session()->flash('success', 'Your Credit Application is sent successfully!');
 		return redirect()->action('CreditController@create');
 	}

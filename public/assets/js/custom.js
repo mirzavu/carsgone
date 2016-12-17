@@ -353,3 +353,5 @@ var yearValues = [
 yearSlider.noUiSlider.on('update', function(values, handle) {
     yearValues[handle].innerHTML = values[handle];
 });
+
+

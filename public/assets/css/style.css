@@ -686,6 +686,21 @@ label.error:before {content: ""; width: 0;  height: 0; float: left; border-botto
 .wrapper > .dealer-info{padding-top:0;}
 .popular-item-list.bordered.four-col li{width:25%; padding:0 15px;}
 
+
+ul.pricing-list{display:inline-block; width:100%;}
+ul.pricing-list li{float:left; width:20%; padding:10px;}
+.pricing-box{display:inline-block; width:100%; text-align:center; border-radius:10px; overflow:hidden; border:solid 1px #ebebeb; border-bottom: solid 2px #d3d3d3; border-top-width:2px;}
+.pricing-header{font-size:20px; padding:16px 8px; background-color:#3b4c5d; color:#fff; margin-bottom:0;background: -moz-linear-gradient(top,#e1f3fb 0%,#20a9e2 100%);
+    background: -webkit-linear-gradient(top,#e1f3fb 0%,#20a9e2 100%);
+    background: linear-gradient(to bottom,#e1f3fb 0%,#20a9e2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient;}
+.pricing-icon{padding:25px 10px; background-color:#f5f5f5;}
+.pricing-content > p{margin-bottom:0; padding:8px; background-color:#f5f5f5; text-align:center;}
+.pricing-content > p:nth-child(odd){background-color:#ebebeb;}
+.pricing-footer{padding:25px 10px;}
+.pricing-footer .btn{font-size:12px;}
+
+
 /* ============================= */
 @media only screen and (max-width: 1140px) {
 .header-search-box{width:270px; margin-left:0;}
@@ -722,6 +737,7 @@ footer{font-size:15px;}
 .contact-box-right .phone{position:relative;}
 
 .help-information .panel-body{padding:25px 10px;}
+.pricing-header{font-size:18px;}
 }
 /*============================= 
 ! Layout for ipad portrait  
@@ -763,6 +779,8 @@ ul.popular-item-list{margin-bottom:30px;}
 .sf-nav li{font-size:17px;}
 
 .popular-item-list.bordered.four-col li{width:33.33333333%;}
+ul.pricing-list li{width:50%;}
+ul.pricing-list li:nth-child(3){margin-left:25%; margin-right:25%;}
 }
 
  
@@ -863,6 +881,8 @@ fieldset .display-table > *{display:block; width:100% !important; text-align:lef
 .sf-nav li{font-size:15px; padding:15px; text-align:left; position:relative;}
 .sf-nav li .sf-nav-number{padding-left:15px; font-size:20px; margin-right:5px;}
 .popular-item-list.bordered.four-col li{width:50%;}
+ul.pricing-list li{width:100%;}
+ul.pricing-list li:nth-child(3){margin-left:0; margin-right:0;}
 }
 
 

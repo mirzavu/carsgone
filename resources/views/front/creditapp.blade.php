@@ -22,6 +22,89 @@
                      </div>
                   </div>
                </fieldset>
+               <div class="pricing-container">
+                  <ul class="pricing-list">
+                      <li>
+                          <div class="pricing-box">
+                                <h4 class="pricing-header">Car</h4>
+                                <div class="pricing-icon">
+                                  <img src="assets/images/car.png" alt="" />
+                                </div>
+                                <div class="pricing-content">
+                                    <p>Lower monthly payments</p>
+                                    <p>Seats up to 6</p>
+                                    <p>Practical and sporty</p>
+                                </div>
+                                <div class="pricing-footer">
+                                  <a href="#" class="btn waves-effect waves-light">Choose</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                          <div class="pricing-box">
+                                <h4 class="pricing-header">Van</h4>
+                                <div class="pricing-icon">
+                                  <img src="assets/images/van.png" alt="" />
+                                </div>
+                                <div class="pricing-content">
+                                    <p>Passenger or Work</p>
+                                    <p>Seats up to 15</p>
+                                    <p>Seating and cargo</p>
+                                </div>
+                                <div class="pricing-footer">
+                                  <a href="#" class="btn waves-effect waves-light">Choose</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                          <div class="pricing-box">
+                                <h4 class="pricing-header">Recommended</h4>
+                                <div class="pricing-icon">
+                                  <img src="assets/images/dollar60.png" alt="" />
+                                </div>
+                                <div class="pricing-content">
+                                    <p><strong>CHOOSE LATER</strong></p>
+                                    <p>Get me pre-approved for an auto loan 1st</p>
+                                </div>
+                                <div class="pricing-footer">
+                                  <a href="#" class="btn waves-effect waves-light">Get Approved Now</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                          <div class="pricing-box">
+                                <h4 class="pricing-header">suv</h4>
+                                <div class="pricing-icon">
+                                  <img src="assets/images/suv.png" alt="" />
+                                </div>
+                                <div class="pricing-content">
+                                    <p>Versatile and safe</p>
+                                    <p>Seats up to 9</p>
+                                    <p>Cargo and hauling</p>
+                                </div>
+                                <div class="pricing-footer">
+                                  <a href="#" class="btn waves-effect waves-light">Choose</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                          <div class="pricing-box">
+                                <h4 class="pricing-header">Truck</h4>
+                                <div class="pricing-icon">
+                                  <img src="assets/images/truck.png" alt="" />
+                                </div>
+                                <div class="pricing-content">
+                                    <p>Towing and shipping</p>
+                                    <p>Seats up to 6</p>
+                                    <p>Recreation and Work</p>
+                                </div>
+                                <div class="pricing-footer">
+                                  <a href="#" class="btn waves-effect waves-light">Choose</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                 </div>
             </div>
             <div class="form-section">
                <legend>Budget</legend>
@@ -30,6 +113,7 @@
                   <h4>Budget</h4>
                   <div class="row">
                      <div class="col-sm-12">
+                     
                      </div>
                   </div>
                </fieldset>
@@ -80,6 +164,7 @@
                   </div>
                   <div class="row">
                   	<div class="col-sm-6 display-table">
+                        <label>&nbsp;</label>
                         <div class="input-box">
                           	<input type="checkbox" class="filled-in" id="filled-in-box" />
       						<label>I agree</label>

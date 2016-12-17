@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 
 use App\Models\User;
 use App\Models\Vehicle;
-use App\Models\Dealer;
 use App\Models\Province;
 use App\Models\City;
 use App\Models\Make;
@@ -88,7 +87,7 @@ class Strathcom extends Command
         while ($xmlReader->read()) {
             if ($xmlReader->name === 'Dealer' && $xmlReader->nodeType == \XMLReader::ELEMENT) {
                 $xml        = simplexml_load_string($xmlReader->readOuterXML());
-                $dealer = Dealer::firstOrNew(['partner_id' => 1, 'partner_dealer_id' => $xml->PartyId]);
+                $dealer = User::firstOrNew(['partner_id' => 1, 'partner_dealer_id' => $xml->PartyId]);
 
                 $dealer->name = $xml->DealerName;
                 $dealer->email = $xml->Contact->Email;
@@ -128,20 +127,21 @@ class Strathcom extends Command
                         $dealer->longitude = $loc_array->results[0]->geometry->location->lng;
                     }     
                 }
-                $dealer->status = 1;
+                $dealer->status_id = 1;
+                $dealer->role = 'dealer';
                 $dealer->save();
                 echo "\nDealer Name found in DB: " . $dealer->name . ' : Dealer ID: '.$dealer->id."\n";
                 $dealer_cnt++;
-                Vehicle::where('dealer_id', $dealer->id)->update(['status_id' => 2]);
+                Vehicle::where('user_id', $dealer->id)->update(['status_id' => 2]);
             }
 
             if($xmlReader->name == 'Vehicle' && $xmlReader->nodeType == \XMLReader::ELEMENT) {
                 $xml = simplexml_load_string( $xmlReader->readOuterXML() );
-                $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['dealer_id' => $dealer->id, 'partner_vehicle_id' => (string)$xml->SMI_ID]);
-                if($vehicle->exists)
-                {
-                    continue;
-                }
+                $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['user_id' => $dealer->id, 'partner_vehicle_id' => (string)$xml->SMI_ID]);
+                // if($vehicle->exists)
+                // {
+                //     continue;
+                // }
                 $vehicle->condition = strtolower($xml->SaleClass); 
                 $vehicle->status_id = 1;
                 $vehicle->year = (string)$xml->ModelYear;

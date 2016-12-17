@@ -18,6 +18,7 @@ use App\Models\Payment;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use Image;
 use File;
+use SEOMeta;
 use Log;
 
 class PostController extends Controller
@@ -56,10 +57,6 @@ class PostController extends Controller
 
     public function newPost(Request $request)
 	{	
-		
-		// echo "<pre>";print_r(curl_version());exit;
-		// $a = Paypal::getAll(array('count' => 1, 'start_index' => 0), $this->_apiContext);
-		// dd($a);
 		$data['location'] = getLocation($request);
 		$data['makes'] = Make::all();
 		$data['body_style_groups'] = BodyStyleGroup::all();
@@ -68,12 +65,14 @@ class PostController extends Controller
 
 	public function create(Request $request)
 	{		
+		SEOMeta::setTitle('Sell a car online free auto classifieds | Buy Sell and Trade Used Cars Canada');
+        SEOMeta::setDescription('Sell my car free, advertise vehicles free, automotive classified, post or list free online auto listings');
+        SEOMeta::addKeyword(['sell', 'used cars', 'auto', 'list vehicle', 'classifieds', 'vehicle']);
 		$request['model_id'] = VehicleModel::where('model_name', $request['model'])->value('id');
 		if(!empty($request['colour_exterior'])) $request['ext_color_id'] = Color::where('color', $request['colour_exterior'])->value('id');
 		if(!empty($request['colour_interior'])) $request['int_color_id'] = Color::where('color', $request['colour_interior'])->value('id');
 		if(!empty($request['fuel'])) $request['fuel_id'] = FuelType::where('fuel_type', $request['fuel'])->value('id');
-		//$request['status_id'] = 1;
-		// Log::info($request->all());
+
 		$validator = Validator::make($request->all(), [
             'make_id' => 'required|integer',
             'model_id' => 'required|integer',
@@ -83,28 +82,30 @@ class PostController extends Controller
         if ($validator->fails()) {
         	return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
         }
-        Log::info($request->all());
+
 		$vehicle = Auth::user()->vehicles()->create($request->all());
 		$vehicle->slug = null;
+		if(Auth::user()->verified)
+		{
+			$vehicle->status_id = 1;
+			$request->session()->flash('success', 'Vehicle has been posted Successfully! Check <a href="/dashboard">Dashboard</a>');
+		}
+		else
+		{
+			$vehicle->status_id = 0;
+			$request->session()->flash('success', 'Vehicle has been posted Successfully! Verify your email address to publish your vehicle');
+		}
 		$vehicle->save();
 		$image_names = explode('^', $request['file_names']);
 		
 		$photos =[];$i=1;
 		foreach($image_names as $image) {
 			if(!empty($image))
-            	array_push($photos, new VehiclePhoto(['position' => $i++, 'path' => 'uploads/vehicle/'.$image]));
+            	array_push($photos, new VehiclePhoto(['position' => $i++, 'path' => '/uploads/vehicle/'.$image]));
         }
         $vehicle->photos()->saveMany($photos);
 
 		if ($request->has('free')) {
-			if(Auth::user()->verified)
-			{
-				$request->session()->flash('success', 'Vehicle has been posted Successfully! Check <a href="/dashboard">Dashboard</a>');
-			}
-			else
-			{
-				$request->session()->flash('success', 'Vehicle has been posted Successfully! Verify your email address to publish your vehicle');
-			}
 		 	return response()->json(['status' => 'done', 'url' => url('post')]);
 		}
 		else
@@ -236,7 +237,6 @@ class PostController extends Controller
 	{	
 		$filename = $this->upload_path."/".$request->file_name;
 		// Load the image
-		Log::info($filename);
 		$img = Image::make($filename);
 		$img->rotate(-90);
 		$img->save($filename);
@@ -266,11 +266,15 @@ class PostController extends Controller
 	//Edit Vehicle
 	public function editVehicle(Request $request, $id)
 	{	
+		
 		$data['location'] = getLocation($request);
-
 		// dd($data['makes']);
 		
 		$data['vehicle'] = Vehicle::withoutGlobalScopes()->findorFail($id);
+		if(!Auth::check() || (Auth::user()->id != $data['vehicle']->user_id))
+		{
+			return redirect()->action('HomeController@index');
+		}
 		$data['makes'] = Make::pluck('make_name', 'id');
 		// dd($data['vehicle']);
 		$data['vehicle']->model = $data['vehicle']->model_id; //to match with form builder
@@ -304,8 +308,7 @@ class PostController extends Controller
 		if(!empty($request['colour_exterior'])) $request['ext_color_id'] = Color::where('color', $request['colour_exterior'])->value('id');
 		if(!empty($request['colour_interior'])) $request['int_color_id'] = Color::where('color', $request['colour_interior'])->value('id');
 		if(!empty($request['fuel'])) $request['fuel_id'] = FuelType::where('fuel_type', $request['fuel'])->value('id');
-		//$request['status_id'] = 1;
-		// Log::info($request->all());
+
 		$validator = Validator::make($request->all(), [
             'make_id' => 'required|integer',
             'model_id' => 'required|integer',
@@ -363,14 +366,7 @@ class PostController extends Controller
 		    $payment->setRedirectUrls($redirectUrls);
 		    $payment->setTransactions(array($transaction));
 		    $payment->setExperienceProfileId($this->createWebProfile());
-
-		    // $input = Paypal::InputFields();
-		    // $input->setNoShipping(1);
-
 		    $response = $payment->create($this->_apiContext);
-
-
-
 		    $redirectUrl = $response->links[1]->href;
 
 		    return response()->json(['status' => 'paypal', 'url' => $redirectUrl]);

@@ -8,7 +8,6 @@ use App\Http\Requests;
 
 use App\Models\User;
 use App\Models\Vehicle;
-use App\Models\Dealer;
 use App\Models\Province;
 use App\Models\City;
 use App\Models\Make;
@@ -64,7 +63,7 @@ class Boost extends Command
         $ftp_user_name = 'carsgone';
         $ftp_user_pass = 'boost2carsgone';
 
-        exec("curl -u carsgone:boost2carsgone 'ftp://ftp.boostmotorgroup.com/Export.xml' -o ".$local_file);
+        // exec("curl -u carsgone:boost2carsgone 'ftp://ftp.boostmotorgroup.com/Export.xml' -o ".$local_file);
         $xmlReader = new \XMLReader;
         $xmlReader->open($local_file);
         $province_hash = array(
@@ -81,12 +80,12 @@ class Boost extends Command
             "MB" => "Manitoba",
             "PE" => "Prince Edward Island"
             );
-        $id_maps = Dealer::select(array('id', 'partner_dealer_id'))->where('partner_id',2)->get();
+        // $id_maps = Dealer::select(array('id', 'partner_dealer_id'))->where('partner_id',2)->get();
         
-        $feed_dealers = array();
-        foreach ($id_maps as $value) {
-            $feed_dealers[$value->partner_dealer_id] = $value->id;
-        }
+        // $feed_dealers = array();
+        // foreach ($id_maps as $value) {
+        //     $feed_dealers[$value->partner_dealer_id] = $value->id;
+        // }
         $vehicle_cnt = 0;
         $vehicle_upd = 0;
         $dealer_cnt = 0;
@@ -100,14 +99,13 @@ class Boost extends Command
             if($xmlReader->name == 'Dealership' && $xmlReader->nodeType == \XMLReader::ELEMENT) {
 
                 $xml = simplexml_load_string( $xmlReader->readOuterXML() );
-                $dealer = Dealer::firstOrNew(['partner_id' => 2, 'partner_dealer_id' => $xml->Dealership_Boost_ID]);
+                $dealer = User::firstOrNew(['partner_id' => 2, 'partner_dealer_id' => $xml->Dealership_Boost_ID]);
 
                 $dealer->name = $xml->Dealership_Name;
                 $dealer->email = $xml->Dealership_Email;
                 $dealer->address = $xml->Dealership_Address;
                 $dealer->url = $xml->Dealership_Website;
                 $dealer->phone = $xml->Dealership_Phone;
-                $dealer->email = $xml->Dealership_Email;
 
                 $province_id = Province::where('province_code',(string) $xml->Dealership_Province)->value('id');
                 $dealer->province_id = $province_id;
@@ -138,19 +136,20 @@ class Boost extends Command
                     }  
                 }
 
-                $dealer->status = 1;
+                $dealer->status_id = 1;
+                $dealer->role = 'dealer';
                 $dealer->save();
                 echo "\nDealer Name found in DB: " . $dealer->name . ' : Dealer ID: '.$dealer->id."\n";
                 $dealer_cnt++;
 
-                Vehicle::where('dealer_id', $dealer->id)->update(['status_id' => 2]);
+                Vehicle::where('user_id', $dealer->id)->update(['status_id' => 2]);
 
             }
 
             
             if($xmlReader->name == 'Vehicle' && $xmlReader->nodeType == \XMLReader::ELEMENT) {
                 $xml = simplexml_load_string( $xmlReader->readOuterXML() );
-                $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['dealer_id' => $dealer->id, 'partner_vehicle_id' => (string)$xml->Boost_Vehicle_ID]);
+                $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['user_id' => $dealer->id, 'partner_vehicle_id' => (string)$xml->Boost_Vehicle_ID]);
                 $vehicle->condition = strtolower($xml->VehicleStatus); 
                 $vehicle->status_id = 1;
                 $vehicle->year = (string)$xml->Year;

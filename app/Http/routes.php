@@ -27,17 +27,20 @@
 	Route::get('/vehicles/{id}/edit', 'PostController@editVehicle');
 	Route::patch('/vehicles/{id}', 'PostController@updateVehicle');
 
+	//Search
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
 	Route::get('/search', 'SearchController@searchHandler');
 	Route::get('/setSessionKeyValue/{key}/{value}', 'SearchController@setSessionKeyValue');
 	Route::get('/removeSessionAll', 'SearchController@removeSessionAll');
 	
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
-	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
 
 	Route::post('/save-vehicle', 'PostController@saveVehicle');
 	Route::post('/unsave-vehicle', 'PostController@unsaveVehicle');
 
+	//Brochure
+	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
+	Route::get('/contact-dealer', 'VehicleController@contactDealer');
 
 	//Private Vehicles
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
@@ -87,6 +90,7 @@
 	{
 		CRUD::resource('make', 'MakeCrudController');
 		CRUD::resource('model', 'VehicleModelCrudController');
-		CRUD::resource('dealer', 'DealerCrudController');
+		// CRUD::resource('dealer', 'DealerCrudController');
+		CRUD::resource('dealer', 'UserCrudController');
 		CRUD::resource('content', 'ContentPageCrudController');
 	});

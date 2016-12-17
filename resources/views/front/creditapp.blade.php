@@ -12,94 +12,98 @@
           
             <div class="form-section">
                <legend>Vehicle Type</legend>
-               <fieldset>
-                  <div class="row">
-                     <div class="col-sm-6 display-table">
-                        <label>Year</label>
-                        <div class="select-box">
-                           {!! Form::select('year', ['2017' => '2017','2016' => '2016','2015' => '2015','2014' => '2014','2013' => '2013','2012' => '2012','2011' => '2011','2010' => '2010'], null, ['required' ]) !!}
-                        </div>
-                     </div>
-                  </div>
-               </fieldset>
                <div class="pricing-container">
                   <ul class="pricing-list">
                       <li>
                           <div class="pricing-box">
-                                <h4 class="pricing-header">Car</h4>
-                                <div class="pricing-icon">
+                                <div class="pricing-header"><h4>Car</h4>
+                                  <div class="pricing-icon">
                                   <img src="assets/images/car.png" alt="" />
                                 </div>
+                                </div>
+                                
                                 <div class="pricing-content">
                                     <p>Lower monthly payments</p>
                                     <p>Seats up to 6</p>
                                     <p>Practical and sporty</p>
                                 </div>
                                 <div class="pricing-footer">
-                                  <a href="#" class="btn waves-effect waves-light">Choose</a>
+                                  <a href="#" class="btn next-btn waves-effect waves-light">Choose</a>
                                 </div>
                             </div>
                         </li>
                         <li>
                           <div class="pricing-box">
-                                <h4 class="pricing-header">Van</h4>
-                                <div class="pricing-icon">
-                                  <img src="assets/images/van.png" alt="" />
+                                <div class="pricing-header">
+                                  <h4>Van</h4>
+                                  <div class="pricing-icon">
+                                    <img src="assets/images/van.png" alt="" />
+                                  </div>
                                 </div>
+                                
                                 <div class="pricing-content">
                                     <p>Passenger or Work</p>
                                     <p>Seats up to 15</p>
                                     <p>Seating and cargo</p>
                                 </div>
                                 <div class="pricing-footer">
-                                  <a href="#" class="btn waves-effect waves-light">Choose</a>
+                                  <a href="#" class="btn next-btn waves-effect waves-light">Choose</a>
                                 </div>
                             </div>
                         </li>
                         <li>
                           <div class="pricing-box">
-                                <h4 class="pricing-header">Recommended</h4>
-                                <div class="pricing-icon">
+                                <div class="pricing-header">
+                                  <h4>Recommended</h4>
+                                  <div class="pricing-icon">
                                   <img src="assets/images/dollar60.png" alt="" />
                                 </div>
+                                </div>
+                                
                                 <div class="pricing-content">
-                                    <p><strong>CHOOSE LATER</strong></p>
+                                    <p class="center-text">CHOOSE LATER</p>
                                     <p>Get me pre-approved for an auto loan 1st</p>
                                 </div>
                                 <div class="pricing-footer">
-                                  <a href="#" class="btn waves-effect waves-light">Get Approved Now</a>
+                                  <a href="#" class="btn next-btn waves-effect waves-light">Get Approved Now</a>
                                 </div>
                             </div>
                         </li>
                         <li>
                           <div class="pricing-box">
-                                <h4 class="pricing-header">suv</h4>
-                                <div class="pricing-icon">
-                                  <img src="assets/images/suv.png" alt="" />
+                                <div class="pricing-header">
+                                  <h4>suv</h4>
+                                  <div class="pricing-icon">
+                                    <img src="assets/images/suv.png" alt="" />
+                                  </div>
                                 </div>
+                                
                                 <div class="pricing-content">
                                     <p>Versatile and safe</p>
                                     <p>Seats up to 9</p>
                                     <p>Cargo and hauling</p>
                                 </div>
                                 <div class="pricing-footer">
-                                  <a href="#" class="btn waves-effect waves-light">Choose</a>
+                                  <a href="#" class="btn next-btn waves-effect waves-light">Choose</a>
                                 </div>
                             </div>
                         </li>
                         <li>
                           <div class="pricing-box">
-                                <h4 class="pricing-header">Truck</h4>
-                                <div class="pricing-icon">
-                                  <img src="assets/images/truck.png" alt="" />
+                                <div class="pricing-header">
+                                  <h4>Truck</h4>
+                                  <div class="pricing-icon">
+                                    <img src="assets/images/truck.png" alt="" />
+                                  </div>
                                 </div>
+                                
                                 <div class="pricing-content">
                                     <p>Towing and shipping</p>
                                     <p>Seats up to 6</p>
                                     <p>Recreation and Work</p>
                                 </div>
                                 <div class="pricing-footer">
-                                  <a href="#" class="btn waves-effect waves-light">Choose</a>
+                                  <a href="#" class="btn next-btn waves-effect waves-light">Choose</a>
                                 </div>
                             </div>
                         </li>
@@ -113,6 +117,11 @@
                   <h4>Budget</h4>
                   <div class="row">
                      <div class="col-sm-12">
+ 
+                        <div id="year-range" class="filter-margin"></div>
+                        <p class="price-range-output">
+                           <span><b id="min-year"></b></span>
+                        </p>
                      
                      </div>
                   </div>
@@ -164,10 +173,11 @@
                   </div>
                   <div class="row">
                   	<div class="col-sm-6 display-table">
-                        <label>&nbsp;</label>
                         <div class="input-box">
+                          
                           	<input type="checkbox" class="filled-in" id="filled-in-box" />
-      						<label>I agree</label>
+      						          <label for="filled-in-box">I agree to <a target="_blank" href="/privacy">privacy policy</a></label>
+                            
                         </div>
                      </div>
                   </div>
@@ -244,5 +254,33 @@
                 }
             })
 
+
+var yearSlider = document.getElementById('year-range');
+
+noUiSlider.create(yearSlider, {
+    start: [2],
+    decimals: 0,
+    thousand: ',',
+    snap: false,
+    step: 1000,
+    range: {
+        'min': 1000,
+
+        'max': 50000
+    },
+    format: wNumb({
+        decimals: 0
+    })
+});
+
+
+var yearValues = [
+    document.getElementById('min-year'),
+    document.getElementById('max-year')
+];
+
+yearSlider.noUiSlider.on('update', function(values, handle) {
+    yearValues[handle].innerHTML = values[handle];
+});
 </script>
 @endsection

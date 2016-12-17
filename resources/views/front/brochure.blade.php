@@ -49,21 +49,22 @@
 		<ul class="cd-hero-slider">
 			<li class="selected">
             	<div class="contact-dealer-container">
-                	<div class="dealer-number"><a href="tel:{{preg_replace("/[^0-9]/", "", $vehicle->dealer->phone)}}" class="btn waves-effect waves-light "><i class="fa fa-phone"></i> {{$vehicle->dealer->phone}}</a></div>
+                	<div class="dealer-number"><a href="tel:{{preg_replace("/[^0-9]/", "", $vehicle->user->phone)}}" class="btn waves-effect waves-light "><i class="fa fa-phone"></i> {{$vehicle->user->phone}}</a></div>
                     <h4>Contact Dealer</h4>
+                    {!! Form::open(['url' => '/contact-dealer', 'method' => 'POST', 'id' => 'contact-form']) !!}
                     <div class="form-group">
-                    	<input type="text" class="form-control" placeholder="Name" />
+                    	<input name="name" type="text" class="form-control" placeholder="Name" required/>
                     </div>
                      <div class="form-group">
-                    	<input type="text" class="form-control" placeholder="Email" />
+                    	<input name="email" type="email" class="form-control" placeholder="Email" required />
                     </div>
                      <div class="form-group">
-                    	<textarea class="form-control" placeholder="Message"></textarea>
+                    	<textarea name="message" class="form-control" placeholder="Message" required></textarea>
                     </div>
                     <div class="form-group">
-                    	<input type="submit" value="Submit" class="btn waves-effect waves-light btn-block" />
+                        <button id="dealer-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
                      </div>
-                     
+                     {!! Form::close() !!}
                      
                 </div>
              
@@ -149,8 +150,7 @@
             </li>
             <li>
             	<div class="contact-dealer-container">
-                	<div class="dealer-number"><a href="tel:9899899898" class="btn waves-effect waves-light "><i class="fa fa-phone"></i> 989-989-9898</a></div>
-                    <h4>Contact Dealer</h4>
+                    <h4>Finance</h4>
                     <div class="form-group">
                     	<input type="text" class="form-control" placeholder="Name" />
                     </div>
@@ -176,18 +176,18 @@
                     </div>
                     <div class="single-dealer-mid">
                      <ul class="table-list">
-                        <li>{{$vehicle->dealer->name}}</li>
-                        <li>{{$vehicle->dealer->address}}</li>
-                        <li>{{$vehicle->dealer->phone}}</li>
-                        <li>{{$vehicle->dealer->fax}}</li>
-                        <li><a href="{{$vehicle->dealer->url}}" target="_blank">{{$vehicle->dealer->url}}</a></li>
+                        <li>{{$vehicle->user->name}}</li>
+                        <li>{{$vehicle->user->address}}</li>
+                        <li>{{$vehicle->user->phone}}</li>
+                        <li>{{$vehicle->user->fax}}</li>
+                        <li><a href="{{$vehicle->user->url}}" target="_blank">{{$vehicle->user->url}}</a></li>
                       </ul>
                     </div>
                     <div class="single-dealer-lower">
                     	<div class="dealer-address-map">
                         	 <div id='gmap_canvas' style='height:100%;width:100%;'></div>
                              
-                              <script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng({{$vehicle->dealer->latitude}},{{$vehicle->dealer->longitude}}),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng({{$vehicle->dealer->latitude}},{{$vehicle->dealer->longitude}})});infowindow = new google.maps.InfoWindow({content:'<strong>{{$vehicle->dealer->name}}</strong><br>{{$vehicle->dealer->address}}<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+                              <script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}}),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}})});infowindow = new google.maps.InfoWindow({content:'<strong>{{$vehicle->user->name}}</strong><br>{{$vehicle->user->address}}<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
                         </div>
                     </div>
                 </div>
@@ -241,6 +241,8 @@
                           </div>
                         </div>
                       </div>
+                      <div id="root"></div>
+
                   <!-- Featured Container end -->
        	    </div>
          </div>
@@ -253,4 +255,52 @@
 @endsection
 
 @section('javascript')
+
+<script type="text/javascript">
+    var form = $("#contact-form");
+            form.validate({
+                rules: {},
+                // errorClass: "invalid form-error",       
+                // errorElement : 'div',       
+                errorPlacement: function(error, element) {
+                    if (element.is('select')) {
+                        error.appendTo(element.parent().parent());
+                    } else {
+                        error.appendTo(element.parent());
+                    }
+
+                },
+                focusInvalid: false,
+                invalidHandler: function(form, validator) {
+
+                    if (!validator.numberOfInvalids())
+                        return;
+                    $('html, body').animate({
+                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                    }, 500);
+                    $(validator.errorList[0].element).focus()
+
+                },
+                submitHandler: function(form) {
+                  $('#dealer-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
+                    $.ajax({
+                             url: form.action,
+                             type: form.method,
+                             data: $(form).serialize()+'&_token={{ csrf_token() }}'+'&dealer_email={{ $vehicle->user->email }}',
+                             success: function(response) {
+                                 if(response.status == "success")
+                                 {
+                                    toastr.success(response.message)
+                                    $('#submit-btn').prop('disabled', false).html('Submit')
+                                    $("#contact-form").get(0).reset();
+                                 }
+                             }
+                         });
+                }
+            })
+</script>
+<script src="https://unpkg.com/react@latest/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script type="text/babel" src="/assets/js/related.js"></script>
 @endsection

@@ -66,7 +66,7 @@
                            </div>
                            @else
                            <div class="dashboard">
-                              <a href="#" class="waves-effect waves-light btn btn-orange-border">No Recent Listings</a>
+                              <a href="/post" class="waves-effect waves-light btn btn-orange-border">Sell your Vehicle</a>
                            </div>
                            @endif
                            @if($saved_vehicles->count())   
@@ -111,7 +111,7 @@
                            </div>
                            @else
                            <div class="dashboard">
-                              <a href="#" class="waves-effect waves-light btn btn-orange-border">No Recent Listings</a>
+                              <a href="/search" class="waves-effect waves-light btn btn-orange-border">Browse your Nearby Vehicles Now</a>
                            </div>
                            @endif
                         </div>

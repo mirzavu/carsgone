@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Province extends Model
 {
 	public $timestamps = false;
-    public function dealers()
+    public function users()
     {
-        return $this->hasMany('App\Models\Dealer');
+        return $this->hasMany('App\Models\User');
     }
 
     public function vehicles()
     {
-        return $this->hasManyThrough('App\Models\Vehicle', 'App\Models\Dealer');
+        return $this->hasManyThrough('App\Models\Vehicle', 'App\Models\User');
     }
 
     public function cities()

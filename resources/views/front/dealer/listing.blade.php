@@ -164,14 +164,14 @@
    //set sorting
    $('.filter-box a').on('click',function(e){
      e.preventDefault();
-     $.get( "/setSessionKeyValue/sort/"+$(this).attr('id'), function( data ) {
+     $.get( "/setSessionKeyValue/dealer_sort/"+$(this).attr('id'), function( data ) {
        location.reload();
      });
    });
-   if('{{$sort}}'=='')
+   if('{{$dealer_sort}}'=='')
      $('#name-asc').addClass('active');
    else
-     $('#{{$sort}}').addClass('active');
+     $('#{{$dealer_sort}}').addClass('active');
 
    //if image error
    $('img').one('error', function() { this.src = '/assets/images/placeholder.jpg'; });

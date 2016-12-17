@@ -8,7 +8,6 @@ use App\Http\Requests;
 
 use App\Models\User;
 use App\Models\Vehicle;
-use App\Models\Dealer;
 use App\Models\Province;
 use App\Models\City;
 use App\Models\Make;
@@ -76,12 +75,12 @@ class Cdemo extends Command
                 if (strcmp($node->getname(), 'dealer_info') == 0) {
                     $dealer_xml = $node;
                     // echo str_replace(' ', '', $dealer->dealer_postal_code);exit;
-                    $dealer = Dealer::firstOrNew(['partner_id' => 3, 'partner_dealer_id' => $dealer_xml->dealer_code]);
+                    $dealer = User::firstOrNew(['partner_id' => 3, 'partner_dealer_id' => $dealer_xml->dealer_code]);
                     $dealer->name = $dealer_xml->dealer_name;
                     $dealer->address = $dealer_xml->dealer_address;
                     $dealer->url = $dealer_xml->dealer_website;
                     $dealer->phone = $dealer_xml->dealer_phone;
-                    $dealer->email = $dealer_xml->dealer_fax;
+                    $dealer->fax = $dealer_xml->dealer_fax;
 
                     $province_id = Province::where('province_code',(string) $dealer_xml->dealer_province)->value('id');
                     $dealer->province_id = $province_id;
@@ -112,17 +111,18 @@ class Cdemo extends Command
                         }  
                     }
 
-                    $dealer->status = 1;
+                    $dealer->status_id = 1;
+                    $dealer->role = 'dealer';
                     $dealer->save();
                     echo "\nDealer Name found in DB: " . $dealer->name . ' : Dealer ID: '.$dealer->id."\n";
                     $dealer_cnt++;
-                    Vehicle::where('dealer_id', $dealer->id)->update(['status_id' => 2]);
+                    Vehicle::where('user_id', $dealer->id)->update(['status_id' => 2]);
                     
                 }
 
                 if (strcmp($node->getname(), 'vehicle') == 0) {
                     $vehicle_xml = $node;
-                    $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['dealer_id' => $dealer->id, 'vin' => (string)$vehicle_xml->vin]);
+                    $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['user_id' => $dealer->id, 'vin' => (string)$vehicle_xml->vin]);
 
                     $vehicle->condition = $vehicle_xml->class == "New Auto"? "new":"used"; 
                     $vehicle->stock = $vehicle_xml->stock;

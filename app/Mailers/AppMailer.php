@@ -113,8 +113,20 @@ class AppMailer
         $this->from = $data->email;
         $this->fromName = $data->name;
         $this->to = config('mail.from.address');
-        $this->subject = 'Contact Form';
+        $this->subject = 'Contact Form - '.$data->subject;
         $this->view = 'emails.contact_form';
+        $this->data = compact('data');
+        $this->deliver();
+    }
+
+    
+    public function sendDealerContactForm($data)
+    {
+        $this->from = $data->email;
+        $this->fromName = $data->name;
+        $this->to = $data->dealer_email;
+        $this->subject = 'Contact Form';
+        $this->view = 'emails.dealer_contact_form';
         $this->data = compact('data');
         $this->deliver();
     }

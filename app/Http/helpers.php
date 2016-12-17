@@ -48,6 +48,7 @@ if (!function_exists('getLocation')) {
 			$loc['place'] = $request->session()->get('place');
 			$loc['lat'] = $request->session()->get('lat');
 			$loc['lon'] = $request->session()->get('lon');
+			$loc['region'] = $request->session()->get('region');
 		}
 		else
 		{
@@ -62,6 +63,7 @@ if (!function_exists('getLocation')) {
 			$request->session()->put('place', $loc['place']);
 			$request->session()->put('lat', $loc['lat']);
 			$request->session()->put('lon', $loc['lon']);
+			$request->session()->put('region', $loc['region']);
 		}
 		return $loc;
 	}

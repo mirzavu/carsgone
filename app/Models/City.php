@@ -9,14 +9,14 @@ class City extends Model
     public $timestamps = false;
     protected $fillable = ['city_name','province_id'];
 
-    public function dealers()
+    public function users()
     {
-        return $this->hasMany('App\Models\Dealer');
+        return $this->hasMany('App\Models\User');
     }
 
     public function vehicles()
     {
-        return $this->hasManyThrough('App\Models\Vehicle', 'App\Models\Dealer');
+        return $this->hasManyThrough('App\Models\Vehicle', 'App\Models\User');
     }
 
     public function province()

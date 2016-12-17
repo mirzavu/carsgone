@@ -47,11 +47,11 @@ class DatabaseSeeder extends Seeder
         ));
 
         $this->call(BodyStyleGroupsTableSeeder::class);
-        $this->call(CitiesTableSeeder::class);
+        // $this->call(CitiesTableSeeder::class);
         $this->call(MakesTableSeeder::class);
         $this->call(ModelsTableSeeder::class);
         //$this->call(PostalCodesTableSeeder::class);
         $this->call(ProvincesTableSeeder::class);
-        $this->call(VehiclesTableSeeder::class);
+        // $this->call(VehiclesTableSeeder::class);
     }
 }

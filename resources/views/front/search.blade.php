@@ -71,13 +71,29 @@
                   <div class="panel-body">
                      <div class="item-type-toggle">
                         <input type="radio" name="condition" id="used" value="used" {{$applied_filters->get("condition")=="used"?'checked="checked"':""}}"/> <label for="used" class="waves-effect waves-light">USED</label>
-                        <input type="radio" name="condition" id="both" value="both" {{$applied_filters->has("condition")?"":'checked="checked"'}}" /> <label for="both" class="waves-effect waves-light"> BOTH</label>
+                        <input type="radio" name="condition" id="both-condition" value="both" {{$applied_filters->has("condition")?"":'checked="checked"'}}" /> <label for="both" class="waves-effect waves-light"> BOTH</label>
                         <input type="radio" name="condition" id="new" value="new" {{$applied_filters->get("condition")=="new"?'checked="checked"':""}}"/> <label for="new" class="waves-effect waves-light">NEW</label>
                      </div>
                   </div>
                </div>
                @endif
+               <!-- panel end -->
                <!-- panel start -->
+               @if(!$applied_filters->has("seller"))
+               <div class="panel">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">Seller</h3>
+                  </div>
+                  <div class="panel-body">
+                     <div class="item-type-toggle">
+                        <input type="radio" id="dealer" name="seller" value="dealer" {{$applied_filters->get("seller")=="dealer"?'checked="checked"':""}}"/> <label for="dealer" class="waves-effect waves-light">DEALER</label>
+                        <input type="radio" id="both-seller" name="seller" value="both" {{$applied_filters->has("seller")?"":'checked="checked"'}}" /> <label for="both-seller" class="waves-effect waves-light"> BOTH</label>
+                        <input type="radio" id="private" name="seller" value="private" {{$applied_filters->get("seller")=="private"?'checked="checked"':""}}"/> <label for="private" class="waves-effect waves-light">PRIVATE</label>
+                     </div>
+                  </div>
+               </div>
+               @endif
+               <!-- panel end -->
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Postal Code</h3>
@@ -247,7 +263,7 @@
                   <div class="item">
                      <a href="/vehicle/{{$vehicle->slug}}">
                      <div class="item-heading">
-                        <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->dealer->city->city_name or ''}}, {{$vehicle->dealer->province->province_name or ''}}</h3>
+                        <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</h3>
                         @if($logged_in )
                            @if(empty($vehicle->saved))
                            <button vehicle="{{$vehicle->id}}" class="btn save-btn btn-action waves-effect waves-light waves-input-wrapper">Save</button>
@@ -269,13 +285,13 @@
                               <div class="item-detail">
                                  <div class="item-detail-left"><img src="/assets/images/placeholder.jpg" alt="" /></div>
                                  <div class="item-detail-right">
-                                    <h6>{{$vehicle->dealer->city->city_name or ''}}, {{$vehicle->dealer->province->province_name or ''}}  <span class="part">|</span>  <small>{{$vehicle->created_at->diffForHumans()}}</small></h6>
+                                    <h6>{{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}  <span class="part">|</span>  <small>{{$vehicle->created_at->diffForHumans()}}</small></h6>
                                     <p>{{$vehicle->bodyStyleGroup->body_style_group_name or ''}} <span class="part">|</span> {{$vehicle->ext_color->color or ''}} <span class="part">|</span> {{$vehicle->transmission}}</p>
                                  </div>
                               </div>
                            </div>
                            <div class="item-body-right-lower">
-                              <h5>{{$vehicle->dealer->name or ''}}</h5>
+                              <h5>{{$vehicle->user->name or ''}}</h5>
                               <ul class="item-stats">
                                  <li>
                                     <div><i class="fa fa-tag"></i> ${{number_format($vehicle->price)}}</div>
@@ -284,7 +300,7 @@
                                     <div><i class="fa fa-dashboard"></i> {{number_format($vehicle->odometer)}}KM</div>
                                  </li>
                                  <li>
-                                    <div><i class="fa fa-phone"></i>{{$vehicle->dealer->phone or ''}}</div>
+                                    <div><i class="fa fa-phone"></i>{{$vehicle->user->phone or ''}}</div>
                                  </li>
                               </ul>
                            </div>
@@ -394,6 +410,12 @@
    //transmission
     $('input[name=transmission]').change(function() { 
       $.get( "/setSessionKeyValue/transmission/"+this.value, function( data ) {
+       location.reload();
+       });
+    });
+    //Seller
+    $('input[name=seller]').change(function() { 
+      $.get( "/setSessionKeyValue/seller/"+this.value, function( data ) {
        location.reload();
        });
     });

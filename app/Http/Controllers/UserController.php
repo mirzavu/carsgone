@@ -7,6 +7,8 @@ use App\Http\Requests;
 use App\Mailers\AppMailer;
 use App\Models\User;
 use App\Models\Vehicle;
+use App\Models\City;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +39,8 @@ class UserController extends Controller
     public function postSignUp(Request $request, AppMailer $mailer)
     {
     	//if request ajax() need to check
+        $location = getLocation($request);
+        // Log::info($location);
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email|max:150|unique:users',
             'name' => 'required|max:120',
@@ -53,8 +57,17 @@ class UserController extends Controller
     	$user = new User();
     	$user->email = $email;
     	$user->name = $name;
+        $user->role = 'member';
     	$user->password = $password;
         $user->token = str_random(30);
+        $user->latitude = $location['lat'];
+        $user->longitude = $location['lon'];
+        //changelater
+        //$province_id = Province::where('province_code',$location['region'])->value('id');
+        $province_id = 1;
+        $city = City::firstOrCreate(['city_name'=> $location['place'],'province_id'=> $province_id]);
+        $user->province_id = $province_id;
+        $user->city_id = $city->id;
     	$user->save();
         $mailer->sendEmailConfirmationTo($user);
 
@@ -100,13 +113,15 @@ class UserController extends Controller
         Auth::logout();
     }
 
-    public function confirmEmail($token)
+    public function confirmEmail($token, Request $request)
     {
         $user = User::whereToken($token)->firstOrFail();
         $user->verified = true;
         $user->token = null;
         $user->save();
-        Auth::logout();
+        Auth::login($user);
+        $request->session()->flash('success', 'Your Email confirmation is Successful!');
+        return redirect()->action('UserController@dashboard');
     }
 
     public function changeEmail(Request $request, AppMailer $mailer)

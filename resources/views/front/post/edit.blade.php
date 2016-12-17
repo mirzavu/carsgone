@@ -376,7 +376,7 @@ $(function() {
             var name = temp.join('_')
             var mockFile = { name: name, size: 1 };
             drop.emit("addedfile", mockFile);
-            drop.emit("thumbnail", mockFile, '/'+image.path);
+            drop.emit("thumbnail", mockFile, image.path);
             drop.emit("complete", mockFile);
             drop.options.maxFiles = 10;
           })

@@ -3,33 +3,34 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Scopes\StatusScope;
+// use App\Scopes\StatusScope;
 use Cviebrock\EloquentSluggable\Sluggable;
 use DB;
 
 class Vehicle extends Model
 {
     use Sluggable;
-    protected $fillable = ['dealer_id', 'make_id', 'model_id', 'year','odometer', 'partner_vehicle_id', 'transmission', 'price', 'trim', 'body_style_group_id','ext_color_id', 'int_color_id','doors','passenger','text','drive_type_id', 'engine_cylinders', 'fuel_id', 'engine_description'  ];
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope(new StatusScope);
-    }
+    protected $fillable = ['user_id', 'make_id', 'model_id', 'year','odometer', 'partner_vehicle_id', 'transmission', 'price', 'trim', 'body_style_group_id','ext_color_id', 'int_color_id','doors','passenger','text','drive_type_id', 'engine_cylinders', 'fuel_id', 'engine_description'  ];
+    // protected static function boot()
+    // {
+    //     parent::boot();
+    //     static::addGlobalScope(new StatusScope);
+    // }
 
     public function sluggable()
     {
         return [
             'slug' => [
-                'source' => ['year', 'make.make_name', 'model.model_name','dealer.city.city_name','dealer.province.province_name'],
-                'separator' => '-'
+                'source' => ['year', 'make.make_name', 'model.model_name','user.city.city_name','user.province.province_name'],
+                'separator' => '-',
+                'unique' => true,
             ]
         ];
     }
 
-    public function dealer()
+    public function user()
     {
-        return $this->belongsTo('App\Models\Dealer');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function bodyStyleGroup()
@@ -158,7 +159,7 @@ class Vehicle extends Model
 
     function scopeApplyFilter($query, $conditions, $featured = 0)
     {
-        $query->where(function ($q) use($conditions)
+        $query->where(function ($q) use($conditions, $featured)
             {
                 if ($conditions->get('content'))
                 {
@@ -192,7 +193,12 @@ class Vehicle extends Model
                     $q->where('year', '>=', $range[0]);
                     $q->where('year', '<=', $range[1]);
                 }
-                
+
+                if($featured ==1)
+                {
+                    $q->where('vehicles.featured', 1);
+                }
+                $q->where('vehicles.status_id',1);
                 return $q;
             }
         );
@@ -201,7 +207,6 @@ class Vehicle extends Model
         {
             $query->join('models', 'vehicles.model_id', '=', 'models.id');
             $query->where('model_name', $conditions->get('model'));
-
         }
             
         if ($conditions->get('make'))
@@ -212,30 +217,41 @@ class Vehicle extends Model
 
         if ($conditions->get('dealer'))
         {
-            $query->join('dealers', 'vehicles.dealer_id', '=', 'dealers.id');
-            $query->where('dealers.slug', $conditions->get('dealer'));
+            $query->join('users', 'vehicles.user_id', '=', 'users.id');
+            $query->where('users.name', $conditions->get('dealer'));
         }
 
         if ($conditions->get('province'))
         {
-            $query->join('dealers', 'vehicles.dealer_id', '=', 'dealers.id');
+            $query->join('users', 'vehicles.user_id', '=', 'users.id');
 
-            $query->join('provinces', 'dealers.province_id', '=', 'provinces.id');
+            $query->join('provinces', 'users.province_id', '=', 'provinces.id');
             $query->where('province_name', $conditions->get('province'));
         }
         if ($conditions->get('distance'))
         {
             $lat = 53.421879;
             $lon = - 113.4675614;
-            $query->leftJoin('dealers', 'vehicles.dealer_id', '=', 'dealers.id')
-                 ->select(DB::raw("dealers.id"))
-                 ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < ".$conditions->get('distance'))
-                 ->orWhere('latitude', '=', null); // For including private vehicles
+            $query->leftJoin('users', 'vehicles.user_id', '=', 'users.id')
+                 ->select(DB::raw("users.id"))
+                 ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < ".$conditions->get('distance'));
+            if($featured ==1)
+            {
+                $query->where('users.featured', 1);
+            }
         }
+
         if ($conditions->get('user'))
         {
             $query->leftJoin('vehicle_user', 'vehicles.id', '=', 'vehicle_user.vehicle_id')
             ->select("vehicle_user.user_id AS saved");
+        }
+
+        if ($conditions->get('seller'))
+        {
+            $role = ($conditions->get('seller') == "private"?"member":"dealer");
+            // dd($role);
+            $query->where('users.role', '=',$role);
         }
         $query->addSelect('vehicles.*');
     }

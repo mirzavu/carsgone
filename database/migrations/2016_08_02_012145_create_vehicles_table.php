@@ -14,7 +14,6 @@ class CreateVehiclesTable extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('dealer_id');
             $table->integer('user_id');
             $table->integer('make_id');
             $table->integer('model_id');
@@ -47,7 +46,7 @@ class CreateVehiclesTable extends Migration
             $table->string('engine_config')->nullable();
             $table->string('engine_displacement')->nullable();
             $table->string('partner_vehicle_id')->nullable();
-            $table->index('dealer_id');
+            $table->index('user_id');
             $table->index('make_id');
             $table->index('model_id');
             $table->timestamps();

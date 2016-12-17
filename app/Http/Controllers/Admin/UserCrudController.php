@@ -3,10 +3,10 @@
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\VehicleModelRequest as StoreRequest;
-use App\Http\Requests\VehicleModelRequest as UpdateRequest;
+use App\Http\Requests\UserRequest as StoreRequest;
+use App\Http\Requests\UserRequest as UpdateRequest;
 
-class VehicleModelCrudController extends CrudController {
+class UserCrudController extends CrudController {
 
 	public function __construct() {
         parent::__construct();
@@ -16,38 +16,9 @@ class VehicleModelCrudController extends CrudController {
 		| BASIC CRUD INFORMATION
 		|--------------------------------------------------------------------------
 		*/
-        $this->crud->setModel("App\Models\VehicleModel");
-        $this->crud->setRoute("admin/model");
-        $this->crud->setEntityNameStrings('Model', 'Models');
-
-        $this->crud->addColumn([
-                                'name' => 'model_name',
-                                'label' => 'Model'
-                            ]);
-        $this->crud->addColumn([
-                                'label' => "Make",
-                                'type' => 'select',
-                                'name' => 'make_id',
-                                'entity' => 'make',
-                                'attribute' => 'make_name',
-                                'model' => "App\Models\Make"
-                            ]);
-
-        $this->crud->addField([    // TEXT
-                                'name' => 'model_name',
-                                'label' => 'Model Name',
-                                'type' => 'text',
-                            ]);
-        $this->crud->addField([    // SELECT
-                                'label' => "Make Name",
-                                'type' => 'select2',
-                                'name' => 'make_id',
-                                'entity' => 'make',
-                                'attribute' => 'make_name',
-                                'model' => "App\Models\Make"
-                            ]);
-        // $this->crud->enableAjaxTable();
-
+        $this->crud->setModel("App\Models\User");
+        $this->crud->setRoute("admin/dealer");
+        $this->crud->setEntityNameStrings('dealer', 'Dealers');
 
         /*
 		|--------------------------------------------------------------------------
@@ -55,7 +26,72 @@ class VehicleModelCrudController extends CrudController {
 		|--------------------------------------------------------------------------
 		*/
 
-		//$this->crud->setFromDb();
+		$this->crud->addColumn([
+                                'name' => 'name',
+                                'label' => 'Name'
+                            ]);
+        $this->crud->addColumn([
+                                'name' => 'email',
+                                'label' => 'Email'
+                            ]);
+        $this->crud->addColumn([
+                                'label' => "City",
+                                'type' => 'select',
+                                'name' => 'city_id',
+                                'entity' => 'city',
+                                'attribute' => 'city_name',
+                                'model' => "App\Models\City"
+                            ]);
+        $this->crud->addColumn([
+                                'label' => "Province",
+                                'type' => 'select',
+                                'name' => 'province_id',
+                                'entity' => 'province',
+                                'attribute' => 'province_name',
+                                'model' => "App\Models\Province"
+                            ]);
+        $this->crud->addColumn([
+                                'name' => 'postal_code',
+                                'label' => 'Postal Code'
+                            ]);
+        $this->crud->addColumn([
+                                'name' => 'featured',
+                                'label' => 'Featured'
+                            ]);
+
+        $this->crud->addField([    // TEXT
+                                'name' => 'name',
+                                'label' => 'Dealer Name',
+                                'type' => 'text',
+                            ]);
+        $this->crud->addField([    // TEXT
+                                'name' => 'email',
+                                'label' => 'Email',
+                                'type' => 'email',
+                            ]);
+        $this->crud->addField([    // SELECT
+                                'label' => "City",
+                                'type' => 'select2',
+                                'name' => 'city_id',
+                                'entity' => 'city',
+                                'attribute' => 'city_name',
+                                'model' => "App\Models\City"
+                            ]);
+        $this->crud->addField([    // SELECT
+                                'label' => "Province",
+                                'type' => 'select2',
+                                'name' => 'province_id',
+                                'entity' => 'province',
+                                'attribute' => 'province_name',
+                                'model' => "App\Models\Province"
+                            ]);
+        $this->crud->addField([    // TEXT
+                                'name' => 'postal_code',
+                                'label' => 'Postal Code',
+                                'type' => 'text',
+                            ]);
+
+
 
 		// ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
@@ -96,6 +132,7 @@ class VehicleModelCrudController extends CrudController {
         // $this->crud->addClause('where', 'name', '==', 'car');
         // $this->crud->addClause('whereName', 'car');
         // $this->crud->addClause('whereHas', 'posts', function($query) {
+        $this->crud->addClause('where', 'role', 'dealer');
         //     $query->activePosts();
         // });
         // $this->crud->orderBy();

@@ -140,24 +140,24 @@
   $('#inventory-btn').on('click',function(e){
       e.preventDefault();
       $.get( "/removeSessionAll");
-      $.get( "/setSessionKeyValue/dealer/{{$dealer->slug}}");
+      $.get( "/setSessionKeyValue/dealer/{{$dealer->name}}");
       window.location = $(this).attr('href')
   });
   $('.dealer-tag').on('click',function(e){
       e.preventDefault();
-      $.get( "/setSessionKeyValue/dealer/{{$dealer->slug}}");
+      $.get( "/setSessionKeyValue/dealer/{{$dealer->name}}");
       window.location = $(this).attr('href')
   });
   $('.dealer-tag-price').on('click',function(e){
       e.preventDefault();
       $.get( "/setSessionKeyValue/price/"+$(this).attr('range'));
-      $.get( "/setSessionKeyValue/dealer/{{$dealer->slug}}");
+      $.get( "/setSessionKeyValue/dealer/{{$dealer->name}}");
       window.location = "/search";
   });
   $('.dealer-tag-year').on('click',function(e){
       e.preventDefault();
       $.get( "/setSessionKeyValue/year/"+$(this).attr('year')+'-'+$(this).attr('year'));
-      $.get( "/setSessionKeyValue/dealer/{{$dealer->slug}}");
+      $.get( "/setSessionKeyValue/dealer/{{$dealer->name}}");
       window.location = "/search";
   });
 

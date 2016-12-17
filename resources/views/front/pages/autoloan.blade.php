@@ -43,64 +43,64 @@
                                 <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
                                     <a href="{{ url('autoloans/alberta-auto-loans') }}"><h4>Alberta Auto Loans</h4></a>
                                     <ul class="popular-item-list">
-                                        <li><a href="#"><h6>Edmonton Auto Loans</h6></a></li>
-                                        <li><a href="#"><h6>Calgary Auto Loans</h6></a></li>
-                                        <li><a href="#"><h6>Red Deer Auto Loans</h6></a></li>
-                                        <li><a href="#"><h6>Hinton Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/edmonton-alberta-auto-loans') }}"><h6>Edmonton Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/calgary-auto-loans') }}"><h6>Calgary Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/red-deer-alberta-auto-loans') }}"><h6>Red Deer Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/hinton-alberta-auto-loans') }}"><h6>Hinton Auto Loans</h6></a></li>
                                     </ul>
-                                    <h4>MANITOBA AUTO LOANS</h4>
+                                    <a href="{{ url('autoloans/manitoba-auto-loans') }}"><h4>MANITOBA AUTO LOANS</h4></a>
                                     <ul class="popular-item-list">
-                                        <li><a href="#"><h6>Winnipeg Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/winnipeg-manitoba-auto-loans') }}"><h6>Winnipeg Auto Loans</h6></a></li>
                                     </ul>
-                                    <h4>NOVA SCOTIA AUTO LOANS</h4>
+                                    <a href="{{ url('autoloans/nova-scotia-auto-loans') }}"><h4>NOVA SCOTIA AUTO LOANS</h4></a>
                                     <ul class="popular-item-list">
-                                        <li><a href="#"><h6>Halifax Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/halifax-nova-scotia-auto-loans') }}"><h6>Halifax Auto Loans</h6></a></li>
                                     </ul>
-                                    <h4>QUEBEC AUTO LOANS</h4>
+                                    <a href="{{ url('autoloans/quebec-auto-loans') }}"><h4>QUEBEC AUTO LOANS</h4></a>
                                     <ul class="popular-item-list">
-                                        <li><a href="#"><h6>Montreal Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/montreal-quebec-auto-loans') }}"><h6>Montreal Auto Loans</h6></a></li>
                                     </ul>  
                                 </div>
                                 <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
-                                    <h4>BC Auto Loans</h4>
+                                    <a href="{{ url('autoloans/british-columbia-auto-loans') }}"><h4>BC Auto Loans</h4></a>
                                     <ul class="popular-item-list">
-                                        <li><a href="#"><h6>Kamloops Auto Loans</h6></a></li>
-                                        <li><a href="#"><h6>Kelowna Auto Loans</h6></a></li>
-                                        <li><a href="#"><h6>Nanaimo Auto Loans</h6></a></li>
-                                        <li><a href="#"><h6>Vancouver Auto Loans</h6></a></li>
-                                        <li><a href="#"><h6>Victoria Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/kamloops-bc-auto-loans') }}"><h6>Kamloops Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/kelowna-bc-auto-loans') }}"><h6>Kelowna Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/nanaimo-bc-auto-loans') }}"><h6>Nanaimo Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/vancouver-bc-auto-loans') }}"><h6>Vancouver Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/victoria-bc-auto-loans') }}"><h6>Victoria Auto Loans</h6></a></li>
                                     </ul>
                                     
-                                     <h4>NEW BRUNSWICK AUTO LOANS</h4>
+                                    <a href="{{ url('autoloans/new-brunswick-auto-loans') }}"><h4>NEW BRUNSWICK AUTO LOANS</h4></a>
                                     <ul class="popular-item-list">
-                                        <li><a href="#"><h6>Moncton Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/moncton-new-brunswick-auto-loans') }}"><h6>Moncton Auto Loans</h6></a></li>
                                     </ul>
-                                    <h4>NEWFOUNDLAND AUTO LOANS</h4>
+                                    <a href="{{ url('autoloans/newfoundland-labrador-auto-loans') }}"><h4>NEWFOUNDLAND AUTO LOANS</h4></a>
                                     <ul class="popular-item-list">
-                                        <li><a href="#"><h6>St. John's Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/st-johns-newfoundland-labrador-auto-loans') }}"><h6>St. John's Auto Loans</h6></a></li>
                                     </ul>
                                     
                                     
                                     
                                 </div>
                                 <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
-                                    <h4>ONTARIO AUTO LOANS</h4>
+                                    <a href="{{ url('autoloans/ontario-auto-loans') }}"><h4>ONTARIO AUTO LOANS</h4></a>
                                     <ul class="popular-item-list">
-                                        <li><a href="#"><h6>Hamilton Auto Loans</h6></a></li>
-                                        <li><a href="#"><h6>Kitchener Auto Loans</h6></a></li>
-                                        <li><a href="#"><h6>London Auto Loans</h6></a></li>
-                                        <li><a href="#"><h6>Ottawa Auto Loans</h6></a></li>
-                                        <li><a href="#"><h6>Toronto Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/hamilton-ontario-auto-loans') }}"><h6>Hamilton Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/kitchener-ontario-auto-loans') }}"><h6>Kitchener Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/london-ontario-auto-loans') }}"><h6>London Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/ottawa-ontario-auto-loans') }}"><h6>Ottawa Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/toronto-ontario-auto-loans') }}"><h6>Toronto Auto Loans</h6></a></li>
                                     </ul>
-                                    <h4>P E I AUTO LOANS</h4>
+                                    <a href="{{ url('autoloans/prince-edward-island-auto-loans') }}"><h4>P E I AUTO LOANS</h4></a>
                                     <ul class="popular-item-list">
-                                        <li><a href="#"><h6>Charlottetown Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/charlottetown-pei-auto-loans') }}"><h6>Charlottetown Auto Loans</h6></a></li>
                                     </ul> 
                                      
-                                     <h4>SASKATCHEWAN AUTO LOANS</h4>
+                                    <a href="{{ url('autoloans/saskatchewan-auto-loans') }}"><h4>SASKATCHEWAN AUTO LOANS</h4></a>
                                     <ul class="popular-item-list">
-                                        <li><a href="#"><h6>Regina Auto Loans</h6></a></li>
-                                        <li><a href="#"><h6>Saskatoon Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/regina-saskatchewan-auto-loans') }}"><h6>Regina Auto Loans</h6></a></li>
+                                        <li><a href="{{ url('autoloans/saskatoon-saskatchewan-auto-loans') }}"><h6>Saskatoon Auto Loans</h6></a></li>
                                     </ul>
                                 </div>
                             </div>

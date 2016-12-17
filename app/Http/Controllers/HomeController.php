@@ -22,8 +22,10 @@ use App\Models\BodyStyle;
 use App\Models\DriveType;
 use App\Models\FuelType;
 use App\Models\TransmissionType;
+use SEOMeta;
 use DB;
 use Log;
+
 use Cache;
 
 class HomeController extends Controller
@@ -42,6 +44,9 @@ class HomeController extends Controller
 
 	public function index(Request $request)
 	{	
+		SEOMeta::setTitle('Used Cars and Auto Loans Canada | Free Auto Classifieds | Buy Sell and Trade at Carsgone.com');
+        SEOMeta::setDescription('Providing an online solution for buying and selling New and Used cars, trucks, vans and SUVs.  Free auto classifieds for private sellers and dealerships at Carsgone.com');
+        SEOMeta::addKeyword(['new cars', 'used cars', 'auto classifieds', 'auto loans Canada', 'trucks', 'SUVs', 'vans']);
 		$data['total'] = Vehicle::count();
 		$data['location'] = getLocation($request);
 		$data['provinces'] = Province::withCount('vehicles')->orderBy('province_name', 'asc')->get();

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Carsgone</title>
+{!! SEOMeta::generate() !!}
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
@@ -37,7 +37,7 @@
             </ul>
             <ul class="upper-nav right">
             @if (Auth::check())
-              <li id="dashboard-li"><a href="dashboard">Dashboard</a></li>
+              <li id="dashboard-li"><a href="/dashboard">Dashboard</a></li>
               <li id="logout-li"><a href="/logout">Logout</a></li>
             @else
             	<li id="signup-li"><a class="modal-trigger" href="#signup">Sign-Up</a></li>
@@ -69,11 +69,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/search"><span>Browse Cars</span></a></li>
+                <li {{{ (Request::is('search') ? 'class=active' : '') }}}><a href="/search"><span>Browse Cars</span></a></li>
                 <li><a href="/post"><span>Post Ad</span></a></li>
                 <li><a href="/auto-dealers/info"><span>Dealers</span></a></li>
                 <li><a href="/autoloans"><span>Car Loans</span></a></li>
-                <li><a href="#"><span>Private</span></a></li>
+                <li><a id="private-link" href="#"><span>Private</span></a></li>
            </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -334,7 +334,7 @@ $('#login-submit').on('click',function(e){
     {
       toastr.success('Checkout your saved vehicles in dashboard','You have logged in Successfully')
       $('#member').closeModal();
-      $('#signup-li').replaceWith( '<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
+      $('#signup-li').replaceWith( '<li id="dashboard-li"><a href="/dashboard">Dashboard</a></li>');
       $('#login-li').replaceWith( '<li id="logout-li"><a href="#">Logout</a></li>');
     }
     else
@@ -361,7 +361,7 @@ $('#signup-submit').on('click',function(e){
     {
       toastr.success( 'Checkout your saved vehicles in dashboard', 'Registered Successfully')
       $('#signup').closeModal();
-      $('#signup-li').replaceWith( '<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
+      $('#signup-li').replaceWith( '<li id="dashboard-li"><a href="/dashboard">Dashboard</a></li>');
       $('#login-li').replaceWith( '<li id="logout-li"><a href="#">Logout</a></li>');
     }
     else
@@ -399,6 +399,16 @@ $('body').on('click', '#logout-li', function() {
     location.reload();
   });
 });
+
+
+$('#private-link').on('click',function(e){
+  e.preventDefault();
+  $.get( "/removeSessionAll");
+  $.get( "/setSessionKeyValue/seller/private", function( data ) {
+      window.location = '/search';
+  });
+  
+})
 
 var base_url = '{{ url('/') }}';
 </script>

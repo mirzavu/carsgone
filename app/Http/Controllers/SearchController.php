@@ -15,13 +15,16 @@ use DB;
 use Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\Paginator;
+use SEOMeta;
 use Illuminate\Pagination\LengthAwarePaginator;
+
+
 class SearchController extends Controller
 {
-	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content', 'dealer');
-	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer');
+	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
+	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
 	protected $url_filters = array('make','model', 'province', 'city', 'body');
-	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content', 'dealer');
+	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
 	protected $dealer_ids;
 	protected $url_params;
 
@@ -67,7 +70,7 @@ class SearchController extends Controller
 		}
 		else
 		{
-			$sort = 'vehicles.created_at';
+			$sort = 'created_at';
 			$direction = 'desc';
 		}
 
@@ -75,6 +78,10 @@ class SearchController extends Controller
 		{
 			$conditions->put('user',Auth::user()->id);
 		}
+		// dd($conditions);
+		SEOMeta::setTitle($conditions->get('make').' '.$conditions->get('model').' New and Used Cars | Buy Sell Vehicles Nearby');
+        SEOMeta::setDescription('New and used cars. Auto dealers - private for sale by owner buy and sell cars, trucks, SUVs & vans');
+        SEOMeta::addKeyword(['new cars', 'used cars', 'auto classifieds', 'search cars', 'trucks', 'SUVs', 'vans']);
 
 		// $lat = 53.421879;
   //       $lon = - 113.4675614;
@@ -96,7 +103,7 @@ class SearchController extends Controller
 			            ->groupBy('makes.id')
 			            ->get();
         $data['sort'] = $sort.'-'.$direction; 
-        $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy($sort, $direction)->paginate(15);
+        $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy('vehicles.'.$sort, $direction)->paginate(15);
         // dd($data['vehicles']);
         // dd($data['vehicles']);
   		// foreach ($data['vehicles'] as $key => $value) {

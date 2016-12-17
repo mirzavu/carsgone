@@ -139,7 +139,7 @@
                   	<div class="col-sm-6 display-table">
                         <label>Email</label>
                         <div class="input-box">
-                          {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => "Enter your email", 'type'=>'email', 'required']) !!}
+                          {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => "Enter your email", 'required']) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">

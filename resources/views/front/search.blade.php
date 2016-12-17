@@ -247,7 +247,7 @@
                   <div class="item">
                      <a href="/vehicle/{{$vehicle->slug}}">
                      <div class="item-heading">
-                        <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->dealer->city->city_name}}, {{$vehicle->dealer->province->province_name}}</h3>
+                        <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->dealer->city->city_name or ''}}, {{$vehicle->dealer->province->province_name or ''}}</h3>
                         @if($logged_in )
                            @if(empty($vehicle->saved))
                            <button vehicle="{{$vehicle->id}}" class="btn save-btn btn-action waves-effect waves-light waves-input-wrapper">Save</button>
@@ -269,13 +269,13 @@
                               <div class="item-detail">
                                  <div class="item-detail-left"><img src="/assets/images/placeholder.jpg" alt="" /></div>
                                  <div class="item-detail-right">
-                                    <h6>{{$vehicle->dealer->city->city_name}}, {{$vehicle->dealer->province->province_name}}  <span class="part">|</span>  <small>{{$vehicle->created_at->diffForHumans()}}</small></h6>
-                                    <p>{{$vehicle->bodyStyleGroup->body_style_group_name or $vehicle->bodyStyle->body_style_name}} <span class="part">|</span> {{$vehicle->ext_color->color}} <span class="part">|</span> {{$vehicle->transmission}}</p>
+                                    <h6>{{$vehicle->dealer->city->city_name or ''}}, {{$vehicle->dealer->province->province_name or ''}}  <span class="part">|</span>  <small>{{$vehicle->created_at->diffForHumans()}}</small></h6>
+                                    <p>{{$vehicle->bodyStyleGroup->body_style_group_name or ''}} <span class="part">|</span> {{$vehicle->ext_color->color or ''}} <span class="part">|</span> {{$vehicle->transmission}}</p>
                                  </div>
                               </div>
                            </div>
                            <div class="item-body-right-lower">
-                              <h5>{{$vehicle->dealer->name}}</h5>
+                              <h5>{{$vehicle->dealer->name or ''}}</h5>
                               <ul class="item-stats">
                                  <li>
                                     <div><i class="fa fa-tag"></i> ${{number_format($vehicle->price)}}</div>
@@ -284,7 +284,7 @@
                                     <div><i class="fa fa-dashboard"></i> {{number_format($vehicle->odometer)}}KM</div>
                                  </li>
                                  <li>
-                                    <div><i class="fa fa-phone"></i>{{$vehicle->dealer->phone}}</div>
+                                    <div><i class="fa fa-phone"></i>{{$vehicle->dealer->phone or ''}}</div>
                                  </li>
                               </ul>
                            </div>

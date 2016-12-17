@@ -98,6 +98,7 @@ class SearchController extends Controller
         $data['sort'] = $sort.'-'.$direction; 
         $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy($sort, $direction)->paginate(15);
         // dd($data['vehicles']);
+        // dd($data['vehicles']);
   		// foreach ($data['vehicles'] as $key => $value) {
   		// 	echo $value->id;
   		// 	//echo $value->photo();echo "<br>";

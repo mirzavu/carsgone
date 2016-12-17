@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Models\ContentPage;
+use App\Mailers\AppMailer;
 
 class PageController extends Controller
 {
@@ -23,6 +24,13 @@ class PageController extends Controller
 	{
 		$data['location'] = getLocation($request);
 		return view('front.pages.contact', $data);
+	}
+
+	
+	public function contactSend(Request $request, AppMailer $mailer)
+	{
+		$mailer->sendContactForm($request);
+		return response()->json(['status' => 'success', 'message' => 'Your message is sent successfully! You will hear back from us soon.']);
 	}
 
 	public function autoloan(Request $request)

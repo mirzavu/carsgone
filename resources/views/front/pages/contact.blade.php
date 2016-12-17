@@ -14,23 +14,25 @@
                      <h2>Contact Us</h2>
                   </div>
                   <div class="panel-body">
+                     {!! Form::open(['url' => '/contact', 'method' => 'POST', 'id' => 'contact-form']) !!}
                      <div class="contact-dealer-container">
                         <div class="form-group">
-                           <input type="text" class="form-control" placeholder="Name">
+                           {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => "Enter Name", 'required']) !!}
                         </div>
                         <div class="form-group">
-                           <input type="text" class="form-control" placeholder="Email">
+                           {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => "Enter Email", 'required']) !!}
                         </div>
                         <div class="form-group">
-                           <input type="text" class="form-control" placeholder="Subject">
+                           {!! Form::text('subject', null, ['class' => 'form-control', 'placeholder' => "Enter Subject", 'required']) !!}
                         </div>
                         <div class="form-group">
-                           <textarea class="form-control" placeholder="Message"></textarea>
+                           {!! Form::textarea('message', null, ['class' => 'form-control', 'placeholder' => "Enter Message", 'required']) !!}
                         </div>
                         <div class="form-group">
-                           <i class="btn waves-effect waves-light waves-input-wrapper" style=""><input type="submit" value="Submit" class="waves-button-input"></i>
+                           <button id="submit-btn" class="finish-btn btn waves-effect waves-light" type="submit">Submit</button>
                         </div>
                      </div>
+                     {!! Form::close() !!}
                   </div>
                </div>
             </div>
@@ -64,4 +66,49 @@
 @endsection
 
 @section('javascript')
+<script type="text/javascript">
+   var form = $("#contact-form");
+            form.validate({
+                rules: {},
+                // errorClass: "invalid form-error",       
+                // errorElement : 'div',       
+                errorPlacement: function(error, element) {
+                    if (element.is('select')) {
+                        error.appendTo(element.parent().parent());
+                    } else {
+                        error.appendTo(element.parent());
+                    }
+
+                },
+                focusInvalid: false,
+                invalidHandler: function(form, validator) {
+
+                    if (!validator.numberOfInvalids())
+                        return;
+                    $('html, body').animate({
+                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                    }, 500);
+                    $(validator.errorList[0].element).focus()
+
+                },
+                submitHandler: function(form) {
+                  $('#submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
+                    $.ajax({
+                             url: form.action,
+                             type: form.method,
+                             data: $(form).serialize()+'&_token={{ csrf_token() }}',
+                             success: function(response) {
+                                 if(response.status == "success")
+                                 {
+                                    toastr.success(response.message)
+                                    $('#submit-btn').prop('disabled', false).html('Submit')
+                                    $("#contact-form").get(0).reset();
+                                 }
+                             }
+                         });
+                }
+            })
+
+</script>
+
 @endsection

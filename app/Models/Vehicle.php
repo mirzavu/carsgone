@@ -229,7 +229,8 @@ class Vehicle extends Model
             $lon = - 113.4675614;
             $query->leftJoin('dealers', 'vehicles.dealer_id', '=', 'dealers.id')
                  ->select(DB::raw("dealers.id"))
-                 ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < ".$conditions->get('distance'));
+                 ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < ".$conditions->get('distance'))
+                 ->orWhere('latitude', '=', null); // For including private vehicles
         }
         if ($conditions->get('user'))
         {

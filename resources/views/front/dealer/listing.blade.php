@@ -94,16 +94,10 @@
                      </div>
                      </a>
                      <div class="item-body">
-                        <div class="item-body-left">
-                           <a href="/vehicle/{{$dealer->slug}}">
-                           <img src="{{$dealer->image}}" alt="" />
-                           <span class="overlay"></span>
-                           </a>
-                        </div>
                         <div class="item-body-right">
                            <div class="item-body-right-upper">
                               <div class="item-detail">
-                                 <div class="item-detail-left"><img src="/assets/images/placeholder.jpg" alt="" /></div>
+                                 <div class="item-detail-left"><a href="/dealer/{{$dealer->slug}}"><img src="{{$dealer->image}}" alt="{{$dealer->name}}" /></a></div>
                                  <div class="item-detail-right">
                                     <h6>{{$dealer->city->city_name}}, {{$dealer->province->province_name}} </h6>
                                     <p>{{$dealer->address}} <span class="part">|</span> {{$dealer->phone}} <span class="part">|</span></p>

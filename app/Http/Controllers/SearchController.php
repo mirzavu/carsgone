@@ -104,13 +104,6 @@ class SearchController extends Controller
 			            ->get();
         $data['sort'] = $sort.'-'.$direction; 
         $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy('vehicles.'.$sort, $direction)->paginate(15);
-        // dd($data['vehicles']);
-        // dd($data['vehicles']);
-  		// foreach ($data['vehicles'] as $key => $value) {
-  		// 	echo $value->id;
-  		// 	//echo $value->photo();echo "<br>";
-  		// }
-  		// exit;
 
         $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
         // dd($data['featured_vehicles']);

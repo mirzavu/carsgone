@@ -123,14 +123,35 @@ class AppMailer
     public function sendDealerContactForm($data)
     {
         $this->from = $data->email;
-        $this->fromName = $data->name;
+        $this->fromName = $data->name." via Carsgone";
         $this->to = $data->dealer_email;
         $this->subject = 'Contact Form';
         $this->view = 'emails.dealer_contact_form';
         $this->data = compact('data');
         $this->deliver();
     }
+
+    public function sendOffer($data)
+    {
+        $this->from = $data->email;
+        $this->fromName = $data->name." via Carsgone";
+        $this->to = $data->dealer_email;
+        $this->subject = 'Make An Offer';
+        $this->view = 'emails.make_offer_form';
+        $this->data = compact('data');
+        $this->deliver();
+    }
     
+    public function sendtradeVehicleForm($data)
+    {
+        $this->from = $data->email;
+        $this->fromName = $data->name." via Carsgone";
+        $this->to = $data->dealer_email;
+        $this->subject = 'Trade Vehicle Form';
+        $this->view = 'emails.trade_vehicle_form';
+        $this->data = compact('data');
+        $this->deliver();
+    }
     
     /**
      * Deliver the email.

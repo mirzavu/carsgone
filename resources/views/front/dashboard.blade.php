@@ -50,10 +50,10 @@
                                        <div class="item-body-right-lower">
                                           <ul class="item-stats">
                                              <li>
-                                                <div><i class="fa fa-tag"></i> ${{number_format($vehicles[0]->price)}}</div>
+                                                <div><i class="fa fa-tag"></i> ${{$vehicles[0]->price}}</div>
                                              </li>
                                              <li>
-                                                <div><i class="fa fa-dashboard"></i> {{number_format($vehicles[0]->odometer)}}KM</div>
+                                                <div><i class="fa fa-dashboard"></i> {{$vehicles[0]->odometer}}KM</div>
                                              </li>
                                              <li>
                                                 <div><i class="fa fa-phone"></i> (403) 945-8808</div>
@@ -75,7 +75,7 @@
                               <div class="item">
                                  <a href="/vehicle/{{$saved_vehicles[0]->slug}}">
                                     <div class="item-heading">
-                                       <h3 class="item-title">{{$saved_vehicles[0]->year}} {{$saved_vehicles[0]->make->make_name}} {{$saved_vehicles[0]->model->model_name}} - {{$saved_vehicles[0]->dealer->city->city_name}}, {{$saved_vehicles[0]->dealer->province->province_name}}</h3>
+                                       <h3 class="item-title">{{$saved_vehicles[0]->year}} {{$saved_vehicles[0]->make->make_name}} {{$saved_vehicles[0]->model->model_name}} - {{$saved_vehicles[0]->user->city->city_name}}, {{$saved_vehicles[0]->user->province->province_name}}</h3>
 
                                     </div>
                                  </a>
@@ -84,24 +84,24 @@
                                     <div class="item-body-right">
                                        <div class="item-body-right-upper">
                                           <div class="item-detail">
-                                             <div class="item-detail-left"><img src="{{$saved_vehicles[0]->photo()}}" alt=""></div>
+                                             <div class="item-detail-left"><img src="{{$saved_vehicles[0]->user->image}}" alt=""></div>
                                              <div class="item-detail-right">
-                                                <h6>{{$saved_vehicles[0]->dealer->city->city_name}}, {{$saved_vehicles[0]->dealer->province->province_name}}  <span class="part">|</span>  <small>{{$saved_vehicles[0]->created_at->diffForHumans()}}</small></h6>
+                                                <h6>{{$saved_vehicles[0]->user->city->city_name}}, {{$saved_vehicles[0]->user->province->province_name}}  <span class="part">|</span>  <small>{{$saved_vehicles[0]->created_at->diffForHumans()}}</small></h6>
                                                 <p>{{$saved_vehicles[0]->bodyStyleGroup->body_style_group_name or $saved_vehicles[0]->bodyStyle->body_style_name}} <span class="part">|</span> {{$saved_vehicles[0]->ext_color->color}} <span class="part">|</span> {{$saved_vehicles[0]->transmission}}</p>
                                              </div>
                                           </div>
                                        </div>
                                        <div class="item-body-right-lower">
-                                          <h5>{{$saved_vehicles[0]->dealer->name}}</h5>
+                                          <h5>{{$saved_vehicles[0]->user->name}}</h5>
                                           <ul class="item-stats">
                                              <li>
-                                                <div><i class="fa fa-tag"></i> ${{number_format($saved_vehicles[0]->price)}}</div>
+                                                <div><i class="fa fa-tag"></i> ${{$saved_vehicles[0]->price}}</div>
                                              </li>
                                              <li>
-                                                <div><i class="fa fa-dashboard"></i> {{number_format($saved_vehicles[0]->odometer)}}KM</div>
+                                                <div><i class="fa fa-dashboard"></i> {{$saved_vehicles[0]->odometer}}KM</div>
                                              </li>
                                              <li>
-                                                <div><i class="fa fa-phone"></i>{{$saved_vehicles[0]->dealer->phone}}</div>
+                                                <div><i class="fa fa-phone"></i>{{$saved_vehicles[0]->user->phone}}</div>
                                              </li>
                                           </ul>
                                        </div>
@@ -147,10 +147,10 @@
                                        <div class="item-body-right-lower">
                                           <ul class="item-stats">
                                              <li>
-                                                <div><i class="fa fa-tag"></i> ${{number_format($vehicles[0]->price)}}</div>
+                                                <div><i class="fa fa-tag"></i> ${{$vehicles[0]->price}}</div>
                                              </li>
                                              <li>
-                                                <div><i class="fa fa-dashboard"></i> {{number_format($vehicles[0]->odometer)}}KM</div>
+                                                <div><i class="fa fa-dashboard"></i> {{$vehicles[0]->odometer}}KM</div>
                                              </li>
                                              <li>
                                                 <div><i class="fa fa-phone"></i> (403) 945-8808</div>
@@ -172,7 +172,7 @@
                   <div class="item">
                      <a href="/vehicle/{{$vehicle->slug}}">
                      <div class="item-heading">
-                        <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->dealer->city->city_name}}, {{$vehicle->dealer->province->province_name}}</h3>
+                        <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->user->city->city_name}}, {{$vehicle->user->province->province_name}}</h3>
 
                      </div>
                      </a>
@@ -188,22 +188,22 @@
                               <div class="item-detail">
                                  <div class="item-detail-left"><img src="/assets/images/placeholder.jpg" alt="" /></div>
                                  <div class="item-detail-right">
-                                    <h6>{{$vehicle->dealer->city->city_name}}, {{$vehicle->dealer->province->province_name}}  <span class="part">|</span>  <small>{{$vehicle->created_at->diffForHumans()}}</small></h6>
+                                    <h6>{{$vehicle->user->city->city_name}}, {{$vehicle->user->province->province_name}}  <span class="part">|</span>  <small>{{$vehicle->created_at->diffForHumans()}}</small></h6>
                                     <p>{{$vehicle->bodyStyleGroup->body_style_group_name or $vehicle->bodyStyle->body_style_name}} <span class="part">|</span> {{$vehicle->ext_color->color}} <span class="part">|</span> {{$vehicle->transmission}}</p>
                                  </div>
                               </div>
                            </div>
                            <div class="item-body-right-lower">
-                              <h5>{{$vehicle->dealer->name}}</h5>
+                              <h5>{{$vehicle->user->name}}</h5>
                               <ul class="item-stats">
                                  <li>
-                                    <div><i class="fa fa-tag"></i> ${{number_format($vehicle->price)}}</div>
+                                    <div><i class="fa fa-tag"></i> ${{$vehicle->price}}</div>
                                  </li>
                                  <li>
-                                    <div><i class="fa fa-dashboard"></i> {{number_format($vehicle->odometer)}}KM</div>
+                                    <div><i class="fa fa-dashboard"></i> {{$vehicle->odometer}}KM</div>
                                  </li>
                                  <li>
-                                    <div><i class="fa fa-phone"></i>{{$vehicle->dealer->phone}}</div>
+                                    <div><i class="fa fa-phone"></i>{{$vehicle->user->phone}}</div>
                                  </li>
                               </ul>
                            </div>

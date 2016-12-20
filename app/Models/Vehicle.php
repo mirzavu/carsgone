@@ -85,12 +85,22 @@ class Vehicle extends Model
 
     public function setPriceAttribute($value)
     {
-        $this->attributes['price'] = preg_replace('/[^0-9.]/', '', $value);;
+        $this->attributes['price'] = preg_replace('/[^0-9.]/', '', $value);
     }
 
-    public function setMileageAttribute($value)
+    public function getPriceAttribute($value)
     {
-        $this->attributes['mileage'] = preg_replace('/[^0-9.]/', '', $value);;
+        return number_format($value);
+    }
+
+    public function setOdometerAttribute($value)
+    {
+        $this->attributes['odometer'] = preg_replace('/[^0-9.]/', '', $value);;
+    }
+
+    public function getOdometerAttribute($value)
+    {
+        return number_format($value);
     }
 
     // public function scopeApplyFilter($query, $conditions, $featured=0)

@@ -40,7 +40,10 @@
 
 	//Brochure
 	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
-	Route::get('/contact-dealer', 'VehicleController@contactDealer');
+	Route::get('/vehicle-related/{slug}', 'VehicleController@relatedVehicle')->where('slug', '.*');
+	Route::post('/contact-dealer', 'VehicleController@contactDealer');
+	Route::post('/make-offer', 'VehicleController@makeOffer');
+	Route::post('/trade-vehicle', 'VehicleController@tradeVehicleForm');
 
 	//Private Vehicles
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');

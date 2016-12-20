@@ -232,8 +232,8 @@
                                     <span class="overlay"></span>
                                  </div>
                                  <div class="featured-details">
-                                    <div class="price"><i class="fa fa-tag"></i> ${{number_format($vehicle->price)}}</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> {{number_format($vehicle->odometer)}}KM</div>
+                                    <div class="price"><i class="fa fa-tag"></i> ${{$vehicle->price}}</div>
+                                    <div class="run"><i class="fa fa-dashboard"></i> {{$vehicle->odometer}}KM</div>
                                  </div>
                               </a>
                            </div>
@@ -291,13 +291,13 @@
                               </div>
                            </div>
                            <div class="item-body-right-lower">
-                              <h5>{{$vehicle->user->name or ''}}</h5>
+                              <h5><a href="/dealer/{{$vehicle->user->slug}}">{{$vehicle->user->name or ''}}</a></h5>
                               <ul class="item-stats">
                                  <li>
-                                    <div><i class="fa fa-tag"></i> ${{number_format($vehicle->price)}}</div>
+                                    <div><i class="fa fa-tag"></i> ${{$vehicle->price}}</div>
                                  </li>
                                  <li>
-                                    <div><i class="fa fa-dashboard"></i> {{number_format($vehicle->odometer)}}KM</div>
+                                    <div><i class="fa fa-dashboard"></i> {{$vehicle->odometer}}KM</div>
                                  </li>
                                  <li>
                                     <div><i class="fa fa-phone"></i>{{$vehicle->user->phone or ''}}</div>

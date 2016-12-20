@@ -27,8 +27,8 @@
                                             <span class="overlay"></span>
                                         </div>
                                         <div class="featured-details">
-                                            <div class="price"><i class="fa fa-tag"></i> ${{number_format($vehicle->price)}}</div>
-                                            <div class="run"><i class="fa fa-dashboard"></i> {{number_format($vehicle->odometer)}}KM</div>
+                                            <div class="price"><i class="fa fa-tag"></i> ${{$vehicle->price}}</div>
+                                            <div class="run"><i class="fa fa-dashboard"></i> {{$vehicle->odometer}}KM</div>
                                         </div>
                                     </a>
                                 </div>

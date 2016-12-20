@@ -14,7 +14,7 @@ class CreateVehiclePhotosTable extends Migration
     {
         Schema::create('vehicle_photos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('vehicle_id');
+            $table->integer('vehicle_id')->index();
             $table->integer('position');
             $table->string('path');
         });

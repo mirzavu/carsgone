@@ -13,7 +13,7 @@ class CreateVehiclesTable extends Migration
     public function up()
     {
         Schema::create('vehicles', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->index();
             $table->integer('user_id');
             $table->integer('make_id');
             $table->integer('model_id');

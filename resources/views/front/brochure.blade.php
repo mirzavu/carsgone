@@ -92,10 +92,12 @@
                                 <td>{{$vehicle->price}}</td>
                              </tr>
                              @endif
+                             @if(!empty($vehicle->odometer))
                              <tr>
                                 <td><b>Mileage</b></td>
                                 <td>{{$vehicle->odometer}} Km</td>
                              </tr>
+                             @endif
                              @if(!empty($vehicle->trim))
                              <tr>
                                 <td><b>Trim</b></td>
@@ -112,28 +114,36 @@
                                 <td>{{$vehicle->stock}}</td>
                              </tr>
                              @endif
+                             @if(!empty($vehicle->vin))
                              <tr>
                                 <td><b>VIN</b></td>
                                 <td>{{$vehicle->vin}}</td>
                              </tr>
+                             @endif
                              @if(!empty($vehicle->doors))
                              <tr>
                                 <td><b>Doors</b></td>
                                 <td>{{$vehicle->doors}}</td>
                              </tr>
                              @endif
+                             @if(!empty($vehicle->transmission))
                              <tr>
                                 <td><b>Transmission</b></td>
                                 <td>{{$vehicle->transmission}}</td>
                              </tr>
+                             @endif
+                             @if(!empty($vehicle->ext_color_id))
                              <tr>
                                 <td><b>Exterior Color</b></td>
                                 <td>{{$vehicle->ext_color->color}}</td>
                              </tr>
+                             @endif
+                             @if(!empty($vehicle->int_color_id))
                              <tr>
                                 <td><b>Interior Color</b></td>
                                 <td>{{$vehicle->int_color->color}}</td>
                              </tr>
+                             @endif
                              @if(!empty($vehicle->passenger))
                              <tr>
                                 <td><b>Passengers</b></td>
@@ -167,16 +177,18 @@
             </li>
             <li>
             	<div class="single-dealer-container">
+                    @if($vehicle->user->featured)
                 	<div class="single-dealer-upper">
                     	<div class="dealer-all-number">
-                        	<a href="tel:9899899898" class="btn waves-effect waves-light "><i class="fa fa-phone"></i> 989-989-9898</a>
-                            <a href="tel:9899899898" class="btn waves-effect waves-light "><i class="fa fa-phone"></i> 989-989-9898</a>
-                            <a href="tel:9899899898" class="btn waves-effect waves-light "><i class="fa fa-phone"></i> 989-989-9898</a>
+                        	<a id="make-offer-btn" class="btn waves-effect waves-light "> Make An Offer</a>
+                            <a id="trade-vehicle-btn" class="btn waves-effect waves-light ">Trade Vehicle</a>
+                            <a class="btn waves-effect waves-light ">View Inventory</a>
                         </div>
                     </div>
+                    @endif
                     <div class="single-dealer-mid">
                      <ul class="table-list">
-                        <li>{{$vehicle->user->name}}</li>
+                        <li><a href="/dealer/{{$vehicle->user->slug}}">{{$vehicle->user->name}}</a></li>
                         <li>{{$vehicle->user->address}}</li>
                         <li>{{$vehicle->user->phone}}</li>
                         <li>{{$vehicle->user->fax}}</li>
@@ -215,10 +227,13 @@
                         <div class="panel-heading">
                           <h3 class="panel-title">Related Vehicles</h3>
                         </div>
-                        <div class="panel-body">
-                          <div class="featured-list related-slider">
+                        <div id="related-vehicles" class="panel-body">
+                            <div class="progress">
+                                <div class="indeterminate"></div>
+                            </div>
+                          {{--<div  class="featured-list related-slider">
                           	<!-- fetured-box start -->
-                            @foreach($related as $vehicle)
+                             @foreach($related as $vehicle)
                             <div>
                           	<div class="fetured-box">
                             <a href="/vehicle/{{$vehicle->slug}}">
@@ -235,13 +250,13 @@
                                 </a>
                             </div>
                             </div>
-                            @endforeach
+                            @endforeach 
                             <!-- fetured-box end -->
                       
-                          </div>
+                          </div>--}}
                         </div>
                       </div>
-                      <div id="root"></div>
+                      
 
                   <!-- Featured Container end -->
        	    </div>
@@ -252,11 +267,89 @@
     
 </div>
 <!-- main container outer end -->
+
+<div id="make-offer" class="modal member">
+<form id="offer-form" action="/make-offer" method="POST">
+<div class="modal-content">
+  
+  <h5>Make An Offer</h5>
+  <div class="form-group">
+    <label>Name</label>
+    <input name="name" type="text" class="form-control" required />
+  </div>
+  <div class="form-group">
+    <label>Email</label>
+    <input name="email" type="email" class="form-control" required/>
+  </div>
+  <div class="form-group">
+    <label>Phone Number</label>
+    <input name="phone" type="text" class="form-control" required/>
+  </div>
+  <div class="form-group">
+    <label>Your Offer</label>
+    <input name="offer" type="text" class="form-control" required/>
+  </div>
+  <div class="form-group">
+    <label>Is there anything you would like to add?</label>
+    <textarea name="comment" class="form-control"></textarea>
+  </div>
+  <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
+</div>
+<div class="modal-footer">
+    <button id="offer-submit-btn" class="finish-btn btn waves-effect waves-light" type="submit">Submit</button>
+ </form>
+</div>
+</div>
+
+<div id="trade-vehicle" class="modal member">
+<form id="trade-form" action="/trade-vehicle" method="POST">
+<div class="modal-content">
+  
+  <h5>Trade in your Vehicle</h5>
+  <div class="form-group">
+    <label>Name</label>
+    <input name="name" type="text" class="form-control" required />
+  </div>
+  <div class="form-group">
+    <label>Email</label>
+    <input name="email" type="email" class="form-control" required/>
+  </div>
+  <div class="form-group">
+    <label>Phone Number</label>
+    <input name="phone" type="text" class="form-control" required/>
+  </div>
+  <div class="form-group">
+    <label>Year</label>
+    <input name="year" type="text" class="form-control" required/>
+  </div>
+  <div class="form-group">
+    <label>Make</label>
+    <input name="make" type="text" class="form-control" required/>
+  </div>
+  <div class="form-group">
+    <label>Model</label>
+    <input name="model" type="text" class="form-control" required/>
+  </div>
+  <div class="form-group">
+    <label>Additional Vehicle Info</label>
+    <textarea name="comment" class="form-control"></textarea>
+  </div>
+  <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
+</div>
+<div class="modal-footer">
+    <button id="trade-submit-btn" class="finish-btn btn waves-effect waves-light" type="submit">Submit</button>
+ </form>
+</div>
+
+</div>
+
 @endsection
 
 @section('javascript')
 
 <script type="text/javascript">
+
+
     var form = $("#contact-form");
             form.validate({
                 rules: {},
@@ -298,9 +391,104 @@
                          });
                 }
             })
+
+$('#make-offer-btn').on('click', function(e) {
+    e.preventDefault();
+    $('#make-offer').openModal();
+});
+
+var form = $("#offer-form");
+            form.validate({
+                rules: {},
+                // errorClass: "invalid form-error",       
+                // errorElement : 'div',       
+                errorPlacement: function(error, element) {
+                    if (element.is('select')) {
+                        error.appendTo(element.parent().parent());
+                    } else {
+                        error.appendTo(element.parent());
+                    }
+
+                },
+                focusInvalid: false,
+                invalidHandler: function(form, validator) {
+
+                    if (!validator.numberOfInvalids())
+                        return;
+                    $('html, body').animate({
+                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                    }, 500);
+                    $(validator.errorList[0].element).focus()
+
+                },
+                submitHandler: function(form) {
+                  $('#offer-submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
+                    $.ajax({
+                             url: form.action,
+                             type: form.method,
+                             data: $(form).serialize()+'&_token={{ csrf_token() }}'+'&dealer_email={{ $vehicle->user->email }}',
+                             success: function(response) {
+                                 if(response.status == "success")
+                                 {
+                                    toastr.success(response.message)
+                                    $('#offer-submit-btn').prop('disabled', false).html('Submit')
+                                    $("#offer-form").get(0).reset();
+                                 }
+                             }
+                         });
+                }
+            })
+
+$('#trade-vehicle-btn').on('click', function(e) {
+    e.preventDefault();
+    $('#trade-vehicle').openModal();
+});
+
+var form = $("#trade-form");
+            form.validate({
+                rules: {},
+                // errorClass: "invalid form-error",       
+                // errorElement : 'div',       
+                errorPlacement: function(error, element) {
+                    if (element.is('select')) {
+                        error.appendTo(element.parent().parent());
+                    } else {
+                        error.appendTo(element.parent());
+                    }
+
+                },
+                focusInvalid: false,
+                invalidHandler: function(form, validator) {
+
+                    if (!validator.numberOfInvalids())
+                        return;
+                    $('html, body').animate({
+                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                    }, 500);
+                    $(validator.errorList[0].element).focus()
+
+                },
+                submitHandler: function(form) {
+                  $('#trade-submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
+                    $.ajax({
+                             url: form.action,
+                             type: form.method,
+                             data: $(form).serialize()+'&_token={{ csrf_token() }}'+'&dealer_email={{ $vehicle->user->email }}',
+                             success: function(response) {
+                                 if(response.status == "success")
+                                 {
+                                    toastr.success(response.message)
+                                    $('#trade-submit-btn').prop('disabled', false).html('Submit')
+                                    $("#trade-form").get(0).reset();
+                                 }
+                             }
+                         });
+                }
+            })
 </script>
 <script src="https://unpkg.com/react@latest/dist/react.min.js"></script>
-    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.min.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-    <script type="text/babel" src="/assets/js/related.js"></script>
+<script src="https://unpkg.com/react-dom@latest/dist/react-dom.min.js"></script>
+<script src="https://unpkg.com/react-slick@0.13.6/dist/react-slick.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<script type="text/babel" src="/assets/js/related.js"></script>
 @endsection

@@ -225,6 +225,12 @@ class Vehicle extends Model
             $query->where('make_name', $conditions->get('make'));
         }
 
+        if ($conditions->get('body'))
+        {
+            $query->join('body_style_groups', 'vehicles.body_style_group_id', '=', 'body_style_groups.id');
+            $query->where('body_style_group_name', $conditions->get('body'));
+        }
+
         if ($conditions->get('dealer'))
         {
             $query->join('users', 'vehicles.user_id', '=', 'users.id');

@@ -76,6 +76,8 @@ ul.upper-nav li a:hover{color:#3d6392;}
 .navbar-default .navbar-nav > li > a span{position:relative;}
 .navbar-default .navbar-nav > li > a:before {position: absolute; display: block; top: 0; left: 0; content: ''; background-color: #5fc0ed; height: 100%; width: 100%; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; opacity: 0; -ms-transform: scaleX(.2); -webkit-transform: scaleX(.2); transform: scaleX(.2); -webkit-transition: -webkit-transform .2s ease-out,opacity .2s ease-out; transition: transform .2s ease-out,opacity .2s ease-out; -webkit-backface-visibility: hidden;}
 .navbar-default .navbar-nav > li > a:hover:before{opacity:1; -ms-transform: scaleX(1); -webkit-transform: scaleX(1); transform:scaleX(1);}
+.navbar-default .navbar-nav > li.active > a{ background-color: #0294d1;color: #fff; }
+#navbar > li.active > a:hover{ background-color: #0294d1;color: #fff; }
 .navbar-default .navbar-collapse{border:0;}
 .navbar-toggle { padding:0; border:0; background:transparent; right:0; left:auto; margin-top:24px; margin-left:12px;}
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus { background:transparent; }
@@ -162,7 +164,7 @@ ul.item-list li a span{display:block;}
 /* Ad Box end */
 /* Popular Item start */
 .popular-container{padding:25px 0;}
-.popular-container h4{background:#4dc3ff;padding: 12px 10px;font-size:22px;line-height:32px;color:#fff;text-transform:uppercase;margin-bottom: 18px;box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
+.popular-container h4{background:#4dc3ff;padding: 4px 10px;font-size:20px;line-height:32px;color:#fff;text-transform:uppercase;margin-bottom: 11px;box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
 ul.popular-item-list{width:100%; display:inline-block; vertical-align:top;}
 ul.popular-item-list li{width:100%;float:left;margin-bottom: 11px;}
 ul.popular-item-list li a{width:100%;float:left;background:#fff;padding: 10px 10px;border-radius:0; box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);color:#4dc3ff;}

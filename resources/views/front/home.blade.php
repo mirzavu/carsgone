@@ -143,215 +143,212 @@
              	<h4>Popular New Cars</h4>
     			<ul class="popular-item-list">
                 	<li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/condition-new/make-Ford/model-Escape">
+                        	<h6>New Ford Escape</h6>
+                            {{-- <span>1,633 listings starting at $1,000</span> --}}
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/condition-new/make-Ford/model-Explorer">
+                        	<h6>New Ford Explorer</h6>
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/condition-new/make-Ford/model-Edge">
+                        	<h6>New Ford Edge</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/condition-new/make-Chevrolet/model-Corvette">
+                        	<h6>New Chevrolet Corvette</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
+                    	<a href="/search/condition-new/make-Chevrolet/model-Cruze">
                         	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/condition-new/make-Chevrolet/model-Equinox">
+                        	<h6>New Chevrolet Equinox</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/condition-new/make-Kia/model-Sorento">
+                        	<h6>New Kia Sorento</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/condition-new/make-Hyundai/model-Elantra">
+                        	<h6>New Hyundai Elantra</h6>
+                            
                         </a>
                     </li>
                 </ul>
         	</div>
             
             <div class="col-md-3 col-sm-6">
-             	<h4>Popular New Cars</h4>
+             	<h4>Popular Sedans</h4>
     			<ul class="popular-item-list">
                 	<li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Sedan/make-Chevrolet/model-Malibu">
+                        	<h6>Used Chevrolet Malibu</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Sedan/make-Chevrolet/model-Impala">
+                        	<h6>Used Chevrolet Impala</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Sedan/make-Ford/model-Fusion">
+                        	<h6>Used Ford Fusion</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Sedan/make-Hyundai/model-Sonata">
+                        	<h6>Used Hyundai Sonata</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Sedan/make-Nissan/model-Sentra">
+                        	<h6>Used Nissan Sentra</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Sedan/make-Nissan/model-Altima">
+                        	<h6>Used Nissan Altima</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Sedan/make-Chrysler/model-200">
+                        	<h6>Used Chrysler 200</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Sedan/make-Toyota/model-Corolla">
+                        	<h6>Used Toyota Corolla</h6>
+                            
                         </a>
                     </li>
                 </ul>
         	</div>
             
             <div class="col-md-3 col-sm-6">
-             	<h4>Popular New Cars</h4>
+             	<h4>Popular SUVs</h4>
     			<ul class="popular-item-list">
                 	<li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-SUV/make-Ford/model-Escape">
+                        	<h6>Used Ford Escape</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-SUV/make-Ford/model-Edge">
+                        	<h6>Used Ford Edge</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-SUV/make-Jeep/model-Grand%20Cherokee">
+                        	<h6>Jeep Grand Cherokee</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-SUV/make-Jeep/model-Patriot">
+                        	<h6>Used Jeep Patriot</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-SUV/make-Dodge/model-Journey">
+                        	<h6>Used Dodge Journey</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-SUV/make-Dodge/model-Durango">
+                        	<h6>Used Dodge Durango</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-SUV/make-GMC/model-Terrain">
+                        	<h6>Used GMC Terrain</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-SUV/make-Kia/model-Sorento">
+                        	<h6>Used Kia Sorento</h6>
+                            
                         </a>
                     </li>
                 </ul>
         	</div>
             
            <div class="col-md-3 col-sm-6">
-             	<h4>Popular New Cars</h4>
+             	<h4>Popular Hatchback</h4>
     			<ul class="popular-item-list">
                 	<li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Hatchback/make-Mazda/model-Mazda3">
+                        	<h6>Used Mazda Mazda3</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Hatchback/make-Volkswagen/model-Golf">
+                        	<h6>Used Volkswagen Golf</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Hatchback/make-Hyundai/model-VELOSTER">
+                        	<h6>Used Hyundai VELOSTER</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Hatchback/make-Ford/model-Focus">
+                        	<h6>Used Ford Focus</h6>
+                            
+                        </a>
+                    </li>
+                </ul>
+                <h4>Popular Coupe</h4>
+                <ul class="popular-item-list">
+                    <li>
+                    	<a href="/search/body-Coupe/make-BMW/model-M6">
+                        	<h6>Used BMW M6</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                        <a href="/search/body-Coupe/make-Mercedes-Benz/model-C-Class">
+                            <h6>Mercedes-Benz C-Class</h6>
+                            
                         </a>
                     </li>
                     <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
+                    	<a href="/search/body-Coupe/make-Audi/model-S5">
+                        	<h6>Used Audi S5</h6>
+                            
                         </a>
                     </li>
-                    <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
-                        </a>
-                    </li>
-                    <li>
-                    	<a href="#">
-                        	<h6>New Chevrolet Cruze</h6>
-                            <span>1,633 listings starting at $1,000</span>
-                        </a>
-                    </li>
+                    
                 </ul>
         	</div>
             

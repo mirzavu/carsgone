@@ -14,7 +14,8 @@
         "netshell/paypal": "dev-master",
         "laravelcollective/html": "^5.2.0",
         "intervention/image": "^2.3",
-        "artesaos/seotools": "^0.10.0"
+        "artesaos/seotools": "^0.10.0",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

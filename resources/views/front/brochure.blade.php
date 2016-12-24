@@ -1,7 +1,5 @@
 @extends('layouts.main')
 
-@section('title', 'Carsgone')
-
 @section('content')
 <!-- main container outer start -->
 <div class="main-container-outer">
@@ -104,10 +102,12 @@
                                 <td>{{$vehicle->trim or 'Not specified'}}</td>
                              </tr>
                              @endif
+                             @if(!empty($vehicle->bodyStyleGroup))
                              <tr>
                                 <td><b>Body Style</b></td>
                                 <td>{{$vehicle->bodyStyleGroup->body_style_group_name}}</td>
                              </tr>
+                             @endif
                              @if(!empty($vehicle->stock))
                              <tr>
                                 <td><b>Stock</b></td>
@@ -485,6 +485,8 @@ var form = $("#trade-form");
                          });
                 }
             })
+
+$('img').one('error', function() { this.src = '/assets/images/placeholder.jpg'; });
 </script>
 <script src="https://unpkg.com/react@latest/dist/react.min.js"></script>
 <script src="https://unpkg.com/react-dom@latest/dist/react-dom.min.js"></script>

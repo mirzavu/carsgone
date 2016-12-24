@@ -1,7 +1,5 @@
 @extends('layouts.main')
 
-@section('title', 'Auto Loans')
-
 @section('content')
 <!-- Dealer info start -->
 <div class="dealer-info">
@@ -89,35 +87,35 @@
             	<div class="panel membership">
                 	<div class="panel-heading">
                     	<img src="/assets/images/icon-user.png" alt="" />
-                    	<h3>Free Membership</h3>
-                        <p>Our Basic Dealer Membership</p>
+                    	<h3>Premium Account</h3>
+                        <p>Additional features to drive your sales</p>
                     </div>
                     <div class="panel-body">
-                    	<p>Ready to try us out? Our FREE basic membership with no obligation or hidden costs allows you to start listing an unlimited number of vehicles immediately.</p>
+                    	<p>Upload your logo, have your own virtual showroom and gain access to trade evaluations and credit leads. This membership will generate additional online exposure drive your online leads.</p>
                         <ul class="account-features">
                         	<li>
                             	<div class="icon">
                                 	<img src="/assets/images/icon-cog.png" alt="" />
                                 </div>
-                                <h6>Free Account</h6>
-                                <p>No hidden costs and no obligation.</p>
+                                <h6>Premium Account</h6>
+                                <p>Simple month-to-month membership</p>
                             </li>
                             <li>
                             	<div class="icon">
                             		<img src="/assets/images/icon-disable.png" alt="" />
                                 </div>
-                                <h6>No Limits!</h6>
-                                <p>Post and unlimited number of vehicles and photos.</p>
+                                <h6>Virtual Showroom</h6>
+                                <p>Custom branded online showroom</p>
                             </li>
                             <li>
                             	<div class="icon">
                             		<img src="/assets/images/icon-users2.png" alt="" />
                                 </div>
-                                <h6>Generate online leads</h6>
-                                <p>Get free online exposure for your vehicle inventory.</p>
+                                <h6>Generate Credit Leads</h6>
+                                <p>Get credit enquiries right from carsgone.com</p>
                             </li>
                         </ul>
-                        <a href="#" class="waves-effect waves-light btn">Get Free Account</a>
+                        <a href="/contact" class="waves-effect waves-light btn">Contact Us for Info</a>
                     </div>
                 </div>
             </div>
@@ -128,33 +126,90 @@
 <!-- Membership start -->
 
 <div id="dealer-signup" class="modal member">
-<div class="modal-content">
-  <h5>SIGN UP</h5>
-  <div class="form-group">
-    <label>Email</label>
-    <input id="signup-email" type="text" class="form-control" />
-  </div>
-  <div class="form-group">
-    <label>Name</label>
-    <input id="signup-name" type="text" class="form-control" />
-  </div>
-  <div class="form-group">
-    <label>Password</label>
-    <input id="signup-password" type="password" class="form-control"/>
-  </div>
-  <div class="">
-    <label>Confirm Password</label>
-    <input id="signup-cpassword" type="password" class="form-control" />
-  </div>
-  <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
-</div>
-<div class="modal-footer">
-  <a id="signup-submit" class="btn waves-effect waves-light waves-input-wrapper">Signup</a>
-  <a id="login-link" class="link" href="#">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a>
-</div>
+   <form id="dealer-form" action="/dealer-signup" method="POST">
+      <div class="modal-content">
+         <h5>SIGN UP</h5>
+         <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email" class="form-control" required/>
+         </div>
+         <div class="form-group">
+            <label>Dealership Name</label>
+            <input type="text" name="name" class="form-control"  required/>
+         </div>
+         <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" required/>
+         </div>
+         <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" required />
+         </div>
+         <div class="form-group">
+            <label>Street Address</label>
+            <input type="text" name="address" class="form-control" required />
+         </div>
+         <div class="form-group">
+            <label>Postal Code</label>
+            <input type="text" name="postal_code" class="form-control" required />
+         </div>
+         <div class="form-group">
+            <label>Phone</label>
+            <input type="text" name="phone" class="form-control" required />
+         </div>
+         <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="modal-footer">
+         <button id="dealer-submit" class="finish-btn btn waves-effect waves-light" type="submit">Signup</button>
+      </div>
+   </form>
 </div>
 
 @endsection
 
 @section('javascript')
+<script type="text/javascript">
+     var form = $("#dealer-form");
+            form.validate({
+                rules: {},
+                // errorClass: "invalid form-error",       
+                // errorElement : 'div',       
+                errorPlacement: function(error, element) {
+                    if (element.is('select')) {
+                        error.appendTo(element.parent().parent());
+                    } else {
+                        error.appendTo(element.parent());
+                    }
+
+                },
+                focusInvalid: false,
+                invalidHandler: function(form, validator) {
+
+                    if (!validator.numberOfInvalids())
+                        return;
+                    $('html, body').animate({
+                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                    }, 500);
+                    $(validator.errorList[0].element).focus()
+
+                },
+                submitHandler: function(form) {
+                  $('#dealer-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
+                    $.ajax({
+                             url: form.action,
+                             type: form.method,
+                             data: $(form).serialize()+'&_token={{ csrf_token() }}',
+                             success: function(response) {
+                                 if(response.status == "success")
+                                 {
+                                    toastr.success(response.message)
+                                    $('#dealer-submit').prop('disabled', false).html('Submit')
+                                    $("#dealer-form").get(0).reset();
+                                 }
+                             }
+                         });
+                }
+            })
+
+</script>
 @endsection

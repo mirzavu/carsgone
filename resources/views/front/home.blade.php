@@ -1,7 +1,5 @@
 @extends('layouts.main')
 
-@section('title', 'Carsgone')
-
 @section('content')
 
 <!-- Banner start -->
@@ -125,7 +123,7 @@
                             <li>Currently Employed</li>
                         </ul>
                         <div class="approval-link">
-                            <a href="#" class="waves-effect waves-light btn btn-orange">Get Approved Now</a>
+                            <a href="/credit-application" class="waves-effect waves-light btn btn-orange">Get Approved Now</a>
                             <p class="clock">Easy 60-Second Application</p>
                         </div>
                     </div>

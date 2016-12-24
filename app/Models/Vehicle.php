@@ -239,7 +239,10 @@ class Vehicle extends Model
 
         if ($conditions->get('province'))
         {
-            $query->join('users', 'vehicles.user_id', '=', 'users.id');
+            if(!$this->_hasJoin($query, 'users')){
+                $query->join('users', 'vehicles.user_id', '=', 'users.id');
+            }
+            
 
             $query->join('provinces', 'users.province_id', '=', 'provinces.id');
             $query->where('province_name', $conditions->get('province'));
@@ -270,6 +273,17 @@ class Vehicle extends Model
             $query->where('users.role', '=',$role);
         }
         $query->addSelect('vehicles.*');
+    }
+
+    protected function _hasJoin($query, $table){
+        $joins = $query->getQuery()->joins;
+        if(empty($joins)) return false;
+        foreach($joins as $row){
+            if($row->table == $table){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

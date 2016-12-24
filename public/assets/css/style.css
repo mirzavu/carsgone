@@ -77,7 +77,7 @@ ul.upper-nav li a:hover{color:#3d6392;}
 .navbar-default .navbar-nav > li > a:before {position: absolute; display: block; top: 0; left: 0; content: ''; background-color: #5fc0ed; height: 100%; width: 100%; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; opacity: 0; -ms-transform: scaleX(.2); -webkit-transform: scaleX(.2); transform: scaleX(.2); -webkit-transition: -webkit-transform .2s ease-out,opacity .2s ease-out; transition: transform .2s ease-out,opacity .2s ease-out; -webkit-backface-visibility: hidden;}
 .navbar-default .navbar-nav > li > a:hover:before{opacity:1; -ms-transform: scaleX(1); -webkit-transform: scaleX(1); transform:scaleX(1);}
 .navbar-default .navbar-nav > li.active > a{ background-color: #0294d1;color: #fff; }
-#navbar > li.active > a:hover{ background-color: #0294d1;color: #fff; }
+.navbar-default .navbar-nav > li.active > a:hover {color: white;}
 .navbar-default .navbar-collapse{border:0;}
 .navbar-toggle { padding:0; border:0; background:transparent; right:0; left:auto; margin-top:24px; margin-left:12px;}
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus { background:transparent; }
@@ -236,6 +236,7 @@ ul.social-links li a:hover{ background:#4dc3ff; color:#fff; }
 .item:hover{box-shadow:0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
 .item-heading {padding: 10px 34px; padding-right:150px; position:relative; border-bottom: 1px solid transparent;border-top-left-radius: 2px;border-top-right-radius: 2px;background:#3e5062;}
 .btn-action{position: absolute; top: 6px; right: 6px; padding: 8px 12px; font-size: 12px;}
+button.btn-action{right:62px;}
 .item-title {margin-top: 0;margin-bottom: 0;font-size: 16px;text-transform: uppercase;color: #fff;line-height: 24px;letter-spacing: 1px;}
 .item-body {padding: 13px 13px 13px 13px;width:100%;display:inline-block;vertical-align:top;}
 .item-body-left{width: 26%;float:left; position:relative;}
@@ -288,9 +289,9 @@ label{margin:0;}
 .noUi-state-tap .noUi-origin { -webkit-transition:left .3s, top .3s; transition:left .3s, top .3s }
 .noUi-state-drag * { cursor:inherit!important }
 .noUi-base, .noUi-handle { -webkit-transform:translate3d(0, 0, 0); transform:translate3d(0, 0, 0) }
-.noUi-horizontal { height:6px }
-.noUi-horizontal .noUi-handle {width: 15px;height: 15px;left: -7px;top: -5px;}
-
+.noUi-horizontal { height: 14px;border-radius: 10px; }
+.noUi-horizontal .noUi-handle {width: 22px;height: 22px;left: -7px;top: -5px;background: #5bc0ea;border: 4px solid #fff;}
+.noUi-handle.noUi-handle-lower:hover {border: 6px solid #fff;}
 .noUi-vertical { width:18px }
 .noUi-vertical .noUi-handle { width: 15px;height: 15px;left: -7px;top: -5px;}
 .noUi-background { background:#cfdbe6;   }
@@ -470,7 +471,7 @@ h6.btn-orange-border{cursor:default;}
 ul.dealer-info-list{text-align:center;display: inline-block;vertical-align: top;width: 100%;}
 .dealer-info-list li{display:inline-block; float:left; width:50%;}
 .dealer-page-outer .fetured-box{width:calc(100% - 20px);}
-.dealer-information{box-shadow:-5px 0 10px rgba(0, 0, 0, 0.25); padding:25px 0 10px;}
+.dealer-information{width:100%;box-shadow:-5px 0 10px rgba(0, 0, 0, 0.25); padding:25px 0 10px;}
 .dealer-information .dealer-address-map{height:390px;}
 .dealer-information .single-dealer-mid{padding-top:10px;}
 .dealer-information .single-dealer-lower{padding:15px 25px;}
@@ -623,6 +624,7 @@ fieldset label{font-size:18px; font-weight:700; color:#3b4c5d; text-align:right;
 .select-box .btn{color:#fff; font-weight:700; text-transform:capitalize; font-size:14px;}
 .select-box .btn:hover{color:#fff;}
 .input-box{width:60%; padding:15px; padding-right:0;}
+.margin-checkbox{margin-left: 188px;}
 .input-box .form-control{border:solid 2px #e0e0e0 !important; background-color:#f2f2f2; box-shadow:none;}
 .textarea .input-box{width:80.5%;}
 .textarea label{vertical-align:top; padding-top:18px;}
@@ -681,7 +683,7 @@ label.error:before {content: ""; width: 0;  height: 0; float: left; border-botto
 .alert-outer .wrapper{padding-bottom:0; padding-top:0;}
 .alert-outer .alert{margin-bottom:0;position:relative;padding-left: 70px;font-weight: 400;border: 0; margin-top:30px;}
 .alert .close{position: absolute; top: -10px; right: -10px; color: #555; font-size: 20px; line-height: 18px; width: 20px; height: 20px; background: #fff; border-radius: 50%; border: solid 1px #555; opacity: 1;}
- .alert-outer .icon {position: absolute;left: 0;top: 0;font-size: 24px;height: 100%;width: 60px;border-right: solid 1px #ccc;line-height: 78px;padding-left: 15px;}
+ .alert-outer .icon {position: absolute;left: 0;top: 0;font-size: 24px;height: 100%;width: 60px;border-right: solid 1px #ccc;line-height: 30px;padding-left: 15px;}
 .alert-outer .alert-success {background-color: #dff0d8;border-color: #d6e9c6;color: #3c763d;}
 .alert-outer .alert-danger {background-color: #f2dede; border-color: #ebccd1; color: #a94442;}
 .alert-outer .alert strong{display:block;}
@@ -693,9 +695,9 @@ ul.pricing-list{display:inline-block; width:100%;padding:11px;}
 ul.pricing-list li{float:left; width:20%; padding:10px;}
 .pricing-box{display:inline-block; width:100%; text-align:center; border-radius:10px; overflow:hidden; border:solid 1px #ebebeb; border-bottom: solid 2px #d3d3d3; border-top-width:2px;}
 .pricing-list li:nth-child(3) .pricing-icon{padding: 12px 12px 12px 0px;}
-.pricing-header{font-size:20px; padding:16px 8px; background-color:#3b4c5d; color:#fff; margin-bottom:0;height: 90px;background: -moz-linear-gradient(top,#e1f3fb 0%,#20a9e2 100%);
-    background: -webkit-linear-gradient(top,#e1f3fb 0%,#20a9e2 100%);
-    background: linear-gradient(to bottom,#e1f3fb 0%,#20a9e2 100%);
+.pricing-header{font-size:20px; padding:16px 8px; background-color:#3b4c5d; color:#fff; margin-bottom:0;height: 90px;background: -moz-linear-gradient(top,#8adaff 0%,#0f93ca 100%);
+    background: -webkit-linear-gradient(top,#8adaff 0%,#0f93ca 100%);
+    background: linear-gradient(to bottom,#8adaff 0%,#0f93ca 100%);
     filter: progid:DXImageTransform.Microsoft.gradient;}
 .pricing-box:hover .pricing-header {
     background: #0294d1;
@@ -968,3 +970,48 @@ ul.upper-nav.right li:last-child{border:0 !important;}
 
 .dealer-info-list li{width:100%;}
 }
+.budget-range-output{    text-align: center;
+    font-size: 30px;
+    margin-top: 60px;
+    color: #fff;
+}
+.budget-range-output > span{    padding: 10px;
+    border: solid 6px #bee6f7;
+    border-radius: 26px;
+    background: #3b4c5d;
+}
+.dealer-badge
+{
+	position: absolute;
+	top: 10px;
+    right: 10px;
+}
+.dealer-badge span
+{
+	font-weight: 500;
+    font-size: 1.3rem;
+    color: #fff;
+    background-color: #3e5062;
+    border-radius: 13px;
+    border: solid 2px;
+    padding: 3px 12px;
+}
+.featured-badge
+{
+	position: absolute;
+	top: 10px;
+    right: 160px;
+}
+.featured-badge span
+{
+	font-weight: 500;
+    font-size: 1.3rem;
+    color: #fff;
+    background-color: #3e5062;
+    border-radius: 13px;
+    border: solid 2px;
+    padding: 3px 12px;
+}
+
+
+

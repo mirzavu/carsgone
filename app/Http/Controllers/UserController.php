@@ -76,6 +76,8 @@ class UserController extends Controller
     	return response()->json(['status' => 'success', 'id' => $id, 'email' => $email, 'name' => $name]);
     }
 
+
+
     public function postSignIn(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -265,6 +267,66 @@ class UserController extends Controller
         $user = Auth::user();
         Vehicle::withoutGlobalScopes()->whereId($vehicle_id)->update(['status_id' => 0]);
         return response()->json(['status' => 'success']);
+    }
+
+    public function postDealerSignUp(Request $request, AppMailer $mailer)
+    {
+        //if request ajax() need to check
+        $location = getLocation($request);
+        // Log::info($location);
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:150|unique:users',
+            'name' => 'required|max:120',
+            'password' => 'required|min:6|max:100'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
+        }
+
+        $email = $request['email'];
+        $name = $request['name'];
+        $password = bcrypt($request['password']);
+        $user = new User();
+        $user->email = $email;
+        $user->name = $name;
+        $user->role = 'dealer';
+        $user->password = $password;
+        $user->token = str_random(30);
+        if(!empty($request->postal_code))
+        {
+            $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($request->postal_code);
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            $loc_json = curl_exec($curl);
+            $retry = 0;
+            $loc_array = json_decode($loc_json);
+            while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
+                $loc_json = curl_exec($curl);
+                $loc_array = json_decode($loc_json);
+                $retry++;
+            }
+            curl_close($curl);
+            if($loc_array->status == "OK")
+            {
+                $user->latitude = $loc_array->results[0]->geometry->location->lat;
+                $user->longitude = $loc_array->results[0]->geometry->location->lng;
+            }  
+        }
+        //changelater
+        $province_id = Province::where('province_code',$location['region'])->value('id');
+        // $province_id = 1;
+        $city = City::firstOrCreate(['city_name'=> $location['place'],'province_id'=> $province_id]);
+        $user->province_id = $province_id;
+        $user->city_id = $city->id;
+        $user->save();
+        $mailer->sendEmailConfirmationTo($user);
+
+        Auth::login($user);
+        $id = Auth::user()->id;
+        return response()->json(['status' => 'success', 'id' => $id, 'email' => $email, 'name' => $name]);
     }
     
 }

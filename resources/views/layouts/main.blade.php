@@ -8,7 +8,8 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
-<link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/all.css" rel="stylesheet" type="text/css">
+{{-- <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/materialize.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/slick.css" rel="stylesheet" type="text/css">
@@ -17,7 +18,7 @@
 <link href="/assets/css/toastr.min.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/step-form-wizard-all.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/dropzone.css" rel="stylesheet" type="text/css">
-<link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/style.css" rel="stylesheet" type="text/css"> --}}
 <script src="/assets/js/modernizr.js"></script> <!-- Modernizr -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKsvinm7jgttOZYmtlyIEhEt5l7ZL7-yM"></script>
 <!--[if lt IE 9]>
@@ -70,9 +71,9 @@
         <div id="navbar" class="navbar-collapse collapse">
            <ul class="nav navbar-nav navbar-right">
                 <li {{{ (Request::is('search') ? 'class=active' : '') }}}><a href="/search"><span>Browse Cars</span></a></li>
-                <li><a href="/post"><span>Post Ad</span></a></li>
-                <li><a href="/auto-dealers/info"><span>Dealers</span></a></li>
-                <li><a href="/autoloans"><span>Car Loans</span></a></li>
+                <li {{{ (Request::is('post') ? 'class=active' : '') }}}><a href="/post"><span>Post Ad</span></a></li>
+                <li {{{ (Request::is('auto-dealers/info') ? 'class=active' : '') }}}><a href="/auto-dealers/info"><span>Dealers</span></a></li>
+                <li {{{ (Request::is('autoloans') ? 'class=active' : '') }}}><a href="/autoloans"><span>Car Loans</span></a></li>
                 <li><a id="private-link" href="#"><span>Private</span></a></li>
            </ul>
         </div><!--/.nav-collapse -->
@@ -121,10 +122,9 @@
                     	<div class="footer-box-content">
                     	  <h5>Auto Dealers</h5>
                         	<ul class="footer-links">
-                            	<li><a href="#">Auto Dealer Listings</a></li>
-                                <li><a href="#">Auto Dealer Info</a></li>
-                                <li><a href="#">Auto Dealer Accounts</a></li>
-                                <li><a href="#">Auto Dealer Contact</a></li>
+                            	<li><a href="/auto-dealers">Auto Dealer Listings</a></li>
+                                <li><a href="/auto-dealers/info">Auto Dealer Info</a></li>
+                                <li><a href="/contact">Auto Dealer Contact</a></li>
                             </ul> 
                        </div>
                     </div>
@@ -217,13 +217,13 @@
   <a id="reset-login-link" class="link" href="#">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a>
 </div>
 </div>
-<script src="/assets/js/jquery-2.2.2.min.js"></script> 
+<script src="/assets/js/all.js"></script>
+{{-- <script src="/assets/js/jquery-2.2.2.min.js"></script> 
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/materialize.min.js"></script>
 <script src="/assets/js/slick.min.js"></script>
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/nouislider.min.js"></script>
-<script src="/assets/js/dropzone.js"></script>
 <script src="/assets/js/step-form-wizard.js"></script>
 <script src="/assets/js/wNumb.min.js"></script>
 <script src="/assets/js/jquery.magnific-popup.min.js"></script>
@@ -231,7 +231,7 @@
 <script src="/assets/js/nprogress.js"></script>
 <script src="/assets/js/toastr.min.js"></script>
 <script src="/assets/js/jquery.validate.js"></script>
-<script src="/assets/js/custom.js"></script> 
+<script src="/assets/js/custom.js"></script>  --}}
 <script type="text/javascript">
 toastr.options = {
   "closeButton": true,

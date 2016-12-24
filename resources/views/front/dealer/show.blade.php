@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Dealer Listing')
+
 @section('content')
 
 <div class="dealer-page-outer">
@@ -139,9 +139,11 @@
 <script type="text/javascript">
   $('#inventory-btn').on('click',function(e){
       e.preventDefault();
-      $.get( "/removeSessionAll");
-      $.get( "/setSessionKeyValue/dealer/{{$dealer->name}}");
-      window.location = $(this).attr('href')
+      $.get( "/removeSessionAll", function(){
+          $.get( "/setSessionKeyValue/dealer/{{$dealer->name}}",function(){
+            window.location = '/search';
+          });
+      });
   });
   $('.dealer-tag').on('click',function(e){
       e.preventDefault();

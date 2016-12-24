@@ -1,7 +1,5 @@
 @extends('layouts.main')
 
-@section('title', 'Carsgone')
-
 @section('content')
 
 <!-- Vehicle Post start -->
@@ -420,7 +418,7 @@
 @endsection
 
 @section('javascript')
-
+<script src="/assets/js/dropzone.js"></script>
 <script>
 $(function() {
     var previewNode = document.querySelector("#template");

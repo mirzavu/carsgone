@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Carsgone')
+
 @section('content')
 <div class="main-container-outer">
    <div class="container">
@@ -132,6 +132,23 @@
                      <ul class="link-list">
                         @foreach($sidebar_data["models"] as $model)
                         <li><a href="{{Request::url()}}/model-{{$model->model_name}}">{{$model->model_name}} ({{$model->model_count}})</a></li>
+                        @endforeach
+                     </ul>
+                  </div>
+               </div>
+               @endif
+               <!-- panel end -->
+
+               <!-- panel start -->
+               @if(isset($sidebar_data["cities"]))
+               <div class="panel">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">Select City</h3>
+                  </div>
+                  <div class="panel-body">
+                     <ul class="link-list">
+                        @foreach($sidebar_data["cities"] as $city)
+                        <li><a href="{{Request::url()}}/city-{{$city->city_name}}">{{$city->city_name}} ({{$city->vehicles_count}})</a></li>
                         @endforeach
                      </ul>
                   </div>

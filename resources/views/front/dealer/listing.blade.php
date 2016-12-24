@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Dealer Listing')
+
 @section('content')
 <div class="main-container-outer">
    <div class="container">
@@ -88,11 +88,16 @@
                <div class="result-container">
                   @foreach($dealers as $dealer)
                   <div class="item">
-                     <a href="/dealer/{{$dealer->slug}}">
+                     
                      <div class="item-heading">
-                        <h3 class="item-title">{{$dealer->name}}</h3>
+                        <a href="/dealer/{{$dealer->slug}}">
+                          <h3 class="item-title">{{$dealer->name}}</h3>
+                        </a>
+                        <div class="dealer-badge">
+                            <span>{{$dealer->vehicles_count}} vehicles</span>
+                        </div>
                      </div>
-                     </a>
+                     
                      <div class="item-body">
                         <div class="item-body-right">
                            <div class="item-body-right-upper">

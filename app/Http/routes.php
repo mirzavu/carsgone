@@ -22,6 +22,7 @@
 	Route::get('/autoloans', 'PageController@autoloan');
 	Route::get('/autoloans/{slug}', 'PageController@viewLoanPage');
 	Route::get('/credit-application', 'CreditController@create');
+	Route::post('/credit-application', 'CreditController@send');
 
 	//edit post
 	Route::get('/vehicles/{id}/edit', 'PostController@editVehicle');
@@ -60,6 +61,7 @@
 
 //Authentication
 	Route::post('/signup', 'UserController@postSignUp');
+	Route::post('/dealer-signup', 'UserController@postDealerSignUp');
 	Route::post('/login', 'UserController@postSignIn');
 	Route::get('/logout', 'UserController@logout');
 	Route::get('/loggedInUser', 'UserController@loggedInUser');

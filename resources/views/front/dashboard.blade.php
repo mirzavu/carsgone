@@ -1,7 +1,5 @@
 @extends('layouts.main')
 
-@section('title', 'Carsgone')
-
 @section('content')
 <!-- Dashboard start -->
 <div class="dashboard-outer">
@@ -125,8 +123,13 @@
                                  <a href="/vehicle/{{$vehicle->slug}}">
                                  <div class="item-heading">
                                     <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}}</h3>
+                                    @if($vehicle->featured)
+                                    <div class="featured-badge">
+                                        <span>featured</span>
+                                    </div>
+                                    @endif
                                     <a href="/vehicles/{{$vehicle->id}}/edit" class="btn btn-action waves-effect waves-light waves-input-wrapper">Edit</a>
-                                    @if(empty($vehicle->featured))
+                                    @if(empty($vehicle->status_id))
                                     <button vehicle="{{$vehicle->id}}" class="btn activate-btn btn-action waves-effect waves-light waves-input-wrapper">Activate</button>
                                     @else
                                     <button vehicle="{{$vehicle->id}}" class="btn deactivate-btn btn-action waves-effect waves-light waves-input-wrapper">Deactivate</button>

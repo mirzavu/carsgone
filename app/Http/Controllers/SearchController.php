@@ -7,7 +7,6 @@ use App\Models\Vehicle;
 use App\Models\Make;
 use App\Models\Province;
 use App\Models\City;
-use App\Models\Dealer;
 use App\Models\VehicleModel;
 
 use App\Http\Requests; 
@@ -61,6 +60,10 @@ class SearchController extends Controller
 		{
 			$conditions->forget('distance');
 			$conditions->forget('province');
+		}
+		elseif($conditions->get('province'))
+		{
+			$conditions->forget('distance');
 		}
 		
 		//Sorting set
@@ -153,17 +156,8 @@ class SearchController extends Controller
 		//Get city
 		if($conditions->get('province') && !$conditions->get('city'))
 		{
-			$ss = Vehicle::ApplyFilter($conditions)
-					->with(['dealer.province' => function($query) {
-					    return $query->groupBy('province_name');
-					}])->get();
-			$ss = Province::where('province_name','=','Manitoba')->first()->cities()->withCount(['vehicles' => function ($query) use ($conditions) {
-					    $query->applyFilter($conditions);
-
-					}])->get();
-			foreach ($ss as $value) {
-				// dd($value);
-			}
+			 $province_id= Province::where('province_name','=',$conditions->get('province'))->value('id');
+			 $sidebar_data['cities'] = City::where('province_id','=',$province_id)->withCount('vehicles')->orderBy('vehicles_count', 'desc')->get();
 		}
 		return $sidebar_data;
 	}
@@ -220,7 +214,10 @@ class SearchController extends Controller
 
 	public function removeSessionAll(Request $request)
 	{
-		$request->session()->flush();
+		foreach ($this->filters as $value) {
+			$request->session()->forget($value);
+		}
+		
 	}
 
 	

@@ -49,7 +49,7 @@ class DealerController extends Controller
 
 		$data['sidebar_data'] = $this->getSidebarData($conditions);
 		$data['dealer_sort'] = $dealer_sort.'-'.$direction; 
-		$data['dealers'] = User::applyFilter($conditions)->orderBy($dealer_sort, $direction)->paginate(15);
+		$data['dealers'] = User::applyFilter($conditions)->withCount('vehicles')->orderBy($dealer_sort, $direction)->paginate(15);
 		$data['applied_filters'] = $this->getAppliedFilters($conditions);
 		$data['url_params'] = $params;
 		// $data['filters'] = $this->filters;

@@ -49,11 +49,23 @@ class HomeController extends Controller
         SEOMeta::addKeyword(['new cars', 'used cars', 'auto classifieds', 'auto loans Canada', 'trucks', 'SUVs', 'vans']);
 		$data['total'] = Vehicle::count();
 		$data['location'] = getLocation($request);
-		$data['provinces'] = Province::withCount('vehicles')->orderBy('province_name', 'asc')->get();
-		$data['makes'] = Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
-		$data['body_style_groups'] = BodyStyleGroup::withCount('vehicles')->orderBy('body_style_group_name', 'asc')->get();
+		$data['provinces'] = Cache::remember('home_provinces', 30, function() {
+				    return Province::withCount('vehicles')->orderBy('province_name', 'asc')->get();
+				});
+		// $data['provinces'] = Province::withCount('vehicles')->orderBy('province_name', 'asc')->get();
+		$data['makes'] = Cache::remember('home_makes', 30, function() {
+				    return Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
+				});
+		// $data['makes'] = Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
+		$data['body_style_groups'] = Cache::remember('home_body_style_groups', 30, function() {
+				    return BodyStyleGroup::withCount('vehicles')->orderBy('body_style_group_name', 'asc')->get();
+				});
+		// $data['body_style_groups'] = BodyStyleGroup::withCount('vehicles')->orderBy('body_style_group_name', 'asc')->get();
 
-		$prices = DB::table('vehicles')->select(DB::raw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`'))->groupBy('range')->get();
+		$prices = Cache::remember('home_prices', 30, function() {
+				    return DB::table('vehicles')->select(DB::raw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`'))->groupBy('range')->get();
+				});
+		// $prices = DB::table('vehicles')->select(DB::raw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`'))->groupBy('range')->get();
 
 		// $data['provinces'] = Cache::remember('provinces', 30, function() {
 		//     return Province::withCount('vehicles')->orderBy('province_name', 'asc')->get();

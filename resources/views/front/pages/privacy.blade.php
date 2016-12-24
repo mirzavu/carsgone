@@ -1,7 +1,5 @@
 @extends('layouts.main')
 
-@section('title', 'Carsgone')
-
 @section('content')
 <div class="help-container">
    <div class="container">

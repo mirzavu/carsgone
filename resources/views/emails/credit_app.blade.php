@@ -25,6 +25,14 @@
 		<th>Income</th>
 		<td>{{$data->income}}</td>
 	</tr>
+	<tr>
+		<th>Vehicle Type</th>
+		<td>{{$data->body}}</td>
+	</tr>
+	<tr>
+		<th>Budget</th>
+		<td>{{$data->budget}}</td>
+	</tr>
 </table>
 </body>
 </html>

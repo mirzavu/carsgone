@@ -1,7 +1,5 @@
 @extends('layouts.main')
 
-@section('title', 'Auto Loans')
-
 @section('content')
 <!-- approval start -->
 <div class="approval-outer">

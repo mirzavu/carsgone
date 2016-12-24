@@ -1,13 +1,11 @@
 @extends('layouts.main')
 
-@section('title', 'Carsgone')
-
 @section('content')
 <div class="vehicle-post-outer">
  <div class="container">
     <div class="wrapper">
        {{-- <form id="vehicle-form" method="post" action="/post/create"> --}}
-       {!! Form::open(['url' => '/credit-application', 'method' => 'PATCH', 'id' => 'credit-form']) !!}
+       {!! Form::open(['url' => '/credit-application', 'method' => 'POST', 'id' => 'credit-form']) !!}
        <div class="post-tab clearfix panel" id="credit_wizard">
           
             <div class="form-section">
@@ -28,7 +26,7 @@
                                     <p>Practical and sporty</p>
                                 </div>
                                 <div class="pricing-footer">
-                                  <a href="#" class="btn next-btn waves-effect waves-light">Choose</a>
+                                  <a href="#" body="car" class="btn next-btn waves-effect waves-light">Choose</a>
                                 </div>
                             </div>
                         </li>
@@ -47,7 +45,7 @@
                                     <p>Seating and cargo</p>
                                 </div>
                                 <div class="pricing-footer">
-                                  <a href="#" class="btn next-btn waves-effect waves-light">Choose</a>
+                                  <a href="#" body="van" class="btn next-btn waves-effect waves-light">Choose</a>
                                 </div>
                             </div>
                         </li>
@@ -65,7 +63,7 @@
                                     <p>Get me pre-approved for an auto loan 1st</p>
                                 </div>
                                 <div class="pricing-footer">
-                                  <a href="#" class="btn next-btn waves-effect waves-light">Get Approved Now</a>
+                                  <a href="#" body="choose later" class="btn next-btn waves-effect waves-light">Get Approved Now</a>
                                 </div>
                             </div>
                         </li>
@@ -84,7 +82,7 @@
                                     <p>Cargo and hauling</p>
                                 </div>
                                 <div class="pricing-footer">
-                                  <a href="#" class="btn next-btn waves-effect waves-light">Choose</a>
+                                  <a href="#" body="suv" class="btn next-btn waves-effect waves-light">Choose</a>
                                 </div>
                             </div>
                         </li>
@@ -103,7 +101,7 @@
                                     <p>Recreation and Work</p>
                                 </div>
                                 <div class="pricing-footer">
-                                  <a href="#" class="btn next-btn waves-effect waves-light">Choose</a>
+                                  <a href="#" body="truck" class="btn next-btn waves-effect waves-light">Choose</a>
                                 </div>
                             </div>
                         </li>
@@ -118,9 +116,9 @@
                   <div class="row">
                      <div class="col-sm-12">
  
-                        <div id="year-range" class="filter-margin"></div>
-                        <p class="price-range-output">
-                           <span><b id="min-year"></b></span>
+                        <div id="budget-range" class="filter-margin"></div>
+                        <p class="budget-range-output">
+                           <span><b id="budget-val"></b></span>
                         </p>
                      
                      </div>
@@ -172,12 +170,13 @@
                      </div>
                   </div>
                   <div class="row">
-                  	<div class="col-sm-6 display-table">
-                        <div class="input-box">
+                  	<div class="col-sm-6">
+                        <div class="input-box margin-checkbox">
                           
-                          	<input type="checkbox" class="filled-in" id="filled-in-box" />
+                          	<input type="checkbox" class="filled-in" name="privacy" id="filled-in-box" required />
       						          <label for="filled-in-box">I agree to <a target="_blank" href="/privacy">privacy policy</a></label>
-                            
+                            <input id="input-body" type="hidden" name="body">
+                            <input id="input-budget" type="hidden" name="budget">
                         </div>
                      </div>
                   </div>
@@ -201,7 +200,7 @@
         markPrevSteps: true,
         nextBtn: $('<a class="next-btn sf-right sf-btn btn waves-effect waves-light " href="#">NEXT <i class="icofont icofont-rounded-right"></i></a>'),
         prevBtn: $('<a class="prev-btn sf-left sf-btn btn grey waves-effect waves-light  " href="#"><i class="icofont icofont-rounded-left"></i> PREV</a>'),
-        // finishBtn: $(''),
+        finishBtn: $('<button id="credit-submit" class="finish-btn sf-right sf-btn sf-btn-finish btn waves-effect waves-light" type="submit" value="FINISH">Submit</button>'),
         onNext: function(i, wizard) {
             
             console.log(i,wizard)
@@ -220,6 +219,11 @@
     var form = $("#credit-form");
     form.validate({
                 rules: {},
+                messages:{
+                    privacy: {
+                      required : "Please accept the privacy policy"
+                    }
+                },
                 // errorClass: "invalid form-error",       
                 // errorElement : 'div',       
                 errorPlacement: function(error, element) {
@@ -243,21 +247,25 @@
 
                 },
                 submitHandler: function(form) {
+                  $('credit-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
                     $.ajax({
                         url: form.action,
                         type: form.method,
                         data: $(form).serialize(),
                         success: function(response) {
-                            window.location = response.url;
+                            if(response.status=="success")
+                            {
+                              location.reload()
+                            }
                         }
                     });
                 }
             })
 
 
-var yearSlider = document.getElementById('year-range');
+var budgetSlider = document.getElementById('budget-range');
 
-noUiSlider.create(yearSlider, {
+noUiSlider.create(budgetSlider, {
     start: [2],
     decimals: 0,
     thousand: ',',
@@ -266,21 +274,26 @@ noUiSlider.create(yearSlider, {
     range: {
         'min': 1000,
 
-        'max': 50000
+        'max': 150000
     },
     format: wNumb({
-        decimals: 0
+        decimals: 0,
+        prefix: '$'
     })
 });
 
 
-var yearValues = [
-    document.getElementById('min-year'),
-    document.getElementById('max-year')
+var budgetValue = [
+    document.getElementById('budget-val')
 ];
 
-yearSlider.noUiSlider.on('update', function(values, handle) {
-    yearValues[handle].innerHTML = values[handle];
+budgetSlider.noUiSlider.on('update', function(values, handle) {
+    budgetValue[handle].innerHTML = values[handle];
+    $('#input-budget').val(values[handle])
 });
+
+$('.pricing-footer > a').on('click',function(e){
+  $('#input-body').val($(this).attr('body'))
+})
 </script>
 @endsection

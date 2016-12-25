@@ -130,7 +130,7 @@ class Strathcom extends Command
                 $dealer->status_id = 1;
                 $dealer->role = 'dealer';
                 $dealer->save();
-                echo "\nDealer Name found in DB: " . $dealer->name . ' : Dealer ID: '.$dealer->id."\n";
+                echo "\nDealer Name : " . $dealer->name . ' : Dealer ID: '.$dealer->id."\n";
                 $dealer_cnt++;
                 Vehicle::where('user_id', $dealer->id)->update(['status_id' => 2]);
             }

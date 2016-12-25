@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use Validator;
-use Debugbar;
 use App\Http\Requests;
 use App\Mailers\AppMailer;
 use App\Models\User;

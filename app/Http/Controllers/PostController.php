@@ -15,7 +15,6 @@ use App\Models\VehiclePhoto;
 use App\Models\DriveType;
 use App\Models\FuelType;
 use App\Models\Payment;
-use Barryvdh\Debugbar\Facade as Debugbar;
 use Image;
 use File;
 use SEOMeta;

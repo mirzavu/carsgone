@@ -56,20 +56,9 @@ if (!function_exists('getLocation')) {
 			if ($ip[0]==':') {
 				$ip = '123.237.131.97';
 			}
-			// $loc = json_decode(file_get_contents('http://ip-api.com/json/'.$ip),'true');
-			$loc['zip'] = '682012';
-			$loc['lat'] = '12';
-			$loc['lon'] = '23';
-			$loc['region'] = 'region';
-			$loc['place'] = 'Ernakulam';
-			// $loc['place'] = $loc['city'];
-
+			$loc = json_decode(file_get_contents('http://ip-api.com/json/'.$ip),'true');
+			$loc['place'] = $loc['city'];
 			unset($loc['city']); //city is used in search page, so no clash
-			$request->session()->put('zip', '682012');
-			$request->session()->put('place', 'Ernakulam');
-			$request->session()->put('lat', '12');
-			$request->session()->put('lon', '67');
-			$request->session()->put('region', 'region');
 			$request->session()->put('zip', $loc['zip']);
 			$request->session()->put('place', $loc['place']);
 			$request->session()->put('lat', $loc['lat']);

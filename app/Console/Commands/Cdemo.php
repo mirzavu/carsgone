@@ -136,7 +136,7 @@ class Cdemo extends Command
                         continue;
                     }
                     $model_id = VehicleModel::where([
-                        ['model_name', '=', (string) $vehicle_xml->Model],
+                        ['model_name', '=', (string) $vehicle_xml->model],
                         ['make_id', '=', $make_id]
                     ])->value('id');
                     if($model_id)

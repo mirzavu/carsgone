@@ -63,7 +63,7 @@ class Boost extends Command
         $ftp_user_name = 'carsgone';
         $ftp_user_pass = 'boost2carsgone';
 
-        // exec("curl -u carsgone:boost2carsgone 'ftp://ftp.boostmotorgroup.com/Export.xml' -o ".$local_file);
+        exec("curl -u carsgone:boost2carsgone 'ftp://ftp.boostmotorgroup.com/Export.xml' -o ".$local_file);
         $xmlReader = new \XMLReader;
         $xmlReader->open($local_file);
         $province_hash = array(
@@ -80,12 +80,7 @@ class Boost extends Command
             "MB" => "Manitoba",
             "PE" => "Prince Edward Island"
             );
-        // $id_maps = Dealer::select(array('id', 'partner_dealer_id'))->where('partner_id',2)->get();
-        
-        // $feed_dealers = array();
-        // foreach ($id_maps as $value) {
-        //     $feed_dealers[$value->partner_dealer_id] = $value->id;
-        // }
+
         $vehicle_cnt = 0;
         $vehicle_upd = 0;
         $dealer_cnt = 0;
@@ -221,6 +216,6 @@ class Boost extends Command
                 $vehicle->options()->attach($option_ids);
             }
         }
-        dd($email);
+        Log::info($email);
     }
 }

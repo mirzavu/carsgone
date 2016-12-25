@@ -192,6 +192,6 @@ class Cdemo extends Command
             }
         }
             
-        dd($email);
+        Log::info($email);
     }
 }

@@ -218,5 +218,6 @@ class Strathcom extends Command
             }
             
         }
+        Log::info($email);
     }
 }

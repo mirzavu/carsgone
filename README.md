@@ -16,7 +16,7 @@ sudo find ./ -type d -exec chmod 755 {} \;
 sudo chgrp -R mirza_ekm storage bootstrap/cache
 sudo chmod -R ug+rwx storage bootstrap/cache
 
-
+git config core.fileMode false
 
 sudo apt-get install curl php-cli php-mbstring git unzip
 cd ~

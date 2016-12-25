@@ -3,6 +3,7 @@
 /node_modules/
 /bootstrap/cache/
 /public/uploads/vehicle/
+/storage/
 .env
 .env.*.php
 .env.php

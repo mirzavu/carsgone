@@ -165,7 +165,7 @@ class Boost extends Command
                     $vehicle->model_id = $model_id;
                 else
                 {
-                    $email[$i++] = "Model ".(string) $xml->Model." ".(string) $xml->Make;
+                    $email[$i++] = "Model ".(string) $xml->Model." ".(string) $xml->Make.$make_id;
                     continue;
                 }
                 $body_style_id = BodyStyleGroup::where('body_style_group_name',(string) $xml->Body_Style)->value('id');

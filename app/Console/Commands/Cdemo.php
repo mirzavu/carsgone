@@ -143,7 +143,7 @@ class Cdemo extends Command
                         $vehicle->model_id = $model_id;
                     else
                     {
-                        $email[$i++] = "Model ".(string) $vehicle_xml->model." ".(string) $vehicle_xml->make;
+                        $email[$i++] = "Model ".(string) $vehicle_xml->model." ".(string) $vehicle_xml->make.$make_id;
                         continue;
                     }
                     $vehicle->trim = (string)$vehicle_xml->trim;

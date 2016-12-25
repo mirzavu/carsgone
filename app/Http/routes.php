@@ -17,7 +17,7 @@
 		'as' => 'home'
 	]);
 	Route::get('/fb', 'HomeController@fb');
-	Route::get('/searchterm/{term}', 'HomeController@searchTerm');  //from homepage
+	Route::get('/searchterm', 'HomeController@searchTerm');  //from homepage
 	Route::get('/getModels/{term}', 'HomeController@getModels');
 	Route::get('/autoloans', 'PageController@autoloan');
 	Route::get('/autoloans/{slug}', 'PageController@viewLoanPage');
@@ -50,6 +50,7 @@
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
 	Route::get('/search', 'SearchController@searchHandler');
 
+	//Post Vehicle
 	Route::get('/post', 'PostController@newPost');
 	Route::get('/post/done', 'PostController@getDone');
 	Route::post('/post/create', 'PostController@create');

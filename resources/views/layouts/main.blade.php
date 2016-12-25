@@ -61,9 +61,13 @@
           <a href="/search" class="hero-btn"><span>Browse Cars</span></a>
           <div class="header-search">
           <div class="header-search-box">
-          	<input id="search_text" type="text" value="" placeholder="Full content search" class="search-input" />
+            <form id="search-form" action="/searchterm" method="GET">
+          	<input id="search_text" name="search_text" type="text" value="" placeholder="Full content search" class="search-input" required />
+            {{ csrf_field() }}
+            
             {{-- fa-refresh fa-spin fa-search --}}
             <button id="search_icon" type="submit" class="search-submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </form>
             </div>
           </div>
          
@@ -268,22 +272,23 @@ $('#make-select').on('change',function(){
     });
 });
 
-
-$('#search_icon').on('mousedown',function(){
-    $(this).children('i').removeClass( "fa-search" ).addClass( "fa-refresh fa-spin" );
-    $(this).css({opacity:0.8})
-    var term = $('#search_text').val();
-    var response = '';
-    $.ajax({ type: "GET",   
-             url: "{{ url('searchterm/') }}/"+term,   
-             async: false,
-             success : function(response)
-             {
-                 window.location = "{{ url('search/') }}/"+response;
-             }
-    });
-
-})
+var form = $("#search-form");
+            form.validate({    
+                errorPlacement: function(error, element) {
+                    return false;
+                },
+                submitHandler: function(form) {
+                  $('#search_icon').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>');
+                    $.ajax({
+                             url: form.action,
+                             type: form.method,
+                             data: $(form).serialize()+'&_token={{ csrf_token() }}',
+                             success: function(response) {
+                                 window.location = "{{ url('search/') }}/"+response.link;
+                             }
+                         });
+                }
+            })
 
 $('#quick_search').on('click',function(){
     var make = $('#make-select option:selected').text();

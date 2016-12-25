@@ -7,7 +7,7 @@ Include /etc/phpmyadmin/apache.conf  (at bottom)
 
 sudo apt-get install git
 install git-lfs
-sudo git clone https://github.com/mirzavu/carsgone.git html
+sudo git clone -b dev https://github.com/mirzavu/carsgone.git html
 
 Permissions (Inside docroot)
 sudo chown -R ubuntu:ubuntu ./
@@ -16,9 +16,7 @@ sudo find ./ -type d -exec chmod 755 {} \;
 sudo chgrp -R mirza_ekm storage bootstrap/cache
 sudo chmod -R ug+rwx storage bootstrap/cache
 
-git checkout .
-git checkout dev
-git pull
+
 
 sudo apt-get install curl php-cli php-mbstring git unzip
 cd ~
@@ -30,13 +28,12 @@ composer install
 
 create database
 configure .env
-cd docroot
-sudo chown -R mirza_ekm:mirza_ekm ./
-sudo find ./ -type f -exec chmod 644 {} \;
+
+comment out config/database.php socket
 
 php artisan migrate
 php artisan db:seed
-php -d memory_limit=3G artisan db:seed --class=PostalCodesTableSeeder
+//php -d memory_limit=3G artisan db:seed --class=PostalCodesTableSeeder
 
 sudo vim /etc/apache2/sites-available/000-default.conf
 add this

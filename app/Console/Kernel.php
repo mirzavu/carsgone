@@ -27,12 +27,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
-        $filePath = "storage/logs/feeds/boost/".date("Y-m-d")."log";
-        $schedule->command('feed:boost')->dailyAt('13:00')->sendOutputTo($filePath);
+        $log_boost = "storage/logs/feeds/boost/".date("Y-m-d")."log";
+        $schedule->command('feed:boost')->cron('10 4 * * 1,5')->sendOutputTo($log_boost);
 
-        $filePath = "storage/logs/feeds/cdemo/".date("Y-m-d")."log";
-        $schedule->command('feed:cdemo')->dailyAt('14:00')->sendOutputTo($filePath);
+        $log_cdemo = "storage/logs/feeds/cdemo/".date("Y-m-d")."log";
+        $schedule->command('feed:cdemo')->cron('10 4 * * 2,6')->sendOutputTo($log_cdemo);
+
+        $log_strathcom = "storage/logs/feeds/strathcom/".date("Y-m-d")."log";
+        $schedule->command('feed:strathcom')->cron('10 4 * * 0,4')->sendOutputTo($log_strathcom);
     }
 }

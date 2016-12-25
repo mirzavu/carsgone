@@ -110,14 +110,13 @@
             	<div class="row">
                     <div class="col-sm-4 footer-box">
                     	    <a href="index.html" class="footer-logo"><img src="/assets/images/footer-logo.png" alt="" /></a>
-                            <h5>Contact</h5>
-                            <p>198 West 21th Street, Suite 721, New York NY5109 Pacific Coast Highway, Los Angeles CA</p>
-                            <p>Email: <a href="mailto:youremail@yourdomain.com">youremail@yourdomain.com</a></p>
-                            <p>Phone: +88 (0) 101 0000 000</p>
+                            {{-- <h5>Contact</h5> --}}
+                            <p>17536 – 105 Avenue, Edmonton, Alberta  T5S 1G4</p>
+                            <p>Email: <a href="mailto:youremail@yourdomain.com">support@carsgone.com</a></p>
+                            <p>Phone: 1-855-328-6002</p>
                             <ul class="social-links">
-                            	<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            	<li><a href="https://www.facebook.com/Carsgonecom-108789885413"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-vine"></i></a></li>
                                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                                 <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                             </ul> 

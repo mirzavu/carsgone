@@ -319,7 +319,7 @@ class PostController extends Controller
         }
         $vehicle = Vehicle::withoutGlobalScopes()->findorFail($id);
 		$vehicle->update($request->all());
-		if ($request->has('free')) {
+		if ($request->has('free') || $request->has('paid')) {
 			if(Auth::user()->verified)
 			{
 				$request->session()->flash('success', 'Your changes are saved! Check <a href="/dashboard">Dashboard</a>');

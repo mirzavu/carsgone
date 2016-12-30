@@ -346,6 +346,11 @@ $('#login-submit').on('click',function(e){
       toastr.error(data.error,'Error')
     }
     console.log(data);
+  }).fail(function(data){
+    if(data.status=="fail")
+    {
+      toastr.error('Token Expired. Please refresh page')
+    }
   });
 });
 

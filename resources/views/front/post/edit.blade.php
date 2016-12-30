@@ -8,7 +8,7 @@
     <div class="wrapper">
        {{-- <form id="vehicle-form" method="post" action="/post/create"> --}}
        {!! Form::model($vehicle, ['url' => '/vehicles/'.$vehicle->id, 'method' => 'PATCH', 'id' => 'vehicle-form']) !!}
-       <div class="post-tab clearfix panel" id="wizard_example">
+       <div class="post-tab clearfix panel" id="post-edit-form">
           
             <div class="form-section">
                <legend>Vehicle Info</legend>
@@ -197,7 +197,16 @@
             <div class="form-section">
                <legend>Promote Vehicle</legend>
                @if($vehicle->featured)
-                <p>Featured already</p>
+                <div class="promote-vehicle">
+                  <div class="promote-vehicle-left">
+                     <h4>Your Ad is featured!</h4>
+                     <p>Your ad appears in the <span>search results</span> on the site for <span>30 days</span></p>
+                  </div>
+                  <div class="promote-vehicle-right">
+                     <label for="vehicle-price-free">29 days remaining</label>
+                  </div>
+               </div>
+                <input name="paid" type="hidden" value="paid">
                @else
                <div class="promote-vehicle">
                   <div class="promote-vehicle-left">
@@ -205,17 +214,16 @@
                      <p>For 30 days your <span>Ad will appear</span> on the site for <span>FREE</span></p>
                   </div>
                   <div class="promote-vehicle-right">
-                     <input name="free" type="checkbox" class="promote-check" checked id="vehicle-price-free">
+                     <input name="free" type="checkbox" class="filled-in promote-check" checked id="vehicle-price-free">
                      <label for="vehicle-price-free">FREE</label>
                   </div>
                </div>
                <div class="promote-vehicle">
                   <div class="promote-vehicle-left">
-                     <h4>On Our Website!</h4>
                      <p>For <span>30 days</span> your ad will appear in the <span>"Featured Vehicles"</span> sections and enjoy<br /> <span>increased visibility</span> in the <span>search results.</span></p>
                   </div>
                   <div class="promote-vehicle-right">
-                     <input type="checkbox" class="promote-check" id="vehicle-price">
+                     <input type="checkbox" class="filled-in promote-check" id="vehicle-price">
                      <label for="vehicle-price"><span>$</span>14.95</label>
                   </div>
                </div>
@@ -226,9 +234,6 @@
                   
                </div>
                @endif
-               <div class="form-group submit-btn">
-                     <button id="submit-btn" class="finish-btn btn waves-effect waves-light" type="submit">Save Changes</button>
-               </div>
             </div>
           
        </div>
@@ -288,7 +293,7 @@
 @endsection
 
 @section('javascript')
-
+<script src="/assets/js/dropzone.js"></script>
 <script>
 $(function() {
     var previewNode = document.querySelector("#template");
@@ -340,7 +345,7 @@ $(function() {
         accept: function(file, done) {
           console.log(file)
           console.log(file.name)
-          var image_path  = 'uploads/vehicle/'+file_prefix + '_' + file.name;
+          var image_path  = '/uploads/vehicle/'+file_prefix + '_' + file.name;
           var data = {
                 image_path: image_path,
                 vehicle_id: {{ $vehicle->id}},
@@ -402,6 +407,84 @@ $(function() {
         });
 
     })
+
+
+
+//------Form-----multistep----// 
+
+var sfw = $("#post-edit-form").stepFormWizard({
+        theme: 'sun',
+        height: 'auto',
+        markPrevSteps: true,
+        nextBtn: $('<a class="next-btn sf-right sf-btn btn waves-effect waves-light " href="#">NEXT <i class="icofont icofont-rounded-right"></i></a>'),
+        prevBtn: $('<a class="prev-btn sf-left sf-btn btn grey waves-effect waves-light  " href="#"><i class="icofont icofont-rounded-left"></i> PREV</a>'),
+        finishBtn: $('<button id="submit-btn" class="finish-btn btn sf-btn sf-btn-finish waves-effect waves-light" type="submit" value="FINISH">Save Changes</button>'),
+        onNext: function(i, wizard) {
+            var form = $("#vehicle-form");
+            form.validate({
+                rules: {},
+                // errorClass: "invalid form-error",       
+                // errorElement : 'div',       
+                errorPlacement: function(error, element) {
+                    if (element.is('select')) {
+                        error.appendTo(element.parent().parent());
+                    } else {
+                        error.appendTo(element.parent());
+                    }
+
+                },
+                focusInvalid: false,
+                invalidHandler: function(form, validator) {
+
+                    if (!validator.numberOfInvalids())
+                        return;
+                    $('html, body').animate({
+                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                    }, 500);
+                    $(validator.errorList[0].element).focus()
+
+                },
+                submitHandler: function(form) {
+                    $.get("/loggedInUser", function(data) {
+                        if (data.status == "success") {
+                            $('#submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:2.0rem" aria-hidden="true"></i>  SAVING VEHICLE');
+                            $.ajax({
+                                url: form.action,
+                                type: form.method,
+                                data: $(form).serialize(),
+                                success: function(response) {
+                                    window.location = response.url;
+                                }
+                            });
+                        } else {
+                            $('#post-member').openModal();
+                        }
+                    });
+                }
+            })
+            if (form.valid() == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+    });
+    sfw.refresh();
+
+    $('input.promote-check').on('change', function() {
+        $('input.promote-check').not(this).prop('checked', false);
+    });
+
+    $("#post-edit-form").on('sf-step-after', function(e, from, to, data) {
+            $('html, body').animate({
+                scrollTop: $('.sf-content').offset().top - 60
+            }, 300);
+            e.preventDefault();
+        })
+
+    //------Form-----multistep--end--// 
 
 })
 </script>
@@ -472,5 +555,6 @@ $('#post-signup-submit').on('click', function(e) {
         console.log(data);
     });
 });
+
 </script>
 @endsection

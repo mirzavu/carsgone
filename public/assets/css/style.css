@@ -9,7 +9,7 @@ ul { list-style:none; }
 a:focus, input:focus, textarea:focus, *:focus { outline:0 !important; box-shadow:none !important; }
 .nobg { background:transparent !important; }
 /* =================reset css ends here================= */
-body { font-size:14px; line-height:24px;  font-weight:400; font-family:'Roboto'; color:#323232; background:#f2f2f2;  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;  }
+body { font-size:14px; line-height:24px;  font-weight:400; font-family:'Roboto'; color:#232f3e; background:#f2f2f2;  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;  }
 .container { width:100%; max-width:1140px; }
 a, input, button { text-decoration:none; color: inherit; outline:none; transition: all 0.3s ease-in; -moz-transition: all 0.3s ease-in; -o-transition: all 0.3s ease-in; -webkit-transition: all 0.3s ease-in; -ms-transition: all 0.3s ease-in; }
 a img { border: 0px none; }
@@ -240,7 +240,7 @@ button.btn-action{right:62px;}
 .item-title {margin-top: 0;margin-bottom: 0;font-size: 16px;text-transform: uppercase;color: #fff;line-height: 24px;letter-spacing: 1px;}
 .item-body {padding: 13px 13px 13px 13px;width:100%;display:inline-block;vertical-align:top;}
 .item-body-left{width: 26%;float:left; position:relative;}
-.item-body-left img{width:100%; }
+.item-body-left img{object-fit: cover;width:100%;height: 150px; }
 .item-body-right{width: 74%;float:left;padding: 0 0 0 15px;}
 .item-body-right-upper{width:100%; display:inline-block; vertical-align:top;}
 .item-body-right-lower{width:100%; display:inline-block; vertical-align:top;}
@@ -401,7 +401,7 @@ ul.table-list li a{color:#5fc0ed;}
 .panel.full .panel-heading{background:#3e5062;}
 .panel.full .panel-heading h2{text-transform:uppercase; font-family:'Lato'; font-weight:900; text-align:center; color:#fff; margin-bottom:0;}
 .panel.full .panel-body{padding:30px 60px; font-family: 'Roboto';}
-.panel.full .panel-body h3{color:#000; font-weight:400; text-transform:none; letter-spacing:0;}
+.panel.full .panel-body h3{color:#3e5062; font-weight:400; text-transform:none; letter-spacing:0;}
 .btn{font-family:'Lato'; background:#5fc0ed;}
 .browse-dealership-outer{background:url(../images/browers-dealership.jpg) no-repeat left top; background-size:cover;}
 .browse-dealership{padding:20px 80px; color:#fff;}
@@ -651,15 +651,15 @@ fieldset label{font-size:18px; font-weight:700; color:#3b4c5d; text-align:right;
 .dropzone .dz-preview .dz-success-mark{background:#009cde; background:-moz-linear-gradient(top,#e1f3fb 0%,#20a9e2 100%); background:-webkit-linear-gradient(top,#e1f3fb 0%,#20a9e2 100%); background: linear-gradient(to bottom,#e1f3fb 0%,#20a9e2 100%); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e1f3fb',endColorstr='#20a9e2',GradientType=0);color:#fff;top:4px;width:34px;padding: 2px 0;border-radius:50%; border: solid 3px #fff;box-shadow: 0 0 10px rgba(0,0,0,0.3);}
 .promote-vehicle{background-color:#f7f7f7; border:solid 1px #e3e3e3; border-radius:2px; box-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.16); width:calc(100% - 70px); display:table; margin:0 35px;}
 .promote-vehicle-left{width:75%; display:table-cell; vertical-align:middle; padding:25px 30px;}
-.promote-vehicle-right{width:25%; display:table-cell; vertical-align:middle; text-align:right; padding:25px 30px; padding-right:5%; background-color:#f3f3f3;}
-.promote-vehicle h4{font-size:22px; font-weight:700; text-align:left; color:#020202; text-transform:capitalize;}
-.promote-vehicle p{font-weight:600;}
+.promote-vehicle-right{width:25%; display:table-cell; vertical-align:middle; text-align:right; padding:25px 30px; padding-right:5%; background-color:#fff;}
+.promote-vehicle h4{font-size:30px; font-weight:500; text-align:left; color:#8c8c8c; text-transform:capitalize;}
+.promote-vehicle p{font-weight: 300;font-size: 20px;}
 .promote-vehicle p span{color:#30afe4;}
 .promote-vehicle-right [type="checkbox"] + label{font-size:32px; color:#12a5dc; padding-left:0; padding-right:35px;}
-.promote-vehicle-right [type="checkbox"] + label:before,.promote-vehicle-right [type="checkbox"]:not(.filled-in) + label:after{left:auto; right:0; top:0;}
-.promote-vehicle-right [type="checkbox"]:checked + label:before{top:-4px; right:5px;}
+.promote-vehicle-right [type="checkbox"] + label:before,.promote-vehicle-right [type="checkbox"] + label:after{left:auto; right:0; top:0;}
+.promote-vehicle-right [type="checkbox"]:checked + label:before{top:0px; right:11px;left: auto;}
 .promote-vehicle.paypal{background-color:transparent; padding:50px; box-shadow:none; text-align:center;}
-.promote-vehicle.paypal p{font-size:16px;}
+.promote-vehicle.paypal p{font-size:16px;text-align: center;}
 .promote-vehicle.paypal > img{padding-right:20px;}
 .promote-vehicle.paypal h4{display:inline-block; font-size:24px; vertical-align:middle; margin-bottom:0; padding:15px 20px; border-left:solid 1px #dadada;}
 .promote-vehicle.paypal h4 span{color:#12a5dc;}
@@ -667,6 +667,7 @@ fieldset label{font-size:18px; font-weight:700; color:#3b4c5d; text-align:right;
 .submit-btn input{font-size:18px; font-weight:700; padding:5px 15px;}
 .sf-controls{padding:0 35px 40px 25px;}
 .sf-animating .sf-viewport{overflow:hidden;}
+.sf-controls.clearfix{text-align: center;}
 
 
 /* ============ Vehicle Post Page End ================= */
@@ -683,7 +684,7 @@ label.error:before {content: ""; width: 0;  height: 0; float: left; border-botto
 .alert-outer .wrapper{padding-bottom:0; padding-top:0;}
 .alert-outer .alert{margin-bottom:0;position:relative;padding-left: 70px;font-weight: 400;border: 0; margin-top:30px;}
 .alert .close{position: absolute; top: -10px; right: -10px; color: #555; font-size: 20px; line-height: 18px; width: 20px; height: 20px; background: #fff; border-radius: 50%; border: solid 1px #555; opacity: 1;}
- .alert-outer .icon {position: absolute;left: 0;top: 0;font-size: 24px;height: 100%;width: 60px;border-right: solid 1px #ccc;line-height: 30px;padding-left: 15px;}
+ .alert-outer .icon {position: absolute;left: 0;top: 0;font-size: 24px;height: 100%;width: 60px;border-right: solid 1px #ccc;padding: 15px;}
 .alert-outer .alert-success {background-color: #dff0d8;border-color: #d6e9c6;color: #3c763d;}
 .alert-outer .alert-danger {background-color: #f2dede; border-color: #ebccd1; color: #a94442;}
 .alert-outer .alert strong{display:block;}

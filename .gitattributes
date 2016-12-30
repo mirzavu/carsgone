@@ -1,2 +1,2 @@
 * text=auto
-database/seeds/PostalCodesTableSeeder.php filter=lfs diff=lfs merge=lfs -text
+#database/seeds/PostalCodesTableSeeder.php filter=lfs diff=lfs merge=lfs -text

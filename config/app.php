@@ -154,9 +154,10 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        
         Backpack\Base\BaseServiceProvider::class,
         Backpack\CRUD\CrudServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
         // Backpack\Generators\GeneratorsServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         // Barryvdh\Debugbar\ServiceProvider::class,

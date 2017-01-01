@@ -92,11 +92,34 @@
 
 //Route::auth();
 
+/****  ADMIN PANEL **********/
 	Route::group(['namespace' => 'Admin','middleware' => 'admin', 'prefix' => config('backpack.base.route_prefix')], function ()
 	{
 		CRUD::resource('make', 'MakeCrudController');
 		CRUD::resource('model', 'VehicleModelCrudController');
-		// CRUD::resource('dealer', 'DealerCrudController');
 		CRUD::resource('dealer', 'UserCrudController');
 		CRUD::resource('content', 'ContentPageCrudController');
 	});
+
+	Route::group(['namespace' =>'Admin', 'prefix' => config('backpack.base.route_prefix')], function () {
+    	Route::get('dashboard', 'AdminController@dashboard');
+    	Route::auth();
+	});	
+
+/****  ADMIN PANEL END**********/
+
+// Route::group(
+//                 [
+//                     'middleware' => 'web',
+//                     'prefix'     => config('backpack.base.route_prefix'),
+//                     'namespace'     => '..\..\..\Backpack\Base\Http\Controllers',
+//                 ],
+//                 function () {
+//                     // setup the auth routes
+//                     Route::auth();
+//                     Route::get('logout', 'Auth\LoginController@logout');
+
+//                     // setup the dashboard routes
+//                     Route::get('dashboard', 'AdminController@dashboard');
+//                     Route::get('/', 'AdminController@redirect');
+//                 });

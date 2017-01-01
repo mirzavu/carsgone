@@ -28,8 +28,8 @@
                 <div class="info-box">
                   <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
                   <div class="info-box-content">
-                    <span class="info-box-text">Messages</span>
-                    <span class="info-box-number">1,410</span>
+                    <span class="info-box-text">Vehicles</span>
+                    <span class="info-box-number">{{ $vehicles_count }}</span>
                   </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
               </div><!-- /.col -->
@@ -37,8 +37,8 @@
                 <div class="info-box">
                   <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
                   <div class="info-box-content">
-                    <span class="info-box-text">Bookmarks</span>
-                    <span class="info-box-number">410</span>
+                    <span class="info-box-text">Dealers</span>
+                    <span class="info-box-number">{{ $dealers_count}}</span>
                   </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
               </div><!-- /.col -->
@@ -46,8 +46,8 @@
                 <div class="info-box">
                   <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
                   <div class="info-box-content">
-                    <span class="info-box-text">Uploads</span>
-                    <span class="info-box-number">13,648</span>
+                    <span class="info-box-text">Users</span>
+                    <span class="info-box-number">{{ $users_count }}</span>
                   </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
               </div><!-- /.col -->
@@ -55,8 +55,8 @@
                 <div class="info-box">
                   <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
                   <div class="info-box-content">
-                    <span class="info-box-text">Likes</span>
-                    <span class="info-box-number">93,139</span>
+                    <span class="info-box-text">Extra</span>
+                    <span class="info-box-number">0</span>
                   </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
               </div><!-- /.col -->

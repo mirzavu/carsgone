@@ -142,11 +142,4 @@ class HomeController extends Controller
 		echo json_encode($models);
 	}
 
-	public function fb()
-	{
-		
-
-		
-	}
-
 }

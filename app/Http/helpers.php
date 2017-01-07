@@ -53,7 +53,7 @@ if (!function_exists('getLocation')) {
 		else
 		{
 			$ip = $request->ip();
-			if ($ip[0]==':') {
+			if ($ip[0]==':' || $ip=="137.97.229.196") {
 				$ip = '50.65.193.19';
 			}
 			//If a bot arrives, serving sample location

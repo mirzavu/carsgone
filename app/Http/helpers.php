@@ -43,7 +43,8 @@ if (!function_exists('classActiveOnlySegment')) {
 if (!function_exists('getLocation')) {
 	function getLocation($request)
 	{
-		if ($request->session()->has('zip')) {
+
+		if (!empty($request->session()->get('zip'))) {
 			$loc['zip'] = $request->session()->get('zip');
 			$loc['place'] = $request->session()->get('place');
 			$loc['lat'] = $request->session()->get('lat');

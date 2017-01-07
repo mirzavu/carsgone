@@ -9514,8 +9514,8 @@ ul.social-links li a:hover{ background:#4dc3ff; color:#fff; }
 .filter-box .down{bottom:0;}
 .filter-box .up:before, .filter-box .down:before{content:"\f077"; font-family:"fontAwesome"; width:100%; height:100%; float:left; position:absolute; top:0; left:0; font-size:11px; color:#333; text-align:center; }
 .filter-box .down:before{content:"\f078";}
-.item { margin-bottom: 20px; background-color: #fff;  border-radius: 2px;transition: all 0.2s ease-in; -moz-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; -webkit-transition: all 0.2s ease-in; -ms-transition: all 0.2s ease-in; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
-.item:hover{box-shadow:0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
+.item { margin-bottom: 20px; background-color: #fff;  border-radius: 2px;transition: all 0.1s ease-in; -moz-transition: all 0.1s ease-in; -o-transition: all 0.1s ease-in; -webkit-transition: all 0.1s ease-in; -ms-transition: all 0.1s ease-in; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
+.item:hover{box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23); }
 .item-heading {padding: 10px 34px; padding-right:150px; position:relative; border-bottom: 1px solid transparent;border-top-left-radius: 2px;border-top-right-radius: 2px;background:#3e5062;}
 .btn-action{position: absolute; top: 6px; right: 6px; padding: 8px 12px; font-size: 12px;}
 button.btn-action{right:62px;}
@@ -9768,7 +9768,7 @@ ul.dealer-info-list{text-align:center;display: inline-block;vertical-align: top;
 .dealer-page-outer .cd-slider-nav li.selected a{color:#fff;}
 .dealer-page-outer .tab-content{padding:40px 15px 15px;}
 .popular-item-list.bordered li{margin-bottom:25px;}
-.popular-item-list.bordered li a{text-align: center; padding: 10px 0; font-weight: 700; color: #3e5062; border: solid 4px #ecf0f5; text-transform:uppercase; transition:box-shadow .3s ease,border .3s ease;}
+.popular-item-list.bordered li a{text-align: center; padding: 10px 0; font-weight: 700; color: #3e5062; border: solid 4px #b6c0ce; text-transform:uppercase; transition:box-shadow .3s ease,border .3s ease;}
 .popular-item-list.bordered li a h6{color: #3e5062; font-weight: 700; transition:all 0.3s ease;}
 .popular-item-list.bordered li a:hover{border-color:#bbe5f9;}
 .popular-item-list.bordered li a:hover h6{color: #6fc6ef;}

@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'support@autoandtruck.ca', 'name' => "Mirza V U"],
+    'from' => ['address' => 'ray@autoandtruck.ca', 'name' => "Carsgone"],
 
     /*
     |--------------------------------------------------------------------------

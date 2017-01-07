@@ -13,7 +13,7 @@ Permissions (Inside docroot)
 sudo chown -R ubuntu:ubuntu ./
 sudo find ./ -type f -exec chmod 644 {} \;
 sudo find ./ -type d -exec chmod 755 {} \;
-sudo chgrp -R mirza_ekm storage bootstrap/cache
+sudo chgrp -R www-data storage bootstrap/cache
 sudo chmod -R ug+rwx storage bootstrap/cache
 
 git config core.fileMode false
@@ -43,7 +43,7 @@ add this
  sudo a2enmod rewrite
  sudo systemctl restart apache2
 
- edit .htaccess
+ edit .htaccess in docroot folder
  <IfModule mod_rewrite.c>
         RewriteEngine On
         RewriteRule ^(.*)$ public/$1 [L]

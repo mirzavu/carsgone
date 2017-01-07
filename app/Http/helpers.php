@@ -54,27 +54,44 @@ if (!function_exists('getLocation')) {
 		{
 			$ip = $request->ip();
 			if ($ip[0]==':') {
-				$ip = '123.237.131.97';
+				$ip = '50.65.193.19';
 			}
-			// $loc = json_decode(file_get_contents('http://ip-api.com/json/'.$ip),'true');
-			$loc['zip'] = '682012';
-			$loc['lat'] = '12';
-			$loc['lon'] = '23';
-			$loc['region'] = 'region';
-			$loc['place'] = 'Ernakulam';
-			// $loc['place'] = $loc['city'];
+			//If a bot arrives, serving sample location
+			if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
+			    $loc['zip'] = 'T9E';
+			    $loc['lat'] = 53.266;
+				$loc['lon'] = -113.552;
+				$loc['region'] = 'Alberta';
+				$loc['place'] = 'Leduc';
+			}
+			else //If a normal user
+			{
+			    $curl = curl_init();
+	            curl_setopt_array($curl, array(
+	                CURLOPT_RETURNTRANSFER => 1,
+	                CURLOPT_URL => 'http://freegeoip.net/json/'.$ip,
+	                CURLOPT_USERAGENT => 'Codular Sample cURL Request'
+	            ));
+	            $resp = curl_exec($curl);
+				$location = json_decode($resp, true);
+				// http://freegeoip.net/json/50.65.216.255
+				$loc['zip'] =	$location['zip_code'];
+				$loc['lat'] = $location['latitude'];
+				$loc['lon'] = $location['longitude'];
+				$loc['region'] = $location['region_name'];
+				$loc['place'] = $location['city'];
+				// $loc['place'] = $loc['city'];
 
-			unset($loc['city']); //city is used in search page, so no clash
-			$request->session()->put('zip', '682012');
-			$request->session()->put('place', 'Ernakulam');
-			$request->session()->put('lat', '12');
-			$request->session()->put('lon', '67');
-			$request->session()->put('region', 'region');
+				// unset($loc['city']); //city is used in search page, so no clash
+
+			}
 			$request->session()->put('zip', $loc['zip']);
 			$request->session()->put('place', $loc['place']);
 			$request->session()->put('lat', $loc['lat']);
 			$request->session()->put('lon', $loc['lon']);
 			$request->session()->put('region', $loc['region']);
+			// $loc = json_decode(file_get_contents('http://ip-api.com/json/'.$ip),'true');
+			
 		}
 		return $loc;
 	}

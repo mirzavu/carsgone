@@ -51,7 +51,6 @@
                   <div class="single-dealer-lower">
                      <div class="dealer-address-map">
                         <div id='gmap_canvas' style='height:100%;width:100%;'></div>
-                        <script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(45.4393321,-73.47262060000003),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(45.4393321,-73.47262060000003)});infowindow = new google.maps.InfoWindow({content:'<strong>Carsgone</strong><br>8905, boul. Taschereau, J4Y 1A4, Brossard, Quebec<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
                      </div>
                   </div>
                </div>
@@ -107,6 +106,9 @@
                 }
             })
 
+
+
 </script>
+<script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(45.4393321,-73.47262060000003),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(45.4393321,-73.47262060000003)});infowindow = new google.maps.InfoWindow({content:'<strong>Carsgone</strong><br>8905, boul. Taschereau, J4Y 1A4, Brossard, Quebec<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
 
 @endsection

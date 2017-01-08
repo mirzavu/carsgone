@@ -198,8 +198,6 @@
                     <div class="single-dealer-lower">
                     	<div class="dealer-address-map">
                         	 <div id='gmap_canvas' style='height:100%;width:100%;'></div>
-                             
-                              <script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}}),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}})});infowindow = new google.maps.InfoWindow({content:'<strong>{{$vehicle->user->name}}</strong><br>{{$vehicle->user->address}}<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
                         </div>
                     </div>
                 </div>
@@ -465,6 +463,7 @@ var form = $("#trade-form");
 
 $('img').one('error', function() { this.src = '/assets/images/placeholder.jpg'; });
 </script>
+<script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}}),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}})});infowindow = new google.maps.InfoWindow({content:'<strong>{{$vehicle->user->name}}</strong><br>{{$vehicle->user->address}}<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
 <script src="https://unpkg.com/react@latest/dist/react.min.js"></script>
 <script src="https://unpkg.com/react-dom@latest/dist/react-dom.min.js"></script>
 <script src="https://unpkg.com/react-slick@0.13.6/dist/react-slick.min.js"></script>

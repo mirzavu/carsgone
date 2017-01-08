@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {!! SEOMeta::generate() !!}
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
@@ -33,7 +34,7 @@
     	<div class="container">
         	<ul class="upper-nav">
             	<li><a href="#"><i class="fa fa-map-marker"></i> {{ $location['place'] or 'Location'}}</a></li>
-                <li><a href="#">Contact: 123-456-7890</a></li>
+                <li><a href="#">Contact: 1-855-328-6002</a></li>
             </ul>
             <ul class="upper-nav right">
             @if (Auth::check())

@@ -123,9 +123,9 @@ class AppMailer
     public function sendDealerContactForm($data)
     {
         $this->from = $data->email;
-        $this->fromName = $data->name." via Carsgone";
+        $this->fromName = $data->name;
         $this->to = $data->dealer_email;
-        $this->subject = 'Contact Form';
+        $this->subject = 'Carsgone Contact Form';
         $this->view = 'emails.dealer_contact_form';
         $this->data = compact('data');
         $this->deliver();

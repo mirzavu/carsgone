@@ -47,7 +47,9 @@
 		<ul class="cd-hero-slider">
 			<li class="selected">
             	<div class="contact-dealer-container">
+                    @if(!empty($vehicle->user->phone))
                 	<div class="dealer-number"><a href="tel:{{preg_replace("/[^0-9]/", "", $vehicle->user->phone)}}" class="btn waves-effect waves-light "><i class="fa fa-phone"></i> {{$vehicle->user->phone}}</a></div>
+                    @endif
                     <h4>Contact Dealer</h4>
                     {!! Form::open(['url' => '/contact-dealer', 'method' => 'POST', 'id' => 'contact-form']) !!}
                     <div class="form-group">
@@ -359,7 +361,7 @@
                                  if(response.status == "success")
                                  {
                                     toastr.success(response.message)
-                                    $('#submit-btn').prop('disabled', false).html('Submit')
+                                    $('#dealer-submit').prop('disabled', false).html('Submit')
                                     $("#contact-form").get(0).reset();
                                  }
                              }

@@ -316,8 +316,15 @@
                                  <li>
                                     <div><i class="fa fa-dashboard"></i> {{$vehicle->odometer}}KM</div>
                                  </li>
+
                                  <li>
-                                    <div><i class="fa fa-phone"></i>{{$vehicle->user->phone or ''}}</div>
+                                    <div><i class="fa fa-phone"></i>
+                                    @if(!empty($vehicle->user->phone))
+                                       {{$vehicle->user->phone}}
+                                    @else
+                                       {{ '--' }}
+                                    @endif
+                                    </div>
                                  </li>
                               </ul>
                            </div>

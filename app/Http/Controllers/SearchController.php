@@ -38,7 +38,7 @@ class SearchController extends Controller
 				$conditions->put($value[0],$value[1]);
 			}
 		}
-
+		
 
 		if(!$conditions->get('province'))  // set local area if no province in url
 		{
@@ -98,7 +98,7 @@ class SearchController extends Controller
 		//dd($query);
 
 		$data['sidebar_data'] = $this->getSidebarData($conditions);
-
+		
 
         $data['makes'] = DB::table('makes')
 			            ->join('vehicles', 'vehicles.make_id', '=', 'makes.id')
@@ -107,7 +107,7 @@ class SearchController extends Controller
 			            ->get();
         $data['sort'] = $sort.'-'.$direction; 
         $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy('vehicles.'.$sort, $direction)->paginate(15);
-
+        
         $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
         // dd($data['featured_vehicles']);
         $data['applied_filters'] = $this->getAppliedFilters($conditions, $this->dealer_ids);

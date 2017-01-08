@@ -44,7 +44,7 @@ if (!function_exists('getLocation')) {
 	function getLocation($request)
 	{
 
-		if (!empty($request->session()->get('zip'))) {
+		if (!empty($request->session()->get('lat'))) {
 			$loc['zip'] = $request->session()->get('zip');
 			$loc['place'] = $request->session()->get('place');
 			$loc['lat'] = $request->session()->get('lat');

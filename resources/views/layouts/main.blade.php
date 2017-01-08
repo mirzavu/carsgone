@@ -19,8 +19,7 @@
 <link href="/assets/css/step-form-wizard-all.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/dropzone.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/style.css" rel="stylesheet" type="text/css"> --}}
-<script src="/assets/js/modernizr.js"></script> <!-- Modernizr -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKsvinm7jgttOZYmtlyIEhEt5l7ZL7-yM"></script>
+
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -220,6 +219,8 @@
   <a id="reset-login-link" class="link" href="#">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a>
 </div>
 </div>
+<script src="/assets/js/modernizr.js"></script> <!-- Modernizr -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKsvinm7jgttOZYmtlyIEhEt5l7ZL7-yM"></script>
 <script src="/assets/js/all.js"></script>
 {{-- <script src="/assets/js/jquery-2.2.2.min.js"></script> 
 <script src="/assets/js/bootstrap.min.js"></script>

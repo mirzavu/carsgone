@@ -249,11 +249,15 @@ class Vehicle extends Model
         }
         if ($conditions->get('distance'))
         {
-            $lat = $conditions->get('lat');
-            $lon = $conditions->get('lon');
-            $query->leftJoin('users', 'vehicles.user_id', '=', 'users.id')
-                 ->select(DB::raw("users.id"))
-                 ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < ".$conditions->get('distance'));
+            $query->leftJoin('users', 'vehicles.user_id', '=', 'users.id');
+            if($conditions->get('distance')!="All")
+            {
+                $lat = $conditions->get('lat');
+                $lon = $conditions->get('lon');
+                $query->select(DB::raw("users.id"))
+                     ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < ".$conditions->get('distance'));
+            }
+            
             if($featured ==1)
             {
                 $query->where('users.featured', 1);

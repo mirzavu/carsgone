@@ -68,14 +68,12 @@ class Related extends React.Component {
                 breakpoint: 600,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 2
+                    slidesToScroll: 2,
+                    vertical: true
                 }
             }, {
                 breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
+                settings: "unslick"
             }
 
         ]

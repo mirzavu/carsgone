@@ -9525,7 +9525,7 @@ button.btn-action{right:62px;}
 .item-body-left img{object-fit: cover;width:100%;height: 150px; }
 .item-body-right{width: 74%;float:left;padding: 0 0 0 15px;}
 .item-body-right-upper{width:100%; display:inline-block; vertical-align:top;}
-.item-body-right-lower{width:100%; display:inline-block; vertical-align:top;}
+.item-body-right-lower{width:100%; display:inline-block; vertical-align:top;margin-top: 22px;}
 .item-detail{width:100%; display:inline-block; vertical-align:top;}
 .item-detail-left{width: 127px;float:left;margin-top: -6px;}
 .item-detail-left img{width:100%; border:solid 5px #fff;}
@@ -9675,7 +9675,7 @@ ul.table-list li:nth-child(odd){background:#f5f9fd;}
 ul.table-list li a{color:#5fc0ed;}
 .single-dealer-lower{padding:15px; display:inline-block; vertical-align:top; width:100%;}
 .dealer-address-map{width:100%; height:320px; float:left; background:#f0f0f0; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
-.panel-default > .panel-heading{background:#3e5062;}
+.panel-default > .panel-heading{background:#3e5062;text-align: center;}
 /* ============ Car Detail Page Start ================= */
 
 /* ============ Info Page Start ================= */
@@ -9956,7 +9956,7 @@ fieldset label{font-size:18px; font-weight:700; color:#3b4c5d; text-align:right;
 
 #toast-container>.toast { display: block; }
 .toast-title { float: left; width: 100%; display: block; font-size: 16px; line-height: 26px; }
-.toast-message { float: left; width: 100%; display: block; font-size: 16px; font-weight: bold; }
+.toast-message { float: left; width: 100%; display: block; font-size: 16px; font-weight: bold;word-break: break-word;text-align: justify; }
 button.toast-close-button { position: absolute; top: -1px; right: 4px; font-size: 23px; }
 
 label.error { font-size: 11px;  font-weight: normal;  background: #d65454; border-radius: 3px; padding: 0 15px;  color: #fff !important; top: auto; z-index: 1; position:relative;}
@@ -9986,7 +9986,7 @@ ul.pricing-list li{float:left; width:20%; padding:10px;}
     background: #0294d1;
     transition: all 0.5s ease;
 }
-.pricing-icon{padding:22px 11px;padding-left:0px;  background-color:#ffffff;border-radius:50%;width:43%;margin:-6px 50px;border:solid 2px #c9c9c9;}
+.pricing-icon{padding:22px 11px;padding-left:0px;  background-color:#ffffff;border-radius:50%;width:75px;margin:0 auto;border:solid 2px #c9c9c9;}
 .pricing-content {
     background: #f5f5f5;
     margin-top: 57px;
@@ -10294,6 +10294,13 @@ ul.upper-nav.right li:last-child{border:0 !important;}
     border-radius: 13px;
     border: solid 2px;
     padding: 3px 12px;
+}
+.related-link-list
+{
+	width: 100%;
+    display: inline-flex;
+    vertical-align: top;
+    text-align: center;
 }
 
 

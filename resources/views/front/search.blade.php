@@ -37,9 +37,6 @@
                   <div class="panel-body">
                      <ul class="applied-list">
                         @foreach ($applied_filters->all() as $key => $value)
-                        @if($key=="distance") 
-                        @php $value = (int)$value. " KM"; @endphp
-                        @endif
                         <li>
                            <span>{{$key.' : '.$value}}</span>
                            <a href="#" class="applied-remove">x</a>
@@ -49,20 +46,25 @@
                   </div>
                </div>
                <!-- panel end -->
+               @if(!$applied_filters->has("province"))
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Distance within</h3>
                   </div>
                   <div class="panel-body">
                      <ul class="link-list distance-list">
-                        <li><a id="200" href="#">200 Km</a></li>
-                        <li><a id="300" href="#">300 Km</a></li>
-                        <li><a id="400" href="#">400 Km</a></li>
+                        <li><a id="50" href="#">50 Km</a></li>
+                        <li><a id="100" href="#">100 Km</a></li>
+                        <li><a id="250" href="#">250 Km</a></li>
                         <li><a id="500" href="#">500 Km</a></li>
+                        <li><a id="1000" href="#">1000 Km</a></li>
+                        <li><a id="All" href="#">All</a></li>
                      </ul>
                   </div>
                </div>
+               @endif
                <!-- panel end -->
+
                @if(!$applied_filters->has("condition"))
                <div class="panel">
                   <div class="panel-heading">
@@ -300,9 +302,10 @@
                         <div class="item-body-right">
                            <div class="item-body-right-upper">
                               <div class="item-detail">
-                                 <div class="item-detail-left"><img src="/assets/images/placeholder.jpg" alt="" /></div>
+                                 {{-- <div class="item-detail-left"><img src="/assets/images/placeholder.jpg" alt="" /></div> --}}
                                  <div class="item-detail-right">
-                                    <h6>{{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}  <span class="part">|</span>  <small>{{$vehicle->created_at->diffForHumans()}}</small></h6>
+                                    <h6>{{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</h6>
+                                    <h6><small>Added {{$vehicle->created_at->diffForHumans()}}</small></h6>
                                     <p>{{$vehicle->bodyStyleGroup->body_style_group_name or ''}} <span class="part">|</span> {{$vehicle->ext_color->color or ''}} <span class="part">|</span> {{$vehicle->transmission}}</p>
                                  </div>
                               </div>
@@ -319,11 +322,13 @@
 
                                  <li>
                                     <div><i class="fa fa-phone"></i>
+                                    <p>
                                     @if(!empty($vehicle->user->phone))
                                        {{$vehicle->user->phone}}
                                     @else
                                        {{ '--' }}
                                     @endif
+                                    </p>
                                     </div>
                                  </li>
                               </ul>
@@ -432,13 +437,18 @@
        });
     });
    //distance set
-   $('.distance-list #{{$applied_filters->get("distance")}}').addClass('active').removeAttr("href");
-   $('.distance-list a').on('click',function(e){
-     e.preventDefault();
-     $.get( "/setSessionKeyValue/distance/"+$(this).attr('id'), function( data ) {
-       location.reload();
-     });
-   });
+   var distance_id = "{{$applied_filters->get("distance")}}".replace(' KM',''); 
+   if(distance_id)
+   {
+      $('.distance-list #'+distance_id).addClass('active').removeAttr("href"); // set active
+      $('.distance-list a').on('click',function(e){
+        e.preventDefault();
+        $.get( "/setSessionKeyValue/distance/"+$(this).attr('id'), function( data ) {
+          location.reload();
+        });
+      });
+   }
+   
 
    //if image error
    $('img').one('error', function() { this.src = '/assets/images/placeholder.jpg'; });

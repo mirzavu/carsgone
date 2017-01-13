@@ -53,7 +53,7 @@ class SearchController extends Controller
 		//distance set
 		if(!$conditions->get('distance'))
 		{
-			$conditions->put('distance','200');
+			$conditions->put('distance','250');
 		}
 
 		if($conditions->get('dealer')) 
@@ -111,7 +111,6 @@ class SearchController extends Controller
         $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
         // dd($data['featured_vehicles']);
         $data['applied_filters'] = $this->getAppliedFilters($conditions, $this->dealer_ids);
-
         $data['url_params'] = $params;
         $data['logged_in'] = Auth::check();
         // dd($data);die;
@@ -194,6 +193,15 @@ class SearchController extends Controller
 			if(!in_array($key, $this->applied_filters))
 			{
 				$conditions->forget($key);
+			}
+
+			if($key == "distance") // Add all filter for distance
+			{	
+				if($value != 'All')
+				{
+					$value = (int)$value. " KM";
+				}
+				$conditions->put('distance',$value);
 			}
 		}
 		return $conditions;

@@ -103,7 +103,7 @@ class DealerController extends Controller
 				    ->join('provinces', 'users.province_id', '=', 'provinces.id')
 			            ->selectRaw('count(provinces.id) as province_count, provinces.province_name')
 				    ->groupBy('provinces.province_name')
-			            ->orderBy('province_count','desc')->get();
+			            ->orderBy('province_name','asc')->get();
 		}
 		//Get models
 		if($conditions->get('province') && !$conditions->get('city'))

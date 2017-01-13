@@ -147,8 +147,8 @@ $(document).ready(function() {
     $timeSlots = $('.link-list');
     $timeSlots.each(function() {
         var $times = $(this).children();
-        if ($times.length > 5) {
-            $timeSlots.children(':nth-of-type(n+6)').hide();
+        if ($times.length > 6) {
+            $timeSlots.children(':nth-of-type(n+7)').hide();
             $(this).append('<span class="more-times">+More</span>');
         }
     });

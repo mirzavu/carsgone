@@ -304,14 +304,14 @@
                               <div class="item-detail">
                                  {{-- <div class="item-detail-left"><img src="/assets/images/placeholder.jpg" alt="" /></div> --}}
                                  <div class="item-detail-right">
-                                    <h6>{{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</h6>
-                                    <h6><small>Added {{$vehicle->created_at->diffForHumans()}}</small></h6>
+                                    <p>{{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</p>
+                                    <p>Added {{$vehicle->created_at->diffForHumans()}}</p>
                                     <p>{{$vehicle->bodyStyleGroup->body_style_group_name or ''}} <span class="part">|</span> {{$vehicle->ext_color->color or ''}} <span class="part">|</span> {{$vehicle->transmission}}</p>
+                                    <h4><a href="/dealer/{{$vehicle->user->slug}}">{{$vehicle->user->name or ''}}</a></h4>
                                  </div>
                               </div>
                            </div>
                            <div class="item-body-right-lower">
-                              <h5><a href="/dealer/{{$vehicle->user->slug}}">{{$vehicle->user->name or ''}}</a></h5>
                               <ul class="item-stats">
                                  <li>
                                     <div><i class="fa fa-tag"></i> ${{$vehicle->price}}</div>

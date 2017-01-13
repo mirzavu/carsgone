@@ -82,15 +82,15 @@
                                     <div class="item-body-right">
                                        <div class="item-body-right-upper">
                                           <div class="item-detail">
-                                             <div class="item-detail-left"><img src="{{$saved_vehicles[0]->user->image}}" alt=""></div>
                                              <div class="item-detail-right">
-                                                <h6>{{$saved_vehicles[0]->user->city->city_name}}, {{$saved_vehicles[0]->user->province->province_name}}  <span class="part">|</span>  <small>{{$saved_vehicles[0]->created_at->diffForHumans()}}</small></h6>
+                                                <p>{{$saved_vehicles[0]->user->city->city_name}}, {{$saved_vehicles[0]->user->province->province_name}}  <span class="part">|</span>  </p>
+                                                <p>{{$saved_vehicles[0]->created_at->diffForHumans()}}</p>
                                                 <p>{{$saved_vehicles[0]->bodyStyleGroup->body_style_group_name or $saved_vehicles[0]->bodyStyle->body_style_name}} <span class="part">|</span> {{$saved_vehicles[0]->ext_color->color}} <span class="part">|</span> {{$saved_vehicles[0]->transmission}}</p>
+                                                <h4><a href="/dealer/{{$saved_vehicles[0]->user->slug}}">{{$saved_vehicles[0]->user->name}}</a></h4>
                                              </div>
                                           </div>
                                        </div>
                                        <div class="item-body-right-lower">
-                                          <h5>{{$saved_vehicles[0]->user->name}}</h5>
                                           <ul class="item-stats">
                                              <li>
                                                 <div><i class="fa fa-tag"></i> ${{$saved_vehicles[0]->price}}</div>
@@ -189,15 +189,15 @@
                         <div class="item-body-right">
                            <div class="item-body-right-upper">
                               <div class="item-detail">
-                                 <div class="item-detail-left"><img src="/assets/images/placeholder.jpg" alt="" /></div>
                                  <div class="item-detail-right">
-                                    <h6>{{$vehicle->user->city->city_name}}, {{$vehicle->user->province->province_name}}  <span class="part">|</span>  <small>{{$vehicle->created_at->diffForHumans()}}</small></h6>
+                                    <p>{{$vehicle->user->city->city_name}}, {{$vehicle->user->province->province_name}}</p>
+                                    <p>{{$vehicle->created_at->diffForHumans()}}</p>
                                     <p>{{$vehicle->bodyStyleGroup->body_style_group_name or $vehicle->bodyStyle->body_style_name}} <span class="part">|</span> {{$vehicle->ext_color->color}} <span class="part">|</span> {{$vehicle->transmission}}</p>
+                                    <h4>{{$vehicle->user->name}}</h4>
                                  </div>
                               </div>
                            </div>
                            <div class="item-body-right-lower">
-                              <h5>{{$vehicle->user->name}}</h5>
                               <ul class="item-stats">
                                  <li>
                                     <div><i class="fa fa-tag"></i> ${{$vehicle->price}}</div>

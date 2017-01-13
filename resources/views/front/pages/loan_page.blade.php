@@ -10,9 +10,9 @@
                 	<img src="/assets/images/approval-image.png" alt="" />
                     <h4>if you meet these 3 requirements, you're approved:</h4>
                     <ul class="reqiured-list">
-                    	<li>Canadian citizen</li>
-                        <li>At least 18 years old</li>
-                        <li>Currently Employed</li>
+                    	<li>LIVE IN CANADA</li>
+                        <li>ARE 18 OR OLDER</li>
+                        <li>EARN MIN $1500 /MO</li>
                     </ul>
                     <div class="approval-link">
                     	<a href="/credit-application" class="waves-effect waves-light btn btn-orange">Get Approved Now</a>

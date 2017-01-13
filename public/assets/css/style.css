@@ -828,7 +828,7 @@ ul.advance-search > li{width:100% !important;}
 .tab-content h4{font-size:16px;}
 ul.item-list li{width:50%;}
 .footer-logo{max-width:200px;}
-.footer-box{margin:0 0 30px 0; border:0;} 
+.footer-box{margin:0 0 30px 0; border:0;text-align: center;} 
 .footer-box-content{padding:0;}
 .footer-lower{padding:20px 0;}
 ul.social-links{margin-bottom:12px;}
@@ -836,7 +836,7 @@ footer{font-size:14px;}
 .footer-box-content{border:0;}
 .filter-box{font-size:15px;}
 .filter-box:first-child{padding-left:10px; padding-right:10px;}
-.item-body-left{width:100%; margin-bottom:30px; max-width:180px;}
+.item-body-left{width:100%; max-width:180px;}
 .item-body-right{width:100%; padding:0; clear:both;}
 .table-responsive{border:0;}
 .car-details-container .table > thead > tr > th, .car-details-container .table > tbody > tr > th, .car-details-container .table > tfoot > tr > th, .car-details-container .table > thead > tr > td, .car-details-container .table > tbody > tr > td, .car-details-container .table > tfoot > tr > td{padding:10px 15px;}
@@ -948,7 +948,6 @@ ul.upper-nav.right li{border-right:solid 1px #dbdfda;}
 ul.upper-nav.right li:last-child{border:0 !important;}
 .filter-box{width:50%; margin-bottom:1px;}
 .filter-box:first-child{width:100%;}
-.item-detail{margin-bottom:10px;}
 .item-detail-left{width:110px;}
 .item-detail-right{padding:6px;}
 .item-body-left{max-width:100%;}

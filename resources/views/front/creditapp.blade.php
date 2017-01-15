@@ -270,11 +270,11 @@ noUiSlider.create(budgetSlider, {
     decimals: 0,
     thousand: ',',
     snap: false,
-    step: 1000,
+    step: 50,
     range: {
-        'min': 1000,
+        'min': 150,
 
-        'max': 150000
+        'max': 1500
     },
     format: wNumb({
         decimals: 0,

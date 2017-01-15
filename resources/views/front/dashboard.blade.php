@@ -120,9 +120,11 @@
                               <a href="#" class="waves-effect waves-light btn btn-orange-border">My Listings</a>
                               @foreach($vehicles as $vehicle)
                               <div class="item">
-                                 <a href="/vehicle/{{$vehicle->slug}}">
+                                 
                                  <div class="item-heading">
+                                    <a href="/vehicle/{{$vehicle->slug}}">
                                     <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}}</h3>
+                                    </a>
                                     @if($vehicle->featured)
                                     <div class="featured-badge">
                                         <span>featured</span>
@@ -135,7 +137,6 @@
                                     <button vehicle="{{$vehicle->id}}" class="btn deactivate-btn btn-action waves-effect waves-light waves-input-wrapper">Deactivate</button>
                                     @endif
                                  </div>
-                                 </a>
                                  <div class="item-body">
                                     <div class="item-body-left"> <a href="/vehicle/{{$vehicle->slug}}"> <img src="{{$vehicle->photo()}}" alt=""> <span class="overlay"></span> </a> </div>
                                     <div class="item-body-right">

@@ -8,7 +8,7 @@
         	<div class="col-sm-12">
             	<div class="approval">
                 	<img src="assets/images/approval-image.png" alt="" />
-                    <h4>if you meet these 3 requirements, you're approved:</h4>
+                    <h4>Pre Approved if you:</h4>
                     <ul class="reqiured-list">
                     	<li>LIVE IN CANADA</li>
                         <li>ARE 18 OR OLDER</li>

@@ -16,7 +16,7 @@ $(document).ready(function() {
         return false;
     });
 
-    $('.sidebar-overlay').click(function() {
+    $('.sidebar-overlay, .sidenav-close').click(function() {
         $('body').removeClass('sidebar-open');
         return false;
     });

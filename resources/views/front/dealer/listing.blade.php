@@ -12,6 +12,7 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Filters Applied</h3>
+                     <a href="#" class="sidenav-close"><i class="fa fa-times"></i></a>
                   </div>
                   <div class="panel-body">
                      <ul class="applied-list">

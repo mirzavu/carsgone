@@ -12,6 +12,7 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Quick Search</h3>
+                     <a href="#" class="sidenav-close"><i class="fa fa-times"></i></a>
                   </div>
                   <div class="panel-body">
                      <div class="filter-dropdown">
@@ -39,7 +40,7 @@
                         @foreach ($applied_filters->all() as $key => $value)
                         <li>
                            <span>{{$key.' : '.$value}}</span>
-                           <a href="#" class="applied-remove">x</a>
+                           <a href="#" class="applied-remove"><i class="fa fa-times"></i></a>
                         </li>
                         @endforeach
                      </ul>

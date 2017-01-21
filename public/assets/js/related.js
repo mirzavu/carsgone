@@ -31,7 +31,7 @@ class Related extends React.Component {
                 <a href={"/vehicle/"+item.slug}>
                 	<h4>{item.make.make_name+' '+item.model.model_name}</h4>
                     <div className="featured-img">
-                    	<img src={src} alt="" />
+                    	<img src={src} alt={item.make.make_name+' '+item.model.model_name} onError={(e)=>{e.target.src='/assets/images/placeholder.jpg'}}/>
                         <span className="overlay"></span>
                     </div>
                     <div className="featured-details">
@@ -67,13 +67,15 @@ class Related extends React.Component {
             }, {
                 breakpoint: 600,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    vertical: true
+                    slidesToShow: 3,
+                    slidesToScroll: 3
                 }
             }, {
                 breakpoint: 480,
-                settings: "unslick"
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                }
             }
 
         ]

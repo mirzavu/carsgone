@@ -162,6 +162,8 @@
       window.location = "/search";
   });
 
+  $('img').one('error', function() { this.src = '/assets/images/placeholder.jpg'; });
+
 </script>
 <script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng({{$dealer->latitude}},{{$dealer->longitude}}),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng({{$dealer->latitude}},{{$dealer->longitude}})});infowindow = new google.maps.InfoWindow({content:'<strong>Park Avenue Honda Brossard</strong><br>8905, boul. Taschereau, J4Y 1A4, Brossard, Quebec<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
 @endsection

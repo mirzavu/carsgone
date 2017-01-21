@@ -27,6 +27,10 @@
                         </ul>
                     </div>
                 </div>
+                <div class="vehicle-info-small clearfix">
+                    <div class="pull-left">${{$vehicle->price}}</div>
+                    <div class="pull-right">{{$vehicle->odometer}} Km</div>
+                </div>
        	    </div>
             
             <div class="col-md-6 col-md-offset-0 col-sm-10 col-sm-offset-1 half-right">

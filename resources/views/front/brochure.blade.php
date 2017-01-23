@@ -76,7 +76,6 @@
 			<li>
             	<div class="single-description-container">
                 	<div class="single-description-upper">
-                    <div class="table-responsive">
                     	<table class="table table-striped">
                         	<tr>
                                 <td><b>Year</b></td>
@@ -154,7 +153,6 @@
                                 <td colspan="2"><b>{!!$vehicle->text!!}</b></td>
                              </tr>
                         </table>
-                       </div>
                     </div>
                 </div>
             </li>

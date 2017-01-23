@@ -32,8 +32,8 @@
                   </div>
                   <div class="panel-body">
                      <div class="filter-search">
-                        <input type="text"  value="" placeholder="Enter Postal Code.." />
-                        <input type="submit" value="Go" class="btn waves-effect waves-light filter-btn" />
+                        <input id="postal-input" type="text" placeholder="Enter Postal Code.." />
+                        <input id="postal-submit" type="submit" value="Go" class="btn waves-effect waves-light filter-btn" />
                      </div>
                   </div>
                </div>
@@ -175,6 +175,17 @@
 
    //if image error
    $('img').one('error', function() { this.src = '/assets/images/placeholder.jpg'; });
+
+   $('#postal-submit').on('click', function(){
+      var postal = $('#postal-input').val()
+      if(postal.length >7 || postal.length < 6)
+        return false
+      if(postal[3]!='')
+      {
+        postal = [postal.slice(0, 3), ' ', postal.slice(3)].join(''); //Insert Space if not present in middle
+      }
+      window.location.href = window.location.href+'/postal_code-'+postal
+   })
    
 </script>
 @endsection

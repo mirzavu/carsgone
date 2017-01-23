@@ -29,10 +29,16 @@ class VehicleController extends Controller
 		$location = getLocation($request);
 		$vehicle = Vehicle::with('user')->with('make')->with('model')->where('slug',$slug)->first();
 
+		$other_vehicle_text = 'Related Vehicles';
+		if($vehicle->user->featured)
+			$other_vehicle_text = 'Dealers Other Vehicles';
+		else
+			$other_vehicle_text = 'Related Vehicles';
+
 		SEOMeta::setTitle($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' in '.$vehicle->user->city->city_name.','.$vehicle->user->province->province_name);
         SEOMeta::setDescription($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' in '.$vehicle->user->city->city_name.','.$vehicle->user->province->province_name.' for sale in Canada');
         SEOMeta::addKeyword(['new cars', 'used cars', $vehicle->make->make_name, $vehicle->model->model_name, $vehicle->make->make_name.' '.$vehicle->model->model_name]);
-		return view('front.brochure', compact('vehicle','location'));
+		return view('front.brochure', compact('vehicle','location','other_vehicle_text'));
 	}
 
 	public function relatedVehicle(Request $request, $slug)
@@ -41,21 +47,23 @@ class VehicleController extends Controller
 		$vehicle = Vehicle::with('user')->where('slug',$slug)->first();	
 		$paid_vehicles = Vehicle::leftJoin('users', 'vehicles.user_id', '=', 'users.id')
 								->select('vehicles.*')
-								->where(['make_id' => $vehicle->make_id, 'model_id'=>$vehicle->model_id])
+								->where(['make_id' => $vehicle->make_id])
 								->where(function ($query) {
 						    		$query->where('vehicles.featured', '=', 1)
 						         		  ->orWhere('users.featured', '=', 1)->take(8);
-										})->with('make')->with('model')->with('photos');
+										})->with('make')->with('model')->with('photos')->get();
+		// dd($paid_vehicles);
 		$related = Vehicle::where(['make_id' => $vehicle->make_id, 'model_id'=>$vehicle->model_id])
 							->with('make')->with('model')->with('photos')
-							->take(8);
-		$results = $paid_vehicles->union($related);
+							->take(8)->get();
+		$results = $paid_vehicles->merge($related);
 		if($vehicle->user->featured)
 		{
-			$user_vehicles = $vehicle->user->vehicles->take(10);
-			$results = $user_vehicles->union($results);
+			$user_vehicles = Vehicle::where('user_id',$vehicle->user->id)->with('make')->with('model')->with('photos')->take(10)->get();
+			// dd($user_vehicles)
+			$results = $user_vehicles->merge($results);
 		}
-		$results = $results->get();
+		// $results3 = $results2->get();
 		$results->splice(10); //take 10 in total
 		return $results->toJson();
 	}

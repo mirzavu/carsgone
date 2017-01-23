@@ -120,12 +120,6 @@
                                 <td>{{$vehicle->stock}}</td>
                              </tr>
                              @endif
-                             @if(!empty($vehicle->vin))
-                             <tr>
-                                <td><b>VIN</b></td>
-                                <td>{{$vehicle->vin}}</td>
-                             </tr>
-                             @endif
                              @if(!empty($vehicle->doors))
                              <tr>
                                 <td><b>Doors</b></td>
@@ -183,15 +177,12 @@
             </li>
             <li>
             	<div class="single-dealer-container">
-                    @if($vehicle->user->featured)
                 	<div class="single-dealer-upper">
-                    	<div class="dealer-all-number">
-                        	<a id="make-offer-btn" class="btn waves-effect waves-light "> Make An Offer</a>
-                            <a id="trade-vehicle-btn" class="btn waves-effect waves-light ">Trade Vehicle</a>
-                            <a class="btn waves-effect waves-light ">View Inventory</a>
+                    	<div class="dealer-buttons">
+                            <a href="/dealer/{{$vehicle->user->slug}}" class="btn waves-effect waves-light">View Dealer</a>
+                            <a id="inventory-btn" class="btn waves-effect waves-light ">View Inventory</a>
                         </div>
                     </div>
-                    @endif
                     <div class="single-dealer-mid">
                      <ul class="table-list">
                         <li><a href="/dealer/{{$vehicle->user->slug}}">{{$vehicle->user->name}}</a></li>
@@ -257,7 +248,7 @@
           		 <!-- Featured Container start -->
                 	<div class="panel panel-default">
                         <div class="panel-heading">
-                          <h3 class="panel-title">Related Vehicles</h3>
+                          <h3 class="panel-title">{{ $other_vehicle_text }}</h3>
                         </div>
                         <div id="related-vehicles" class="panel-body">
                             <div class="progress">
@@ -277,77 +268,6 @@
 </div>
 <!-- main container outer end -->
 
-<div id="make-offer" class="modal member">
-<form id="offer-form" action="/make-offer" method="POST">
-<div class="modal-content">
-  
-  <h5>Make An Offer</h5>
-  <div class="form-group">
-    <label>Name</label>
-    <input name="name" type="text" class="form-control" required />
-  </div>
-  <div class="form-group">
-    <label>Email</label>
-    <input name="email" type="email" class="form-control" required/>
-  </div>
-  <div class="form-group">
-    <label>Phone Number</label>
-    <input name="phone" type="text" class="form-control" required/>
-  </div>
-  <div class="form-group">
-    <label>Your Offer</label>
-    <input name="offer" type="text" class="form-control" required/>
-  </div>
-  <div class="form-group">
-    <label>Is there anything you would like to add?</label>
-    <textarea name="comment" class="form-control"></textarea>
-  </div>
-  <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
-</div>
-<div class="modal-footer">
-    <button id="offer-submit-btn" class="finish-btn btn waves-effect waves-light" type="submit">Submit</button>
- </form>
-</div>
-</div>
-
-<div id="trade-vehicle" class="modal member">
-<form id="trade-form" action="/trade-vehicle" method="POST">
-<div class="modal-content">
-  
-  <h5>Trade in your Vehicle</h5>
-  <div class="form-group">
-    <label>Name</label>
-    <input name="name" type="text" class="form-control" required />
-  </div>
-  <div class="form-group">
-    <label>Email</label>
-    <input name="email" type="email" class="form-control" required/>
-  </div>
-  <div class="form-group">
-    <label>Phone Number</label>
-    <input name="phone" type="text" class="form-control" required/>
-  </div>
-  <div class="form-group">
-    <label>Year</label>
-    <input name="year" type="text" class="form-control" required/>
-  </div>
-  <div class="form-group">
-    <label>Make</label>
-    <input name="make" type="text" class="form-control" required/>
-  </div>
-  <div class="form-group">
-    <label>Model</label>
-    <input name="model" type="text" class="form-control" required/>
-  </div>
-  <div class="form-group">
-    <label>Additional Vehicle Info</label>
-    <textarea name="comment" class="form-control"></textarea>
-  </div>
-  <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
-</div>
-<div class="modal-footer">
-    <button id="trade-submit-btn" class="finish-btn btn waves-effect waves-light" type="submit">Submit</button>
- </form>
 </div>
 
 </div>
@@ -401,101 +321,17 @@
                 }
             })
 
-$('#make-offer-btn').on('click', function(e) {
-    e.preventDefault();
-    $('#make-offer').openModal();
-});
-
-var form = $("#offer-form");
-            form.validate({
-                rules: {},
-                // errorClass: "invalid form-error",       
-                // errorElement : 'div',       
-                errorPlacement: function(error, element) {
-                    if (element.is('select')) {
-                        error.appendTo(element.parent().parent());
-                    } else {
-                        error.appendTo(element.parent());
-                    }
-
-                },
-                focusInvalid: false,
-                invalidHandler: function(form, validator) {
-
-                    if (!validator.numberOfInvalids())
-                        return;
-                    $('html, body').animate({
-                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
-                    }, 500);
-                    $(validator.errorList[0].element).focus()
-
-                },
-                submitHandler: function(form) {
-                  $('#offer-submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
-                    $.ajax({
-                             url: form.action,
-                             type: form.method,
-                             data: $(form).serialize()+'&_token={{ csrf_token() }}'+'&dealer_email={{ $vehicle->user->email }}',
-                             success: function(response) {
-                                 if(response.status == "success")
-                                 {
-                                    toastr.success(response.message)
-                                    $('#offer-submit-btn').prop('disabled', false).html('Submit')
-                                    $("#offer-form").get(0).reset();
-                                 }
-                             }
-                         });
-                }
-            })
-
-$('#trade-vehicle-btn').on('click', function(e) {
-    e.preventDefault();
-    $('#trade-vehicle').openModal();
-});
-
-var form = $("#trade-form");
-            form.validate({
-                rules: {},
-                // errorClass: "invalid form-error",       
-                // errorElement : 'div',       
-                errorPlacement: function(error, element) {
-                    if (element.is('select')) {
-                        error.appendTo(element.parent().parent());
-                    } else {
-                        error.appendTo(element.parent());
-                    }
-
-                },
-                focusInvalid: false,
-                invalidHandler: function(form, validator) {
-
-                    if (!validator.numberOfInvalids())
-                        return;
-                    $('html, body').animate({
-                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
-                    }, 500);
-                    $(validator.errorList[0].element).focus()
-
-                },
-                submitHandler: function(form) {
-                  $('#trade-submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
-                    $.ajax({
-                             url: form.action,
-                             type: form.method,
-                             data: $(form).serialize()+'&_token={{ csrf_token() }}'+'&dealer_email={{ $vehicle->user->email }}',
-                             success: function(response) {
-                                 if(response.status == "success")
-                                 {
-                                    toastr.success(response.message)
-                                    $('#trade-submit-btn').prop('disabled', false).html('Submit')
-                                    $("#trade-form").get(0).reset();
-                                 }
-                             }
-                         });
-                }
-            })
 
 $('img').one('error', function() { this.src = '/assets/images/placeholder.jpg'; });
+
+  $('#inventory-btn').on('click',function(e){
+      e.preventDefault();
+      $.get( "/removeSessionAll", function(){
+          $.get( "/setSessionKeyValue/dealer/{{$vehicle->user->name}}",function(){
+            window.location = '/search';
+          });
+      });
+  });
 </script>
 <script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}}),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}})});infowindow = new google.maps.InfoWindow({content:'<strong>{{$vehicle->user->name}}</strong><br>{{$vehicle->user->address}}<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
 <script src="https://unpkg.com/react@latest/dist/react.min.js"></script>

@@ -9291,7 +9291,7 @@ ul { list-style:none; }
 a:focus, input:focus, textarea:focus, *:focus { outline:0 !important; box-shadow:none !important; }
 .nobg { background:transparent !important; }
 /* =================reset css ends here================= */
-body { font-size:14px; line-height:24px;  font-weight:400; font-family:'Roboto'; color:#232f3e; background:#f2f2f2;  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;  }
+body { font-size:14px; line-height:24px;  font-weight:400; font-family:'Roboto'; color:#3e5062; background:#f2f2f2;  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;  }
 .container { width:100%; max-width:1140px; }
 a, input, button { text-decoration:none; color: inherit; outline:none; transition: all 0.3s ease-in; -moz-transition: all 0.3s ease-in; -o-transition: all 0.3s ease-in; -webkit-transition: all 0.3s ease-in; -ms-transition: all 0.3s ease-in; }
 a img { border: 0px none; }
@@ -9505,7 +9505,7 @@ a.sidenav-close {display:none;background: #ee6e73;border-radius: 4px;float: righ
 .featured-details{width:100%; float:left; margin-top:3px;}
 .featured-details .price{width:49%; float:left; font-size:10px; color:#3e5062; margin:0; background:#cfdbe6; border-radius:3px; padding:0; margin-bottom:5px; letter-spacing:0.5px;  font-weight:700;}
 .featured-details .run{width:49%; float:right; font-size:10px; color:#3e5062; margin:0; background:#cfdbe6; border-radius:3px; padding:0; margin-bottom:5px; letter-spacing:0.5px; font-weight:700;}
-.alert{background:#fff; border-radius:2px; box-shadow:0 1px 1px rgba(0, 0, 0, .05); border:0; border-left:solid 10px #54c5fb; font-size:16px; font-weight:700; color:#333; letter-spacing:1px; padding:15px 24px; margin-bottom:15px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
+.alert{background:#fff; border-radius:2px; box-shadow:0 1px 1px rgba(0, 0, 0, .05); border:0; border-left:solid 10px #54c5fb; font-size:16px; font-weight:700; color:#3e5062; letter-spacing:1px; padding:15px 24px; margin-bottom:15px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
 .filter-container{width:100%; display:inline-block; vertical-align:top; border-right:0; margin-bottom:10px;}
 .filter-box{width:20%; float:left; background:#2b3843; padding:12px 25px 12px 0; text-align:center; color:#fff; font-weight:700; font-size:17px; position:relative; border:0; border-right:solid 1px #fff;}
 .filter-box:first-child{padding-left:25px;}
@@ -9554,7 +9554,7 @@ ul.checklist li{padding:8px 15px; border-bottom:solid 1px #e2e2e2; color:#666;}
 .filter-btn, .filter-btn:hover{border:0; background:#ffc04c; width:60px; text-align:center; color:#fff; font-weight:700;height:38px; border-left:solid 1px #e2e2e2; position:absolute; top:0; right:0; border-radius:0; padding:10px; }
 ul.link-list{width:100%; display:inline-block; vertical-align:top; background:#fff;}
 ul.link-list li{font-weight:700; color:#666;  position:relative; width:100%; float:left; border-bottom:solid 1px #e2e2e2;}
-ul.link-list li a{float:left;   float:left; color:#666; line-height:20px; padding:10px 15px; border-left:solid 5px #fff; width:100%;}
+ul.link-list li a{float:left;   float:left; color:#3e5062; line-height:20px; padding:10px 15px; border-left:solid 5px #fff; width:100%;}
 ul.link-list li a:hover, ul.link-list li a.active{border-left-color:#009cde; color:#009cde;}
 label{margin:0;}
 .filter-dropdown{width:100%; float:left; padding:15px;}
@@ -9672,6 +9672,7 @@ textarea.form-control{height:120px; resize:none;}
 .dealer-all-number{width:100%; display:inline-block; vertical-align:top;}
 .dealer-all-number a{width:32%; float:left;}
 .dealer-all-number .btn + .btn{margin:0; margin-left:2%;}
+.dealer-buttons{text-align: center;}
 .single-dealer-mid{padding:0;}
 ul.table-list{width:100%; display:inline-block; vertical-align:top;}
 ul.table-list li{width:100%; float:left; padding:8px 25px; font-weight:700;}

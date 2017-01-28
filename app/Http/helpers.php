@@ -50,6 +50,7 @@ if (!function_exists('getLocation')) {
 			$loc['lat'] = $request->session()->get('lat');
 			$loc['lon'] = $request->session()->get('lon');
 			$loc['region'] = $request->session()->get('region');
+			$loc['ip'] = $request->session()->get('ip');
 		}
 		else
 		{
@@ -57,20 +58,21 @@ if (!function_exists('getLocation')) {
 			if ($ip[0]==':' || $ip= "127.0.0.1" || strpos($ip, '137.97') !== false) {
 				$ip = '50.65.193.19';
 			}
-			//If a bot arrives, serving sample location
+			//If a bot arrives, serve sample location
 			if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
 			    $loc['zip'] = 'T9E';
 			    $loc['lat'] = 53.266;
 				$loc['lon'] = -113.552;
 				$loc['region'] = 'Alberta';
-				$loc['place'] = 'Leduc';
+				$loc['place'] = 'Leduc2';
+				$loc['ip'] = $request->ip()."x";
 			}
 			else //If a normal user
 			{
 			    $curl = curl_init();
 	            curl_setopt_array($curl, array(
 	                CURLOPT_RETURNTRANSFER => 1,
-	                CURLOPT_URL => 'http://freegeoip.net/json/'.$ip,
+	                CURLOPT_URL => 'http://freegeoip.net/json/'.$request->ip(),
 	                CURLOPT_USERAGENT => 'Codular Sample cURL Request'
 	            ));
 	            $resp = curl_exec($curl);
@@ -81,6 +83,7 @@ if (!function_exists('getLocation')) {
 				$loc['lon'] = $location['longitude'];
 				$loc['region'] = $location['region_name'];
 				$loc['place'] = $location['city'];
+				$loc['ip'] = $location['ip'];
 				// $loc['place'] = $loc['city'];
 
 				// unset($loc['city']); //city is used in search page, so no clash
@@ -91,6 +94,7 @@ if (!function_exists('getLocation')) {
 			$request->session()->put('lat', $loc['lat']);
 			$request->session()->put('lon', $loc['lon']);
 			$request->session()->put('region', $loc['region']);
+			$request->session()->put('ip', $loc['ip']);
 			// $loc = json_decode(file_get_contents('http://ip-api.com/json/'.$ip),'true');
 			
 		}

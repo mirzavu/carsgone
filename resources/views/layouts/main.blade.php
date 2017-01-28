@@ -33,7 +33,7 @@
 	<div class="header-upper">
     	<div class="container">
         	<ul class="upper-nav">
-            	<li><a href="#"><i class="fa fa-map-marker"></i> {{ $location['place'] or 'Location'}}</a></li>
+            	<li><a href="#"><i class="fa fa-map-marker"></i> {{ $location['ip'] or 'Location'}}</a></li>
                 <li><a href="#">Contact: 1-855-328-6002</a></li>
             </ul>
             <ul class="upper-nav right">
@@ -424,6 +424,7 @@ $('#private-link').on('click',function(e){
 var base_url = '{{ url('/') }}';
 </script>
 @yield('javascript')
-
+<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-588b40388234f00a"></script> 
 </body>
 </html>

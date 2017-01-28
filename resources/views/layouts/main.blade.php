@@ -33,7 +33,7 @@
 	<div class="header-upper">
     	<div class="container">
         	<ul class="upper-nav">
-            	<li><a href="#"><i class="fa fa-map-marker"></i> {{ $location['ip'] or 'Location'}}</a></li>
+            	<li><a href="#"><i class="fa fa-map-marker"></i> {{ $location['place'] or 'Location'}}</a></li>
                 <li><a href="#">Contact: 1-855-328-6002</a></li>
             </ul>
             <ul class="upper-nav right">

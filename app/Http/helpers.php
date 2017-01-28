@@ -94,7 +94,7 @@ if (!function_exists('getLocation')) {
 				//Fetch city from coordinates if empty
 				if(empty($location['city']))
 				{
-					$location['latitude'] = 53.55;$location['longitude']=-113.5;
+					// $location['latitude'] = 53.55;$location['longitude']=-113.5;
 					$url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".$location['latitude'].','.$location['longitude'];
                     $curl = curl_init();
                     curl_setopt($curl, CURLOPT_URL, $url);

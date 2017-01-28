@@ -89,7 +89,7 @@ if (!function_exists('getLocation')) {
 				$loc['lat'] = $location['latitude'];
 				$loc['lon'] = $location['longitude'];
 				$loc['region'] = $location['region_name'];
-				$loc['place'] = $location['city'];
+				
 
 				//Fetch city from coordinates if empty
 				if(empty($location['city']))
@@ -121,8 +121,8 @@ if (!function_exists('getLocation')) {
 
                     }  
 				}
-
-
+				$loc['place'] = $location['city'];
+				
 				// $loc['place'] = $loc['city'];
 				// unset($loc['city']); //city is used in search page, so no clash
 

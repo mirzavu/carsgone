@@ -56,7 +56,7 @@ if (!function_exists('getLocation')) {
 		else
 		{
 			$ip = $request->ip();
-			if ($ip[0]==':' || $ip= "127.0.0.1" || strpos($ip, '137.97') !== false) {
+			if ($ip[0]==':' || $ip== "127.0.0.1" || strpos($ip, '137.97') !== false) {
 				$ip = '50.65.193.19';
 			}
 			Log::info('---');

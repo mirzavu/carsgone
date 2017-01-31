@@ -170,6 +170,7 @@ class Cdemo extends Command
                     $vehicle->price = (int)$vehicle_xml->standard_price;
                     $vehicle->status_id = 1;
                     $vehicle->text = (string)$vehicle_xml->special_mention;
+                    $vehicle->vin = (string)$vehicle_xml->vin;
                     $vehicle->save();
 
                     $vehicle->photos()->delete();

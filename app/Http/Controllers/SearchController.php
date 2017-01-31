@@ -109,7 +109,6 @@ class SearchController extends Controller
         $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy('vehicles.'.$sort, $direction)->paginate(15);
         
         $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
-        // dd($data['featured_vehicles']);
         $data['applied_filters'] = $this->getAppliedFilters($conditions, $this->dealer_ids);
         $data['url_params'] = $params;
         $data['logged_in'] = Auth::check();

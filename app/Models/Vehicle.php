@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 // use App\Scopes\StatusScope;
 use Cviebrock\EloquentSluggable\Sluggable;
 use DB;
+use Log;
 
 class Vehicle extends Model
 {
@@ -169,6 +170,7 @@ class Vehicle extends Model
 
     function scopeApplyFilter($query, $conditions, $featured = 0)
     {
+
         $query->where(function ($q) use($conditions, $featured)
             {
                 if ($conditions->get('content'))
@@ -204,10 +206,10 @@ class Vehicle extends Model
                     $q->where('year', '<=', $range[1]);
                 }
 
-                if($featured ==1)
-                {
-                    $q->where('vehicles.featured', 1);
-                }
+                // if($featured ==1)
+                // {
+                //     $q->orWhere('vehicles.featured', 1);
+                // }
                 $q->where('vehicles.status_id',1);
                 return $q;
             }
@@ -265,10 +267,12 @@ class Vehicle extends Model
                      ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < ".$conditions->get('distance'));
             }
             
-            if($featured ==1)
-            {
-                $query->where('users.featured', 1);
-            }
+
+        }
+
+        if($featured ==1)
+        {
+            $query->where('users.featured', 1)->orWhere('vehicles.featured', 1);
         }
 
         if ($conditions->get('user'))

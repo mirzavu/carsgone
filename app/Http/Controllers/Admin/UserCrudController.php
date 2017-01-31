@@ -31,8 +31,20 @@ class UserCrudController extends CrudController {
                                 'label' => 'Name'
                             ]);
         $this->crud->addColumn([
-                                'name' => 'email',
-                                'label' => 'Email'
+                                'name' => 'vehicle_count',
+                                'label' => 'Vehicle Count'
+                            ]);
+        $this->crud->addColumn([
+                                'name' => 'partner_dealer_id',
+                                'label' => 'Partner Dealer ID'
+                            ]);
+        $this->crud->addColumn([
+                                'label' => "Partner",
+                                'type' => 'select',
+                                'name' => 'partner_id',
+                                'entity' => 'partner',
+                                'attribute' => 'partner',
+                                'model' => "App\Models\Partner"
                             ]);
         $this->crud->addColumn([
                                 'label' => "City",
@@ -50,13 +62,17 @@ class UserCrudController extends CrudController {
                                 'attribute' => 'province_name',
                                 'model' => "App\Models\Province"
                             ]);
-        $this->crud->addColumn([
-                                'name' => 'postal_code',
-                                'label' => 'Postal Code'
-                            ]);
+
+
         $this->crud->addColumn([
                                 'name' => 'featured',
-                                'label' => 'Featured'
+                                'label' => 'Featured',
+                                'type' => 'boolean'
+                            ]);
+        $this->crud->addColumn([
+                                'name' => 'updated_at_date',
+                                'label' => 'Updated At',
+                                'type' => 'text'
                             ]);
 
         $this->crud->addField([    // TEXT
@@ -65,9 +81,25 @@ class UserCrudController extends CrudController {
                                 'type' => 'text',
                             ]);
         $this->crud->addField([    // TEXT
+                                'name' => 'featured',
+                                'label' => 'Featured',
+                                'type' => 'checkbox',
+                            ]);
+
+        $this->crud->addField([    // TEXT
                                 'name' => 'email',
                                 'label' => 'Email',
                                 'type' => 'email',
+                            ]);
+        $this->crud->addField([    // TEXT
+                                'name' => 'url',
+                                'label' => 'Website',
+                                'type' => 'text',
+                            ]);
+        $this->crud->addField([    // TEXT
+                                'name' => 'address',
+                                'label' => 'Address Line',
+                                'type' => 'text',
                             ]);
         $this->crud->addField([    // SELECT
                                 'label' => "City",
@@ -88,6 +120,21 @@ class UserCrudController extends CrudController {
         $this->crud->addField([    // TEXT
                                 'name' => 'postal_code',
                                 'label' => 'Postal Code',
+                                'type' => 'text',
+                            ]);
+        $this->crud->addField([    // TEXT
+                                'name' => 'phone',
+                                'label' => 'Phone',
+                                'type' => 'text',
+                            ]);
+        $this->crud->addField([    // TEXT
+                                'name' => 'fax',
+                                'label' => 'Fax',
+                                'type' => 'text',
+                            ]);
+        $this->crud->addField([    // TEXT
+                                'name' => 'partner_dealer_id',
+                                'label' => 'Partner Dealer ID',
                                 'type' => 'text',
                             ]);
 

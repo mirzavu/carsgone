@@ -25,7 +25,7 @@ class DealerCrudController extends CrudController {
                                 'label' => 'Name'
                             ]);
         $this->crud->addColumn([
-                                'name' => 'email',
+                                'name' => 'vehicle_count',
                                 'label' => 'Email'
                             ]);
         $this->crud->addColumn([

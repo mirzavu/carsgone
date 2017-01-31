@@ -21,6 +21,7 @@ class User extends Authenticatable
     use Sluggable;
 
     protected $fillable = array('slug','name','email','password','role','address','partner_id','partner_dealer_id','city_id','province_id','phone','fax','url','postal_code','latitude','longitude','featured');
+    protected $appends = ['vehicle_count', 'updated_at_date'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -84,6 +85,29 @@ class User extends Authenticatable
         
     }
 
+    public function getPhoneAttribute($value)
+    {
+        if(empty($value) || $value == '')
+        {
+            return '--';
+        }
+        else
+        {
+            return $value;
+        }
+    }
+
+    public function getVehicleCountAttribute()
+    {
+        return $this->attributes['vehicle_count'] = $this->vehicles()->count();
+    }
+
+    public function getUpdatedAtDateAttribute($value)
+    {
+        return $this->attributes['updated_at_date'] = $this->updated_at->format('d-m-Y');
+    }
+
+
     public function province()
     {
         return $this->belongsTo('App\Models\Province');
@@ -92,6 +116,11 @@ class User extends Authenticatable
     public function city()
     {
         return $this->belongsTo('App\Models\City');
+    }
+
+    public function partner()
+    {
+        return $this->belongsTo('App\Models\Partner');
     }
 
     public function vehicles()

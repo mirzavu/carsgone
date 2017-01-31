@@ -247,6 +247,13 @@ class Vehicle extends Model
             $query->join('provinces', 'users.province_id', '=', 'provinces.id');
             $query->where('province_name', $conditions->get('province'));
         }
+
+        if ($conditions->get('city'))
+        {
+            $query->join('cities', 'users.city_id', '=', 'cities.id');
+            $query->where('city_name', $conditions->get('city'));
+        }
+
         if ($conditions->get('distance'))
         {
             $query->leftJoin('users', 'vehicles.user_id', '=', 'users.id');

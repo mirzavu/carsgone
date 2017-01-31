@@ -399,8 +399,9 @@ ul.table-list li a{color:#5fc0ed;}
 .single-dealer-lower{padding:15px; display:inline-block; vertical-align:top; width:100%;}
 .dealer-address-map{width:100%; height:320px; float:left; background:#f0f0f0; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
 .panel-default > .panel-heading{background:#3e5062;text-align: center;}
-.vehicle-info-small{margin-bottom: 45px;font-size: 30px;font-weight: 600;}
-.vehicle-info-small > div{float: left;border: solid 3px #3e5062;background-color: #e8e7e7;color: #3e5062;padding: 14px;border-radius: 5px;}
+.vehicle-info-small{margin-bottom: 45px;font-size: 26px;font-weight: 600;}
+.vehicle-info-small > .info-item{float: left;border: solid 3px #3e5062;background-color: #e8e7e7;color: #3e5062;padding: 11px;border-radius: 5px;margin-right: 2px;}
+.addthis_inline_share_toolbox{clear:none !important;padding: 5px;}
 /* ============ Car Detail Page Start ================= */
 
 /* ============ Info Page Start ================= */
@@ -999,7 +1000,7 @@ ul.item-stats li div{padding: 4px;}
 .related-link-list{display: block;}
 .related-link-list li{width: 100%;}
 .fetured-box{width: 80%;}
-#related-vehicles .fetured-box h4,#related-vehicles .featured-details{display: none;}
+.featured-details .price, .featured-details .run{width:100%;}
 
 }
 /* ============================= */
@@ -1044,7 +1045,8 @@ ul.item-stats li div i{line-height: 16px;font-size: 11px;}
 .sf-nav li .sf-nav-number{float:none;}
 
 .popular-item-list.bordered.four-col li{width: 100%;}
-.vehicle-info-small{font-size: 20px;}
+.vehicle-info-small > .info-item{font-size: 16px;padding: 6px;}
+.featured-details .run, .featured-details .price{width: 100%;margin-bottom: 2px;}
 }
 @media screen and (max-width: 380px) {
 .navbar-brand {width: 140px; padding: 15px 5px;}

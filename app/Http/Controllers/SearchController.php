@@ -53,7 +53,7 @@ class SearchController extends Controller
 		//distance set
 		if(!$conditions->get('distance'))
 		{
-			$conditions->put('distance','250');
+			$conditions->put('distance','50');
 		}
 
 		if($conditions->get('dealer')) 

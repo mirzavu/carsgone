@@ -111,9 +111,9 @@
                     <div class="col-sm-4 footer-box">
                     	    <a href="index.html" class="footer-logo"><img src="/assets/images/footer-logo.png" alt="" /></a>
                             {{-- <h5>Contact</h5> --}}
-                            <p>17536 – 105 Avenue, Edmonton, Alberta  T5S 1G4</p>
+                            <p>{!! Helper::setting('address') !!} {!! Helper::setting('postal_code') !!}</p>
                             <p>Email: <a href="mailto:support@carsgone.com">support@carsgone.com</a></p>
-                            <p>Phone: 1-855-328-6002</p>
+                            <p>Phone: {!! Helper::setting('phone') !!}</p>
                             <ul class="social-links">
                             	<li><a href="https://www.facebook.com/Carsgonecom-108789885413"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>

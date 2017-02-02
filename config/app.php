@@ -216,6 +216,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'SEOMeta'   => Artesaos\SEOTools\Facades\SEOMeta::class,
+        'Helper' => App\Http\Helpers\Helper::class,
     ],
 
 ];

@@ -103,6 +103,8 @@
 
 	Route::group(['namespace' =>'Admin', 'prefix' => config('backpack.base.route_prefix')], function () {
     	Route::get('dashboard', 'AdminController@dashboard');
+    	Route::get('settings', 'AdminController@settings');
+    	Route::patch('settings', 'AdminController@settingUpdate');
     	Route::auth();
 	});	
 

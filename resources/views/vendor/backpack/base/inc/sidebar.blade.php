@@ -24,6 +24,7 @@
           <li><a href="{{ url('admin/dealer') }}"><i class="fa fa-newspaper-o"></i> <span>Dealers</span> <i class="fa fa-angle-left pull-right"></i></a></li>
           <li><a href="{{ url('admin/make') }}"><i class="fa fa-newspaper-o"></i> <span>Makes</span> <i class="fa fa-angle-left pull-right"></i></a></li>
           <li><a href="{{ url('admin/model') }}"><i class="fa fa-newspaper-o"></i> <span>Models</span> <i class="fa fa-angle-left pull-right"></i></a></li>
+          <li><a href="{{ url('admin/settings') }}"><i class="fa fa-newspaper-o"></i> <span>Settings</span> <i class="fa fa-angle-left pull-right"></i></a></li>
 
 
           <!-- ======================================= -->

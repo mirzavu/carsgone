@@ -44,8 +44,8 @@
                      <img src="/assets/images/icon-biulding.png" alt="Address" />
                      <div class="contact-box-right">
                         <h3>Carsgone.com</h3>
-                        <p>17536 – 105 Avenue, Edmonton, Alberta T5S 1G4</p>
-                        <a class="phone" href="tel:1-855-328-6002"><i class="fa fa-phone" aria-hidden="true"></i> 1-855-328-6002</a>
+                        <p>{!! Helper::setting('address') !!} {!! Helper::setting('postal_code') !!}</p>
+                        <a class="phone" href="tel:1-855-328-6002"><i class="fa fa-phone" aria-hidden="true"></i> {!! Helper::setting('phone') !!}</a>
                      </div>
                   </div>
                   <div class="single-dealer-lower">
@@ -109,6 +109,6 @@
 
 
 </script>
-<script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(45.4393321,-73.47262060000003),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(45.4393321,-73.47262060000003)});infowindow = new google.maps.InfoWindow({content:'<strong>Carsgone</strong><br>8905, boul. Taschereau, J4Y 1A4, Brossard, Quebec<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+<script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(53.5477952,-113.5679699),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(53.5477952,-113.5679699)});infowindow = new google.maps.InfoWindow({content:'<strong>Carsgone</strong><br>17536 – 105 Avenue, Edmonton, Alberta<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
 
 @endsection

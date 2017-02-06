@@ -9483,7 +9483,7 @@ ul.social-links li a:hover{ background:#4dc3ff; color:#fff; }
 .sidebar{width: 29%;float:left;padding-right: 34px; font-weight: 700; color: #666;}
 .slide-nav{display:none;}
 .slide-nav, .slide-nav:hover, .slide-nav:focus{ position: fixed; left: 0;   top: 200px; background: #009cde; color:#fff; font-weight:700; padding: 10px; border-radius: 0 5px 5px 0; z-index:9999; box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
-a.sidenav-close {display:none;background: #ee6e73;border-radius: 4px;float: right;font-size: 17px;color: #fff;position: absolute;top: 10px;right: 10px;width: 24px;height: 24px;text-align: center;text-shadow: ;}
+a.sidenav-close {display:none;background: #ee6e73;border-radius: 4px;float: right;font-size: 17px;color: #fff;position: absolute;top: 10px;right: 10px;padding: 0px 7px;height: 24px;text-align: center;text-shadow: ;}
 .main-container{width:71%; float:right;}
 .panel{border:0; border-radius:2px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
 .panel-heading{background:#54c5fb; border-radius:2px 2px 0 0;}
@@ -9521,10 +9521,10 @@ a.sidenav-close {display:none;background: #ee6e73;border-radius: 4px;float: righ
 .item-heading a.btn, .item-heading button{float: right;margin-left: 10px;}
 .btn-action{padding: 4px 12px; font-size: 12px;}
 .item-title {margin-top: 0;margin-bottom: 0;font-size: 16px;text-transform: uppercase;color: #fff;line-height: 24px;letter-spacing: 1px;float: left;}
-.item-body {padding: 13px 13px 13px 13px;width:100%;display:inline-block;vertical-align:top;}
-.item-body-left{width: 26%;float:left; position:relative;}
+.item-body {padding: 13px 13px 13px 13px;width:100%;display:flex;vertical-align:top;}
+.item-body-left{width: 100%;flex: 2;float:left; position:relative;}
 .item-body-left img{object-fit: cover;width:100%;height: 150px; }
-.item-body-right{width: 74%;float:left;padding: 0 0 0 15px;}
+.item-body-right{width: 100%;float:left;padding: 0 0 0 15px;flex: 5;display: flex;}
 .item-body-right-upper{width:100%; display:inline-block; vertical-align:top;}
 .item-body-right-lower{width:100%; display:inline-block; vertical-align:top;}
 .item-detail{width:100%; display:inline-block; vertical-align:top;}
@@ -9539,8 +9539,8 @@ a.sidenav-close {display:none;background: #ee6e73;border-radius: 4px;float: righ
 .item-detail-right p{color: #666666;font-size: 15px; margin: 0;line-height: 22px;}
 .item-detail-right h4{color: #2061c5;font-size: 18px;margin: 0;line-height: 26px;}
 .item-body-right-lower h5{color:#2061c5;font-size:14px;margin: 0 0 2px;text-transform:uppercase;letter-spacing: 1.25px;padding: 0 9px;}
-ul.item-stats{width:100%; display:inline-block; vertical-align:top;}
-ul.item-stats li{width:33.3%; float:left; padding:5px; padding-bottom:0; }
+ul.item-stats{width:100%;height: 100%; display:inline-block; vertical-align:top;}
+ul.item-stats li{width:100%;height: 34%; float:left; padding:5px; padding-bottom:0; }
 ul.item-stats li div{width:100%;float:left;font-size:16px; line-height:22px;color:#3e5062;margin:0;background:#cfdbe6;border-radius:3px;padding: 8px;margin-bottom:0;letter-spacing:0.5px;font-weight:700;text-align:center;}
 ul.item-stats li div i{float:left;line-height:22px;font-size: 22px;}
 ul.applied-list{width:100%; display:inline-block; vertical-align:top; background:#f2f2f2;}
@@ -10254,10 +10254,7 @@ ul.pricing-list li:nth-child(3){margin-left:0; margin-right:0;}
 @media screen and (max-width: 600px) {
 
 ul.item-stats li,
-.dashboard ul.item-stats li{width:100%; padding:1px 7px;}
-.item-body{display:flex;}
-.item-body-left{flex: 2;}
-.item-body-right{flex: 5;display: flex;}
+.dashboard ul.item-stats li{padding:1px 7px;}
 .item-body-left img{height: auto;}
 ul.item-stats li div{padding: 4px;}
 .item-detail-right p:first-child{display: none;}

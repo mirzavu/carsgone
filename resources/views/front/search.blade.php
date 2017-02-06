@@ -12,7 +12,7 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Quick Search</h3>
-                     <a href="#" class="sidenav-close"><i class="fa fa-times"></i></a>
+                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <div class="filter-dropdown">

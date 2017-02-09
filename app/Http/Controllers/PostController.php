@@ -64,6 +64,8 @@ class PostController extends Controller
 
 	public function create(Request $request)
 	{		
+
+		//SEO
 		SEOMeta::setTitle('Sell a car online free auto classifieds | Buy Sell and Trade Used Cars Canada');
         SEOMeta::setDescription('Sell my car free, advertise vehicles free, automotive classified, post or list free online auto listings');
         SEOMeta::addKeyword(['sell', 'used cars', 'auto', 'list vehicle', 'classifieds', 'vehicle']);
@@ -72,6 +74,7 @@ class PostController extends Controller
 		if(!empty($request['colour_interior'])) $request['int_color_id'] = Color::where('color', $request['colour_interior'])->value('id');
 		if(!empty($request['fuel'])) $request['fuel_id'] = FuelType::where('fuel_type', $request['fuel'])->value('id');
 
+		//Validate fields
 		$validator = Validator::make($request->all(), [
             'make_id' => 'required|integer',
             'model_id' => 'required|integer',
@@ -82,6 +85,7 @@ class PostController extends Controller
         	return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
         }
 
+        //Save vehicle
 		$vehicle = Auth::user()->vehicles()->create($request->all());
 		$vehicle->slug = null;
 		if(Auth::user()->verified)
@@ -95,6 +99,38 @@ class PostController extends Controller
 			$request->session()->flash('success', 'Vehicle has been posted Successfully! Verify your email address to publish your vehicle');
 		}
 		$vehicle->save();
+
+		//Change user parameters from input
+		$user = Auth::user();
+		$user->phone = $request['phone'];
+		$user->postal_code = $request['postal_code'];
+		if($request->seller == "dealer")
+			$user->role = "dealer";
+		else
+			$user->role = "member";
+		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($user->postal_code);
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        $loc_json = curl_exec($curl);
+        $retry = 0;
+        $loc_array = json_decode($loc_json);
+        while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
+            $loc_json = curl_exec($curl);
+            $loc_array = json_decode($loc_json);
+            $retry++;
+        }
+        curl_close($curl);
+        if($loc_array->status == "OK")
+        {
+            $user->latitude = $loc_array->results[0]->geometry->location->lat;
+            $user->longitude = $loc_array->results[0]->geometry->location->lng;
+        }  
+
+		$user->save();
+
+		//Save Vehicle Images
 		$image_names = explode('^', $request['file_names']);
 		
 		$photos =[];$i=1;
@@ -104,6 +140,7 @@ class PostController extends Controller
         }
         $vehicle->photos()->saveMany($photos);
 
+        //Payment
 		if ($request->has('free')) {
 		 	return response()->json(['status' => 'done', 'url' => url('post')]);
 		}
@@ -274,6 +311,7 @@ class PostController extends Controller
 		{
 			return redirect()->action('HomeController@index');
 		}
+		$data['user'] = Auth::user();
 		$data['makes'] = Make::pluck('make_name', 'id');
 		// dd($data['vehicle']);
 		$data['vehicle']->model = $data['vehicle']->model_id; //to match with form builder
@@ -319,6 +357,38 @@ class PostController extends Controller
         }
         $vehicle = Vehicle::withoutGlobalScopes()->findorFail($id);
 		$vehicle->update($request->all());
+
+		//Change user parameters from input
+		$user = Auth::user();
+		$user->phone = $request['phone'];
+		$user->postal_code = $request['postal_code'];
+		if($request->seller == "dealer")
+			$user->role = "dealer";
+		else
+			$user->role = "member";
+		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($user->postal_code);
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        $loc_json = curl_exec($curl);
+        $retry = 0;
+        $loc_array = json_decode($loc_json);
+        while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
+            $loc_json = curl_exec($curl);
+            $loc_array = json_decode($loc_json);
+            $retry++;
+        }
+        curl_close($curl);
+        if($loc_array->status == "OK")
+        {
+            $user->latitude = $loc_array->results[0]->geometry->location->lat;
+            $user->longitude = $loc_array->results[0]->geometry->location->lng;
+        }  
+
+		$user->save();
+
+		
 		if ($request->has('free') || $request->has('paid')) {
 			if(Auth::user()->verified)
 			{

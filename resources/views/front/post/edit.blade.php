@@ -7,23 +7,23 @@
  <div class="container">
     <div class="wrapper">
        {{-- <form id="vehicle-form" method="post" action="/post/create"> --}}
-       {!! Form::model($vehicle, ['url' => '/vehicles/'.$vehicle->id, 'method' => 'PATCH', 'id' => 'vehicle-form']) !!}
        <div class="post-tab clearfix panel" id="post-edit-form">
           
             <div class="form-section">
+            {!! Form::model($vehicle, ['url' => '/vehicles/'.$vehicle->id, 'method' => 'PATCH', 'id' => 'vehicle-form']) !!}
                <legend>Vehicle Info</legend>
                <fieldset>
                   <span>1</span>
                   <h4>Make &amp; Model</h4>
                   <div class="row">
                      <div class="col-sm-6 display-table">
-                        <label>Year</label>
+                        <label>Year<span class="required">*</span></label>
                         <div class="select-box">
                            {!! Form::select('year', ['2017' => '2017','2016' => '2016','2015' => '2015','2014' => '2014','2013' => '2013','2012' => '2012','2011' => '2011','2010' => '2010'], null, ['required' ]) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
-                        <label>Make</label>
+                        <label>Make<span class="required">*</span></label>
                         <div class="select-box">
                            {!! Form::select('make_id', $makes, null, ['id'=> 'make-select', 'required' ]) !!}
                         </div>
@@ -31,7 +31,7 @@
                   </div>
                   <div class="row">
                      <div class="col-sm-6 display-table">
-                        <label>Model</label>
+                        <label>Model<span class="required">*</span></label>
                         <div class="select-box">
                            {!! Form::select('model_id', $models, null, ['id'=> 'model-select', 'required' ]) !!}
                         </div>
@@ -49,7 +49,7 @@
                   <h4>Price % Mileage</h4>
                   <div class="row">
                      <div class="col-sm-6 display-table">
-                        <label>Price</label>
+                        <label>Price<span class="required">*</span></label>
                         <div class="input-box">
                           {!! Form::text('price', null, ['class' => 'form-control', 'placeholder' => "eg: $12,000", 'minlength'=>'3', 'required']) !!}
                         </div>
@@ -67,9 +67,9 @@
                   <h4>Vehicle Info</h4>
                   <div class="row">
                      <div class="col-sm-6 display-table">
-                        <label>Body Style</label>
+                        <label>Body Style<span class="required">*</span></label>
                         <div class="select-box">
-                           {!! Form::select('body_style_group_id', $body_style_groups, null) !!}
+                           {!! Form::select('body_style_group_id', $body_style_groups, null, ['required']) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
@@ -148,6 +148,7 @@
                      </div>
                   </div>
                </fieldset>
+            {!! Form::close() !!}
             </div>
             <div class="form-section">
                <legend>Photos</legend>
@@ -195,7 +196,32 @@
                </fieldset>
             </div>
             <div class="form-section">
-               <legend>Promote Vehicle</legend>
+            {!! Form::model($user, ['method' => 'PATCH', 'id' => 'contact-info']) !!}
+               <legend>Contact Info</legend>
+               <fieldset>
+                 <div class="row">
+                     <div class="col-sm-6 display-table">
+                        <label>Seller Type<span class="required">*</span></label>
+                        <div class="select-box">
+                           {!! Form::select('seller', ['dealer' => 'Dealer','member' => 'Private'], null, ['required' ]) !!}
+                        </div>
+                     </div>
+                     <div class="col-sm-6 display-table">
+                        <label>Phone<span class="required">*</span></label>
+                        <div class="input-box">
+                           {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => "Eg: 111-111-1111", 'required']) !!}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-6 display-table">
+                        <label>Postal Code<span class="required">*</span></label>
+                        <div class="input-box">
+                           {!! Form::text('postal_code', null, ['class' => 'form-control', 'placeholder' => "Enter Postal Code", 'pattern' => "^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$", 'required']) !!}
+                        </div>
+                     </div>
+                  </div>
+                </fieldset>
                @if($vehicle->featured)
                 <div class="promote-vehicle">
                   <div class="promote-vehicle-left">
@@ -234,10 +260,10 @@
                   
                </div>
                @endif
+               {!! Form::close() !!}
             </div>
           
        </div>
-       {!! Form::close() !!}
     </div>
  </div>
 </div>
@@ -443,15 +469,52 @@ var sfw = $("#post-edit-form").stepFormWizard({
                     }, 500);
                     $(validator.errorList[0].element).focus()
 
+                }
+            })
+            if (form.valid() == true) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+      onFinish: function(i) {
+            var form2 = $("#contact-info");
+            form2.validate({
+                rules: {},
+                // errorClass: "invalid form-error",       
+                // errorElement : 'div',       
+                errorPlacement: function(error, element) {
+                    if (element.is('select')) {
+                        error.appendTo(element.parent().parent());
+                    } else {
+                        error.appendTo(element.parent());
+                    }
+
                 },
-                submitHandler: function(form) {
+                focusInvalid: false,
+                invalidHandler: function(form2, validator) {
+
+                    if (!validator.numberOfInvalids())
+                        return;
+                    $('html, body').animate({
+                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                    }, 500);
+                    $(validator.errorList[0].element).focus()
+
+                }
+            })
+
+            if (form2.valid() == false) {
+                return false;
+            }
+              console.log($('#vehicle-form').attr('action'))
                     $.get("/loggedInUser", function(data) {
                         if (data.status == "success") {
                             $('#submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:2.0rem" aria-hidden="true"></i>  SAVING VEHICLE');
                             $.ajax({
-                                url: form.action,
-                                type: form.method,
-                                data: $(form).serialize(),
+                                url: $('#vehicle-form').attr('action'),
+                                type: 'POST',
+                                data: $('form').serialize(),
                                 success: function(response) {
                                     window.location = response.url;
                                 }
@@ -460,13 +523,6 @@ var sfw = $("#post-edit-form").stepFormWizard({
                             $('#post-member').openModal();
                         }
                     });
-                }
-            })
-            if (form.valid() == true) {
-                return true;
-            } else {
-                return false;
-            }
         }
 
 

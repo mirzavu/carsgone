@@ -17,17 +17,18 @@
              </div>
           </div>
        </div>
-       <form id="vehicle-form" method="post" action="/post/create">
+       
        <div class="post-tab clearfix panel" id="post-create-form">
           
             <div class="form-section">
+            <form id="vehicle-form" method="post" action="/post/create">
                <legend>Vehicle Info</legend>
                <fieldset>
                   <span>1</span>
                   <h4>Make &amp; Model</h4>
                   <div class="row">
                      <div class="col-sm-6 display-table">
-                        <label>Year</label>
+                        <label>Year<span class="required">*</span></label>
                         <div class="select-box">
                            <select name="year" required>
                               <option value="" disabled selected>Select Year</option>
@@ -43,7 +44,7 @@
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
-                        <label>Make</label>
+                        <label>Make<span class="required">*</span></label>
                         <div class="select-box">
                            <select id="make-select" name="make_id" required>
                                <option value="" disabled selected>Select Make</option>
@@ -56,7 +57,7 @@
                   </div>
                   <div class="row">
                      <div class="col-sm-6 display-table">
-                        <label>Model</label>
+                        <label>Model<span class="required">*</span></label>
                         <div class="select-box">
                            <select id="model-select" name="model" required>
                               <option value="" disabled selected>Select Model</option>
@@ -76,7 +77,7 @@
                   <h4>Price % Mileage</h4>
                   <div class="row">
                      <div class="col-sm-6 display-table">
-                        <label>Price</label>
+                        <label>Price<span class="required">*</span></label>
                         <div class="input-box">
                            <input type="text" class="form-control" name="price" placeholder="eg: $12,000" minlength="3" required/>
                         </div>
@@ -94,9 +95,9 @@
                   <h4>Vehicle Info</h4>
                   <div class="row">
                      <div class="col-sm-6 display-table">
-                        <label>Body Style</label>
+                        <label>Body Style<span class="required">*</span></label>
                         <div class="select-box">
-                           <select name="body_style_group_id">
+                           <select name="body_style_group_id" required>
                               <option value="" disabled selected>Select Body Style</option>
                                @foreach ($body_style_groups as $body)
                                <option value="{{$body->id}}">{{$body->body_style_group_name}}</option>
@@ -283,6 +284,7 @@
                      </div>
                   </div>
                </fieldset>
+               </form>
             </div>
             <div class="form-section">
                <legend>Photos</legend>
@@ -330,35 +332,64 @@
                </fieldset>
             </div>
             <div class="form-section">
-               <legend>Promote Vehicle</legend>
-               <div class="promote-vehicle">
-                  <div class="promote-vehicle-left">
-                     <h4>On Our Website!</h4>
-                     <p>For 30 days your <span>Ad will appear</span> on the site for <span>FREE</span></p>
-                  </div>
-                  <div class="promote-vehicle-right">
-                     <input name="free" type="checkbox" class="filled-in promote-check" checked id="vehicle-price-free">
-                     <label for="vehicle-price-free">FREE</label>
-                  </div>
-               </div>
-               <div class="promote-vehicle">
-                  <div class="promote-vehicle-left">
-                     <p>For <span>30 days</span> your ad will appear in the <span>"Featured Vehicles"</span> sections and enjoy<br /> <span>increased visibility</span> in the <span>search results.</span></p>
-                  </div>
-                  <div class="promote-vehicle-right">
-                     <input type="checkbox" class="filled-in promote-check" id="vehicle-price">
-                     <label for="vehicle-price"><span>$</span>14.95</label>
-                  </div>
-               </div>
-               <div class="promote-vehicle paypal">
-                  <p>Payments are accepted through <span>PayPal</span>. Click <span>Submit</span> to continue.</p>
-                  <img src="/assets/images/paypal.jpg" alt="" />
-                  <h4>Total <span>$14.95</span></h4>
-               </div>
+              <form id="contact-info">
+                 <legend>Contact Info</legend>
+                 <fieldset>
+                   <div class="row">
+                       <div class="col-sm-6 display-table">
+                          <label>Seller Type<span class="required">*</span></label>
+                          <div class="select-box">
+                             <select name="seller" required>
+                                <option value="" disabled selected>Select</option>
+                                <option value="dealer">Dealer</option>
+                                <option value="private">Private</option>
+                             </select>
+                          </div>
+                       </div>
+                       <div class="col-sm-6 display-table">
+                          <label>Phone<span class="required">*</span></label>
+                          <div class="input-box">
+                             <input name="phone" minlength="8" maxlength="12" type="text" class="form-control" placeholder="Eg: 111-111-1111" required/>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-sm-6 display-table">
+                          <label>Postal Code<span class="required">*</span></label>
+                          <div class="input-box">
+                             <input name="postal_code" minlength="6" maxlength="7" pattern="^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$" type="text" class="form-control" placeholder="Enter Postal Code" required/>
+                          </div>
+                       </div>
+                    </div>
+                  </fieldset>
+                 <div class="promote-vehicle">
+                    <div class="promote-vehicle-left">
+                       <h4>On Our Website!</h4>
+                       <p>For 30 days your <span>Ad will appear</span> on the site for <span>FREE</span></p>
+                    </div>
+                    <div class="promote-vehicle-right">
+                       <input name="free" type="checkbox" class="filled-in promote-check" checked id="vehicle-price-free">
+                       <label for="vehicle-price-free">FREE</label>
+                    </div>
+                 </div>
+                 <div class="promote-vehicle">
+                    <div class="promote-vehicle-left">
+                       <p>For <span>30 days</span> your ad will appear in the <span>"Featured Vehicles"</span> sections and enjoy<br /> <span>increased visibility</span> in the <span>search results.</span></p>
+                    </div>
+                    <div class="promote-vehicle-right">
+                       <input type="checkbox" class="filled-in promote-check" id="vehicle-price">
+                       <label for="vehicle-price"><span>$</span>14.95</label>
+                    </div>
+                 </div>
+                 <div class="promote-vehicle paypal">
+                    <p>Payments are accepted through <span>PayPal</span>. Click <span>Submit</span> to continue.</p>
+                    <img src="/assets/images/paypal.jpg" alt="" />
+                    <h4>Total <span>$14.95</span></h4>
+                 </div>
+              </form>
             </div>
           
        </div>
-       </form>
     </div>
  </div>
 </div>
@@ -490,6 +521,15 @@ $(function() {
 
     })
 
+    // $("#my-awesome-dropzone").sortable({
+    //     items:'.dz-preview',
+    //     cursor: 'move',
+    //     opacity: 0.5,
+    //     containment: '#image-dropzone',
+    //     distance: 20,
+    //     tolerance: 'pointer'
+    // });
+
     //------Form-----multistep----// 
 
     var sfw = $("#post-create-form").stepFormWizard({
@@ -523,15 +563,54 @@ $(function() {
                     }, 500);
                     $(validator.errorList[0].element).focus()
 
+                }
+            })
+
+            if (form.valid() == true) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+      onFinish: function(i) {
+            var form2 = $("#contact-info");
+            form2.validate({
+                rules: {},
+                // errorClass: "invalid form-error",       
+                // errorElement : 'div',       
+                errorPlacement: function(error, element) {
+                    if (element.is('select')) {
+                        error.appendTo(element.parent().parent());
+                    } else {
+                        error.appendTo(element.parent());
+                    }
+
                 },
-                submitHandler: function(form) {
+                focusInvalid: false,
+                invalidHandler: function(form2, validator) {
+
+                    if (!validator.numberOfInvalids())
+                        return;
+                    $('html, body').animate({
+                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                    }, 500);
+                    $(validator.errorList[0].element).focus()
+
+                }
+            })
+
+            if (form2.valid() == false) {
+                return false;
+            }
+
+
                     $.get("/loggedInUser", function(data) {
                         if (data.status == "success") {
                             $('#submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:2.0rem" aria-hidden="true"></i>  SAVING VEHICLE');
                             $.ajax({
-                                url: form.action,
-                                type: form.method,
-                                data: $(form).serialize(),
+                                url: '/post/create',
+                                type: 'POST',
+                                data: $('form').serialize(),
                                 success: function(response) {
                                     window.location = response.url;
                                 }
@@ -540,14 +619,8 @@ $(function() {
                             $('#post-member').openModal();
                         }
                     });
-                }
-            })
-            if (form.valid() == true) {
-                return true;
-            } else {
-                return false;
-            }
         }
+
 
 
     });
@@ -627,7 +700,6 @@ $('#post-signup-submit').on('click', function(e) {
             $('#post-signup').closeModal();
             $('#signup-li').replaceWith('<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
             $('#login-li').replaceWith('<li id="logout-li"><a href="#">Logout</a></li>');
-            console.log('aaxa')
             $('#vehicle-form').submit();
         } else {
             toastr.error(data.error, 'Error')

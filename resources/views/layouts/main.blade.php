@@ -236,6 +236,7 @@
 <script src="/assets/js/nprogress.js"></script>
 <script src="/assets/js/toastr.min.js"></script>
 <script src="/assets/js/jquery.validate.js"></script>
+<script src="/assets/js/additional-methods.min.js"></script>
 <script src="/assets/js/custom.js"></script>  --}}
 <script type="text/javascript">
 toastr.options = {

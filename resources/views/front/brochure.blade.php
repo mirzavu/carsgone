@@ -47,7 +47,13 @@
 					<li class="selected"><a href="#0">Contact</a></li>
 					<li><a href="#0">Description</a></li>
 					<li><a href="#0">Finance</a></li>
-					<li><a href="#0">Dealer</a></li>
+					<li>
+                    @if($vehicle->user->role == "dealer")
+                    <a href="#0">Dealer</a>
+                    @else
+                    <a href="#0">Private</a>
+                    @endif
+                    </li>
 				</ul>
 			</nav>  
 		</div> <!-- .cd-slider-nav -->

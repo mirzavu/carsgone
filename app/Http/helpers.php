@@ -47,7 +47,7 @@ if (!function_exists('getLocation')) {
 
 		$ip = $request->ip();
 		if (!empty($request->session()->get('lat'))) {
-			$loc['zip'] = $request->session()->get('zip');
+			// $loc['zip'] = $request->session()->get('zip');
 			$loc['place'] = $request->session()->get('place');
 			$loc['lat'] = $request->session()->get('lat');
 			$loc['lon'] = $request->session()->get('lon');
@@ -66,7 +66,7 @@ if (!function_exists('getLocation')) {
 			Log::info($request->ip());
 			//If a bot arrives, serve sample location
 			if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
-			    $loc['zip'] = 'T9E';
+			    // $loc['zip'] = 'T9E';
 			    $loc['lat'] = 53.266;
 				$loc['lon'] = -113.552;
 				$loc['region'] = 'Alberta';
@@ -79,16 +79,16 @@ if (!function_exists('getLocation')) {
 			    $curl = curl_init();
 	            curl_setopt_array($curl, array(
 	                CURLOPT_RETURNTRANSFER => 1,
-	                CURLOPT_URL => 'http://freegeoip.net/json/'.$ip,
+	                CURLOPT_URL => 'http://geoip.nekudo.com/api/'.$ip,
 	                CURLOPT_USERAGENT => 'Codular Sample cURL Request'
 	            ));
 	            $resp = curl_exec($curl);
 				$location = json_decode($resp, true);
 				// http://freegeoip.net/json/50.65.216.255
-				$loc['zip'] =	$location['zip_code'];
-				$loc['lat'] = $location['latitude'];
-				$loc['lon'] = $location['longitude'];
-				$loc['region'] = $location['region_name'];
+				// $loc['zip'] =	$location['zip_code'];
+				$loc['lat'] = $location['location']['latitude'];
+				$loc['lon'] = $location['location']['longitude'];
+				$loc['region'] = $location['country']['name'];
 				
 
 				//Fetch city from coordinates if empty
@@ -127,7 +127,7 @@ if (!function_exists('getLocation')) {
 				// unset($loc['city']); //city is used in search page, so no clash
 
 			}
-			$request->session()->put('zip', $loc['zip']);
+			// $request->session()->put('zip', $loc['zip']);
 			$request->session()->put('place', $loc['place']);
 			$request->session()->put('lat', $loc['lat']);
 			$request->session()->put('lon', $loc['lon']);

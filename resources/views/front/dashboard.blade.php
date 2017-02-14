@@ -136,6 +136,7 @@
                                     @else
                                     <button vehicle="{{$vehicle->id}}" class="btn deactivate-btn btn-action waves-effect waves-light waves-input-wrapper">Deactivate</button>
                                     @endif
+                                    <button vehicle="{{$vehicle->id}}" class="btn delete-btn btn-action waves-effect waves-light waves-input-wrapper">Delete</button>
                                  </div>
                                  <div class="item-body">
                                     <div class="item-body-left"> <a href="/vehicle/{{$vehicle->slug}}"> <img src="{{$vehicle->photo()}}" alt=""> <span class="overlay"></span> </a> </div>
@@ -388,6 +389,36 @@ var password_form = $("#password-form");
           }
        });
    })    
+
+      $('.delete-btn').on('click',function(){
+         var x = confirm("Are you sure you want to delete?");
+         var btn = $(this)
+        if (x)
+        {
+            $.ajax({ type: "POST",   
+                  url: "/delete-vehicle",   
+             accepts: {
+                text: "application/json"
+            },
+             async: true,
+             data: {vehicle_id: btn.attr('vehicle'), "_token": "{{ csrf_token() }}"},
+             success : function(data)
+             {  
+               if(data.status=="success")
+               {
+                  toastr.success("Vehicle deleted successfuly")
+                  location.reload();
+               }
+               else
+               {
+                  toastr.error("Session expired. Please refresh page")
+               }
+               
+             }
+          });
+        }
+             
+      })
 
       $('img[src=""]').attr('src','/assets/images/placeholder.jpg');
 

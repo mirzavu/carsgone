@@ -268,6 +268,23 @@ class UserController extends Controller
         return response()->json(['status' => 'success']);
     }
 
+    public function deleteVehicle(Request $request)
+    {
+        $vehicle_id = $request['vehicle_id'];
+        $user = Auth::user();
+        
+        $vehicle = Vehicle::withoutGlobalScopes()->whereId($vehicle_id)->first();
+        Log::info($vehicle_id);
+        if($vehicle->user->id == $user->id)
+        {
+            $vehicle->photos()->delete();
+            $vehicle->options()->delete();
+            $vehicle->delete();
+        }
+        return response()->json(['status' => 'success']);
+    }
+    
+
     public function postDealerSignUp(Request $request, AppMailer $mailer)
     {
         //if request ajax() need to check

@@ -82,7 +82,8 @@ class SearchController extends Controller
 			$conditions->put('user',Auth::user()->id);
 		}
 		// dd($conditions);
-		SEOMeta::setTitle($conditions->get('make').' '.$conditions->get('model').' New and Used Cars | Buy Sell Vehicles Nearby');
+		$title = $this->getTitle($conditions);
+		SEOMeta::setTitle($title);
         SEOMeta::setDescription('New and used cars. Auto dealers - private for sale by owner buy and sell cars, trucks, SUVs & vans');
         SEOMeta::addKeyword(['new cars', 'used cars', 'auto classifieds', 'search cars', 'trucks', 'SUVs', 'vans']);
 
@@ -116,6 +117,21 @@ class SearchController extends Controller
 		//$vehicles->select(DB::raw('count(*) as total'))->groupBy('dealer_id');
 		
 		return view('front.search', $data);
+	}
+
+	
+	public function getTitle($conditions)
+	{
+		$loc = '';
+		if($conditions->get('province'))
+		{
+			if($conditions->get('city'))
+				$loc = ' in '.$conditions->get('city').", ".$conditions->get('province');
+			else
+				$loc = ' in '.$conditions->get('province');
+		}
+		$title = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and Used Cars | Buy Sell Vehicles Nearby$loc";
+		return $title;
 	}
 
 	public function sessionToConditions(Request $request, &$conditions)
@@ -155,7 +171,7 @@ class SearchController extends Controller
 		if($conditions->get('province') && !$conditions->get('city'))
 		{
 			 $province_id= Province::where('province_name','=',$conditions->get('province'))->value('id');
-			 $sidebar_data['cities'] = City::where('province_id','=',$province_id)->withCount('vehicles')->orderBy('vehicles_count', 'desc')->get();
+			 $sidebar_data['cities'] = City::where('province_id','=',$province_id)->withCount('vehicles')->orderBy('city_name', 'asc')->get();
 		}
 		return $sidebar_data;
 	}

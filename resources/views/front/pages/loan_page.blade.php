@@ -7,7 +7,7 @@
     	<div class="row">
         	<div class="col-sm-12">
             	<div class="approval">
-                	<img src="/assets/images/approval-image.png" alt="" />
+                	<h3>100% credit acceptance</h3>
                     <h4>Pre Approved if you:</h4>
                     <ul class="reqiured-list">
                     	<li>LIVE IN CANADA</li>

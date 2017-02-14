@@ -76,52 +76,48 @@ if (!function_exists('getLocation')) {
 			}
 			else //If a normal user
 			{
+
+				//Tried http://freegeoip.net, http://geoip.nekudo.com/api but received incorrect coordinates
 			    $curl = curl_init();
 	            curl_setopt_array($curl, array(
 	                CURLOPT_RETURNTRANSFER => 1,
-	                CURLOPT_URL => 'http://geoip.nekudo.com/api/'.$ip,
+	                CURLOPT_URL => 'http://api.db-ip.com/v2/8a6a870884ded89746975ef75b10d5c3ec7589f7/'.$ip,
 	                CURLOPT_USERAGENT => 'Codular Sample cURL Request'
 	            ));
 	            $resp = curl_exec($curl);
 				$location = json_decode($resp, true);
 				// http://freegeoip.net/json/50.65.216.255
 				// $loc['zip'] =	$location['zip_code'];
-				$loc['lat'] = $location['location']['latitude'];
-				$loc['lon'] = $location['location']['longitude'];
-				$loc['region'] = $location['country']['name'];
-				
-
-				//Fetch city from coordinates if empty
-				if(empty($location['city']))
-				{
-					// $location['latitude'] = 53.55;$location['longitude']=-113.5;
-					$url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".$location['latitude'].','.$location['longitude'];
-                    $curl = curl_init();
-                    curl_setopt($curl, CURLOPT_URL, $url);
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($curl, CURLOPT_HEADER, false);
-                    $loc_json = curl_exec($curl);
-                    $retry = 0;
-                    $loc_array = json_decode($loc_json);
-                    while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
-                        $loc_json = curl_exec($curl);
-                        $loc_array = json_decode($loc_json);
-                        $retry++;
-                    }
-                    curl_close($curl);
-                    if($loc_array->status == "OK")
-                    {
-                        foreach ($loc_array->results[0]->address_components as $component) {
-						    
-						    if(in_array("locality", $component->types))
-						    {
-						    	$location['city'] = $component->long_name;
-						    }
-						}
-
-                    }  
-				}
+				// $loc['lat'] = $location['location']['latitude'];
+				// $loc['lon'] = $location['location']['longitude'];
+				$loc['region'] = $location['stateProv'];
 				$loc['place'] = $location['city'];
+				
+				// $url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".$location['location']['latitude'].','.$location['location']['longitude'];
+				$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$location['city'].'%20'.$location['stateProv'];
+				// dd($url);
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_HEADER, false);
+                $loc_json = curl_exec($curl);
+                $retry = 0;
+                $loc_array = json_decode($loc_json);
+         
+                while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
+                    $loc_json = curl_exec($curl);
+                    $loc_array = json_decode($loc_json);
+                    $retry++;
+                }
+                curl_close($curl);
+                if($loc_array->status == "OK")
+                {
+                    $loc['lat'] = $loc_array->results[0]->geometry->location->lat;
+                    $loc['lon'] = $loc_array->results[0]->geometry->location->lng;
+
+                }  
+
+				
 				
 				// $loc['place'] = $loc['city'];
 				// unset($loc['city']); //city is used in search page, so no clash

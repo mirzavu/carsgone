@@ -203,13 +203,13 @@
                      <div class="col-sm-6 display-table">
                         <label>Seller Type<span class="required">*</span></label>
                         <div class="select-box">
-                           {!! Form::select('seller', ['dealer' => 'Dealer','member' => 'Private'], null, ['required' ]) !!}
+                           {!! Form::select('role', ['dealer' => 'Dealer','member' => 'Private'], null, ['required' ]) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">
                         <label>Phone<span class="required">*</span></label>
                         <div class="input-box">
-                           {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => "Eg: 111-111-1111", 'required']) !!}
+                           {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => "Eg: 111-111-1111"]) !!}
                         </div>
                      </div>
                   </div>

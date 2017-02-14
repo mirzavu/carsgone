@@ -104,7 +104,7 @@ class PostController extends Controller
 		$user = Auth::user();
 		$user->phone = $request['phone'];
 		$user->postal_code = $request['postal_code'];
-		if($request->seller == "dealer")
+		if($request->role == "dealer")
 			$user->role = "dealer";
 		else
 			$user->role = "member";
@@ -362,7 +362,7 @@ class PostController extends Controller
 		$user = Auth::user();
 		$user->phone = $request['phone'];
 		$user->postal_code = $request['postal_code'];
-		if($request->seller == "dealer")
+		if($request->role == "dealer")
 			$user->role = "dealer";
 		else
 			$user->role = "member";

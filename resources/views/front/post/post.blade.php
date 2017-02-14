@@ -339,17 +339,17 @@
                        <div class="col-sm-6 display-table">
                           <label>Seller Type<span class="required">*</span></label>
                           <div class="select-box">
-                             <select name="seller" required>
+                             <select name="role" required>
                                 <option value="" disabled selected>Select</option>
                                 <option value="dealer">Dealer</option>
-                                <option value="private">Private</option>
+                                <option value="member">Private</option>
                              </select>
                           </div>
                        </div>
                        <div class="col-sm-6 display-table">
-                          <label>Phone<span class="required">*</span></label>
+                          <label>Phone</label>
                           <div class="input-box">
-                             <input name="phone" minlength="8" maxlength="12" type="text" class="form-control" placeholder="Eg: 111-111-1111" required/>
+                             <input name="phone" minlength="8" maxlength="12" type="text" class="form-control" placeholder="Eg: 111-111-1111"/>
                           </div>
                        </div>
                     </div>

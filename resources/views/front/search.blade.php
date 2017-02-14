@@ -246,7 +246,7 @@
                         <div>
                            <div class="fetured-box">
                               <a href="/vehicle/{{$vehicle->slug}}">
-                                 <h4>{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}</h4>
+                                 <h4>{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}}</h4>
                                  <div class="featured-img">
                                     <img src="{{$vehicle->photo()}}" alt="" />
                                     <span class="overlay"></span>

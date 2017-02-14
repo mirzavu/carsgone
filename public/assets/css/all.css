@@ -9634,7 +9634,7 @@ label{margin:0;}
 .item-gallery-container{width:100%; display:inline-block; vertical-align:top; margin-bottom:25px; }
 .item-large{width:100%; display:inline-block; vertical-align:top; background:#fff; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);margin-bottom:10px;}
 .large-item-head{text-align:center; padding:15px; background:#3e5062;}
-.large-item-head h3{font-size:22px; line-height:16px; color:#fff; margin:0;}
+.large-item-head h3{font-size:18px; line-height:16px; color:#fff; margin:0;}
 .large-item-body img{width:100%;}
 .large-item-body{position:relative;}
 .large-item-body span{color:#3e5062; background:#cfdbe6; padding:5px 30px; float:left; position:absolute; bottom:45px;  font-weight:700; font-size:16px;}
@@ -9720,7 +9720,8 @@ ul.table-list li a{color:#5fc0ed;}
 .approval-outer{padding:50px 0;}
 .approval{background:#fff url(../images/approval-bg.jpg) no-repeat left top; background-size:cover; padding:40px 15px; float:left; width:100%; box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
 .approval > img{margin-bottom:7px;}
-.approval h4{font:700 18px/26px 'Roboto'; color:#fff; text-shadow:2px 3px 0 #000; text-transform:none; margin-bottom:24px;}
+.approval > h3{color: #ffffff;text-shadow: 5px 1px 15px #4b7783;}
+.approval h4{font:700 18px/26px 'Roboto'; color:#fff; text-shadow:2px 3px 0 #4b7782; text-transform:none; margin-bottom:24px;}
 .reqiured-list{float:left;}
 .reqiured-list li{background-color:#7bcff6; color:#fff; font:700 14px/18px 'Roboto'; text-transform:uppercase; padding:11px 17px; border-radius:20px; margin-bottom:12px;}
 .reqiured-list li:before{content:''; background:url(../images/icon-tick.png) no-repeat left top; background-size:cover; width:21px; height:16px; float:left; margin-right:7px;}
@@ -10208,14 +10209,15 @@ footer{font-size:14px;}
 .account-features p{font-size:14px; line-height:20px;}
 
 .approval-outer{padding:30px 0;}
-.approval{padding:25px 15px;}
-.approval h4{font-size:14px; line-height:18px; text-shadow:2px 2px 0 #000;}
+.approval{padding:25px 15px;text-align: center;}
+.approval h4{font-size:14px; line-height:18px; text-shadow:2px 2px 0 #4b7783;}
 .canadian-autoloan .panel.full .panel-body,
 .canadian-autoloan .panel.full .panel-body .popular-container{padding-bottom:0;}
 .canadian-autoloan .panel.full .panel-body .popular-container h4{font-size:17px;}
 .autoloan-desc .panel.full .panel-body p{font-size:14px; line-height:22px; margin-bottom:15px;}
 .approval-link{margin-left:0; margin-top:15px; width:100%;}
 .approval .btn-orange{margin-bottom:10px;}
+.reqiured-list{max-width: 220px;margin: 0 auto;float:none;}
 
 .wrapper{padding:30px 0;}
 .dealer-information{box-shadow:none;}

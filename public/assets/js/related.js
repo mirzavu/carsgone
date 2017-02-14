@@ -30,7 +30,7 @@ class Related extends React.Component {
       	return <div>
               	<div className="fetured-box">
                 <a href={"/vehicle/"+item.slug}>
-                	<h4>{item.make.make_name+' '+item.model.model_name}</h4>
+                	<h4>{item.year+' '+item.make.make_name+' '+item.model.model_name}</h4>
                     <div className="featured-img">
                     	<img src={src} alt={item.make.make_name+' '+item.model.model_name} onError={(e)=>{e.target.src='/assets/images/placeholder.jpg'}}/>
                         <span className="overlay"></span>

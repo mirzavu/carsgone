@@ -43,6 +43,9 @@
 	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
 	Route::get('/vehicle-related/{slug}', 'VehicleController@relatedVehicle')->where('slug', '.*');
 	Route::post('/contact-dealer', 'VehicleController@contactDealer');
+
+
+	//To delete
 	Route::post('/make-offer', 'VehicleController@makeOffer');
 	Route::post('/trade-vehicle', 'VehicleController@tradeVehicleForm');
 
@@ -77,6 +80,7 @@
 	Route::get('/reset-password/{token}', 'UserController@getResetPassword');
 	Route::post('/activate-vehicle', 'UserController@activateVehicle');
 	Route::post('/deactivate-vehicle', 'UserController@deactivateVehicle');
+	Route::post('/delete-vehicle', 'UserController@deleteVehicle');
 
 //Dealers
 	Route::get('/auto-dealers/info', 'DealerController@info');

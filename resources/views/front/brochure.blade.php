@@ -12,7 +12,7 @@
           		<div class="item-gallery-container ">
                 	<div class="item-large">
                     	<div class="large-item-head">
-                        	<h3>{{$vehicle->year}} {{$vehicle->make->make_name}}, {{$vehicle->model->model_name}}</h3>
+                        	<h3>{{$vehicle->year}} {{$vehicle->make->make_name}}, {{$vehicle->model->model_name}} - {{$vehicle->user->city->city_name}}, {{$vehicle->user->province->province_name}}</h3>
                         </div>
                         <div class="large-item-body">
                         	<a href="{{$vehicle->photo()}}" title="A short description of project"><img src="{{$vehicle->photo()}}" alt="" /></a>

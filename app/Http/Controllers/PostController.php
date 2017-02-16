@@ -15,6 +15,7 @@ use App\Models\VehiclePhoto;
 use App\Models\DriveType;
 use App\Models\FuelType;
 use App\Models\Payment;
+use App\Models\ContentPage;
 use Image;
 use File;
 use SEOMeta;
@@ -56,7 +57,10 @@ class PostController extends Controller
 
     public function newPost(Request $request)
 	{	
+		SEOMeta::setTitle('Sell a car online free auto classifieds | Buy Sell & Trade Used Cars Canada');
+        SEOMeta::setDescription('Sell my car free, advertise vehicles free, automotive classified, post or list free online auto listings.');
 		$data['location'] = getLocation($request);
+		$data['content'] = ContentPage::where('slug', 'post-page')->first()->content;
 		$data['makes'] = Make::all();
 		$data['body_style_groups'] = BodyStyleGroup::all();
 		return view('front.post.post', $data);
@@ -254,7 +258,7 @@ class PostController extends Controller
 	{	
 		$full_path = "uploads/vehicle/".$request->file_name;
 		File::delete($full_path);
-		Vehicle::withoutGlobalScopes()->where('id', $request->vehicle_id)->first()->photos()->where('path', $full_path)->delete();
+		Vehicle::withoutGlobalScopes()->where('id', $request->vehicle_id)->first()->photos()->where('path', '/'.$full_path)->delete();
 		return response()->json(['status' => 'success']);
 	}
 
@@ -262,8 +266,11 @@ class PostController extends Controller
 	
 	public function saveImageEditPost(Request $request)
 	{	
-		Vehicle::withoutGlobalScopes()->where('id', $request->vehicle_id)->first()->photos()->create([
-			'position' => 1,
+		$vehicle = Vehicle::withoutGlobalScopes()->where('id', $request->vehicle_id)->first();
+		$pos = $vehicle->photos()->max('position');
+		Log::info($pos);
+		$vehicle->photos()->create([
+			'position' => $pos+1,
 			'path' => $request->image_path
 		]);
 		return response()->json(['status' => 'success']);
@@ -280,6 +287,23 @@ class PostController extends Controller
 		// $degrees = -90;
 		// $rotate = imagerotate($source, $degrees, 0);
 		// imagejpeg($rotate, $this->upload_path."/".$request->file_name);
+		return response()->json(['status' => 'success']);
+	}
+
+	
+	public function setMainPhoto(Request $request)
+	{	
+		// dd($request->all());
+		$file_path = "/uploads/vehicle/".$request->file_name;
+		// Load the image
+		$main = VehiclePhoto::where('path',$file_path)->first();
+		$current_main = VehiclePhoto::where('path',$file_path)->first()->vehicle->photos()->orderBy('position', 'asc')->first();
+		//Exchange positions
+		$temp = $current_main->position;
+		$current_main->position = $main->position;
+		$main->position = $temp;
+		$current_main->save();
+		$main->save();
 		return response()->json(['status' => 'success']);
 	}
 
@@ -325,7 +349,7 @@ class PostController extends Controller
 		$data['passengers'] = array(null => 'Select Passenger') + array_combine($this->passengers, $this->passengers);
 		$data['cylinders'] = array(null => 'Select Cylinders') + array_combine($this->cylinders, $this->cylinders);
 		$data['fuels'] = array(null => 'Select Fuel Type') + array_combine($this->fuels, $this->fuels);
-		$data['images'] = $data['vehicle']->photos()->get();
+		$data['images'] = $data['vehicle']->photos()->orderBy('position','asc')->get();
 
 		if($data['images']->count()) //extracting image key from url
 		{

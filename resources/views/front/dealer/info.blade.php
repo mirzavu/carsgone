@@ -1,30 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-<!-- Dealer info start -->
-<div class="dealer-info">
-	<div class="container">
-    	<div class="row">
-        	<div class="col-sm-12">
-            	<div class="panel full">
-                	<div class="panel-heading">
-                    	<h2>Dealer Information</h2>
-                    </div>
-                    <div class="panel-body">
-                    	<h3>Browse Cars for Sale in Canada</h3>
-                        <p>Carsgone.com allows you to browse through vehicle listings from car dealerships Canada wide. With thousands of listings available you are sure to find the car, truck, van or SUV of your dreams right from the comfort of your own home. Finding cars for sale in Canada has never been this easy and stress free. At Carsgone.com we are consumers too and understand the frustration of searching endlessly through car lots trying to find just the right vehicle, which is why we allow you to refine your search the way you want. You can choose to search either new or used vehicles, or both, by make, model, price or location; you decide what's easiest for you!</p>
-                        <a class="waves-effect waves-light btn">Read more</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Dealer info end -->
-
 <!-- Browse Dealership start -->
 <div class="browse-dealership-outer">
-	<div class="container">
+    <div class="container">
         <div class="browse-dealership">
             <div class="row">
                 <div class="col-md-8">
@@ -41,6 +20,26 @@
 </div>
 <!-- Browse Dealership end -->
 
+<!-- Dealer info start -->
+<div class="dealer-info">
+	<div class="container">
+    	<div class="row">
+        	<div class="col-sm-12">
+            	<div class="panel full">
+                	<div class="panel-heading">
+                    	<h2>Dealer Information</h2>
+                    </div>
+                    <div class="panel-body">
+                    	{!! $dealer_info !!}
+                        <a class="waves-effect waves-light btn">Read more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Dealer info end -->
+
 <!-- Membership start -->
 <div class="membership-container">
 	<div class="container">
@@ -54,7 +53,7 @@
                         <p>Our Basic Dealer Membership</p>
                     </div>
                     <div class="panel-body">
-                    	<p>Ready to try us out? Our FREE basic membership with no obligation or hidden costs allows you to start listing an unlimited number of vehicles immediately.</p>
+                    	{!! $free_membership !!}
                         <ul class="account-features">
                         	<li>
                             	<div class="icon">
@@ -91,7 +90,7 @@
                         <p>Additional features to drive your sales</p>
                     </div>
                     <div class="panel-body">
-                    	<p>Upload your logo, have your own virtual showroom and gain access to trade evaluations and credit leads. This membership will generate additional online exposure drive your online leads.</p>
+                    	{!! $premium_account !!}
                         <ul class="account-features">
                         	<li>
                             	<div class="icon">

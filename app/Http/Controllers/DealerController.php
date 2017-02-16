@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Vehicle;
 use App\Http\Requests;
 use SEOMeta;
+use App\Models\ContentPage;
 
 class DealerController extends Controller
 {
@@ -17,6 +18,9 @@ class DealerController extends Controller
 	{
 		SEOMeta::setTitle('Auto Dealers Online Advertising | Car and Truck Dealership Marketing and Internet Sales Websites');
         SEOMeta::setDescription('Dealership advertising and marketing website, and automotive sales. Dealers car and truck free posting service');
+        $data['dealer_info'] = ContentPage::where('slug', 'dealer-info')->first()->content;
+        $data['free_membership'] = ContentPage::where('slug', 'free-membership')->first()->content;
+        $data['premium_account'] = ContentPage::where('slug', 'premium-account')->first()->content;
 		$data['location'] = getLocation($request);
 		return view('front.dealer.info', $data);
 	}

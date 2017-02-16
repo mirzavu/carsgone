@@ -411,13 +411,13 @@ ul.table-list li a{color:#5fc0ed;}
 .panel.full .panel-body{padding:30px 60px; font-family: 'Roboto';}
 .panel.full .panel-body h3{color:#3e5062; font-weight:400; text-transform:none; letter-spacing:0;}
 .btn{font-family:'Lato'; background:#5fc0ed;}
-.browse-dealership-outer{background:url(../images/browers-dealership.jpg) no-repeat left top; background-size:cover;}
+.browse-dealership-outer{background:url(../images/browers-dealership.jpg) no-repeat left top; background-size:cover;margin-top: 2%;}
 .browse-dealership{padding:20px 80px; color:#fff;}
 .browse-dealership h3{font-size:42px; line-height:50px; font-weight:700; font-family: 'Roboto'; letter-spacing:5px; word-spacing:11px; margin-bottom:0;}
 .browse-dealership p{font:400 18px/24px 'Lato'; margin-bottom:7px;}
 .browse-dealership p span{font-size:20px; font-weight:700;}
 .browse-dealership p:last-child{font-size:16px; line-height:20px; font-weight:700;}
-.btn.bordered{font:900 20px/22px 'Lato';border:2px solid #fff;background-color:transparent;padding: 18px 32px;margin-top: 32px;margin-left: 40px;}
+.btn.bordered{font:900 20px/22px 'Lato';border:2px solid #fff;padding: 18px 32px;margin-top: 32px;margin-left: 40px;}
 .btn.bordered:hover{border-color:#5fc0ed; background-color:#5fc0ed;}
 .membership-container{padding:30px 0;}
 .membership .panel-heading{background-color:#3e5062;}
@@ -651,13 +651,15 @@ fieldset label{font-size:18px; font-weight:700; color:#3b4c5d; text-align:right;
 .dropzone .dz-preview.dz-error .dz-image{border-color:#f00;}
 .photoOption{display:none; padding:5px; float:left; width:100%; font-size:14px; color:rgba(0,0,0,.3);}
 .photoOption:nth-child(7){display:block;}
-.rotate,.remove{float:left; width:50%;}
+.rotate,.remove, .set-default{float:left; width:33%;}
 .rotate > i,.remove > i{transition:all .3s ease;}
-.rotate > i:hover, .remove > i:hover{color:#009cde; cursor:pointer;}
+.rotate > i:hover, .remove > i:hover, .set-default > i:hover{color:#009cde; cursor:pointer;}
 .dropzone .dz-message{margin:5em 0;}
 .dropzone .dz-preview .dz-error-message{top:160px;}
 .dropzone .dz-preview.dz-file-preview .dz-image{border-radius:0;}
 .dropzone .dz-preview .dz-success-mark{background:#009cde; background:-moz-linear-gradient(top,#e1f3fb 0%,#20a9e2 100%); background:-webkit-linear-gradient(top,#e1f3fb 0%,#20a9e2 100%); background: linear-gradient(to bottom,#e1f3fb 0%,#20a9e2 100%); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e1f3fb',endColorstr='#20a9e2',GradientType=0);color:#fff;top:4px;width:34px;padding: 2px 0;border-radius:50%; border: solid 3px #fff;box-shadow: 0 0 10px rgba(0,0,0,0.3);}
+.dz-filename{display: none;}
+.main-photo::before {position: absolute;content: url(/assets/images/main-tag.png);z-index: 2;bottom: -6px;right: 0;}
 .promote-vehicle{background-color:#f7f7f7; border:solid 1px #e3e3e3; border-radius:2px; box-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.16); width:calc(100% - 70px); display:table; margin:12px 35px;}
 .promote-vehicle-left{width:75%; display:table-cell; vertical-align:middle; padding:25px 30px;}
 .promote-vehicle-right{width:25%; display:table-cell; vertical-align:middle; text-align:right; padding:25px 30px; padding-right:5%; background-color:#fff;}

@@ -91,10 +91,11 @@ if (!function_exists('getLocation')) {
 				// $loc['lat'] = $location['location']['latitude'];
 				// $loc['lon'] = $location['location']['longitude'];
 				$loc['region'] = $location['stateProv'];
+				$location['city'] = preg_replace("/\([^)]+\)/","",$location['city']);
 				$loc['place'] = $location['city'];
 				
 				// $url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".$location['location']['latitude'].','.$location['location']['longitude'];
-				$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$location['city'].'%20'.$location['stateProv'];
+				$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($location['city'].' '.$location['stateProv']);
 				// dd($url);
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_URL, $url);

@@ -62,6 +62,7 @@
 	Route::post('/rotate-image', 'PostController@rotateImage');
 	Route::post('/remove-image-editpost', 'PostController@removeImageEditPost');
 	Route::post('/save-image-editpost', 'PostController@saveImageEditPost');
+	Route::post('/set-main-photo', 'PostController@setMainPhoto');
 
 //Authentication
 	Route::post('/signup', 'UserController@postSignUp');

@@ -12,8 +12,7 @@
                 <h2>CREATE A VEHICLE LISTING</h2>
              </div>
              <div class="panel-body">
-                <h3>POST YOUR AUTOMOTIVE CLASSIFIEDS FOR FREE!</h3>
-                <p>Carsgone.com makes finding the right vehicle for you an easy and painless experience, but did you know that you can also list your vehicle just as easily? We offer a fast solution to posting automotive classifieds for both dealerships and private sellers. By filling out the information on this page you are creating a quality listing that will be viewed by thousands of potential buyers, and the best part: it's completely FREE!</p>
+                {!! $content !!}
              </div>
           </div>
        </div>
@@ -315,7 +314,7 @@
                                     <div class="dz-error-mark"></div>
                                     <div class="dz-error-message"><span data-dz-errormessage></span></div>
                                     <div class="photoOption">
-                                       <div class="rotate">
+                                       <div class="rotate tooltipped" data-position="bottom" data-delay="50" data-tooltip="I am tooltip">
                                           <i class="fa fa-repeat" aria-hidden="true"></i>
                                        </div>
                                        <div class="remove" data-dz-remove><i class="fa fa-trash" aria-hidden="true"></i>
@@ -325,7 +324,6 @@
                               </div>
                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
                            </div>
-                           <input id="file_names" type="hidden" name="file_names">
                         </div>
                      </div>
                   </div>
@@ -386,6 +384,7 @@
                     <img src="/assets/images/paypal.jpg" alt="" />
                     <h4>Total <span>$14.95</span></h4>
                  </div>
+                 <input id="file_names" type="hidden" name="file_names">
               </form>
             </div>
           
@@ -603,10 +602,10 @@ $(function() {
                 return false;
             }
 
-
                     $.get("/loggedInUser", function(data) {
                         if (data.status == "success") {
                             $('#submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:2.0rem" aria-hidden="true"></i>  SAVING VEHICLE');
+
                             $.ajax({
                                 url: '/post/create',
                                 type: 'POST',
@@ -670,12 +669,10 @@ $('#post-login-submit').on('click', function(e) {
             $('#post-member').closeModal();
             $('#signup-li').replaceWith('<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
             $('#login-li').replaceWith('<li id="logout-li"><a href="#">Logout</a></li>');
-            console.log('aaa')
-            $('#vehicle-form').submit();
+            $('#submit-btn').trigger('click');
         } else {
             toastr.error(data.error, 'Error')
         }
-        console.log(data);
     });
 });
 
@@ -700,11 +697,10 @@ $('#post-signup-submit').on('click', function(e) {
             $('#post-signup').closeModal();
             $('#signup-li').replaceWith('<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
             $('#login-li').replaceWith('<li id="logout-li"><a href="#">Logout</a></li>');
-            $('#vehicle-form').submit();
+            $('#submit-btn').trigger('click');
         } else {
             toastr.error(data.error, 'Error')
         }
-        console.log(data);
     });
 });
 

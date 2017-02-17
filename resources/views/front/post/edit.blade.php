@@ -179,11 +179,14 @@
                                     <div class="dz-error-mark"></div>
                                     <div class="dz-error-message"><span data-dz-errormessage></span></div>
                                     <div class="photoOption">
-                                       <div class="rotate">
+                                       <div class="rotate tooltipped" data-position="bottom" data-delay="10" data-tooltip="Rotate">
                                           <i class="fa fa-repeat" aria-hidden="true"></i>
                                        </div>
-                                       <div class="remove" data-dz-remove><i class="fa fa-trash" aria-hidden="true"></i>
+                                       <div class="set-default tooltipped" data-position="bottom" data-delay="10" data-tooltip="Set as Main Photo"><i class="fa fa-camera-retro" aria-hidden="true"></i>
                                        </div>
+                                       <div class="remove tooltipped" data-position="bottom" data-delay="10" data-tooltip="Remove" data-dz-remove><i class="fa fa-trash" aria-hidden="true"></i>
+                                       </div>
+
                                     </div>
                                  </div>
                               </div>
@@ -369,6 +372,7 @@ $(function() {
         },
         previewTemplate: previewTemplate,
         accept: function(file, done) {
+          // this.files
           console.log(file)
           console.log(file.name)
           var image_path  = '/uploads/vehicle/'+file_prefix + '_' + file.name;
@@ -377,6 +381,7 @@ $(function() {
                 vehicle_id: {{ $vehicle->id}},
                 "_token": "{{ csrf_token() }}"
             }
+          // this.files.length++  
           $.post("/save-image-editpost", data).done(function(data) {
                 if (data.status == "success") {
                     toastr.success('Image Added')
@@ -398,17 +403,27 @@ $(function() {
           // console.log(files_json)
           var files_obj = JSON.parse(files_json)
           drop = this
+
           $.each(files_obj, function(key,image){
             console.log(image)
+            
             var temp = image.path.split('/').pop().split('_');
             temp.shift()
             var name = temp.join('_')
             var mockFile = { name: name, size: 1 };
+            drop.files.push(mockFile)
             drop.emit("addedfile", mockFile);
             drop.emit("thumbnail", mockFile, image.path);
             drop.emit("complete", mockFile);
-            drop.options.maxFiles = 10;
           })
+
+          $('.tooltipped').tooltip({delay: 50});
+
+          //Setting main photo
+          if ($('.main-photo').length <= 0) {
+            $('.dz-image:first').addClass('main-photo')
+          }
+
         }
     };
 
@@ -428,6 +443,31 @@ $(function() {
             "_token": "{{ csrf_token() }}"
         }
         $.post("/rotate-image", data).fail(function(xhr, status, error) {
+            var obj = JSON.parse(xhr.responseText);
+              toastr.error(obj.error.message)
+        });
+
+    })
+
+    //Set default Photo
+    $(document.body).on('click', '.set-default', function() {
+        $('.dz-image').removeClass('main-photo');
+        $(this).parent().siblings('.dz-image').addClass('main-photo');
+
+
+        var file_name = $(this).parent().siblings('.dz-details').find('span').text();
+        console.log(file_name)
+        var data = {
+            file_name: file_name,
+            "_token": "{{ csrf_token() }}"
+        }
+        $.post("/set-main-photo", data).done(function(data) {
+                if (data.status == "success") {
+                    toastr.success('Set main photo')
+                } else {
+                    toastr.error('Error adding image')
+                }
+            }).fail(function(xhr, status, error) {
             var obj = JSON.parse(xhr.responseText);
               toastr.error(obj.error.message)
         });

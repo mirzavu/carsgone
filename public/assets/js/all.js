@@ -3930,6 +3930,9 @@ if ( $.ajaxPrefilter ) {
 
 }));
 $(document).ready(function() {
+
+    $('[data-toggle="tooltip"]').tooltip();
+    
     $.validator.setDefaults({ // Post - To include hidden fields(material select) validation of Jquery
         ignore: []
     });

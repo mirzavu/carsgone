@@ -76,27 +76,21 @@ if (!function_exists('getLocation')) {
 			}
 			else //If a normal user
 			{
-
 				//Tried http://freegeoip.net, http://geoip.nekudo.com/api but received incorrect coordinates
 			    $curl = curl_init();
 	            curl_setopt_array($curl, array(
 	                CURLOPT_RETURNTRANSFER => 1,
-	                CURLOPT_URL => 'http://api.db-ip.com/v2/8a6a870884ded89746975ef75b10d5c3ec7589f7/'.$ip,
-	                CURLOPT_USERAGENT => 'Codular Sample cURL Request'
+	                CURLOPT_POST => 1,
+	                CURLOPT_URL => 'http://www.ipfingerprints.com/scripts/getIPCoordinates.php',
+	                CURLOPT_USERAGENT => 'Codular Sample cURL Request',
+	                CURLOPT_POSTFIELDS => 'ip='.$ip
 	            ));
 	            $resp = curl_exec($curl);
 				$location = json_decode($resp, true);
 				// http://freegeoip.net/json/50.65.216.255
-				// $loc['zip'] =	$location['zip_code'];
-				// $loc['lat'] = $location['location']['latitude'];
-				// $loc['lon'] = $location['location']['longitude'];
-				$loc['region'] = $location['stateProv'];
-				$location['city'] = preg_replace("/\([^)]+\)/","",$location['city']);
-				$loc['place'] = $location['city'];
-				
-				// $url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".$location['location']['latitude'].','.$location['location']['longitude'];
-				$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($location['city'].' '.$location['stateProv']);
-				// dd($url);
+
+				$url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".$location['latitude'].','.$location['longitude'];
+
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_URL, $url);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -104,7 +98,7 @@ if (!function_exists('getLocation')) {
                 $loc_json = curl_exec($curl);
                 $retry = 0;
                 $loc_array = json_decode($loc_json);
-         
+                // dd($loc_array);
                 while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
                     $loc_json = curl_exec($curl);
                     $loc_array = json_decode($loc_json);
@@ -113,13 +107,20 @@ if (!function_exists('getLocation')) {
                 curl_close($curl);
                 if($loc_array->status == "OK")
                 {
-                    $loc['lat'] = $loc_array->results[0]->geometry->location->lat;
-                    $loc['lon'] = $loc_array->results[0]->geometry->location->lng;
-
+                    foreach ($loc_array->results[0]->address_components as $component) {
+					    
+					    if(in_array("locality", $component->types))
+					    {
+					    	$location['city'] = $component->long_name;
+					    }
+					}
                 }  
+				
 
-				
-				
+				$loc['place'] = $location['city'];
+				$loc['lat'] = $location['latitude'];
+				$loc['lon'] = $location['longitude'];
+			
 				// $loc['place'] = $loc['city'];
 				// unset($loc['city']); //city is used in search page, so no clash
 
@@ -128,7 +129,7 @@ if (!function_exists('getLocation')) {
 			$request->session()->put('place', $loc['place']);
 			$request->session()->put('lat', $loc['lat']);
 			$request->session()->put('lon', $loc['lon']);
-			$request->session()->put('region', $loc['region']);
+			// $request->session()->put('region', $loc['region']);
 			// $loc = json_decode(file_get_contents('http://ip-api.com/json/'.$ip),'true');
 			
 		}

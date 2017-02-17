@@ -115,7 +115,11 @@ if (!function_exists('getLocation')) {
 					    }
 					}
                 }  
-				
+                
+				if(!isset($location['city']))
+				{
+					$location['city'] = 'Location';
+				}
 
 				$loc['place'] = $location['city'];
 				$loc['lat'] = $location['latitude'];

@@ -66,7 +66,7 @@ class Vehicle extends Model
 
     public function photos()
     {
-        return $this->hasMany('App\Models\VehiclePhoto');
+        return $this->hasMany('App\Models\VehiclePhoto')->orderBy('position', 'asc');
     }
 
     public function photo()

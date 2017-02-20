@@ -314,10 +314,12 @@
                                     <div class="dz-error-mark"></div>
                                     <div class="dz-error-message"><span data-dz-errormessage></span></div>
                                     <div class="photoOption">
-                                       <div class="rotate tooltipped" data-position="bottom" data-delay="50" data-tooltip="I am tooltip">
+                                       <div class="rotate tooltipped" data-position="bottom" data-delay="10" data-tooltip="Rotate">
                                           <i class="fa fa-repeat" aria-hidden="true"></i>
                                        </div>
-                                       <div class="remove" data-dz-remove><i class="fa fa-trash" aria-hidden="true"></i>
+                                       <div class="set-default tooltipped" data-position="bottom" data-delay="10" data-tooltip="Set as Main Photo"><i class="fa fa-camera-retro" aria-hidden="true"></i>
+                                       </div>
+                                       <div class="remove tooltipped" data-position="bottom" data-delay="10" data-tooltip="Remove" data-dz-remove><i class="fa fa-trash" aria-hidden="true"></i>
                                        </div>
                                     </div>
                                  </div>
@@ -496,6 +498,12 @@ $(function() {
           var files = $('#file_names').val()
           $('#file_names').val(files+file_prefix + '_' + file.name+'^') // Adding ^ as separator
           done();
+          console.log(this.files.length)
+          if (this.files.length == 1) {
+            $('.dz-image:first').addClass('main-photo')
+          }
+
+          $('.tooltipped').tooltip({delay: 10});
         }
     };
 
@@ -518,6 +526,23 @@ $(function() {
 
         });
 
+    })
+
+    $(document.body).on('click', '.set-default', function() {
+        $('.dz-image').removeClass('main-photo');
+        $(this).parent().siblings('.dz-image').addClass('main-photo');
+
+        // Remove element from files string and add in the beginning
+        var file_name = $(this).parent().siblings('.dz-details').find('span').text();
+        var names = $('#file_names').val().split('^')
+        console.log(file_name)
+        console.log(names)
+        console.log(names.indexOf(file_name))
+        var index = names.indexOf(file_name)
+        names.splice(index, 1);
+        names.unshift(file_name)
+        names = names.join('^')
+        $('#file_names').val(names)
     })
 
     // $("#my-awesome-dropzone").sortable({

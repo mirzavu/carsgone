@@ -19,6 +19,7 @@ use App\Models\DriveType;
 use App\Models\FuelType;
 use App\Models\TransmissionType;
 use DB;
+use Log;
 
 class Strathcom extends Command
 {

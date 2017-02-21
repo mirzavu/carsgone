@@ -27,8 +27,7 @@ class DealerController extends Controller
 
 	public function listing(Request $request, $params=false)
 	{
-		SEOMeta::setTitle('Canadian Auto and Truck Dealers - Find New and Used Car Dealerships in Canada');
-        SEOMeta::setDescription('Canadian car and truck dealerships - find cars, trucks, vans, suvs for sale in Canadian. Browse Canadian Auto dealers.');
+
 		$data['location'] = getLocation($request);
 		$conditions = collect();
 		$this->sessionToConditions($request, $conditions);
@@ -51,6 +50,10 @@ class DealerController extends Controller
 			$direction = 'asc';
 		}
 
+		$title = $this->getTitle($conditions);
+		SEOMeta::setTitle($title['title']);
+        SEOMeta::setDescription($title['description']);
+
 		$data['sidebar_data'] = $this->getSidebarData($conditions);
 		$data['dealer_sort'] = $dealer_sort.'-'.$direction; 
 		$data['dealers'] = User::applyFilter($conditions)->withCount('vehicles')->orderBy($dealer_sort, $direction)->paginate(15);
@@ -58,6 +61,21 @@ class DealerController extends Controller
 		$data['url_params'] = $params;
 		// $data['filters'] = $this->filters;
 		return view('front.dealer.listing', $data);
+	}
+
+	public function getTitle($conditions)
+	{
+		$loc = '';
+		if($conditions->get('province'))
+		{
+			if($conditions->get('city'))
+				$loc = ' in '.$conditions->get('city').", ".$conditions->get('province');
+			else
+				$loc = ' in '.$conditions->get('province');
+		}
+		$title['title'] = "Auto and Truck Dealers - Find New and Used Car Dealerships$loc";
+		$title['description'] = "New and used cars. Auto dealers - private for sale by owner buy and sell cars, trucks, SUVs & vans$loc";
+		return $title;
 	}
 
 	public function showDealer(Request $request, $slug)

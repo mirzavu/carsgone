@@ -83,8 +83,8 @@ class SearchController extends Controller
 		}
 		// dd($conditions);
 		$title = $this->getTitle($conditions);
-		SEOMeta::setTitle($title);
-        SEOMeta::setDescription('New and used cars. Auto dealers - private for sale by owner buy and sell cars, trucks, SUVs & vans');
+		SEOMeta::setTitle(trim($title['title']));
+        SEOMeta::setDescription(trim($title['description']));
         SEOMeta::addKeyword(['new cars', 'used cars', 'auto classifieds', 'search cars', 'trucks', 'SUVs', 'vans']);
 
 		// $lat = 53.421879;
@@ -130,7 +130,8 @@ class SearchController extends Controller
 			else
 				$loc = ' in '.$conditions->get('province');
 		}
-		$title = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and Used Cars | Buy Sell Vehicles Nearby$loc";
+		$title['title'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and Used Cars | Buy Sell Vehicles Nearby$loc";
+		$title['description'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and used cars. Auto dealers - private for sale by owner buy and sell cars, trucks, SUVs & vans$loc";
 		return $title;
 	}
 

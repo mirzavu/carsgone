@@ -83,7 +83,7 @@ class DealerController extends Controller
 
 		$data['location'] = getLocation($request);
 		$data['dealer'] = User::where('slug',$slug)->first();
-		SEOMeta::setTitle($data['dealer']->name);
+		SEOMeta::setTitle($data['dealer']->name." in ".$data['dealer']->city->city_name.", ".$data['dealer']->province->province_name);
         SEOMeta::setDescription($data['dealer']->name." in ".$data['dealer']->city->city_name.", ".$data['dealer']->province->province_name." is a car dealership selling cars, trucks, vans and SUVs. You can also apply for ".$data['dealer']->city->city_name.", ".$data['dealer']->province->province_name." auto loans.");	
 		$data['recent'] = Vehicle::where('user_id',$data['dealer']->id)->orderBy('created_at', 'desc')->take(6)->get();
 		

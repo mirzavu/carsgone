@@ -54,6 +54,7 @@
 	Route::get('/search', 'SearchController@searchHandler');
 
 	//Post Vehicle
+	Route::get('/promote-vehicle/{id}', 'PostController@payPaypal')->where('id', '[0-9]+');
 	Route::get('/post', 'PostController@newPost');
 	Route::get('/post/done', 'PostController@getDone');
 	Route::post('/post/create', 'PostController@create');
@@ -63,6 +64,7 @@
 	Route::post('/remove-image-editpost', 'PostController@removeImageEditPost');
 	Route::post('/save-image-editpost', 'PostController@saveImageEditPost');
 	Route::post('/set-main-photo', 'PostController@setMainPhoto');
+
 
 //Authentication
 	Route::post('/signup', 'UserController@postSignUp');
@@ -76,6 +78,7 @@
 	Route::get('/dashboard', 'UserController@dashboard')->middleware('auth');
 	Route::post('/change-email', 'UserController@changeEmail');
 	Route::post('/change-password', 'UserController@changePassword');
+	Route::post('/change-postal', 'UserController@changePostalCode');
 	Route::post('/send-reset-link', 'UserController@sendResetLink');
 	Route::post('/reset-password', 'UserController@postResetPassword');
 	Route::get('/reset-password/{token}', 'UserController@getResetPassword');

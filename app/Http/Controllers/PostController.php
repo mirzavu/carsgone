@@ -150,51 +150,57 @@ class PostController extends Controller
 		}
 		else
 		{
-			$payer = PayPal::Payer();
-		    $payer->setPaymentMethod('paypal');
-
-		    $amount = PayPal::Amount();
-		    $amount->setCurrency('CAD');
-		    $amount->setTotal(14.95); // This is the simple way,
-		    // you can alternatively describe everything in the order separately;
-		    // Reference the PayPal PHP REST SDK for details.
-
-		    $item = PayPal::Item();                            
-			$item->setQuantity(1);                         
-			$item->setName('Promote your vehicle');           
-			$item->setPrice(14.95);               
-			$item->setCurrency('CAD');          
-
-			$itemList = PayPal::ItemList();                    
-			$itemList->setItems(array($item));
-
-		    $transaction = PayPal::Transaction();
-		    $transaction->setAmount($amount);
-		    $transaction->setItemList($itemList);
-		    $transaction->setDescription('Selling of new and used cars in Canada');
-
-		    $redirectUrls = PayPal::RedirectUrls();
-		    $redirectUrls->setReturnUrl(url('/post/done').'?vehicle_id='.$vehicle->id);
-		    $redirectUrls->setCancelUrl(action('PostController@newPost'));
-
-		    $payment = PayPal::Payment();
-		    $payment->setIntent('sale');
-		    $payment->setPayer($payer);
-		    $payment->setRedirectUrls($redirectUrls);
-		    $payment->setTransactions(array($transaction));
-		    $payment->setExperienceProfileId($this->createWebProfile());
-
-		    // $input = Paypal::InputFields();
-		    // $input->setNoShipping(1);
-
-		    $response = $payment->create($this->_apiContext);
-
-
-
-		    $redirectUrl = $response->links[1]->href;
+			$redirectUrl = $this->payPaypal($vehicle->id);
 
 		    return response()->json(['status' => 'paypal', 'url' => $redirectUrl]);
 		}
+	}
+
+	public function payPaypal($vehicle_id)
+	{
+		$payer = PayPal::Payer();
+	    $payer->setPaymentMethod('paypal');
+
+	    $amount = PayPal::Amount();
+	    $amount->setCurrency('CAD');
+	    $amount->setTotal(14.95); // This is the simple way,
+	    // you can alternatively describe everything in the order separately;
+	    // Reference the PayPal PHP REST SDK for details.
+
+	    $item = PayPal::Item();                            
+		$item->setQuantity(1);                         
+		$item->setName('Promote your vehicle');           
+		$item->setPrice(14.95);               
+		$item->setCurrency('CAD');          
+
+		$itemList = PayPal::ItemList();                    
+		$itemList->setItems(array($item));
+
+	    $transaction = PayPal::Transaction();
+	    $transaction->setAmount($amount);
+	    $transaction->setItemList($itemList);
+	    $transaction->setDescription('Selling of new and used cars in Canada');
+
+	    $redirectUrls = PayPal::RedirectUrls();
+	    $redirectUrls->setReturnUrl(url('/post/done').'?vehicle_id='.$vehicle_id);
+	    $redirectUrls->setCancelUrl(action('PostController@newPost'));
+
+	    $payment = PayPal::Payment();
+	    $payment->setIntent('sale');
+	    $payment->setPayer($payer);
+	    $payment->setRedirectUrls($redirectUrls);
+	    $payment->setTransactions(array($transaction));
+	    $payment->setExperienceProfileId($this->createWebProfile());
+
+	    // $input = Paypal::InputFields();
+	    // $input->setNoShipping(1);
+
+	    $response = $payment->create($this->_apiContext);
+
+
+
+	    $redirectUrl = $response->links[1]->href;
+	    return $redirectUrl;
 	}
 
 	public function getDone(Request $request)
@@ -225,7 +231,7 @@ class PostController extends Controller
 	    $webProfile = PayPal::WebProfile();
 	    $flowConfig->setLandingPageType("Billing"); //Set the page type
 
-	    $presentation->setLogoImage("http://128.199.210.209/assets/images/logo.png")->setBrandName("Carsgone ltd"); //NB: Paypal recommended to use https for the logo's address and the size set to 190x60.
+	    $presentation->setLogoImage("http://carsgone.ca/assets/images/logo.png")->setBrandName("Carsgone ltd"); //NB: Paypal recommended to use https for the logo's address and the size set to 190x60.
 
 	    $inputFields->setAllowNote(true)->setNoShipping(1)->setAddressOverride(0);
 
@@ -426,41 +432,7 @@ class PostController extends Controller
 		}
 		else
 		{
-			$payer = PayPal::Payer();
-		    $payer->setPaymentMethod('paypal');
-
-		    $amount = PayPal::Amount();
-		    $amount->setCurrency('CAD');
-		    $amount->setTotal(14.95); // This is the simple way,
-		    // you can alternatively describe everything in the order separately;
-		    // Reference the PayPal PHP REST SDK for details.
-
-		    $item = PayPal::Item();                            
-			$item->setQuantity(1);                         
-			$item->setName('Promote your vehicle');           
-			$item->setPrice(14.95);               
-			$item->setCurrency('CAD');          
-
-			$itemList = PayPal::ItemList();                    
-			$itemList->setItems(array($item));
-
-		    $transaction = PayPal::Transaction();
-		    $transaction->setAmount($amount);
-		    $transaction->setItemList($itemList);
-		    $transaction->setDescription('Selling of new and used cars in Canada');
-
-		    $redirectUrls = PayPal::RedirectUrls();
-		    $redirectUrls->setReturnUrl(action('PostController@getDone').'?vehicle_id='.$vehicle->id);
-		    $redirectUrls->setCancelUrl(action('PostController@newPost'));
-
-		    $payment = PayPal::Payment();
-		    $payment->setIntent('sale');
-		    $payment->setPayer($payer);
-		    $payment->setRedirectUrls($redirectUrls);
-		    $payment->setTransactions(array($transaction));
-		    $payment->setExperienceProfileId($this->createWebProfile());
-		    $response = $payment->create($this->_apiContext);
-		    $redirectUrl = $response->links[1]->href;
+			$redirectUrl = $this->payPaypal($vehicle->id);
 
 		    return response()->json(['status' => 'paypal', 'url' => $redirectUrl]);
 		}

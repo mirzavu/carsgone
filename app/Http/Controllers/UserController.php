@@ -27,6 +27,7 @@ class UserController extends Controller
         }
         $data['location'] = getLocation($request);
         $data['email'] = Auth::user()->email;
+        $data['postal_code'] = Auth::user()->postal_code;
         $data['vehicles'] = Auth::user()->vehicles()->withoutGlobalScopes()->latest()->take(10)->get();
         // dd($data['vehicles']->count());
         $data['saved_vehicles'] = Auth::user()->saved_vehicles()->take(10)->get();
@@ -200,6 +201,15 @@ class UserController extends Controller
             return response()->json(['status' => 'fail', 'error' => 'Incorrect current Password. Please try again.']);
         }
         
+    }
+
+    public function changePostalCode(Request $request)
+    {
+        if(!Auth::check()) return response()->json(['status' => 'fail', 'error' => 'Session expired. Please SignIn again.']);
+        $user = Auth::user();
+        $user->postal_code = $request['postal_code'];
+        $user->save();
+        return response()->json(['status' => 'success', 'message' => 'Your postal code is changed successfully!']);
     }
 
     public function sendResetLink(Request $request, AppMailer $mailer)

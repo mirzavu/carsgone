@@ -9626,7 +9626,7 @@ label{margin:0;}
 .item-type-toggle [type="radio"]{opacity:0 !important;}
 .item-type-toggle [type="radio"]:checked+label{color:#fff; background:#009cde; }
 .item-type-toggle [type="radio"] + label:before, .item-type-toggle [type="radio"] + label:after{display:none;}
-.more-times{padding:10px 15px; color:#009cde; width:100%; display:inline-block; cursor:pointer;}
+.more-times, .less-times{padding:10px 15px; color:#009cde; width:100%; display:inline-block; cursor:pointer;}
 /* ============ Search Page Start ================= */
 
 /* ============ Car Detail Page Start ================= */

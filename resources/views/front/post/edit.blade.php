@@ -46,7 +46,7 @@
                </fieldset>
                <fieldset>
                   <span>2</span>
-                  <h4>Price % Mileage</h4>
+                  <h4>Price & Mileage</h4>
                   <div class="row">
                      <div class="col-sm-6 display-table">
                         <label>Price<span class="required">*</span></label>

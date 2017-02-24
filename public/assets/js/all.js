@@ -4088,7 +4088,13 @@ $(document).ready(function() {
     });
 
     $timeSlots.on('click', '.more-times', function() {
+        $(this).parent().append('<span class="less-times">Show Less</span>')
         $(this).prevAll().show().end().remove();
+    });
+
+    $timeSlots.on('click', '.less-times', function() {
+        $(this).parent().append('<span class="more-times">+ More</span>').children(':nth-of-type(n+7)').hide();
+        $(this).remove();
     });
 
 })

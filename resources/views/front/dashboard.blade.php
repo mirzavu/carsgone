@@ -419,6 +419,7 @@ var postal_form = $("#postal-form");
          var btn = $(this)
         if (x)
         {
+            btn.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
             $.ajax({ type: "POST",   
                   url: "/delete-vehicle",   
              accepts: {
@@ -430,7 +431,6 @@ var postal_form = $("#postal-form");
              {  
                if(data.status=="success")
                {
-                  toastr.success("Vehicle deleted successfuly")
                   location.reload();
                }
                else

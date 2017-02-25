@@ -116,14 +116,24 @@ if (!function_exists('getLocation')) {
 					}
                 }  
                 
-				if(!isset($location['city']))
+				if(empty($location['latitude']))
 				{
-					$location['city'] = 'Location';
+					$loc['lat'] = 53.266;
+					$loc['lon'] = -113.552;
+					$loc['place'] = 'Location';
+				}
+				elseif(!isset($location['city']))
+				{
+					$loc['place'] = 'Location';
+				}
+				else
+				{
+					$loc['place'] = $location['city'];
+					$loc['lat'] = $location['latitude'];
+					$loc['lon'] = $location['longitude'];
 				}
 
-				$loc['place'] = $location['city'];
-				$loc['lat'] = $location['latitude'];
-				$loc['lon'] = $location['longitude'];
+				
 			
 				// $loc['place'] = $loc['city'];
 				// unset($loc['city']); //city is used in search page, so no clash

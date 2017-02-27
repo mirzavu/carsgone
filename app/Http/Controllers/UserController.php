@@ -69,8 +69,6 @@ class UserController extends Controller
         $user->province_id = $province_id;
         $user->city_id = $city->id;
     	$user->save();
-        $mailer->sendEmailConfirmationTo($user);
-
     	Auth::login($user);
     	$id = Auth::user()->id;
     	return response()->json(['status' => 'success', 'id' => $id, 'email' => $email, 'name' => $name]);
@@ -99,6 +97,41 @@ class UserController extends Controller
         
     }
 
+    public function postLoginSignup(Request $request, AppMailer $mailer)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
+        }
+
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {    
+            return response()->json(['status' => 'success', 'id' => Auth::user()->id, 'email' => Auth::user()->email, 'name' => Auth::user()->name]);
+        }
+        elseif (User::where('email', '=', $request['email'])->exists()) {
+            return response()->json(['status' => 'fail', 'error' => 'Email address or password is incorrect']);
+        }
+        else
+        {
+            $password = bcrypt($request['password']);
+            $user = new User();
+            $user->email = $request['email'];
+            $user->role = 'member';
+            $user->password = $password;
+            $user->token = str_random(30);
+            $user->save();
+            Auth::login($user);
+            $mailer->sendEmailConfirmationTo($user);
+            return response()->json(['status' => 'success', 'id' => $user->id, 'email' => $user->email]);
+        }
+    }
+
+    
+
     public function loggedInUser(Request $request)
     {
         if ($request->user()) {
@@ -113,6 +146,7 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
+        return redirect()->action('HomeController@index');
     }
 
     public function confirmEmail($token, Request $request)
@@ -122,6 +156,7 @@ class UserController extends Controller
         $user->token = null;
         $user->save();
         Auth::login($user);
+        $user->vehicles()->update(['status_id' => 1]);
         $request->session()->flash('success', 'Your Email confirmation is Successful!');
         return redirect()->action('UserController@dashboard');
     }

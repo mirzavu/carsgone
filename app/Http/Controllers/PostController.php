@@ -5,6 +5,7 @@ use Validator;
 use Paypal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Mailers\AppMailer;
 use App\Http\Requests;
 use App\Models\Make;
 use App\Models\BodyStyleGroup;
@@ -66,7 +67,7 @@ class PostController extends Controller
 		return view('front.post.post', $data);
 	}
 
-	public function create(Request $request)
+	public function create(Request $request, AppMailer $mailer)
 	{		
 
 		//SEO
@@ -89,10 +90,12 @@ class PostController extends Controller
         	return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
         }
 
+        $user = Auth::user();
+
         //Save vehicle
-		$vehicle = Auth::user()->vehicles()->create($request->all());
+		$vehicle = $user->vehicles()->create($request->all());
 		$vehicle->slug = null;
-		if(Auth::user()->verified)
+		if($user->verified)
 		{
 			$vehicle->status_id = 1;
 			$request->session()->flash('success', 'Vehicle has been posted Successfully! Check <a href="/dashboard">Dashboard</a>');
@@ -100,12 +103,12 @@ class PostController extends Controller
 		else
 		{
 			$vehicle->status_id = 0;
+			$mailer->sendEmailConfirmationTo($user);
 			$request->session()->flash('success', 'Vehicle has been posted Successfully! Verify your email address to publish your vehicle');
 		}
 		$vehicle->save();
 
 		//Change user parameters from input
-		$user = Auth::user();
 		$user->phone = $request['phone'];
 		$user->postal_code = $request['postal_code'];
 		if($request->role == "dealer")

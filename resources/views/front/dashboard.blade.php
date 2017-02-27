@@ -66,7 +66,7 @@
                                                 <div><i class="fa fa-dashboard"></i> {{$vehicles[0]->odometer}}KM</div>
                                              </li>
                                              <li>
-                                                <div><i class="fa fa-phone"></i> (403) 945-8808</div>
+                                                <div><i class="fa fa-phone"></i> {{$vehicle->user->phone or '--'}}</div>
                                              </li>
                                           </ul>
                                        </div>
@@ -88,7 +88,7 @@
                                     <p>Carsgone.com allows you to browse through vehicle listings from car dealerships Canada wide. With thousands of listings available you are sure to find the car, truck, van or SUV of your dreams right from the comfort of your own home. Finding cars for sale in Canada has never been this easy and stress free. At Carsgone.com we are consumers too and understand the frustration of searching endlessly through car lots trying to find just the right vehicle, which is why we allow you to refine your search the way you want. You can choose to search either new or used vehicles, or both, by make, model, price or location; you decide what's easiest for you!</p>
                                  </div>
                               </div>
-                              <a href="#" class="waves-effect waves-light btn btn-orange-border">My Listings</a>
+                              <a href="#" class="waves-effect waves-light btn btn-orange-border">Promote To Featured Vehicles</a>
                               @foreach($vehicles as $vehicle)
                               <div class="item">
                                  <div class="item-heading">
@@ -123,7 +123,7 @@
                                                 <div><i class="fa fa-dashboard"></i> {{$vehicles[0]->odometer}}KM</div>
                                              </li>
                                              <li>
-                                                <div><i class="fa fa-phone"></i> (403) 945-8808</div>
+                                                <div><i class="fa fa-phone"></i> {{$vehicle->user->phone or '--'}}</div>
                                              </li>
                                           </ul>
                                        </div>

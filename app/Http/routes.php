@@ -70,6 +70,7 @@
 	Route::post('/signup', 'UserController@postSignUp');
 	Route::post('/dealer-signup', 'UserController@postDealerSignUp');
 	Route::post('/login', 'UserController@postSignIn');
+	Route::post('/login-signup', 'UserController@postLoginSignup');
 	Route::get('/logout', 'UserController@logout');
 	Route::get('/loggedInUser', 'UserController@loggedInUser');
 	Route::get('/signup/confirm/{token}', 'UserController@confirmEmail');

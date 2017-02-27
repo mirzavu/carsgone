@@ -36,7 +36,7 @@ class User extends Authenticatable
     {
         return [
             'slug' => [
-                'source' => ['name'],
+                'source' => ['name', 'postal_code'],
                 'separator' => '-',
                 'unique' => true
             ]

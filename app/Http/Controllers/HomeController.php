@@ -37,6 +37,8 @@ class HomeController extends Controller
 	 * @return Response
 	 */
 
+	protected $sessions = array('_token','place','lat','lon', '_previous', 'flash');
+
 	public function __construct()
     {
         //$this->middleware('auth');
@@ -47,25 +49,32 @@ class HomeController extends Controller
 		SEOMeta::setTitle('Used Cars and Auto Loans Canada | Free Auto Classifieds | Buy Sell and Trade at Carsgone.com');
         SEOMeta::setDescription('Providing an online solution for buying and selling New and Used cars, trucks, vans and SUVs.  Free auto classifieds for private sellers and dealerships at Carsgone.com');
         SEOMeta::addKeyword(['new cars', 'used cars', 'auto classifieds', 'auto loans Canada', 'trucks', 'SUVs', 'vans']);
+
+        //Clear search page filters
+        foreach ($request->session()->all() as $key => $value) {
+        	if(!in_array($key, $this->sessions))
+        	{
+        		$request->session()->forget($key);
+        	}
+        }
+
 		$data['total'] = Vehicle::count();
 		$data['location'] = getLocation($request);
 		$data['provinces'] = Cache::remember('home_provinces', 30, function() {
 				    return Province::withCount('vehicles')->orderBy('province_name', 'asc')->get();
 				});
-		// $data['provinces'] = Province::withCount('vehicles')->orderBy('province_name', 'asc')->get();
 		$data['makes'] = Cache::remember('home_makes', 30, function() {
 				    return Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
 				});
-		// $data['makes'] = Make::withCount('vehicles')->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
+
 		$data['body_style_groups'] = Cache::remember('home_body_style_groups', 30, function() {
 				    return BodyStyleGroup::withCount('vehicles')->orderBy('body_style_group_name', 'asc')->get();
 				});
-		// $data['body_style_groups'] = BodyStyleGroup::withCount('vehicles')->orderBy('body_style_group_name', 'asc')->get();
+
 
 		$prices = Cache::remember('home_prices', 30, function() {
 				    return DB::table('vehicles')->select(DB::raw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`'))->groupBy('range')->orderBy('price', 'asc')->get();
 				});
-		// $prices = DB::table('vehicles')->select(DB::raw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`'))->groupBy('range')->get();
 
 		// $data['provinces'] = Cache::remember('provinces', 30, function() {
 		//     return Province::withCount('vehicles')->orderBy('province_name', 'asc')->get();

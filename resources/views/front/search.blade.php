@@ -308,7 +308,7 @@
                                     <p>{{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</p>
                                     <p>Added {{$vehicle->created_at->diffForHumans()}}</p>
                                     <p>{{$vehicle->bodyStyleGroup->body_style_group_name or ''}} <span class="part">|</span> {{$vehicle->ext_color->color or ''}} <span class="part">|</span> {{$vehicle->transmission}}</p>
-                                    <h4><a href="/dealer/{{$vehicle->user->slug}}">{{$vehicle->user->name or ''}}</a></h4>
+                                    <h4><a href="/dealer/{{$vehicle->user->slug or ''}}">{{$vehicle->user->name or ''}}</a></h4>
                                  </div>
                               </div>
                            </div>
@@ -452,7 +452,7 @@
    
 
    //if image error
-   $('img').one('error', function() { this.src = '/assets/images/placeholder.jpg'; });
+   $('img').on('error', function() { this.src = '/assets/images/placeholder.jpg'; });
    $('.result-container')
       .on('click','.save-btn', function(e){
          e.preventDefault();

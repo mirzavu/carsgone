@@ -403,12 +403,11 @@
       <div class="form-group">
          <label>Password</label>
          <input id="post-login-password" type="password" class="form-control" />
-         <a href="#" class="forgot">Forgot It ?</a>
       </div>
       <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
    </div>
    <div class="modal-footer">
-      <a id="post-login-submit" class="btn waves-effect waves-light waves-input-wrapper">Login</a>
+      <a id="post-login-submit" class="btn waves-effect waves-light waves-input-wrapper">POST VEHICLE</a>
    </div>
 </div>
 <!-- Vehicle Post end -->

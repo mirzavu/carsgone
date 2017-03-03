@@ -113,7 +113,7 @@ class UserController extends Controller
             return response()->json(['status' => 'success', 'id' => Auth::user()->id, 'email' => Auth::user()->email, 'name' => Auth::user()->name]);
         }
         elseif (User::where('email', '=', $request['email'])->exists()) {
-            return response()->json(['status' => 'fail', 'error' => 'Email address or password is incorrect']);
+            return response()->json(['status' => 'fail', 'error' => 'Incorrect password. Please try again!']);
         }
         else
         {

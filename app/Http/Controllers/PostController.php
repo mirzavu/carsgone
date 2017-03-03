@@ -17,6 +17,8 @@ use App\Models\DriveType;
 use App\Models\FuelType;
 use App\Models\Payment;
 use App\Models\ContentPage;
+use App\Models\Province;
+use App\Models\City;
 use Image;
 use File;
 use SEOMeta;
@@ -104,11 +106,11 @@ class PostController extends Controller
 		{
 			$vehicle->status_id = 0;
 			$mailer->sendEmailConfirmationTo($user);
-			$request->session()->flash('success', 'Vehicle has been posted Successfully! Verify your email address to publish your vehicle');
+			$request->session()->flash('success', 'Vehicle has been posted Successfully! A confirmation email is sent to your email address '.$user->email);
 		}
 		$vehicle->save();
 
-		//Change user parameters from input
+		//Change user's lat, long, city, prov from postal code
 		$user->phone = $request['phone'];
 		$user->postal_code = $request['postal_code'];
 		if($request->role == "dealer")
@@ -133,6 +135,21 @@ class PostController extends Controller
         {
             $user->latitude = $loc_array->results[0]->geometry->location->lat;
             $user->longitude = $loc_array->results[0]->geometry->location->lng;
+            foreach ($loc_array->results[0]->address_components as $component) 
+            {    
+			    if(in_array("administrative_area_level_1", $component->types))
+			    {
+			    	$province_code = $component->short_name;
+			    }
+
+			    if(in_array("locality", $component->types))
+			    {
+			    	$city_name = $component->long_name;
+			    }
+			}
+			$user->province_id = Province::where('province_code',(string) $province_code)->value('id');
+			$city = City::firstOrCreate(['city_name'=> (string)$city_name,'province_id'=> $user->province_id]);
+			    	$user->city_id = $city->id;
         }  
 
 		$user->save();
@@ -149,7 +166,7 @@ class PostController extends Controller
 
         //Payment
 		if ($request->has('free')) {
-		 	return response()->json(['status' => 'done', 'url' => url('post')]);
+		 	return response()->json(['status' => 'done', 'url' => url('dashboard')]);
 		}
 		else
 		{

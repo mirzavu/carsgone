@@ -74,7 +74,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
            <ul class="nav navbar-nav navbar-right">
-                <li {{{ (Request::is('search') ? 'class=active' : '') }}}><a href="/search"><span>Browse Cars</span></a></li>
+                <li {{{ (Request::is('search') ? 'class=active' : '') }}}><a id="browse-link" href="/search"><span>Browse Cars</span></a></li>
                 <li {{{ (Request::is('post') ? 'class=active' : '') }}}><a href="/post"><span>Post Ad</span></a></li>
                 <li {{{ (Request::is('auto-dealers/info') ? 'class=active' : '') }}}><a href="/auto-dealers/info"><span>Dealers</span></a></li>
                 <li {{{ (Request::is('autoloans') ? 'class=active' : '') }}}><a href="/autoloans"><span>Car Loans</span></a></li>
@@ -420,6 +420,13 @@ $('#private-link').on('click',function(e){
       window.location = '/search';
   });
   
+})
+
+$('#browse-link').on('click',function(e){
+  e.preventDefault();
+  $.get( "/removeSessionAll", function( data ) {
+      window.location = '/search';
+  });
 })
 
 var base_url = '{{ url('/') }}';

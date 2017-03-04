@@ -248,7 +248,7 @@
                               <a href="/vehicle/{{$vehicle->slug}}">
                                  <h4>{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}}</h4>
                                  <div class="featured-img">
-                                    <img src="{{$vehicle->photo()}}" alt="" />
+                                    <img src="{{$vehicle->photo()}}" alt=""/>
                                     <span class="overlay"></span>
                                  </div>
                                  <div class="featured-details">
@@ -451,8 +451,7 @@
    }
    
 
-   //if image error
-   $('img').on('error', function() { this.src = '/assets/images/placeholder.jpg'; });
+   
    $('.result-container')
       .on('click','.save-btn', function(e){
          e.preventDefault();
@@ -499,6 +498,19 @@
           }
        });
    })    
+
+   //Image on error code with support edge browser
+   $(document).ready(function(){  
+     $("img").each(function(i,ele){
+        $("<img/>").attr("src",$(ele).attr("src")).on('error', function() {             
+            $(ele).attr( "src", "/assets/images/placeholder.jpg" );
+         })
+     });
+     
+    $("img").on("error", function(){      
+      $(this).attr( "src", "/assets/images/placeholder.jpgg" );  
+    });
+  });
    
 </script>
 @endsection

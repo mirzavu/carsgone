@@ -165,7 +165,7 @@
                      <li>
                         <div class="contact-dealer-container">
                            <h4>Finance</h4>
-                           {!! Form::open(['url' => '/finance', 'method' => 'GET', 'id' => 'finance-form']) !!}
+                           {!! Form::open(['url' => '/finance', 'method' => 'POST', 'id' => 'finance-form']) !!}
                            <div class="form-group">
                               <input name="name" type="text" class="form-control" placeholder="Name" required />
                            </div>
@@ -396,7 +396,7 @@ form.validate({
             $.ajax({
                url: form.action,
                type: form.method,
-               data: $(form).serialize() + '&_token={{ csrf_token() }}' + '&vehicle={{ $vehicle->slug }}',
+               data: $(form).serialize() + '&_token={{ csrf_token() }}' + '&vehicle={{ $vehicle->slug }}&dealer_email={{ $vehicle->user->email }}',
                success: function(response) {
                    if (response.status == "success") {
                        toastr.success(response.message)

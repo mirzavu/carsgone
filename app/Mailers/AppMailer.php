@@ -4,7 +4,7 @@ namespace App\Mailers;
 
 use Illuminate\Contracts\Mail\Mailer;
 use App\Models\User;
-
+use Log;
 class AppMailer
 {
     /**
@@ -127,6 +127,20 @@ class AppMailer
         $this->to = $data->dealer_email;
         $this->subject = 'Carsgone Contact Form';
         $this->view = 'emails.dealer_contact_form';
+        $this->data = compact('data');
+        $this->deliver();
+    }
+
+    public function sendDealerFinanceForm($data, $vehicle)
+    {
+        $data->year = $vehicle->year;
+        $data->make = $vehicle->make->make_name;
+        $data->model = $vehicle->model->model_name;
+        $data->price = $vehicle->price;
+        $this->fromName = $data->name." via Carsgone";
+        $this->to = $data->dealer_email;
+        $this->subject = 'Carsgone Finance';
+        $this->view = 'emails.dealer_finance_form';
         $this->data = compact('data');
         $this->deliver();
     }

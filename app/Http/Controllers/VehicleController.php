@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Mailers\AppMailer;
 use SEOMeta;
+use Log;
 
 class VehicleController extends Controller
 {
@@ -75,6 +76,13 @@ class VehicleController extends Controller
 		// 	return response()->json(['status' => 'success', 'message' => 'Your message is sent successfully! You will hear back from us soon.']);
 		// }
 		$mailer->sendDealerContactForm($request);
+		return response()->json(['status' => 'success', 'message' => 'Your message is sent successfully! You will hear back from us soon.']);
+	}
+
+	public function finance(Request $request, AppMailer $mailer)
+	{	
+		$vehicle = Vehicle::whereslug($request['vehicle'])->first();
+		$mailer->sendDealerFinanceForm($request, $vehicle);
 		return response()->json(['status' => 'success', 'message' => 'Your message is sent successfully! You will hear back from us soon.']);
 	}
 

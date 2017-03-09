@@ -43,6 +43,7 @@
 	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
 	Route::get('/vehicle-related/{slug}', 'VehicleController@relatedVehicle')->where('slug', '.*');
 	Route::post('/contact-dealer', 'VehicleController@contactDealer');
+	Route::post('/finance', 'VehicleController@finance');
 
 
 	//To delete

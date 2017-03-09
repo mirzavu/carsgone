@@ -311,7 +311,7 @@ var sfw = $("#credit_wizard").stepFormWizard({
             data: $('form').serialize(),
             success: function(response) {
                 if (response.status == "success") {
-                    location.reload()
+                    location.reload(true)
                 }
             }
         });

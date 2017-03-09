@@ -4,6 +4,7 @@
 <div class="vehicle-post-outer">
    <div class="container">
       <div class="wrapper">
+         @if($quick_form)
          <div class="dealer-info">
             <div class="panel full">
                <div class="panel-body">
@@ -13,29 +14,31 @@
                         <label for="quick-info">Check this box, and we'll get back to you! Don't forget leave your name and/or phone number below.</label>
 
                      </div>
-                     <fieldset id="quick-box">
-                        <div class="row">
-                           <div class="col-sm-4 display-table">
-                              <label>Name</label>
+                     {!! Form::open(['url' => '/quick-finance', 'method' => 'POST', 'id' => 'quick-form']) !!}
+                        <fieldset id="quick-box">
+                           <div class="row">
+                              <div class="col-sm-4 display-table">
+                                 <label>Name</label>
+                                 <div class="input-box">
+                                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => "Enter your name", 'minlength'=>'3', 'required']) !!}
+                                 </div>
+                              </div>
+                              <div class="col-sm-4 display-table">
+                                 <label>Phone Number</label>
+                                 <div class="input-box">
+                                    {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => "Eg: 9999900000", 'required']) !!}
+                                 </div>
+                              </div>
+                              <div class="col-sm-4 display-table">
                               <div class="input-box">
-                                 {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => "Enter your name", 'minlength'=>'3', 'required']) !!}
+                                 <button id="quick-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
+                                 </div>
                               </div>
-                           </div>
-                           <div class="col-sm-4 display-table">
-                              <label>Phone Number</label>
-                              <div class="input-box">
-                                 {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => "Eg: 9999900000", 'required']) !!}
-                              </div>
-                           </div>
-                           <div class="col-sm-4 display-table">
-                           <div class="input-box">
-                              <button id="finance-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
-                              </div>
+
                            </div>
 
-                        </div>
-
-                     </fieldset>
+                        </fieldset>
+                     {!! Form::close() !!}
                      
                   </div>
                   <div id="post-create-form-box">
@@ -47,10 +50,12 @@
                </div>
             </div>
          </div>
-            {!! Form::open(['url' => '/credit-application', 'method' => 'POST', 'id' => 'credit-form']) !!}
+         @endif
+            
             <div class="post-tab clearfix panel" id="credit_wizard">
                <div class="form-section">
                   <legend>Contact Details</legend>
+                  {!! Form::open(['url' => '/credit-application', 'method' => 'POST', 'id' => 'contact-form']) !!}
                   <fieldset>
                      <div class="row">
                         <div class="col-sm-6 display-table">
@@ -84,7 +89,7 @@
                         <div class="col-sm-6 display-table">
                            <label>City</label>
                            <div class="input-box">
-                              {!! Form::email('city', null, ['class' => 'form-control', 'required']) !!}
+                              {!! Form::text('city', null, ['class' => 'form-control', 'required']) !!}
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
@@ -108,10 +113,12 @@
                         </div>
                      </div>
                   </fieldset>
+                  {!! Form::close() !!}
                </div>
 
                <div class="form-section">
                   <legend>Complete Application</legend>
+                  {!! Form::open(['url' => '/credit-application', 'method' => 'POST', 'id' => 'credit-form']) !!}
                   <fieldset>
                      <span>1</span>
                      <h4>Personal Information</h4>
@@ -210,15 +217,14 @@
                            <div class="input-box margin-checkbox">
                               <input type="checkbox" class="filled-in" name="privacy" id="filled-in-box" required />
                               <label for="filled-in-box">I agree to <a target="_blank" href="/privacy">privacy policy</a></label>
-                              <input id="input-body" type="hidden" name="body">
-                              <input id="input-budget" type="hidden" name="budget">
                            </div>
                         </div>
                      </div>
                   </fieldset>
+                  {!! Form::close() !!}
                </div>
             </div>
-         {!! Form::close() !!}
+         
       </div>
    </div>
 </div>
@@ -235,53 +241,74 @@ var sfw = $("#credit_wizard").stepFormWizard({
     finishBtn: $('<button id="credit-submit" class="finish-btn sf-right sf-btn sf-btn-finish btn waves-effect waves-light" type="submit" value="FINISH">Submit</button>'),
     onNext: function(i, wizard) {
 
-        console.log(i, wizard)
-        if (i == 1) {
-            return true
-        } else
-            return true
-    }
+        var form = $("#contact-form");
+        form.validate({
+            rules: {},
+            // errorClass: "invalid form-error",       
+            // errorElement : 'div',       
+            errorPlacement: function(error, element) {
+                if (element.is('select')) {
+                    error.appendTo(element.parent().parent());
+                } else {
+                    error.appendTo(element.parent());
+                }
 
+            },
+            focusInvalid: false,
+            invalidHandler: function(form, validator) {
 
-});
-sfw.refresh();
+                if (!validator.numberOfInvalids())
+                    return;
+                $('html, body').animate({
+                    scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                }, 500);
+                $(validator.errorList[0].element).focus()
 
-var form = $("#credit-form");
-form.validate({
-    rules: {},
-    messages: {
-        privacy: {
-            required: "Please accept the privacy policy"
-        }
-    },
-    // errorClass: "invalid form-error",       
-    // errorElement : 'div',       
-    errorPlacement: function(error, element) {
-        if (element.is('select')) {
-            error.appendTo(element.parent().parent());
+            }
+        })
 
+        if (form.valid() == true) {
+            return true;
         } else {
-            error.appendTo(element.parent());
+            return false;
+        }
+    },
+    onFinish: function(i) {
+        var form2 = $("#credit-form");
+        form2.validate({
+            rules: {},
+            // errorClass: "invalid form-error",       
+            // errorElement : 'div',       
+            errorPlacement: function(error, element) {
+                if (element.is('select')) {
+                    error.appendTo(element.parent().parent());
+                } else {
+                    error.appendTo(element.parent());
+                }
+
+            },
+            focusInvalid: false,
+            invalidHandler: function(form2, validator) {
+
+                if (!validator.numberOfInvalids())
+                    return;
+                $('html, body').animate({
+                    scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                }, 500);
+                $(validator.errorList[0].element).focus()
+
+            }
+        })
+
+        if (form2.valid() == false) {
+            return false;
         }
 
-    },
-    focusInvalid: false,
-    invalidHandler: function(form, validator) {
-
-        if (!validator.numberOfInvalids())
-            return;
-        $('html, body').animate({
-            scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
-        }, 500);
-        $(validator.errorList[0].element).focus()
-
-    },
-    submitHandler: function(form) {
-        $('credit-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
+        $('#credit-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
         $.ajax({
-            url: form.action,
-            type: form.method,
-            data: $(form).serialize(),
+            url: '/credit-application',
+            type: 'POST',
+            data: $('form').serialize(),
             success: function(response) {
                 if (response.status == "success") {
                     location.reload()
@@ -289,30 +316,79 @@ form.validate({
             }
         });
     }
-})
 
 
-$('.pricing-footer > a').on('click', function(e) {
-    $('#input-body').val($(this).attr('body'))
-})
+});
+sfw.refresh();
+
+
+var form = $("#quick-form");
+            form.validate({
+                rules: {},
+                // errorClass: "invalid form-error",       
+                // errorElement : 'div',       
+                errorPlacement: function(error, element) {
+                    if (element.is('select')) {
+                        error.appendTo(element.parent().parent());
+                    } else {
+                        error.appendTo(element.parent());
+                    }
+
+                },
+                focusInvalid: false,
+                invalidHandler: function(form, validator) {
+
+                    if (!validator.numberOfInvalids())
+                        return;
+                    $('html, body').animate({
+                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                    }, 500);
+                    $(validator.errorList[0].element).focus()
+
+                },
+                submitHandler: function(form) {
+                  $('#quick-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
+                    $.ajax({
+                             url: form.action,
+                             type: form.method,
+                             data: $(form).serialize()+'&_token={{ csrf_token() }}',
+                             success: function(response) {
+                                 if(response.status == "success")
+                                 {
+                                    toastr.success(response.message)
+                                    $('#quick-submit').prop('disabled', false).html('Submit')
+                                    $("#quick-form").get(0).reset();
+                                 }
+                             }
+                         });
+                }
+            })
 
 $("#quick-info").change(function() {
-    if(this.checked) {
+    if (this.checked) {
         $('#quick-box').fadeIn('slow')
-        $('#credit-form').fadeOut('slow')
-    }
-    else
-    {
-      $('#quick-box').fadeOut('slow')
-      $('#credit-form').fadeIn('slow')
+        $('#credit_wizard-box').fadeOut('slow')
+    } else {
+        $('#quick-box').fadeOut('slow')
+        $('#credit_wizard-box').fadeIn('slow')
     }
 });
 
 $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 60, // Creates a dropdown of 15 years to control year
-    min: [1950,1,1],
-    max: [2005,1,1]
-  });
+    min: [1950, 1, 1],
+    max: [2005, 1, 1],
+    onSet: function (ele) {
+         if(ele.select){
+                this.close();
+         }
+      }
+
+});
+
+$(document).ready(function(){
+    $(this).scrollTop(0);
+});
 </script>
 @endsection

@@ -52,6 +52,7 @@ class AppMailer
     {
         $this->mailer = $mailer;
         $this->from = config('mail.from.address');
+        $this->to = config('mail.from.address');
         $this->fromName = config('mail.from.name');
     }
     /**
@@ -141,6 +142,16 @@ class AppMailer
         $this->to = $data->dealer_email;
         $this->subject = 'Carsgone Finance';
         $this->view = 'emails.dealer_finance_form';
+        $this->data = compact('data');
+        $this->deliver();
+    }
+
+    
+    public function sendQuickFinanceForm($data)
+    {
+        $this->fromName = $data->name." via Carsgone";
+        $this->subject = 'Carsgone Finance Callback';
+        $this->view = 'emails.quick_credit_form';
         $this->data = compact('data');
         $this->deliver();
     }

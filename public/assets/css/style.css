@@ -615,7 +615,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b2e3f8', end
 .sf-content{background:#fff;}
 .sf-nav-wrap{padding:0; background:#3b4c5d;}
 .sf-nav li{width:33.33%; font-size:18px; font-weight:700; text-align:center; color:#fff; padding:18px 38px; margin:0; position:relative;}
-#credit-form .sf-nav li{width:50%;}
+#credit_wizard-box .sf-nav li{width:50%;}
 .sf-nav li:before{position:absolute; top:50%; left:-2px; margin:-23px -20px; width:45px; height:45px; transform:rotate(45deg); content:''; border-right:solid 2px #fff; border-top:solid 2px #fff;}
 .sf-nav li .sf-nav-number{display:inline-block; position:relative; top:3px; font-size:30px; margin-right:10px;}
 .sf-nav li.sf-active,.sf-nav li.sf-nav-mark-step{color:#fff; background:-moz-linear-gradient(top,#e1f3fb 0%,#20a9e2 100%); background:-webkit-linear-gradient(top,#e1f3fb 0%,#20a9e2 100%); background: linear-gradient(to bottom,#e1f3fb 0%,#20a9e2 100%); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e1f3fb',endColorstr='#20a9e2',GradientType=0);}
@@ -704,8 +704,8 @@ label.error:before {content: ""; width: 0;  height: 0; float: left; border-botto
 .alert-outer .alert{margin-bottom:0;position:relative;padding-left: 70px;font-weight: 400;border: 0; margin-top:30px;}
 .alert .close{position: absolute; top: -10px; right: -10px; color: #555; font-size: 20px; line-height: 18px; width: 20px; height: 20px; background: #fff; border-radius: 50%; border: solid 1px #555; opacity: 1;}
  .alert-outer .icon {position: absolute;left: 0;top: 0;font-size: 24px;height: 100%;width: 60px;border-right: solid 1px #ccc;padding: 15px;}
-.alert-outer .alert-success {background-color: #dff0d8;border-color: #d6e9c6;color: #3c763d;}
-.alert-outer .alert-danger {background-color: #f2dede; border-color: #ebccd1; color: #a94442;}
+.alert-outer .alert-success {background-color: #74c553;color: #054406;}
+.alert-outer .alert-danger {background-color: #f2dede;color: #a94442;}
 .alert-outer .alert strong{display:block;}
 .wrapper > .dealer-info{padding-top:0;}
 .popular-item-list.bordered.four-col li{width:25%; padding:0 15px;}

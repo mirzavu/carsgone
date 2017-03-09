@@ -21,8 +21,11 @@
 	Route::get('/getModels/{term}', 'HomeController@getModels');
 	Route::get('/autoloans', 'PageController@autoloan');
 	Route::get('/autoloans/{slug}', 'PageController@viewLoanPage');
+
+	//Credit Application
 	Route::get('/credit-application', 'CreditController@create');
 	Route::post('/credit-application', 'CreditController@send');
+	Route::post('/quick-finance', 'CreditController@quickfinance');
 
 	//edit post
 	Route::get('/vehicles/{id}/edit', 'PostController@editVehicle');

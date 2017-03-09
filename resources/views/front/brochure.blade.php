@@ -187,6 +187,7 @@
                               </p>
                            </div>
                            <div class="form-group">
+                              <input type="hidden" name="vehicle" value="{{$vehicle->slug}}">
                               <button id="finance-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
                            </div>
                            {!! Form::close() !!}
@@ -270,7 +271,7 @@
                            <p class="clock">Easy 60-Second Application</p>
                         </div>
                         <div class="small-approval-link">
-                           <a href="/credit-application/{{$vehicle->slug}}" class="waves-effect waves-light btn btn-orange small-btn-orange">APPLY CREDIT</a>
+                           <a href="/credit-application/?vehicle={{$vehicle->slug}}" class="waves-effect waves-light btn btn-orange small-btn-orange">APPLY CREDIT</a>
                         </div>
                      </div>
                   </div>
@@ -387,8 +388,11 @@ form.validate({
         $('#finance-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
         if($('input[name="contact"]:checked').val() == "credit")
         {
-         // console.log($('#finance-form').serialize())
-            var win = window.open('/credit-application/?'+$('#finance-form').serialize(), '_blank');
+            $('#finance-submit').prop('disabled', false).html('Submit')
+            var form_data = $('#finance-form').serialize()
+            $("#finance-form").get(0).reset();
+         
+            var win = window.open('/credit-application/?'+form_data, '_blank');
             win.focus();
         }
         else

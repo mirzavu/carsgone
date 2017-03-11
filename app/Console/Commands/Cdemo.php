@@ -127,25 +127,13 @@ class Cdemo extends Command
                     $vehicle->condition = $vehicle_xml->class == "New Auto"? "new":"used"; 
                     $vehicle->stock = $vehicle_xml->stock;
                     $vehicle->year = (string)$vehicle_xml->year;
-                    $make_id = Make::where('make_name',(string) $vehicle_xml->make)->value('id');
-                    if($make_id)
-                        $vehicle->make_id = $make_id;
-                    else
-                    {
-                        $email[$i++] = "Make ".(string) $vehicle_xml->make;
-                        continue;
-                    }
-                    $model_id = VehicleModel::where([
-                        ['model_name', '=', (string) $vehicle_xml->model],
-                        ['make_id', '=', $make_id]
-                    ])->value('id');
-                    if($model_id)
-                        $vehicle->model_id = $model_id;
-                    else
-                    {
-                        $email[$i++] = $model_id." Model ".(string) $vehicle_xml->model." ".(string) $vehicle_xml->make.$make_id;
-                        continue;
-                    }
+                    $make = Make::firstOrCreate(['make_name' => (string) $vehicle_xml->make]);
+                    $vehicle->make_id = $make->id;
+
+                    $model = VehicleModel::firstOrCreate(['model_name' => (string) $vehicle_xml->model, 'make_id' => $make->id]);
+                    
+                    $vehicle->model_id = $model->id;
+                    
                     $vehicle->trim = (string)$vehicle_xml->trim;
                     $body_style = BodyStyle::firstOrCreate(['body_style_name' =>  (string)$vehicle_xml->body]);
                     $vehicle->body_style_id = $body_style->id;

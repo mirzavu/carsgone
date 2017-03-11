@@ -147,25 +147,13 @@ class Strathcom extends Command
                 $vehicle->status_id = 1;
                 $vehicle->year = (string)$xml->ModelYear;
                 $vehicle->vin = (string)$xml->VIN;
-                $make_id = Make::where('make_name',(string) $xml->Make)->value('id');
-                if($make_id)
-                    $vehicle->make_id = $make_id;
-                else
-                {
-                    $email[$i++] = "Make ".(string) $xml->Make;
-                    continue;
-                }
-                $model_id = VehicleModel::where([
-                        ['model_name', '=', (string) $xml->ModelDescription],
-                        ['make_id', '=', $make_id]
-                    ])->value('id');
-                if($model_id)
-                    $vehicle->model_id = $model_id;
-                else
-                {
-                    $email[$i++] = "Model ".(string) $xml->Model." ".(string) $xml->Make;
-                    continue;
-                }
+                $make = Make::firstOrCreate(['make_name' => (string) $xml->Make]);
+                $vehicle->make_id = $make->id;
+
+                $model = VehicleModel::firstOrCreate(['model_name' => (string) $xml->ModelDescription, 'make_id' => $make->id]);
+                
+                $vehicle->model_id = $model->id;
+
                 $body_style_id = BodyStyleGroup::where('body_style_group_name',(string) $xml->BodyStyle)->value('id');
                 if($body_style_id)
                     $vehicle->body_style_group_id = $body_style_id;

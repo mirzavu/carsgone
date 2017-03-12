@@ -64,81 +64,87 @@ if (!function_exists('getLocation')) {
 			Log::info('---');
 			Log::info($ip);
 			Log::info($request->ip());
+			$loc['lat'] = 53.266;
+			$loc['lon'] = -113.552;
+			$loc['region'] = 'Alberta';
+			$loc['place'] = 'Edmonton';
+			Log::info('***');
+			Log::info($_SERVER['HTTP_USER_AGENT']);
 			//If a bot arrives, serve sample location
-			if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
-			    // $loc['zip'] = 'T9E';
-			    $loc['lat'] = 53.266;
-				$loc['lon'] = -113.552;
-				$loc['region'] = 'Alberta';
-				$loc['place'] = 'Leduc2';
-				Log::info('***');
-				Log::info($_SERVER['HTTP_USER_AGENT']);
-			}
-			else //If a normal user
-			{
-				//Tried http://freegeoip.net, http://geoip.nekudo.com/api but received incorrect coordinates
-			    $curl = curl_init();
-	            curl_setopt_array($curl, array(
-	                CURLOPT_RETURNTRANSFER => 1,
-	                CURLOPT_POST => 1,
-	                CURLOPT_URL => 'http://www.ipfingerprints.com/scripts/getIPCoordinates.php',
-	                CURLOPT_USERAGENT => 'Codular Sample cURL Request',
-	                CURLOPT_POSTFIELDS => 'ip='.$ip
-	            ));
-	            $resp = curl_exec($curl);
-				$location = json_decode($resp, true);
-				// http://freegeoip.net/json/50.65.216.255
+			// if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
+			//     // $loc['zip'] = 'T9E';
+			//     $loc['lat'] = 53.266;
+			// 	$loc['lon'] = -113.552;
+			// 	$loc['region'] = 'Alberta';
+			// 	$loc['place'] = 'Edmonton';
+			// 	Log::info('***');
+			// 	Log::info($_SERVER['HTTP_USER_AGENT']);
+			// }
+			// else //If a normal user
+			// {
+			// 	//Tried http://freegeoip.net, http://geoip.nekudo.com/api but received incorrect coordinates
+			//     $curl = curl_init();
+	  //           curl_setopt_array($curl, array(
+	  //               CURLOPT_RETURNTRANSFER => 1,
+	  //               CURLOPT_POST => 1,
+	  //               CURLOPT_URL => 'http://www.ipfingerprints.com/scripts/getIPCoordinates.php',
+	  //               CURLOPT_USERAGENT => 'Codular Sample cURL Request',
+	  //               CURLOPT_POSTFIELDS => 'ip='.$ip
+	  //           ));
+	  //           $resp = curl_exec($curl);
+			// 	$location = json_decode($resp, true);
+			// 	// http://freegeoip.net/json/50.65.216.255
 
-				$url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".$location['latitude'].','.$location['longitude'];
+			// 	$url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".$location['latitude'].','.$location['longitude'];
 
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, $url);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_HEADER, false);
-                $loc_json = curl_exec($curl);
-                $retry = 0;
-                $loc_array = json_decode($loc_json);
-                // dd($loc_array);
-                while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
-                    $loc_json = curl_exec($curl);
-                    $loc_array = json_decode($loc_json);
-                    $retry++;
-                }
-                curl_close($curl);
-                if($loc_array->status == "OK")
-                {
-                    foreach ($loc_array->results[0]->address_components as $component) {
+   //              $curl = curl_init();
+   //              curl_setopt($curl, CURLOPT_URL, $url);
+   //              curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+   //              curl_setopt($curl, CURLOPT_HEADER, false);
+   //              $loc_json = curl_exec($curl);
+   //              $retry = 0;
+   //              $loc_array = json_decode($loc_json);
+   //              // dd($loc_array);
+   //              while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
+   //                  $loc_json = curl_exec($curl);
+   //                  $loc_array = json_decode($loc_json);
+   //                  $retry++;
+   //              }
+   //              curl_close($curl);
+   //              if($loc_array->status == "OK")
+   //              {
+   //                  foreach ($loc_array->results[0]->address_components as $component) {
 					    
-					    if(in_array("locality", $component->types))
-					    {
-					    	$location['city'] = $component->long_name;
-					    }
-					}
-                }  
+			// 		    if(in_array("locality", $component->types))
+			// 		    {
+			// 		    	$location['city'] = $component->long_name;
+			// 		    }
+			// 		}
+   //              }  
                 
-				if(empty($location['latitude']))
-				{
-					$loc['lat'] = 53.266;
-					$loc['lon'] = -113.552;
-					$loc['place'] = 'Location';
-				}
-				elseif(!isset($location['city']))
-				{
-					$loc['place'] = 'Location';
-				}
-				else
-				{
-					$loc['place'] = $location['city'];
-					$loc['lat'] = $location['latitude'];
-					$loc['lon'] = $location['longitude'];
-				}
+			// 	if(empty($location['latitude']))
+			// 	{
+			// 		$loc['lat'] = 53.266;
+			// 		$loc['lon'] = -113.552;
+			// 		$loc['place'] = 'Location';
+			// 	}
+			// 	elseif(!isset($location['city']))
+			// 	{
+			// 		$loc['place'] = 'Location';
+			// 	}
+			// 	else
+			// 	{
+			// 		$loc['place'] = $location['city'];
+			// 		$loc['lat'] = $location['latitude'];
+			// 		$loc['lon'] = $location['longitude'];
+			// 	}
 
 				
 			
-				// $loc['place'] = $loc['city'];
-				// unset($loc['city']); //city is used in search page, so no clash
+			// 	// $loc['place'] = $loc['city'];
+			// 	// unset($loc['city']); //city is used in search page, so no clash
 
-			}
+			// }
 			// $request->session()->put('zip', $loc['zip']);
 			$request->session()->put('place', $loc['place']);
 			$request->session()->put('lat', $loc['lat']);

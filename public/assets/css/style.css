@@ -510,6 +510,7 @@ ul.dealer-info-list{text-align:center;display: inline-block;vertical-align: top;
 
 /* ============ Dashboard Page Start ================= */
 .dashboard-outer .panel.full .panel-body{padding:0;}
+.vertical-tab .cd-slider-nav ul{ display:block; }
 .vertical-tab .cd-slider-nav{float:left; width:20%; background:#3e5062;}
 .vertical-tab:before{content: ''; width:20%; height:100%; background:#fff; position:absolute; top:0; left:0; box-shadow:4px 0px 6px -1px rgba(0,0,0,0.4); z-index:1;}
 .vertical-tab .cd-slider-nav nav{width:100%;}

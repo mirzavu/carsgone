@@ -28,7 +28,7 @@
       }
 
       .title {
-        font-size: 156px;
+        font-size: 120px;
       }
 
       .quote {
@@ -43,8 +43,8 @@
   <body>
     <div class="container">
       <div class="content">
-        <div class="title">500</div>
-        <div class="quote">It's not you, it's me.</div>
+        <div class="title">Page not found</div>
+        <div class="quote">Browse <a href="/">Homepage</a></div>
         <div class="explanation">
           <br>
           <small>

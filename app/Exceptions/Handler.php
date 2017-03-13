@@ -68,7 +68,8 @@ class Handler extends ExceptionHandler
         
         if(config('app.env') == 'production')
         {
-            return response()->view('errors.500', [], 500);
+            return redirect()->action('HomeController@index');
+            // return response()->view('errors.500', [], 500);
         }
         else
         {

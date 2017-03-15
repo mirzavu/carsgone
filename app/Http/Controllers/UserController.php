@@ -70,6 +70,7 @@ class UserController extends Controller
         $user->city_id = $city->id;
     	$user->save();
     	Auth::login($user);
+        $mailer->sendEmailConfirmationTo($user);
     	$id = Auth::user()->id;
     	return response()->json(['status' => 'success', 'id' => $id, 'email' => $email, 'name' => $name]);
     }

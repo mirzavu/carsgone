@@ -28,7 +28,9 @@
 </head>
 <body class="home">
 <script>
-  if(document.location.hostname.search("carsgone.com") !== -1)
+console.log(document.location)
+  console.log(document.location.hostname)
+  if(document.location.hostname.search("carsgone.com") !== -1 && document.location.hostname.search("dev44") == -1)
   {
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

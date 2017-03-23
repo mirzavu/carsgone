@@ -9923,6 +9923,7 @@ fieldset label{font-size:18px; font-weight:700; color:#3b4c5d; text-align:right;
 .select-box .select-wrapper input.select-dropdown{border:0; background-color:#f2f2f2; height:43px; margin-bottom:0; text-indent:13px; box-shadow:none !important;}
 .select-box .btn{color:#fff; font-weight:700; text-transform:capitalize; font-size:14px;}
 .select-box .btn:hover{color:#fff;}
+.select-box-wide{width:100%; padding:0px;}
 .input-box{width:60%; padding:15px; padding-right:0;}
 .margin-checkbox{margin-left: 188px;}
 .input-box .form-control{border:solid 2px #e0e0e0 !important; background-color:#f2f2f2; box-shadow:none;}
@@ -10077,10 +10078,11 @@ ul.pricing-list li{float:left; width:20%; padding:10px;}
 span.required {
     color: #ee3131;
 }
-#quick-box{
+#quick-box, #callback-form{
 	display: none; 
 }
 .flex{ display:flex; }
+#finance-form-2{ display: none; }
 
 
 /* ============================= */

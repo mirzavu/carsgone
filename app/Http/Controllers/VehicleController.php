@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 
 use App\Models\Vehicle;
+use App\Models\Province;
 use App\Mailers\AppMailer;
 use SEOMeta;
 use Log;
@@ -29,6 +30,7 @@ class VehicleController extends Controller
 
 		$location = getLocation($request);
 		$vehicle = Vehicle::with('user')->with('make')->with('model')->where('slug',$slug)->first();
+		$provinces = Province::orderBy('province_name', 'asc')->pluck('province_name','id');
 
 		$other_vehicle_text = 'Related Vehicles';
 		if($vehicle->user->featured)
@@ -39,7 +41,7 @@ class VehicleController extends Controller
 		SEOMeta::setTitle($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.$vehicle->trim.' in '.$vehicle->user->city->city_name.', '.$vehicle->user->province->province_name);
         SEOMeta::setDescription($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' at price $'.$vehicle->price.' in '.$vehicle->user->city->city_name.', '.$vehicle->user->province->province_name.' for sale in Canada');
         SEOMeta::addKeyword(['new cars', 'used cars', $vehicle->make->make_name, $vehicle->model->model_name, $vehicle->make->make_name.' '.$vehicle->model->model_name]);
-		return view('front.brochure', compact('vehicle','location','other_vehicle_text'));
+		return view('front.brochure', compact('vehicle','location','other_vehicle_text','provinces'));
 	}
 
 	public function relatedVehicle(Request $request, $slug)

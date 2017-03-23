@@ -20,8 +20,7 @@ class CreditController extends Controller
 		$data['location'] = getLocation($request);
 		SEOMeta::setTitle('Canada Auto Loans | Car Credit and Auto Credit Canada');
         SEOMeta::setDescription('Auto loans in Canada - car credit in Alberta, British Columbia, Manitoba, Ontario, Saskatchewan, New Brunswick, Quebec, Newfoundland and Labrador, Nova Scotia, Prince Edward Island. Apply for auto credit online in Canada.');
-
-		$data['quick_form'] = $request['contact'] == "credit"? false:true;
+        $data['slug'] = $request->vehicle;
 		$data['provinces'] = Province::orderBy('province_name', 'asc')->pluck('province_name','id');
 		return view('front.creditapp', $data);	
 	}
@@ -30,8 +29,25 @@ class CreditController extends Controller
 	{
 		Log::info($request);
 		$data = $request;
+		$vehicle = Vehicle::whereSlug($data->slug)->first();
+		if($vehicle === null)
+		{
+			$data->set_vehicle = false;
+		}
+		else
+		{
+			$data->set_vehicle = true;
+			$data->year = $vehicle->year;
+			$data->make = $vehicle->make->make_name;
+			$data->model = $vehicle->model->model_name;
+		}
 		$mailer->sendCreditApp($data);
-		$request->session()->flash('success', 'Your Credit Application is sent successfully!');
+
+		//Flash only if credit app sent from credit page
+		if(empty($data->dealer_email))
+		{
+			$request->session()->flash('success', 'Your Credit Application is sent successfully!');
+		}
 		return response()->json(['status' => 'success']);
 	}
 

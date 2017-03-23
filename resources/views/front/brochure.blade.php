@@ -165,32 +165,116 @@
                      <li>
                         <div class="contact-dealer-container">
                            <h4>Finance</h4>
-                           {!! Form::open(['url' => '/finance', 'method' => 'POST', 'id' => 'finance-form']) !!}
                            <div class="form-group">
-                              <input name="name" type="text" class="form-control" placeholder="Name" required />
+                              <input type="checkbox" class="filled-in" name="quick-info" id="quick-info" />
+                              <label for="quick-info">Complete the form below, or receive a call back by clicking here.</label>
                            </div>
-                           <div class="form-group">
-                              <input name="phone" type="text" class="form-control" placeholder="Phone" required/>
-                           </div>
-                           <div class="form-group">
-                              <p>
-                                 <input name="contact" type="radio" id="contact1" value="call" required/>
-                                 <label for="contact1">Call me back</label>
-                              </p>
-                              <p>
-                                 <input name="contact" type="radio" id="contact2" value="text" required/>
-                                 <label for="contact2">Text me back</label>
-                              </p>
-                              <p>
-                                 <input name="contact" type="radio" id="contact3" value="credit" required/>
-                                 <label for="contact3">Get me Approved Now</label>
-                              </p>
-                           </div>
-                           <div class="form-group">
-                              <input type="hidden" name="vehicle" value="{{$vehicle->slug}}">
-                              <button id="finance-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
-                           </div>
+                           {!! Form::open(['url' => '/quick-finance', 'method' => 'POST', 'id' => 'callback-form']) !!}
+                              <div class="form-group">
+                                 {!! Form::text('name', null, ['class' => 'form-control', 'minlength'=>'3', 'placeholder'=>'Name', 'required']) !!}
+                              </div>
+                              <div class="form-group">
+                                 {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder'=>'Phone', 'required']) !!}
+                              </div>
+                               <button id="quick-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
                            {!! Form::close() !!}
+                           <div id="credit_form-box">
+                              {!! Form::open(['id' => 'finance-form-1']) !!}
+                              <div class="form-group">
+                                 {!! Form::text('name', null, ['class' => 'form-control', 'minlength'=>'3', 'placeholder'=>'Name', 'required']) !!}
+                              </div>
+                              <div class="form-group">
+                                 {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder'=>'Phone', 'required']) !!}
+                              </div>
+                              <div class="form-group">
+                                 {!! Form::email('email', null, ['class' => 'form-control', 'placeholder'=>'Email','required']) !!}
+                              </div>
+                              <div class="form-group">
+                                 {!! Form::text('street', null, ['class' => 'form-control','minlength'=>'3', 'placeholder'=>'Street', 'required']) !!}
+                              </div>
+                              <div class="form-group">
+                                 {!! Form::text('city', null, ['class' => 'form-control', 'placeholder'=>'City', 'required']) !!}
+                              </div>
+                              <div class="form-group">
+                                 <div class="select-box select-box-wide">
+                                    <select name="province" required>
+                                       <option value="" disabled selected>Select Province</option>
+                                       @foreach ($provinces as $province)
+                                       <option value="{{$province}}">{{$province}}</option>
+                                       @endforeach
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 {!! Form::text('postal_code', null, ['class' => 'form-control', 'placeholder'=>'Postal Code','required']) !!}
+                              </div>
+                              
+                              <div class="form-group">
+                                 <input type="hidden" name="vehicle" value="{{$vehicle->slug}}">
+                                 <button id="next-btn" class="btn waves-effect waves-light btn-block" type="button">Next</button>
+                              </div>
+                              {!! Form::close() !!}
+
+                              {!! Form::open(['id' => 'finance-form-2']) !!}
+                              <div class="form-group">
+                                 <input name="dob" type="date" class="form-control datepicker" placeholder="Date of Birth">
+                              </div>
+                              <div class="form-group">
+                                 {!! Form::text('sin', null, ['class' => 'form-control', 'placeholder'=>'Social Insurance Number']) !!}
+                              </div>
+                              <div class="form-group flex">
+                                 <label>Rent Or Own</label>
+                                 <div class="input-box">
+                                    <div class="switch">
+                                     <label>
+                                       Rent
+                                       <input type="checkbox">
+                                       <span class="lever"></span>
+                                       Own
+                                     </label>
+                                   </div>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <div class="flex">
+                                    {!! Form::text('time_address_year', null, ['class' => 'form-control', 'placeholder' => 'Time At Address Years']) !!}
+                                    {!! Form::text('time_address_month', null, ['class' => 'form-control', 'placeholder' => 'Time At Address Months']) !!}
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 {!! Form::text('monthly_payment', null, ['class' => 'form-control', 'placeholder' => 'Monthly Payment']) !!}
+                              </div>
+                              <div class="form-group">
+                                 {!! Form::text('company', null, ['class' => 'form-control', 'placeholder' => 'Company Name']) !!}
+                              </div>
+                              <div class="form-group">
+                                 {!! Form::text('work_phone', null, ['class' => 'form-control', 'placeholder' => 'Work Phone Number']) !!}
+                              </div>
+                              
+                              <div class="form-group">
+                                 {!! Form::text('position', null, ['class' => 'form-control', 'placeholder' => 'Position/Title']) !!}
+                              </div>
+                              <div class="form-group">
+                                 <div class="flex">
+                                    {!! Form::text('time_job_year', null, ['class' => 'form-control', 'placeholder' => 'Time At Job Years']) !!}
+                                    {!! Form::text('time_job_month', null, ['class' => 'form-control', 'placeholder' => 'Time At Job Months']) !!}
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 {!! Form::text('monthly_income', null, ['class' => 'form-control', 'placeholder' => 'Monthly Income']) !!}
+                              </div>
+                              <div class="form-group">
+                                 <input type="checkbox" class="filled-in" name="privacy" id="filled-in-box" required />
+                                 <label for="filled-in-box">I agree to <a target="_blank" href="/privacy">privacy policy</a></label>
+                              </div>
+                              
+                              <div class="form-group">
+                                 <input type="hidden" name="vehicle" value="{{$vehicle->slug}}">
+                                 <button id="back-btn" class="btn waves-effect waves-light btn-block" type="button">test</button>
+                                 <button id="credit-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
+                              </div>
+                              {!! Form::close() !!}
+                           </div>
                         </div>
                      </li>
                      @endif
@@ -253,7 +337,6 @@
       </div>
    </div>
    <!-- Related Links End-->
-   @if($vehicle->user->featured)
    <!-- Credit Application Banner -->
    <div class="related-item-container">
       <div class="container">
@@ -271,7 +354,7 @@
                            <p class="clock">Easy 60-Second Application</p>
                         </div>
                         <div class="small-approval-link">
-                           <a href="/credit-application/?vehicle={{$vehicle->slug}}" class="waves-effect waves-light btn btn-orange small-btn-orange">APPLY CREDIT</a>
+                           <a target="_blank" href="/credit-application/?vehicle={{$vehicle->slug}}" class="waves-effect waves-light btn btn-orange small-btn-orange">APPLY CREDIT</a>
                         </div>
                      </div>
                   </div>
@@ -282,7 +365,7 @@
       </div>
    </div>
    <!-- Credit Application Banner End-->
-   @endif
+
    <!-- Related Item Container Start -->
    <div class="related-item-container">
       <div class="container">
@@ -355,7 +438,7 @@ form.validate({
     }
 })
 
-var form = $("#finance-form");
+var form = $("#finance-form-2");
 form.validate({
     rules: {},
     messages: {
@@ -385,31 +468,22 @@ form.validate({
 
     },
     submitHandler: function(form) {
-        $('#finance-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
-        if($('input[name="contact"]:checked').val() == "credit")
-        {
-            $('#finance-submit').prop('disabled', false).html('Submit')
-            var form_data = $('#finance-form').serialize()
-            $("#finance-form").get(0).reset();
-         
-            var win = window.open('/credit-application/?'+form_data, '_blank');
-            win.focus();
-        }
-        else
-        {
-            $.ajax({
-               url: form.action,
-               type: form.method,
-               data: $(form).serialize() + '&_token={{ csrf_token() }}' + '&vehicle={{ $vehicle->slug }}&dealer_email={{ $vehicle->user->email }}',
+        $('#credit-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
+        $.ajax({
+               url: '/credit-application',
+               type: 'POST',
+               data: $('#finance-form-1').serialize() + '&'+ $('#finance-form-2').serialize()+ '&_token={{ csrf_token() }}' + '&vehicle={{ $vehicle->slug }}&dealer_email={{ $vehicle->user->email }}',
                success: function(response) {
                    if (response.status == "success") {
-                       toastr.success(response.message)
-                       $('#finance-submit').prop('disabled', false).html('Submit')
-                       $("#finance-form").get(0).reset();
+                       toastr.success('Your credit application is submitted to the dealer successfully.')
+                       $('#credit-submit').prop('disabled', false).html('Submit')
+                       $("#finance-form-1").get(0).reset();
+                       $("#finance-form-2").get(0).reset();
+                       $('#finance-form-2').fadeOut()
+                       $('#finance-form-1').fadeIn()
                    }
                }
            });
-        }
     }
 })
 
@@ -429,7 +503,114 @@ $('#inventory-btn').on('click', function(e) {
 if ({{ $vehicle->user->featured }} == 0) {
     $('.cd-slider-nav .cd-marker').width('33.3%')
 }
-  
+
+$('#next-btn').on('click', function(e) {
+   var form = $("#finance-form-1");
+        form.validate({
+            rules: {},
+            // errorClass: "invalid form-error",       
+            // errorElement : 'div',       
+            errorPlacement: function(error, element) {
+                if (element.is('select')) {
+                    error.appendTo(element.parent().parent());
+                } else {
+                    error.appendTo(element.parent());
+                }
+
+            },
+            focusInvalid: false,
+            invalidHandler: function(form, validator) {
+
+                if (!validator.numberOfInvalids())
+                    return;
+                $('html, body').animate({
+                    scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                }, 500);
+                $(validator.errorList[0].element).focus()
+
+            }
+        })
+
+        if (form.valid() == true) {
+            $('#finance-form-1').fadeOut()
+            $('#finance-form-2').fadeIn()
+        } else {
+            return false;
+        }
+   
+  });
+
+
+$('#back-btn').on('click', function(e) {
+   $('#finance-form-2').fadeOut()
+   $('#finance-form-1').fadeIn()
+  });
+
+$('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 60, // Creates a dropdown of 15 years to control year
+    min: [1950, 1, 1],
+    max: [2005, 1, 1],
+    onSet: function (ele) {
+         if(ele.select){
+                this.close();
+         }
+      }
+
+});
+
+$("#quick-info").change(function() {
+    if (this.checked) {
+        $('#callback-form').fadeIn('slow')
+        $('#credit_form-box').fadeOut('slow')
+    } else {
+        $('#callback-form').hide()
+        $('#credit_form-box').fadeIn('slow')
+    }
+});
+
+var form = $("#callback-form");
+            form.validate({
+                rules: {},
+                // errorClass: "invalid form-error",       
+                // errorElement : 'div',       
+                errorPlacement: function(error, element) {
+                    if (element.is('select')) {
+                        error.appendTo(element.parent().parent());
+                    } else {
+                        error.appendTo(element.parent());
+                    }
+
+                },
+                focusInvalid: false,
+                invalidHandler: function(form, validator) {
+
+                    if (!validator.numberOfInvalids())
+                        return;
+                    $('html, body').animate({
+                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                    }, 500);
+                    $(validator.errorList[0].element).focus()
+
+                },
+                submitHandler: function(form) {
+                  $('#quick-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
+                    $.ajax({
+                             url: form.action,
+                             type: form.method,
+                             data: $(form).serialize()+'&_token={{ csrf_token() }}&dealer_email={{ $vehicle->user->email }}',
+                             success: function(response) {
+                                 if(response.status == "success")
+                                 {
+                                    toastr.success(response.message)
+                                    $('#quick-submit').prop('disabled', false).html('Submit')
+                                    $("#callback-form").get(0).reset();
+                                 }
+                             }
+                         });
+                }
+            })
+
 </script>
 <script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}}),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}})});infowindow = new google.maps.InfoWindow({content:'<strong>{{$vehicle->user->name}}</strong><br>{{$vehicle->user->address}}<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
 <script src="https://unpkg.com/react@latest/dist/react.min.js"></script>

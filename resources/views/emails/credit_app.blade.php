@@ -5,6 +5,12 @@
 </head>
 <body>
 <table>
+	@if($data->set_vehicle)
+	<tr>
+		<th>Vehicle</th>
+		<td>{{$data->year}} {{$data->make}} {{$data->model}}</td>
+	</tr>
+	@endif
 	<tr>
 		<th>Name</th>
 		<td>{{$data->name}}</td>
@@ -32,6 +38,10 @@
 	<tr>
 		<th>Postal Code</th>
 		<td>{{$data->postal_code}}</td>
+	</tr>
+	<tr>
+		<th>Date of Birth</th>
+		<td>{{$data->dob}}</td>
 	</tr>
 	<tr>
 		<th>Social Insurance Number</th>

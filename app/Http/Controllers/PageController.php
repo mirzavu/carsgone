@@ -9,6 +9,7 @@ use App\Models\ContentPage;
 use App\Models\ContentCarsgone;
 use App\Mailers\AppMailer;
 use SEOMeta;
+use Log;
 
 class PageController extends Controller
 {
@@ -37,8 +38,17 @@ class PageController extends Controller
 	
 	public function contactSend(Request $request, AppMailer $mailer)
 	{
-		$mailer->sendContactForm($request);
+		//Spam check
+		if(!$this->endsWith($request['email'], ".ru"))
+		{
+			$mailer->sendContactForm($request);
+		}
 		return response()->json(['status' => 'success', 'message' => 'Your message is sent successfully! You will hear back from us soon.']);
+	}
+
+	public function endsWith($haystack, $needle) {
+	    // search forward starting from end minus needle length characters
+	    return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
 	}
 
 	public function autoloan(Request $request)

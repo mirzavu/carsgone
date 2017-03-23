@@ -4,6 +4,7 @@ namespace App\Mailers;
 
 use Illuminate\Contracts\Mail\Mailer;
 use App\Models\User;
+use App\Models\Vehicle;
 use Log;
 class AppMailer
 {
@@ -102,7 +103,8 @@ class AppMailer
     {
         $this->from = $data->email;
         $this->fromName = $data->name;
-        $this->to = config('mail.from.address');
+        $to_address = empty($data->dealer_email) ? config('mail.from.address'):$data->dealer_email;
+        $this->to = $to_address;
         $this->subject = 'Credit Application';
         $this->view = 'emails.credit_app';
         $this->data = compact('data');

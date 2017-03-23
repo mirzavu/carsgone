@@ -4,14 +4,13 @@
 <div class="vehicle-post-outer">
    <div class="container">
       <div class="wrapper">
-         @if($quick_form)
          <div class="dealer-info">
             <div class="panel full">
                <div class="panel-body">
                   <div>
                      <div class="row">
                         <input type="checkbox" class="filled-in" name="quick-info" id="quick-info" />
-                        <label for="quick-info">Check this box, and we'll get back to you! Don't forget leave your name and/or phone number below.</label>
+                        <label for="quick-info">Complete the form below, or receive a call back by clicking here.</label>
 
                      </div>
                      {!! Form::open(['url' => '/quick-finance', 'method' => 'POST', 'id' => 'quick-form']) !!}
@@ -31,6 +30,7 @@
                               </div>
                               <div class="col-sm-4 display-table">
                               <div class="input-box">
+                                 <input type="hidden" name="slug" value="{{$slug}}">
                                  <button id="quick-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
                                  </div>
                               </div>
@@ -50,7 +50,6 @@
                </div>
             </div>
          </div>
-         @endif
             
             <div class="post-tab clearfix panel" id="credit_wizard">
                <div class="form-section">
@@ -126,7 +125,7 @@
                         <div class="col-sm-6 display-table">
                            <label>Date Of Birth</label>
                            <div class="input-box">
-                              <input type="date" class="form-control datepicker">
+                              <input name="dob" type="date" class="form-control datepicker">
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
@@ -221,6 +220,7 @@
                         </div>
                      </div>
                   </fieldset>
+                  <input type="hidden" name="slug" value="{{$slug}}">
                   {!! Form::close() !!}
                </div>
             </div>

@@ -270,7 +270,7 @@
                               
                               <div class="form-group">
                                  <input type="hidden" name="vehicle" value="{{$vehicle->slug}}">
-                                 <button id="back-btn" class="btn waves-effect waves-light btn-block" type="button">test</button>
+                                 <button id="back-btn" class="btn waves-effect waves-light btn-block" type="button">Back</button>
                                  <button id="credit-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
                               </div>
                               {!! Form::close() !!}

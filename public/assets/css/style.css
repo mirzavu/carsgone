@@ -1019,7 +1019,7 @@ ul.item-stats li div{padding: 4px;}
 .related-link-list li{width: 100%;}
 .fetured-box{width: 80%;}
 .featured-details .price, .featured-details .run{width:100%;}
-
+#post-create-form label:not(.promote-label){ display: none; }
 }
 /* ============================= */
 /* ! Layout for mobile(portrait) version   */

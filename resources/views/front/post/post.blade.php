@@ -74,13 +74,13 @@
                         <div class="col-sm-6 display-table">
                            <label>Price<span class="required">*</span></label>
                            <div class="input-box">
-                              <input type="text" class="form-control" name="price" placeholder="eg: $12,000" minlength="3" required/>
+                              <input type="text" class="form-control" name="price" placeholder="Price eg: $12,000" minlength="3" required/>
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
                            <label>Mileage</label>
                            <div class="input-box">
-                              <input type="text" class="form-control" name="odometer" placeholder="eg: 12,000" />
+                              <input type="text" class="form-control" name="odometer" placeholder="Mileage eg: 12,000" />
                            </div>
                         </div>
                      </div>
@@ -221,7 +221,7 @@
                         <div class="col-sm-12 display-table textarea">
                            <label>Description</label>
                            <div class="input-box">
-                              <textarea class="form-control" name="text"></textarea>
+                              <textarea class="form-control" name="text" placeholder="Enter Description"></textarea>
                            </div>
                         </div>
                      </div>
@@ -277,7 +277,7 @@
                         <div class="col-sm-6 display-table">
                            <label>Engine</label>
                            <div class="input-box">
-                              <input name="engine_description" type="text" class="form-control" placeholder="Eg: 3.0L" />
+                              <input name="engine_description" type="text" class="form-control" placeholder="Engine Description Eg: 3.0L" />
                            </div>
                         </div>
                      </div>
@@ -368,7 +368,7 @@
                      </div>
                      <div class="promote-vehicle-right">
                         <input name="free" type="checkbox" class="filled-in promote-check" checked id="vehicle-price-free">
-                        <label for="vehicle-price-free">FREE</label>
+                        <label for="vehicle-price-free" class="promote-label">FREE</label>
                      </div>
                   </div>
                   <div class="promote-vehicle">
@@ -377,7 +377,7 @@
                      </div>
                      <div class="promote-vehicle-right">
                         <input type="checkbox" class="filled-in promote-check" id="vehicle-price">
-                        <label for="vehicle-price"><span>$</span>14.95</label>
+                        <label for="vehicle-price" class="promote-label"><span>$</span>14.95</label>
                      </div>
                   </div>
                   <div class="promote-vehicle paypal">

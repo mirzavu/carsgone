@@ -367,9 +367,9 @@ var form = $("#quick-form");
 $("#quick-info").change(function() {
     if (this.checked) {
         $('#quick-box').fadeIn('slow')
-        $('#credit_wizard-box').fadeOut('slow')
+        $('#credit_wizard-box').hide()
     } else {
-        $('#quick-box').fadeOut('slow')
+        $('#quick-box').hide()
         $('#credit_wizard-box').fadeIn('slow')
     }
 });

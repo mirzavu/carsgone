@@ -801,6 +801,7 @@ span.required {
 }
 .flex{ display:flex; }
 #finance-form-2{ display: none; }
+.form-group.flex button{flex: 1;}
 
 
 /* ============================= */

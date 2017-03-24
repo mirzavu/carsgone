@@ -268,10 +268,10 @@
                                  <label for="filled-in-box">I agree to <a target="_blank" href="/privacy">privacy policy</a></label>
                               </div>
                               
-                              <div class="form-group">
+                              <div class="form-group flex">
                                  <input type="hidden" name="vehicle" value="{{$vehicle->slug}}">
-                                 <button id="back-btn" class="btn waves-effect waves-light btn-block" type="button">Back</button>
-                                 <button id="credit-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
+                                 <button id="back-btn" class="btn waves-effect waves-light" type="button">Back</button>
+                                 <button id="credit-submit" class="btn waves-effect waves-light" type="submit">Submit</button>
                               </div>
                               {!! Form::close() !!}
                            </div>

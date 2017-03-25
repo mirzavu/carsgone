@@ -1021,6 +1021,8 @@ ul.item-stats li div{padding: 4px;}
 .fetured-box{width: 80%;}
 .featured-details .price, .featured-details .run{width:100%;}
 #post-create-form label:not(.promote-label){ display: none; }
+#credit_wizard label{ display: none; }
+#quick-box label{ display: none; }
 }
 /* ============================= */
 /* ! Layout for mobile(portrait) version   */

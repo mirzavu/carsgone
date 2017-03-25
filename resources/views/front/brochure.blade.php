@@ -534,6 +534,7 @@ $('#next-btn').on('click', function(e) {
         if (form.valid() == true) {
             $('#finance-form-1').fadeOut()
             $('#finance-form-2').fadeIn()
+            $('#quick-info').parent().hide()
         } else {
             return false;
         }
@@ -544,6 +545,7 @@ $('#next-btn').on('click', function(e) {
 $('#back-btn').on('click', function(e) {
    $('#finance-form-2').fadeOut()
    $('#finance-form-1').fadeIn()
+   $('#quick-info').parent().show()
   });
 
 $('.datepicker').pickadate({

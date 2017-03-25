@@ -25,7 +25,7 @@
                               <div class="col-sm-4 display-table">
                                  <label>Phone Number</label>
                                  <div class="input-box">
-                                    {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => "Eg: 9999900000", 'required']) !!}
+                                    {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => "Phone Number", 'required']) !!}
                                  </div>
                               </div>
                               <div class="col-sm-4 display-table">
@@ -60,13 +60,13 @@
                         <div class="col-sm-6 display-table">
                            <label>Name</label>
                            <div class="input-box">
-                              {!! Form::text('name', null, ['class' => 'form-control', 'minlength'=>'3', 'required']) !!}
+                              {!! Form::text('name', null, ['class' => 'form-control', 'minlength'=>'3', 'required', 'placeholder' => "Enter Name"]) !!}
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
                            <label>Phone Number</label>
                            <div class="input-box">
-                              {!! Form::text('phone', null, ['class' => 'form-control', 'required']) !!}
+                              {!! Form::text('phone', null, ['class' => 'form-control', 'required', 'placeholder' => "Phone Number"]) !!}
                            </div>
                         </div>
                      </div>
@@ -74,13 +74,13 @@
                         <div class="col-sm-6 display-table">
                            <label>Email</label>
                            <div class="input-box">
-                              {!! Form::email('email', null, ['class' => 'form-control','required']) !!}
+                              {!! Form::email('email', null, ['class' => 'form-control','required', 'placeholder' => "Email"]) !!}
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
                            <label>Street</label>
                            <div class="input-box">
-                              {!! Form::text('street', null, ['class' => 'form-control','minlength'=>'3', 'required']) !!}
+                              {!! Form::text('street', null, ['class' => 'form-control','minlength'=>'3', 'required', 'placeholder' => "Street"]) !!}
                            </div>
                         </div>
                      </div>
@@ -88,7 +88,7 @@
                         <div class="col-sm-6 display-table">
                            <label>City</label>
                            <div class="input-box">
-                              {!! Form::text('city', null, ['class' => 'form-control', 'required']) !!}
+                              {!! Form::text('city', null, ['class' => 'form-control', 'required', 'placeholder' => "City"]) !!}
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
@@ -107,7 +107,7 @@
                         <div class="col-sm-6 display-table">
                            <label>Postal Code</label>
                            <div class="input-box">
-                              {!! Form::text('postal_code', null, ['class' => 'form-control', 'required']) !!}
+                              {!! Form::text('postal_code', null, ['class' => 'form-control', 'required', 'placeholder' => "Postal Code"]) !!}
                            </div>
                         </div>
                      </div>
@@ -125,13 +125,13 @@
                         <div class="col-sm-6 display-table">
                            <label>Date Of Birth</label>
                            <div class="input-box">
-                              <input name="dob" type="date" class="form-control datepicker">
+                              <input name="dob" type="date" class="form-control datepicker" placeholder="Date of Birth">
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
                            <label>Social Insurance Number</label>
                            <div class="input-box">
-                              {!! Form::text('sin', null, ['class' => 'form-control']) !!}
+                              {!! Form::text('sin', null, ['class' => 'form-control', 'placeholder' => "Social Insurance Number"]) !!}
                            </div>
                         </div>
                      </div>
@@ -154,8 +154,8 @@
                            <label>Time At Address</label>
                            <div class="input-box">
                               <div class="flex">
-                                 {!! Form::text('time_address_year', null, ['class' => 'form-control', 'placeholder' => 'Years']) !!}
-                                 {!! Form::text('time_address_month', null, ['class' => 'form-control', 'placeholder' => 'Months']) !!}
+                                 {!! Form::text('time_address_year', null, ['class' => 'form-control', 'placeholder' => 'Time At Address Years']) !!}
+                                 {!! Form::text('time_address_month', null, ['class' => 'form-control', 'placeholder' => 'Time At Address Months']) !!}
                               </div>
                            </div>
                         </div>
@@ -164,7 +164,7 @@
                         <div class="col-sm-6 display-table">
                            <label>Monthly Payment</label>
                            <div class="input-box">
-                              {!! Form::text('monthly_payment', null, ['class' => 'form-control']) !!}
+                              {!! Form::text('monthly_payment', null, ['class' => 'form-control', 'placeholder' => 'Monthly Payment']) !!}
                            </div>
                         </div>
                      </div>
@@ -176,13 +176,13 @@
                         <div class="col-sm-6 display-table">
                            <label>Company Name</label>
                            <div class="input-box">
-                              {!! Form::text('company', null, ['class' => 'form-control']) !!}
+                              {!! Form::text('company', null, ['class' => 'form-control', 'placeholder' => 'Company Name']) !!}
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
                            <label>Work Phone Number</label>
                            <div class="input-box">
-                              {!! Form::text('work_phone', null, ['class' => 'form-control']) !!}
+                              {!! Form::text('work_phone', null, ['class' => 'form-control', 'placeholder' => 'Work Phone Number']) !!}
                            </div>
                         </div>
                      </div>
@@ -190,15 +190,15 @@
                         <div class="col-sm-6 display-table">
                            <label>Position/Title</label>
                            <div class="input-box">
-                              {!! Form::text('position', null, ['class' => 'form-control']) !!}
+                              {!! Form::text('position', null, ['class' => 'form-control', 'placeholder' => 'Position/Title']) !!}
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
                            <label>Time At Job</label>
                            <div class="input-box">
                               <div class="flex">
-                                 {!! Form::text('time_job_year', null, ['class' => 'form-control', 'placeholder' => 'Years']) !!}
-                                 {!! Form::text('time_job_month', null, ['class' => 'form-control', 'placeholder' => 'Months']) !!}
+                                 {!! Form::text('time_job_year', null, ['class' => 'form-control', 'placeholder' => 'Time At Job Years']) !!}
+                                 {!! Form::text('time_job_month', null, ['class' => 'form-control', 'placeholder' => 'Time At Job Months']) !!}
                               </div>
                            </div>
                         </div>
@@ -207,7 +207,7 @@
                         <div class="col-sm-6 display-table">
                            <label>Monthly Income</label>
                            <div class="input-box">
-                              {!! Form::text('monthly_income', null, ['class' => 'form-control']) !!}
+                              {!! Form::text('monthly_income', null, ['class' => 'form-control', 'placeholder' => 'Monthly Income']) !!}
                            </div>
                         </div>
                      </div>

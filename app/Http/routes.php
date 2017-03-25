@@ -123,8 +123,11 @@
 
 /****  ADMIN PANEL END**********/
 
-	Route::get('/brochure-sitemap.txt', function(){
-		return response()->file(base_path()."/brochure-sitemap.txt");
+	Route::get('/brochure-sitemap1.txt', function(){
+		return response()->file(base_path()."/brochure-sitemap1.txt");
+	});
+	Route::get('/brochure-sitemap2.txt', function(){
+		return response()->file(base_path()."/brochure-sitemap2.txt");
 	});
 	
 

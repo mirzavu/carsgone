@@ -38,7 +38,7 @@ class VehicleController extends Controller
 		else
 			$other_vehicle_text = 'Related Vehicles';
 
-		SEOMeta::setTitle($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.$vehicle->trim.' in '.$vehicle->user->city->city_name.', '.$vehicle->user->province->province_name);
+		SEOMeta::setTitle($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.$vehicle->trim.' for price $'.$vehicle->price.' in '.$vehicle->user->city->city_name.', '.$vehicle->user->province->province_name);
         SEOMeta::setDescription($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' at price $'.$vehicle->price.' in '.$vehicle->user->city->city_name.', '.$vehicle->user->province->province_name.' for sale in Canada');
         SEOMeta::addKeyword(['new cars', 'used cars', $vehicle->make->make_name, $vehicle->model->model_name, $vehicle->make->make_name.' '.$vehicle->model->model_name]);
 		return view('front.brochure', compact('vehicle','location','other_vehicle_text','provinces'));

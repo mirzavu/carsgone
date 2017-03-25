@@ -135,6 +135,8 @@ if (!function_exists('getLocation')) {
 				elseif(!isset($location['city']))
 				{
 					$loc['place'] = 'Location';
+					$loc['lat'] = $location['latitude'];
+					$loc['lon'] = $location['longitude'];
 				}
 				else
 				{

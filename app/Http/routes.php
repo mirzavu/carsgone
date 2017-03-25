@@ -123,6 +123,11 @@
 
 /****  ADMIN PANEL END**********/
 
+	Route::get('/brochure-sitemap.txt', function(){
+		return response()->file(base_path()."/brochure-sitemap.txt");
+	});
+	
+
 // Route::group(
 //                 [
 //                     'middleware' => 'web',

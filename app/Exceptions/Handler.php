@@ -47,12 +47,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        Log::info('--------------------------------');
+        Log::info($e->getMessage(), [
+            'url' => Request::url(),
+            'input' => Request::all()
+        ]);
         if (isset($_SERVER['HTTP_USER_AGENT']) && !preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
-            Log::info('--------------------------------');
-            Log::info($e->getMessage(), [
-                'url' => Request::url(),
-                'input' => Request::all()
-            ]);
             Log::info($e);
         }
         if ($request->ajax() || $request->wantsJson())

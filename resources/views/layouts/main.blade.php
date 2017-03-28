@@ -426,8 +426,8 @@ $('body').on('click', '#logout-li', function() {
 });
 
 
-$('#private-link').on('click',function(e){
-  e.preventDefault();
+$('#private-link').on('click',function(event){
+  event.preventDefault ? event.preventDefault() : (event.returnValue = false)
   $.get( "/removeSessionAll");
   $.get( "/setSessionKeyValue/seller/private", function( data ) {
       window.location = '/search';
@@ -435,8 +435,8 @@ $('#private-link').on('click',function(e){
   
 })
 
-$('#browse-link').on('click',function(e){
-  e.preventDefault();
+$('#browse-link').on('click',function(event){
+  event.preventDefault ? event.preventDefault() : (event.returnValue = false)
   $.get( "/removeSessionAll", function( data ) {
       window.location = '/search';
   });

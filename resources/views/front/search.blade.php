@@ -365,8 +365,8 @@
 @section('javascript')
 <script type="text/javascript">
    // Filter remove
-   $('.applied-remove').on('click',function(e){
-      e.preventDefault();
+   $('.applied-remove').on('click',function(event){
+     event.preventDefault ? event.preventDefault() : (event.returnValue = false)
      $('.result-container').css({opacity:0.2}).before('<div class="progress"><div class="indeterminate"></div></div>')
      data = $(this).prev().html();
      //console.log(data);

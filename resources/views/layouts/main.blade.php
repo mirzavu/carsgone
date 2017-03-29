@@ -428,8 +428,8 @@ $('body').on('click', '#logout-li', function() {
 
 $('#private-link').on('click',function(event){
   event.preventDefault ? event.preventDefault() : (event.returnValue = false)
-  $.get( "/removeSessionAll");
-  $.get( "/setSessionKeyValue/seller/private", function( data ) {
+  $.get( "/removeSessionAll",{ "_": $.now() });
+  $.get( "/setSessionKeyValue/seller/private",{ "_": $.now() }, function( data ) {
       window.location = '/search';
   });
   
@@ -437,7 +437,7 @@ $('#private-link').on('click',function(event){
 
 $('#browse-link').on('click',function(event){
   event.preventDefault ? event.preventDefault() : (event.returnValue = false)
-  $.get( "/removeSessionAll", function( data ) {
+  $.get( "/removeSessionAll",{ "_": $.now() }, function( data ) { //Added time to disable caching
       window.location = '/search';
   });
 })

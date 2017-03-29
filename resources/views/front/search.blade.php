@@ -508,7 +508,7 @@
      });
      
     $("img").on("error", function(){      
-      $(this).attr( "src", "/assets/images/placeholder.jpgg" );  
+      $(this).attr( "src", "/assets/images/placeholder.jpg" );  
     });
   });
    

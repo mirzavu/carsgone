@@ -21,6 +21,8 @@ class DealerController extends Controller
         $data['dealer_info'] = ContentPage::where('slug', 'dealer-info')->first()->content;
         $data['free_membership'] = ContentPage::where('slug', 'free-membership')->first()->content;
         $data['premium_account'] = ContentPage::where('slug', 'premium-account')->first()->content;
+        $data['vehicle_count'] =  Vehicle::where('status_id', 1)->count();
+        $data['dealer_count'] =  User::where('role', 'dealer')->count();
 		$data['location'] = getLocation($request);
 		return view('front.dealer.info', $data);
 	}

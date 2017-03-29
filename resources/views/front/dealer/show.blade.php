@@ -46,9 +46,9 @@
                              <ul class="table-list">
                                 <li>{{$dealer->name}}</li>
                                 <li>{{$dealer->address}}</li>
-                                <li>{{$dealer->email}}</li>
-                                <li>{{$dealer->phone}}</li>
-                                <li><a href="{{$dealer->url}}">{{$dealer->url}}</a></li>
+                                <li> <a href="mailto:{{$dealer->email}}">Email Seller</a></li>
+                                <li><a href="tel:{{$dealer->phone}}">{{$dealer->phone}}</a></li>
+                                <li><a href="{{$dealer->url}}" target="_blank">Seller's Website</a></li>
                                 <li></li>
                               </ul>
                             </div>

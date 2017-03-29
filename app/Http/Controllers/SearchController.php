@@ -130,8 +130,13 @@ class SearchController extends Controller
 			else
 				$loc = ' in '.$conditions->get('province');
 		}
-		$title['title'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and Used Cars | Buy Sell Vehicles Nearby$loc";
-		$title['description'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and used cars. Auto dealers - private for sale by owner buy and sell cars, trucks, SUVs & vans$loc";
+		$price = '';
+		if($conditions->get('price'))
+		{
+			$price = ' within range '.$conditions->get('price');
+		}
+		$title['title'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and Used Cars $price| Buy Sell Vehicles Nearby$loc";
+		$title['description'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and used cars. Auto dealers - private for sale by owner buy and sell cars, trucks, SUVs & vans$loc$price";
 		return $title;
 	}
 

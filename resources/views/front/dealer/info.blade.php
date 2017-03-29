@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <h3>Browse  Dealerships</h3>
-                    <p><span>1736</span> Dealers and <span>79128</span> dealer vehicles currently listed</p>
+                    <p><span>{{ $dealer_count}}</span> Dealers and <span>{{ $vehicle_count}}</span> dealer vehicles currently listed</p>
                     <p>Looking for a car dealership near you? Dealerships across Canada list vehicles  with Carsgone.com. Have a look!</p>
                 </div>
                 <div class="col-md-4">

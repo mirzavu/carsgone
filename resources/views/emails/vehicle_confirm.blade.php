@@ -639,7 +639,7 @@
                                                         <!-- Image -->
                                                         <tr>
                                                             <td align="left" style="font-family: 'Roboto', sans-serif; font-weight:400; color:#808285; font-size:13px; line-height:22px;">
-                                                                	{{ $data['price']}} 
+                                                                	${{ $data['price']}} 
                                                             </td>
                                                         </tr>
 
@@ -709,7 +709,7 @@
 
 														<!-- Social icon -->
 														<td align="center" style="line-height:0px;" class="social_image">
-															<a href=""><img width="35" height="35" style="display:block; line-height:0px; font-size:0px; border:0px;" src="images/facebook.png" alt="35_35_1" /></a>
+															<a href="https://www.facebook.com/Carsgonecom-108789885413"><img width="35" height="35" style="display:block; line-height:0px; font-size:0px; border:0px;" src="{{ url('/').'/assets/images/fb.png'}}" alt="35_35_1" /></a>
 														</td>
 														<!-- End Social icon -->
 
@@ -717,7 +717,7 @@
 														
 														<!-- Social icon -->
 														<td align="center" style="line-height:0px;" class="social_image">
-															<a href=""><img width="35" height="35" style="display:block; line-height:0px; font-size:0px; border:0px;" src="images/twitter.png" alt="35_35_2" /></a>
+															<a href=""><img width="35" height="35" style="display:block; line-height:0px; font-size:0px; border:0px;" src="{{ url('/').'/assets/images/twitter.png'}}" alt="35_35_2" /></a>
 														</td>
 														<!-- End Social icon -->
 
@@ -725,7 +725,7 @@
 														
 														<!-- Social icon -->
 														<td align="center" style="line-height:0px;" class="social_image">
-															<a href=""><img width="35" height="35" style="display:block; line-height:0px; font-size:0px; border:0px;" src="images/googleplus.png" alt="35_35_3" /></a>
+															<a href=""><img width="35" height="35" style="display:block; line-height:0px; font-size:0px; border:0px;" src="{{ url('/').'/assets/images/google.png'}}" alt="35_35_3" /></a>
 														</td>
 														<!-- End Social icon -->
 

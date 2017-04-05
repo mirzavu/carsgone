@@ -19,7 +19,7 @@
                      <div class="col-sm-6 display-table">
                         <label>Year<span class="required">*</span></label>
                         <div class="input-box">
-                           {!! Form::text('year', null, ['class' => 'form-control', 'minlength' => '4', 'maxlength' => '4', placeholder' => "Enter Year"]) !!}
+                           {!! Form::text('year', null, ['class' => 'form-control', 'minlength' => '4', 'maxlength' => '4', 'placeholder' => "Enter Year"]) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">

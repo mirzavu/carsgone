@@ -24,18 +24,8 @@
                      <div class="row">
                         <div class="col-sm-6 display-table">
                            <label>Year<span class="required">*</span></label>
-                           <div class="select-box">
-                              <select name="year" required>
-                                 <option value="" disabled selected>Select Year</option>
-                                 <option value="2017">2017</option>
-                                 <option value="2016">2016</option>
-                                 <option value="2015">2015</option>
-                                 <option value="2014">2014</option>
-                                 <option value="2013">2013</option>
-                                 <option value="2012">2012</option>
-                                 <option value="2011">2011</option>
-                                 <option value="2010">2010</option>
-                              </select>
+                           <div class="input-box">
+                              <input name="year" type="text" minlength="4" maxlength="4" class="form-control" placeholder="Enter Year" />
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">

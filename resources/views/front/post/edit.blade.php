@@ -18,8 +18,8 @@
                   <div class="row">
                      <div class="col-sm-6 display-table">
                         <label>Year<span class="required">*</span></label>
-                        <div class="select-box">
-                           {!! Form::select('year', ['2017' => '2017','2016' => '2016','2015' => '2015','2014' => '2014','2013' => '2013','2012' => '2012','2011' => '2011','2010' => '2010'], null, ['required' ]) !!}
+                        <div class="input-box">
+                           {!! Form::text('year', null, ['class' => 'form-control', 'minlength' => '4', 'maxlength' => '4', placeholder' => "Enter Year"]) !!}
                         </div>
                      </div>
                      <div class="col-sm-6 display-table">

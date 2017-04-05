@@ -62,7 +62,7 @@ class Strathcom extends Command
         $xml_directory   = storage_path('feeds/strathcom');
         $d               = dir($xml_directory);
         ini_set("max_execution_time",0);
-
+        $starttime = date('Y-m-d H:i:s');
         while (false !== ($entry = $d->read())) {
             $filepath = "{$xml_directory}/{$entry}";
             $ext      = pathinfo($entry, PATHINFO_EXTENSION);
@@ -211,6 +211,8 @@ class Strathcom extends Command
             }
             
         }
+        echo "Start time: ". $starttime;
+        echo "\nEnd time: ".  date('Y-m-d H:i:s');
         Log::info($email);
     }
 }

@@ -53,7 +53,7 @@ class Boost extends Command
     public function handle()
     {
         ini_set("max_execution_time",0);
-        $starttime = "\nProgram Start time:" . date(DATE_RFC822);
+        $starttime = date('Y-m-d H:i:s');
 
         $xml_directory   = storage_path('feeds/boost/');
         $xml_filename = 'Export';
@@ -205,6 +205,8 @@ class Boost extends Command
                 $vehicle->options()->attach($option_ids);
             }
         }
+        echo "Start time: ". $starttime;
+        echo "\nEnd time: ".  date('Y-m-d H:i:s');
         Log::info($email);
     }
 }

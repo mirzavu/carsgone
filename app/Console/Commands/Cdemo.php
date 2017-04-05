@@ -58,11 +58,12 @@ class Cdemo extends Command
         $cdemo_feeds = array("cdemo_carsgone.xml","cdemo_carsgone_2.xml");
         $xml_name = "cdemo_carsgone.xml";
         ini_set("max_execution_time",0);
-        $starttime = "\nProgram Start time:" . date(DATE_RFC822);
+        $starttime = date('Y-m-d H:i:s');
         $dealer_cnt = 0;
         $newvehicle_cnt = 0;
         $updvehicle_cnt = 0;
         $email = [];$i=0;
+        echo "Start time ".date('Y-m-d H:i:s');
 
         $xmlfile = storage_path('feeds/cdemo/'.$xml_name);
         $xml_str   = file_get_contents($xmlfile);
@@ -181,6 +182,8 @@ class Cdemo extends Command
             }
         }
             
+        echo "Start time: ". $starttime;
+        echo "\nEnd time: ".  date('Y-m-d H:i:s');
         Log::info($email);
     }
 }

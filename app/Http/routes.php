@@ -70,6 +70,7 @@
 	Route::post('/set-main-photo', 'PostController@setMainPhoto');
 
 
+
 //Authentication
 	Route::post('/signup', 'UserController@postSignUp');
 	Route::post('/dealer-signup', 'UserController@postDealerSignUp');
@@ -78,6 +79,8 @@
 	Route::get('/logout', 'UserController@logout');
 	Route::get('/loggedInUser', 'UserController@loggedInUser');
 	Route::get('/signup/confirm/{token}', 'UserController@confirmEmail');
+	Route::get('/token-login/{token}', 'UserController@tokenLogin');
+	Route::get('/vehicle-confirm/{slug}/{token}', 'UserController@confirmVehicle');
 
 //Dashboard
 	Route::get('/dashboard', 'UserController@dashboard')->middleware('auth');

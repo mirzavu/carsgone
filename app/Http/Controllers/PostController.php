@@ -80,12 +80,11 @@ class PostController extends Controller
 		if(!empty($request['colour_exterior'])) $request['ext_color_id'] = Color::where('color', $request['colour_exterior'])->value('id');
 		if(!empty($request['colour_interior'])) $request['int_color_id'] = Color::where('color', $request['colour_interior'])->value('id');
 		if(!empty($request['fuel'])) $request['fuel_id'] = FuelType::where('fuel_type', $request['fuel'])->value('id');
-
 		//Validate fields
 		$validator = Validator::make($request->all(), [
             'make_id' => 'required|integer',
             'model_id' => 'required|integer',
-            'year' => 'required|min:1970|max:2020|integer'
+            'year' => 'required|min:1900|max:2020|integer'
         ]);
 
         if ($validator->fails()) {
@@ -93,7 +92,6 @@ class PostController extends Controller
         }
 
         $user = Auth::user();
-
         //Save vehicle
 		$vehicle = $user->vehicles()->create($request->all());
 		$vehicle->slug = null;
@@ -109,7 +107,6 @@ class PostController extends Controller
 			$request->session()->flash('success', 'Vehicle has been posted Successfully! A confirmation email is sent to your email address '.$user->email);
 		}
 		$vehicle->save();
-
 		//Change user's lat, long, city, prov from postal code
 		$user->phone = $request['phone'];
 		$user->postal_code = $request['postal_code'];
@@ -156,13 +153,13 @@ class PostController extends Controller
 
 		//Save Vehicle Images
 		$image_names = explode('^', $request['file_names']);
-		
 		$photos =[];$i=1;
 		foreach($image_names as $image) {
 			if(!empty($image))
             	array_push($photos, new VehiclePhoto(['position' => $i++, 'path' => '/uploads/vehicle/'.$image]));
         }
         $vehicle->photos()->saveMany($photos);
+        $mailer->sendVehicleConfirmation($user, $vehicle);
 
         //Payment
 		if ($request->has('free')) {

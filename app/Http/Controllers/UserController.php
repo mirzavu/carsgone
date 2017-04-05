@@ -154,13 +154,30 @@ class UserController extends Controller
     {
         $user = User::whereToken($token)->firstOrFail();
         $user->verified = true;
-        $user->token = null;
         $user->save();
         Auth::login($user);
-        $user->vehicles()->update(['status_id' => 1]);
         $request->session()->flash('success', 'Your Email confirmation is Successful!');
         return redirect()->action('UserController@dashboard');
     }
+
+    public function confirmVehicle($slug, $token, Request $request)
+    {
+        $user = User::whereToken($token)->firstOrFail();
+        $user->verified = true;
+        $user->save();
+        Auth::login($user);
+        $user->vehicles()->where('slug', $slug)->update(['status_id' => 1]);
+        $request->session()->flash('success', 'Your Vehicle is activated successfully!');
+        return redirect()->action('UserController@dashboard');
+    }
+
+    public function tokenLogin($token, Request $request)
+    {
+        $user = User::whereToken($token)->firstOrFail();
+        Auth::login($user);
+        return redirect()->action('UserController@dashboard');
+    }
+    
 
     public function changeEmail(Request $request, AppMailer $mailer)
     {
@@ -285,7 +302,6 @@ class UserController extends Controller
         $user = User::whereToken($request['token'])->firstOrFail();
         $user->password = bcrypt($request['new_password']);
         Log::info($request['new_password']);
-        $user->token = null;
         $user->save();
         return response()->json(['status' => 'success', 'message' => 'Password changed successfully']);
         

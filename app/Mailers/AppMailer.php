@@ -157,25 +157,30 @@ class AppMailer
         $this->data = compact('data');
         $this->deliver();
     }
-
-    public function sendOffer($data)
-    {
-        $this->from = $data->email;
-        $this->fromName = $data->name." via Carsgone";
-        $this->to = $data->dealer_email;
-        $this->subject = 'Make An Offer';
-        $this->view = 'emails.make_offer_form';
-        $this->data = compact('data');
-        $this->deliver();
-    }
     
-    public function sendtradeVehicleForm($data)
+    public function sendVehicleConfirmation($user, $vehicle)
     {
-        $this->from = $data->email;
-        $this->fromName = $data->name." via Carsgone";
-        $this->to = $data->dealer_email;
-        $this->subject = 'Trade Vehicle Form';
-        $this->view = 'emails.trade_vehicle_form';
+        $data['year'] = $vehicle->year;
+        $data['make'] = $vehicle->make->make_name;
+        $data['model'] = $vehicle->model->model_name;
+        $data['price'] = $vehicle->price;
+        $data['photo'] = $vehicle->photo();
+        if(empty($data['photo']))
+        {
+            $data['photo'] = url('/').'/assets/images/placeholder.jpg';
+        }
+        $data['slug'] = $vehicle->slug;
+        if(empty($user->token))
+        {
+            $user->token = str_random(30);
+            $user->save();
+        }
+        $data['token'] = $user->token;
+        $data['description'] = $vehicle->text;
+        Log::info(url('/vehicle-confirm/').$data['slug'].'/'.$data['token']);
+        $this->to = $user->email;
+        $this->subject = 'Activate your Vehicle Ad';
+        $this->view = 'emails.vehicle_confirm';
         $this->data = compact('data');
         $this->deliver();
     }

@@ -39,11 +39,6 @@
                                     </div>
                                     @endif
                                     <a href="/vehicles/{{$vehicle->id}}/edit" class="btn btn-action waves-effect waves-light waves-input-wrapper">Edit</a>
-                                    @if(empty($vehicle->status_id))
-                                    <button vehicle="{{$vehicle->id}}" class="btn activate-btn btn-action waves-effect waves-light waves-input-wrapper">Activate</button>
-                                    @else
-                                    <button vehicle="{{$vehicle->id}}" class="btn deactivate-btn btn-action waves-effect waves-light waves-input-wrapper">Deactivate</button>
-                                    @endif
                                     <button vehicle="{{$vehicle->id}}" class="btn delete-btn btn-action waves-effect waves-light waves-input-wrapper">Delete</button>
                                  </div>
                                  <div class="item-body">
@@ -324,66 +319,6 @@ postal_form.validate({
     }
 })
 
-
-//Activate/Deactivate Vehicle
-$('.dashboard')
-    .on('click', '.activate-btn', function(e) {
-        e.preventDefault();
-    })
-    .on('mousedown', '.activate-btn', function(e) {
-        var btn = $(this)
-        btn.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
-
-
-        $.ajax({
-            type: "POST",
-            url: "/activate-vehicle",
-            accepts: {
-                text: "application/json"
-            },
-            async: true,
-            data: {
-                vehicle_id: btn.attr('vehicle'),
-                "_token": "{{ csrf_token() }}"
-            },
-            success: function(data) {
-                if (data.status == "success") {
-                    btn.removeClass('activate-btn').addClass('deactivate-btn');
-                    btn.prop('disabled', false).html('Deactivate')
-                } else {
-                    btn.prop('disabled', false).html('Activate')
-                    toastr.error(data.message)
-                }
-
-            }
-        });
-    })
-$('.dashboard')
-    .on('click', '.deactivate-btn', function(e) {
-        e.preventDefault();
-    })
-    .on('mousedown', '.deactivate-btn', function(e) {
-        var btn = $(this)
-        btn.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
-
-
-        $.ajax({
-            type: "POST",
-            url: "/deactivate-vehicle",
-            accepts: {
-                text: "application/json"
-            },
-            async: true,
-            data: {
-                vehicle_id: btn.attr('vehicle'),
-                "_token": "{{ csrf_token() }}"
-            },
-            success: function(data) {
-                btn.removeClass('deactivate-btn').addClass('activate-btn');
-                btn.prop('disabled', false).html('Activate')
-            }
-        });
-    })
 
 $('.promote-btn').on('click', function() {
     $(this).prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');

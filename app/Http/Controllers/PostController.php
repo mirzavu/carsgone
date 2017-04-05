@@ -97,7 +97,7 @@ class PostController extends Controller
 		$vehicle->slug = null;
 		if($user->verified)
 		{
-			$vehicle->status_id = 1;
+			$vehicle->status_id = 0;
 			$request->session()->flash('success', 'Vehicle has been posted Successfully! Check <a href="/dashboard">Dashboard</a>');
 		}
 		else

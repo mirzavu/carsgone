@@ -167,7 +167,7 @@ class AppMailer
         $data['photo'] = $vehicle->photo();
         if(empty($data['photo']))
         {
-            $data['photo'] = url('/').'/assets/images/placeholder.jpg';
+            $data['photo'] = '/assets/images/placeholder.jpg';
         }
         $data['slug'] = $vehicle->slug;
         if(empty($user->token))

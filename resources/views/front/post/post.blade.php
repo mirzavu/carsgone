@@ -635,7 +635,6 @@
        $.post("/login-signup", data).done(function(data) {
            NProgress.done();
            if (data.status == "success") {
-               toastr.success('Checkout your saved vehicles in dashboard', 'You have logged in Successfully')
                $('#post-member').closeModal();
                $('#signup-li').replaceWith('<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
                $('#login-li').replaceWith('<li id="logout-li"><a href="#">Logout</a></li>');

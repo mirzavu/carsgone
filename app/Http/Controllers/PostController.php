@@ -95,17 +95,10 @@ class PostController extends Controller
         //Save vehicle
 		$vehicle = $user->vehicles()->create($request->all());
 		$vehicle->slug = null;
-		if($user->verified)
-		{
-			$vehicle->status_id = 0;
-			$request->session()->flash('success', 'Vehicle has been posted Successfully! Check <a href="/dashboard">Dashboard</a>');
-		}
-		else
-		{
-			$vehicle->status_id = 0;
-			$mailer->sendEmailConfirmationTo($user);
-			$request->session()->flash('success', 'Vehicle has been posted Successfully! A confirmation email is sent to your email address '.$user->email);
-		}
+
+		$vehicle->status_id = 0;
+		$request->session()->flash('success', 'Thank you for listing your ad with Carsgone! Please check your email to activate your vehicle.');
+
 		$vehicle->save();
 		//Change user's lat, long, city, prov from postal code
 		$user->phone = $request['phone'];

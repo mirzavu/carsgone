@@ -39,7 +39,17 @@
                                     </div>
                                     @endif
                                     <a href="/vehicles/{{$vehicle->id}}/edit" class="btn btn-action waves-effect waves-light waves-input-wrapper">Edit</a>
+                                    
                                     <button vehicle="{{$vehicle->id}}" class="btn delete-btn btn-action waves-effect waves-light waves-input-wrapper">Delete</button>
+                                    @if(empty($vehicle->status_id))
+                                    <div class="dealer-badge">
+                                        <span>Inactive</span>
+                                    </div>
+                                    @else
+                                    <div class="dealer-badge">
+                                        <span>Active</span>
+                                    </div>
+                                    @endif
                                  </div>
                                  <div class="item-body">
                                     <div class="item-body-left"> <a href="/vehicle/{{$vehicle->slug}}"> <img src="{{$vehicle->photo()}}" alt=""> <span class="overlay"></span> </a> </div>

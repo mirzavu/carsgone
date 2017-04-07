@@ -46,6 +46,7 @@ class HomeController extends Controller
 
 	public function index(Request $request)
 	{	
+		Log::info($request->session()->all());
 		SEOMeta::setTitle('Used Cars and Auto Loans Canada | Free Auto Classifieds | Buy Sell and Trade at Carsgone.com');
         SEOMeta::setDescription('Providing an online solution for buying and selling New and Used cars, trucks, vans and SUVs.  Free auto classifieds for private sellers and dealerships at Carsgone.com');
         SEOMeta::addKeyword(['new cars', 'used cars', 'auto classifieds', 'auto loans Canada', 'trucks', 'SUVs', 'vans']);
@@ -135,6 +136,13 @@ class HomeController extends Controller
 				$search_param .= "make-".$param->make()->first()->make_name."/model-".$param->model_name."/";
 				unset($terms[$key]);
 				$flags['model']=1;
+			}
+			elseif (City::where('city_name',"=","$keyword")->count()  && $flags['city']==0) 
+			{	
+				$param = City::where('city_name',"=","$keyword")->first();
+				$search_param .= "province-".$param->province()->first()->province_name."/city-".$param->city_name."/";
+				unset($terms[$key]);
+				$flags['city']=1;
 			}
 		}
 		if(count($terms))

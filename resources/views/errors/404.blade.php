@@ -43,16 +43,14 @@
   <body>
     <div class="container">
       <div class="content">
-        <div class="title">404</div>
-        <div class="quote">Page not found.</div>
+        <div class="title">Page not found</div>
+        <div class="quote"><?php
+              $default_error_message = "Please return to our <a href='".url('')."'>Homepage</a>.";
+            ?>
+            {!! isset($exception)? ($exception->getMessage()?$exception->getMessage():$default_error_message): $default_error_message !!}</div>
         <div class="explanation">
           <br>
-          <small>
-            <?php
-              $default_error_message = "Please return to <a href='".url('')."'>our homepage</a>.";
-            ?>
-            {!! isset($exception)? ($exception->getMessage()?$exception->getMessage():$default_error_message): $default_error_message !!}
-         </small>
+          
        </div>
       </div>
     </div>

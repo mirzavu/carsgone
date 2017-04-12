@@ -18,7 +18,7 @@ class DealerController extends Controller
 	{
 		SEOMeta::setTitle('Auto Dealers Online Advertising | Car and Truck Dealership Marketing and Internet Sales Websites');
         SEOMeta::setDescription('Dealership advertising and marketing website, and automotive sales. Dealers car and truck free posting service');
-        $data['dealer_info'] = ContentPage::where('slug', 'dealer-info')->first()->content;
+        $data['dealer_info'] = ContentPage::where('slug', 'dealer-info')->firstOrFail()->content;
         $data['free_membership'] = ContentPage::where('slug', 'free-membership')->first()->content;
         $data['premium_account'] = ContentPage::where('slug', 'premium-account')->first()->content;
         $data['vehicle_count'] =  Vehicle::where('status_id', 1)->count();
@@ -84,8 +84,9 @@ class DealerController extends Controller
 	{	
 
 		$data['location'] = getLocation($request);
-		$data['dealer'] = User::where('slug',$slug)->first();
+		$data['dealer'] = User::where('slug',$slug)->firstOrFail();
 		SEOMeta::setTitle($data['dealer']->name." in ".$data['dealer']->city->city_name.", ".$data['dealer']->province->province_name);
+
         SEOMeta::setDescription($data['dealer']->name." in ".$data['dealer']->city->city_name.", ".$data['dealer']->province->province_name." is a car dealership selling cars, trucks, vans and SUVs. You can also apply for ".$data['dealer']->city->city_name.", ".$data['dealer']->province->province_name." auto loans.");	
 		$data['recent'] = Vehicle::where('user_id',$data['dealer']->id)->orderBy('created_at', 'desc')->take(6)->get();
 		
@@ -104,6 +105,7 @@ class DealerController extends Controller
 		$data['prices'] = Vehicle::where('user_id',$data['dealer']->id)
 						->selectRaw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`')
 						->groupBy('range')->get();
+
 		   // dd($data['years']);
 		return view('front.dealer.show', $data);
 	}

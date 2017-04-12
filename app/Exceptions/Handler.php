@@ -68,15 +68,7 @@ class Handler extends ExceptionHandler
 
             return response()->json($json, 400);
         }
-        
-        if(config('app.env') == 'production')
-        {
-            return Redirect::to('/', 301);
-            // return response()->view('errors.500', [], 500);
-        }
-        else
-        {
-            return parent::render($request, $e);
-        }
+
+        return parent::render($request, $e);
     }
 }

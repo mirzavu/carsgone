@@ -44,10 +44,7 @@
     <div class="container">
       <div class="content">
         <div class="title">Page not found</div>
-        <div class="quote"><?php
-              $default_error_message = "Please return to our <a href='".url('')."'>Homepage</a>.";
-            ?>
-            {!! isset($exception)? ($exception->getMessage()?$exception->getMessage():$default_error_message): $default_error_message !!}</div>
+        <div class="quote">Please return to our <a href='".url('')."'>Homepage</a></div>
         <div class="explanation">
           <br>
           

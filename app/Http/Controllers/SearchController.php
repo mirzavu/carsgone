@@ -34,6 +34,9 @@ class SearchController extends Controller
 		if($params){
 			$param = explode('/', $params);
 			foreach ($param as $key => &$value) {
+				if (strpos($value, '-') == false) { // If there is no '-'
+				    abort(404);
+				}
 				$value = explode('-', $value, 2);
 				$conditions->put($value[0],$value[1]);
 			}

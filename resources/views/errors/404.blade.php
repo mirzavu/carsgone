@@ -44,7 +44,7 @@
     <div class="container">
       <div class="content">
         <div class="title">Page not found</div>
-        <div class="quote">Please return to our <a href='".url('')."'>Homepage</a></div>
+        <div class="quote">Please return to our <a href="{{ url('/')}}">Homepage</a></div>
         <div class="explanation">
           <br>
           

@@ -201,6 +201,9 @@ class Vehicle extends Model
 
                 if ($conditions->get('year'))
                 {
+                    if (strpos($conditions->get('year'), '-') == false) { // If there is no '-'
+                        abort(404);
+                    }
                     $range = explode('-', $conditions->get('year'));
                     $q->where('year', '>=', $range[0]);
                     $q->where('year', '<=', $range[1]);

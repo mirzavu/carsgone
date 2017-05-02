@@ -25,7 +25,7 @@
                         <div class="col-sm-6 display-table">
                            <label>Year<span class="required">*</span></label>
                            <div class="input-box">
-                              <input name="year" type="text" minlength="4" maxlength="4" class="form-control" placeholder="Enter Year" />
+                              <input name="year" type="text" minlength="4" maxlength="4" class="form-control" placeholder="Enter Year" required />
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
@@ -593,6 +593,7 @@
                                    type: 'POST',
                                    data: $('form').serialize(),
                                    success: function(response) {
+                                       console.log(response)
                                        window.location = response.url;
                                    }
                                });

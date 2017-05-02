@@ -105,7 +105,7 @@
                               <div class="item-detail">
                                  <div class="item-detail-left"><a href="/dealer/{{$dealer->slug}}"><img src="{{$dealer->image}}" alt="{{$dealer->name}}" /></a></div>
                                  <div class="item-detail-right">
-                                    <h6>{{$dealer->city->city_name}}, {{$dealer->province->province_name}} </h6>
+                                    <h6>{{$dealer->city->city_name or ''}}, {{$dealer->province->province_name or ''}} </h6>
                                     <p>{{$dealer->address}} <span class="part">|</span> {{$dealer->phone}} <span class="part">|</span></p>
                                  </div>
                               </div>

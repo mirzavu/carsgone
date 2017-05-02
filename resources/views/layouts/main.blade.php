@@ -91,7 +91,7 @@
                 <li {{{ (Request::is('post') ? 'class=active' : '') }}}><a href="/post"><span>Post Ad</span></a></li>
                 <li {{{ (Request::is('auto-dealers/info') ? 'class=active' : '') }}}><a href="/auto-dealers/info"><span>Dealers</span></a></li>
                 <li {{{ (Request::is('autoloans') ? 'class=active' : '') }}}><a href="/autoloans"><span>Car Loans</span></a></li>
-                <li><a id="private-link" href="#"><span>Private</span></a></li>
+                <li><a href="/search/seller-private"><span>Private</span></a></li>
            </ul>
         </div><!--/.nav-collapse -->
       </div>

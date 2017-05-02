@@ -293,7 +293,7 @@
                                  <li>{{$vehicle->user->address}}</li>
                                  <li>{{$vehicle->user->phone}}</li>
                                  <li>{{$vehicle->user->fax}}</li>
-                                 <li><a href="{{$vehicle->user->url}}" target="_blank">{{$vehicle->user->url}}</a></li>
+                                 <li><a href="{{$vehicle->user->url}}" target="_blank">Seller's Website</a></li>
                               </ul>
                            </div>
                            <div class="single-dealer-lower">

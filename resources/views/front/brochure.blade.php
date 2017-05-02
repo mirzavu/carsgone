@@ -70,9 +70,7 @@
                               <input name="email" type="email" class="form-control" placeholder="Email" required />
                            </div>
                            <div class="form-group">
-                              <textarea name="message" class="form-control" placeholder="Message" required>Hi,
-I found your listing on Carsgone.com. Please send me more information about the {{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->price}}. 
-Thank you
+                              <textarea name="message" class="form-control" placeholder="Message" required>I found your listing on Carsgone.com. Please send me more information about the {{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->price}}.
                               </textarea>
                            </div>
                            <div class="form-group">

@@ -77,6 +77,7 @@ if (!function_exists('getLocation')) {
 			Log::info($ip);
 			Log::info($request->ip());
 			//If a bot arrives, serve sample location
+
 			if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider|sitemap/i', $_SERVER['HTTP_USER_AGENT'])) {
 			    // $loc['zip'] = 'T9E';
 			    $loc['lat'] = 53.266;
@@ -98,6 +99,7 @@ if (!function_exists('getLocation')) {
 	                CURLOPT_POSTFIELDS => 'ip='.$ip
 	            ));
 	            $resp = curl_exec($curl);
+
 				$location = json_decode($resp, true);
 				// http://freegeoip.net/json/50.65.216.255
 				$url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".$location['latitude'].','.$location['longitude'];
@@ -126,7 +128,7 @@ if (!function_exists('getLocation')) {
 					}
                 }  
                 
-				if(empty($location['latitude']))
+				if(empty($location['latitude']) || !is_numeric($location['latitude']))
 				{
 					$loc['lat'] = 53.266;
 					$loc['lon'] = -113.552;

@@ -61,7 +61,12 @@ class DealerController extends Controller
 
 		$data['sidebar_data'] = $this->getSidebarData($conditions);
 		$data['dealer_sort'] = $dealer_sort.'-'.$direction; 
-		$data['dealers'] = User::applyFilter($conditions)->withCount('vehicles')->orderBy($dealer_sort, $direction)->paginate(15);
+		$data['dealers'] = User::applyFilter($conditions)
+							->withCount(['vehicles' => function ($query) {
+    							$query->where('status_id',1);
+								}])
+							->orderBy($dealer_sort, $direction)
+							->paginate(15);
 		$data['applied_filters'] = $this->getAppliedFilters($conditions);
 		$data['url_params'] = $params;
 		// $data['filters'] = $this->filters;
@@ -93,19 +98,21 @@ class DealerController extends Controller
         SEOMeta::setDescription($data['dealer']->name." in ".$data['dealer']->city->city_name.", ".$data['dealer']->province->province_name." is a car dealership selling cars, trucks, vans and SUVs. You can also apply for ".$data['dealer']->city->city_name.", ".$data['dealer']->province->province_name." auto loans.");	
 		$data['recent'] = Vehicle::where('user_id',$data['dealer']->id)->orderBy('created_at', 'desc')->take(6)->get();
 		
-		$data['makes'] = Vehicle::where('user_id',$data['dealer']->id)->join('makes', 'vehicles.make_id', '=', 'makes.id')
+		$data['makes'] = Vehicle::where('user_id',$data['dealer']->id)->where('status_id', 1)->join('makes', 'vehicles.make_id', '=', 'makes.id')
 			            ->selectRaw('count(makes.id) as make_count, makes.make_name')
 				    	->groupBy('makes.make_name')
 			            ->orderBy('make_count','desc')->get();
-		$data['body'] = Vehicle::where('user_id',$data['dealer']->id)->join('body_style_groups', 'vehicles.body_style_group_id', '=', 'body_style_groups.id')
+		$data['body'] = Vehicle::where('user_id',$data['dealer']->id)->where('status_id', 1)->join('body_style_groups', 'vehicles.body_style_group_id', '=', 'body_style_groups.id')
 			            ->selectRaw('count(body_style_groups.id) as body_count, body_style_groups.body_style_group_name')
 				    	->groupBy('body_style_groups.body_style_group_name')
 			            ->orderBy('body_count','desc')->get();
 		$data['years'] = Vehicle::where('user_id',$data['dealer']->id)
+						->where('status_id', 1)
 						->selectRaw('count(year) as year_count, year')
 						->groupBy('year')
 						->orderBy('year_count','desc')->get();
 		$data['prices'] = Vehicle::where('user_id',$data['dealer']->id)
+						->where('status_id', 1)
 						->selectRaw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`')
 						->groupBy('range')->get();
 

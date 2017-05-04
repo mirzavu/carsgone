@@ -142,6 +142,7 @@ class User extends Authenticatable
     {
         $query->where(function ($q) use($conditions)
             {
+                $q->where('role', 'dealer');
                 if ($conditions->get('name'))
                 {
                     $q->where('name', 'like', '%' . $conditions->get('name') . '%');

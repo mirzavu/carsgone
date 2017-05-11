@@ -27,7 +27,7 @@ class AdminController extends \Backpack\Base\app\Http\Controllers\AdminControlle
     public function dashboard()
     {
         $this->data['title'] = trans('backpack::base.dashboard'); // set the page title
-        $this->data['vehicles_count'] = Vehicle::count();
+        $this->data['vehicles_count'] = Vehicle::where('status_id', 1)->count();
         $this->data['dealers_count'] = User::where('role','dealer')->count();
         $this->data['users_count'] = User::where('role','member')->count();
 

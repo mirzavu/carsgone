@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\Province;
 use App\Mailers\AppMailer;
+use SEO;
 use SEOMeta;
 use Log;
 
@@ -38,9 +39,12 @@ class VehicleController extends Controller
 		else
 			$other_vehicle_text = 'Related Vehicles';
 
-		SEOMeta::setTitle($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' $'.$vehicle->price.' in '.$vehicle->user->city->city_name.', '.$vehicle->user->province->province_name);
-        SEOMeta::setDescription($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.$vehicle->trim.' $'.$vehicle->price.' in '.$vehicle->user->city->city_name.', '.$vehicle->user->province->province_name.' for sale in Canada');
+		SEO::setTitle($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' $'.$vehicle->price.' in '.$vehicle->user->city->city_name.', '.$vehicle->user->province->province_name);
+        SEO::setDescription($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.$vehicle->trim.' $'.$vehicle->price.' in '.$vehicle->user->city->city_name.', '.$vehicle->user->province->province_name.' for sale in Canada');
         SEOMeta::addKeyword(['new cars', 'used cars', $vehicle->make->make_name, $vehicle->model->model_name, $vehicle->make->make_name.' '.$vehicle->model->model_name]);
+        SEO::opengraph()->setUrl($request->url());
+        SEO::opengraph()->addProperty('type', 'product');
+        SEO::opengraph()->addImage($vehicle->photo());
 		return view('front.brochure', compact('vehicle','location','other_vehicle_text','provinces'));
 	}
 

@@ -6,6 +6,7 @@
 <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {!! SEOMeta::generate() !!}
+{!! SEO::generate() !!}
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">

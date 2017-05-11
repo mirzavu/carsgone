@@ -35,7 +35,7 @@
                             </li>
                             @endforeach
                         </ul>
-                        <div class="pad-10"><a id="inventory-btn" href="/search" class="waves-effect waves-light btn btn-block">View Inventory</a></div>
+                        <div class="pad-10"><a id="inventory-btn" href="#" class="waves-effect waves-light btn btn-block">View Inventory</a></div>
                     </div>
                     </div>
                     <div class="display-flex right">

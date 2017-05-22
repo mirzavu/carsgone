@@ -457,6 +457,7 @@ $('.location-box').on('click',function(event){
   $(this).removeClass('location-box');
   $(this).children('a').hide();
   $(this).children('div').css('display', 'flex').show();
+  $('#searchTextField').focus();
 })
 
 

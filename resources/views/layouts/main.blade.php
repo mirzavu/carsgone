@@ -38,7 +38,7 @@
 
     ga('create', 'UA-6617033-1', 'auto');
     ga('send', 'pageview');
-  }
+  } 
   
 </script>
 <!-- header start -->
@@ -47,8 +47,16 @@
 	<div class="header-upper">
     	<div class="container">
         	<ul class="upper-nav">
-            	<li><a href="#"><i class="fa fa-map-marker"></i> {{ $location['place'] or 'Location'}}</a></li>
-                <li><a href="#">Contact: 1-855-328-6002</a></li>
+            	<li id="location-box" class="location-box">
+                <a href="#"><i class="fa fa-map-marker"></i><span> {{ $location['place'] or 'Location'}}</span></a>
+                <div style="position:relative;display:none;">
+                  <span style="display: block;overflow: hidden;padding-right:6px">
+                    <input id="searchTextField"  type="text" name="" placeholder="City or Postal Code" autocomplete="on">
+                  </span>
+                  <a onclick="searchPlace()" class="btn waves-effect waves-light waves-input-wrapper">Set</a>
+                </div>
+              </li>
+              <li><a href="#">Contact: 1-855-328-6002</a></li>
             </ul>
             <ul class="upper-nav right">
             @if (Auth::check())
@@ -235,7 +243,7 @@
 </div>
 </div>
 <script src="/assets/js/modernizr.js"></script> <!-- Modernizr -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKsvinm7jgttOZYmtlyIEhEt5l7ZL7-yM"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKsvinm7jgttOZYmtlyIEhEt5l7ZL7-yM&sensor=false&libraries=places"></script>
 <script src="/assets/js/all.js"></script>
 {{-- <script src="/assets/js/jquery-2.2.2.min.js"></script> 
 <script src="/assets/js/bootstrap.min.js"></script>
@@ -444,6 +452,89 @@ $('#browse-link').on('click',function(event){
 })
 
 var base_url = '{{ url('/') }}';
+
+$('.location-box').on('click',function(event){
+  $(this).removeClass('location-box');
+  $(this).children('a').hide();
+  $(this).children('div').css('display', 'flex').show();
+})
+
+
+function initialize() {
+
+    var options = {
+     types: ['(cities)'],
+     componentRestrictions: {country: "ca"}
+    };
+
+    var input = document.getElementById('searchTextField');
+    autocomplete = new google.maps.places.Autocomplete(input, options);
+
+   }
+
+   function searchPlace()
+   {
+      var input = document.getElementById('searchTextField').value;
+      var has_number = input.match(/\d+/g);
+      var lat = 0;
+      var lng = 0;
+      var city = '';
+      if (has_number != null) {
+          // $.get('')
+          var geocoder = new google.maps.Geocoder();
+         geocoder.geocode({address: input},
+             function(results_array, status) { 
+               try
+               {
+               city = input;
+               var lat = results_array[0].geometry.location.lat()
+               var lng = results_array[0].geometry.location.lng()
+               setLocation(lat, lng, city);
+               }
+               catch(e)
+               {
+                  console.log("YO",e)
+               }
+         });
+      }
+      else
+      {
+         var place = autocomplete.getPlace();
+          city = place.vicinity;
+          lat = place.geometry.location.lat();
+          lng = place.geometry.location.lng();
+          for (var i = 0; i < place.address_components.length; i++) {
+            for (var j = 0; j < place.address_components[i].types.length; j++) {
+              if (place.address_components[i].types[j] == "postal_code") {
+                console.log(place.address_components[i].long_name);
+
+              }
+            }
+          }
+          setLocation(lat, lng, city)
+      }
+      console.log(city)
+
+
+   }
+
+   function setLocation(lat, lng, city)
+   {
+      $.get( "/setLocation?lat="+lat+"&lng="+lng+"&city="+city).done(function( data ) {
+        if(window.location.pathname.indexOf('search')>=0)
+        {
+          location.reload()
+        }
+        else
+        {
+          $('#location-box').addClass('location-box');
+          $('#location-box').children('a').show();
+          $('#location-box > a > span').text(data.city);
+          $('#location-box').children('div').hide();
+        }
+      });
+   }
+   google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 @yield('javascript')
 <!-- Go to www.addthis.com/dashboard to customize your tools --> 

@@ -24,6 +24,7 @@ class SearchController extends Controller
 	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
 	protected $url_filters = array('make','model', 'province', 'city', 'body', 'seller');
 	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content', 'dealer');
+	protected $clear_filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
 	protected $dealer_ids;
 	protected $url_params;
 
@@ -246,7 +247,7 @@ class SearchController extends Controller
 
 	public function removeSessionAll(Request $request)
 	{
-		foreach ($this->filters as $value) {
+		foreach ($this->clear_filters as $value) {
 			$request->session()->forget($value);
 		}
 		

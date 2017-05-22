@@ -159,4 +159,12 @@ class HomeController extends Controller
 		echo json_encode($models);
 	}
 
+	public function setLocation(Request $request)
+	{
+		$request->session()->put('lat', $request['lat']);
+		$request->session()->put('lon', $request['lng']);
+		$request->session()->put('place', $request['city']);
+		return response()->json(['status' => 'success', 'city' => $request['city']]);
+	}
+
 }

@@ -128,7 +128,7 @@ class AppMailer
         $this->from = $data->email;
         $this->fromName = $data->name;
         $this->to = $data->dealer_email;
-        $this->subject = 'Carsgone Contact Form';
+        $this->subject = 'Carsgone.com Contact Form';
         $this->view = 'emails.dealer_contact_form';
         $this->data = compact('data');
         $this->deliver();
@@ -142,7 +142,7 @@ class AppMailer
         $data->price = $vehicle->price;
         $this->fromName = $data->name." via Carsgone";
         $this->to = $data->dealer_email;
-        $this->subject = 'Carsgone Finance';
+        $this->subject = 'Carsgone.com Finance';
         $this->view = 'emails.dealer_finance_form';
         $this->data = compact('data');
         $this->deliver();
@@ -152,7 +152,7 @@ class AppMailer
     public function sendQuickFinanceForm($data)
     {
         $this->fromName = $data->name." via Carsgone";
-        $this->subject = 'Carsgone Finance Callback';
+        $this->subject = 'Carsgone.com Finance Callback';
         $this->view = 'emails.quick_credit_form';
         $this->data = compact('data');
         $this->deliver();

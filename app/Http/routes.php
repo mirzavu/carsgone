@@ -16,6 +16,9 @@
 		'uses' => 'HomeController@index', 
 		'as' => 'home'
 	]);
+
+	Route::get('/setLocation', 'HomeController@setLocation');
+
 	Route::get('/fb', 'HomeController@fb');
 	Route::get('/searchterm', 'HomeController@searchTerm');  //from homepage
 	Route::get('/getModels/{term}', 'HomeController@getModels');

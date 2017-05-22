@@ -10084,6 +10084,15 @@ span.required {
 .flex{ display:flex; }
 #finance-form-2{ display: none; }
 .form-group.flex button{flex: 1;}
+#location-box input[type=text]{
+	margin-bottom: inherit;
+    color: black;
+    background-color: white;
+    padding: 1.5%;
+}
+#location-box i{
+	padding: 6px;
+}
 
 
 /* ============================= */

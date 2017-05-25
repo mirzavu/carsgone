@@ -29,7 +29,7 @@ class CreditController extends Controller
 	{
 		Log::info($request);
 		$data = $request;
-		$vehicle = Vehicle::whereSlug($data->slug)->firstOrFail();
+		$vehicle = Vehicle::whereSlug($data->slug)->first();
 		if($vehicle === null)
 		{
 			$data->set_vehicle = false;

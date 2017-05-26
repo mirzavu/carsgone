@@ -13,4 +13,9 @@ class VehiclePhoto extends Model
     {
         return $this->belongsTo('App\Models\Vehicle');
     }
+
+    public function getPathAttribute($value)
+    {
+        return preg_replace("/^http:/i", "https:", $value);
+    }
 }

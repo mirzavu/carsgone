@@ -84,79 +84,79 @@
                            <div class="single-description-upper">
                               <table class="table table-striped">
                                  <tr>
-                                    <td><b>Year</b></td>
+                                    <td><strong>Year</strong></td>
                                     <td>{{$vehicle->year}}</td>
                                  </tr>
                                  <tr>
-                                    <td><b>Make</b></td>
+                                    <td><strong>Make</strong></td>
                                     <td>{{$vehicle->make->make_name}}</td>
                                  </tr>
                                  <tr>
-                                    <td><b>Model</b></td>
+                                    <td><strong>Model</strong></td>
                                     <td>{{$vehicle->model->model_name}}</td>
                                  </tr>
                                  @if(!empty($vehicle->price))
                                  <tr>
-                                    <td><b>Price</b></td>
+                                    <td><strong>Price</strong></td>
                                     <td>{{$vehicle->price}}</td>
                                  </tr>
                                  @endif
                                  @if(!empty($vehicle->odometer))
                                  <tr>
-                                    <td><b>Mileage</b></td>
+                                    <td><strong>Mileage</strong></td>
                                     <td>{{$vehicle->odometer}} Km</td>
                                  </tr>
                                  @endif
                                  @if(!empty($vehicle->trim))
                                  <tr>
-                                    <td><b>Trim</b></td>
+                                    <td><strong>Trim</strong></td>
                                     <td>{{$vehicle->trim or 'Not specified'}}</td>
                                  </tr>
                                  @endif
                                  @if(!empty($vehicle->bodyStyleGroup))
                                  <tr>
-                                    <td><b>Body Style</b></td>
+                                    <td><strong>Body Style</strong></td>
                                     <td>{{$vehicle->bodyStyleGroup->body_style_group_name}}</td>
                                  </tr>
                                  @endif
                                  @if(!empty($vehicle->stock))
                                  <tr>
-                                    <td><b>Stock</b></td>
+                                    <td><strong>Stock</strong></td>
                                     <td>{{$vehicle->stock}}</td>
                                  </tr>
                                  @endif
                                  @if(!empty($vehicle->doors))
                                  <tr>
-                                    <td><b>Doors</b></td>
+                                    <td><strong>Doors</strong></td>
                                     <td>{{$vehicle->doors}}</td>
                                  </tr>
                                  @endif
                                  @if(!empty($vehicle->transmission))
                                  <tr>
-                                    <td><b>Transmission</b></td>
+                                    <td><strong>Transmission</strong></td>
                                     <td>{{$vehicle->transmission}}</td>
                                  </tr>
                                  @endif
                                  @if(!empty($vehicle->ext_color_id))
                                  <tr>
-                                    <td><b>Exterior Color</b></td>
+                                    <td><strong>Exterior Color</strong></td>
                                     <td>{{$vehicle->ext_color->color}}</td>
                                  </tr>
                                  @endif
                                  @if(!empty($vehicle->int_color_id))
                                  <tr>
-                                    <td><b>Interior Color</b></td>
+                                    <td><strong>Interior Color</strong></td>
                                     <td>{{$vehicle->int_color->color}}</td>
                                  </tr>
                                  @endif
                                  @if(!empty($vehicle->passenger))
                                  <tr>
-                                    <td><b>Passengers</b></td>
+                                    <td><strong>Passengers</strong></td>
                                     <td>{{$vehicle->passenger}}</td>
                                  </tr>
                                  @endif
                                  <tr>
-                                    <td colspan="2"><b>{!!$vehicle->text!!}</b></td>
+                                    <td colspan="2"><p>{!!$vehicle->text!!}</p></td>
                                  </tr>
                               </table>
                            </div>

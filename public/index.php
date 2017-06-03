@@ -51,7 +51,7 @@ $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()
-// );
+);
 // $response->header('Cache-Control', 'no-cache, must-revalidate');
 // $response->header('Pragma', 'no-cache');
 // $response->header('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');

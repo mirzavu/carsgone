@@ -53,7 +53,7 @@
                   <span style="display: block;overflow: hidden;padding-right:6px">
                     <input id="searchTextField"  type="text" name="" placeholder="City or Postal Code" autocomplete="on">
                   </span>
-                  <a onclick="searchPlace()" class="btn waves-effect waves-light waves-input-wrapper">Set</a>
+                  <a onclick="searchPlace()" class="btn waves-effect waves-light waves-input-wrapper">Go</a>
                 </div>
               </li>
               <li><a href="#">Contact: 1-855-328-6002</a></li>

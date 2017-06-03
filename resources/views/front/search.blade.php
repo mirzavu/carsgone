@@ -47,7 +47,7 @@
                   </div>
                </div>
                <!-- panel end -->
-               @if(!$applied_filters->has("province"))
+               @if(!$applied_filters->has("province") && isset($location['place']))
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Distance within</h3>
@@ -97,7 +97,7 @@
                </div>
                @endif
                <!-- panel end -->
-               <div class="panel">
+               <!-- <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Postal Code</h3>
                   </div>
@@ -107,7 +107,7 @@
                         <input type="submit" value="Go" class="btn waves-effect waves-light filter-btn" />
                      </div>
                   </div>
-               </div>
+               </div> -->
                <!-- panel end -->
                <!-- panel start -->
                @if(isset($sidebar_data["makes"]))

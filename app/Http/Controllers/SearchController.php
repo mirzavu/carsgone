@@ -20,10 +20,10 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class SearchController extends Controller
 {
-	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
-	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
+	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
+	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
 	protected $url_filters = array('make','model', 'province', 'city', 'body', 'seller');
-	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon','odometer', 'distance', 'transmission', 'content', 'dealer');
+	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon', 'place','odometer', 'distance', 'transmission', 'content', 'dealer');
 	protected $clear_filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
 	protected $dealer_ids;
 	protected $url_params;
@@ -46,15 +46,23 @@ class SearchController extends Controller
 
 		if(!$conditions->get('province'))  // set local area if no province in url
 		{
-			$data['location'] = getLocation($request);
 			$loc = getLocation($request);
 			$conditions->put('lat',$loc['lat']);
 			$conditions->put('lon',$loc['lon']);
+			$conditions->put('place',$loc['place']);
+			$data['location'] = $loc;
 		}
-
+		else
+		{
+			$conditions->forget('place');
+		}
 		$this->validateSaveConditions($request, $conditions);
 
 		//distance set
+		if(empty($loc['place'])){
+			$conditions->put('distance','All');
+		}
+
 		if(!$conditions->get('distance'))
 		{
 			$conditions->put('distance','50');
@@ -114,7 +122,7 @@ class SearchController extends Controller
         $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy('vehicles.'.$sort, $direction)->paginate(15);
         
         $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
-        $data['applied_filters'] = $this->getAppliedFilters($conditions, $this->dealer_ids);
+        $data['applied_filters'] = $this->getAppliedFilters($conditions);
         $data['url_params'] = $params;
         $data['logged_in'] = Auth::check();
         // dd($data);die;
@@ -235,7 +243,7 @@ class SearchController extends Controller
     public function validateSaveConditions($request, &$conditions)
 	{
 		foreach ($conditions->all() as $key => $value) {
-			if(!in_array($key, $this->filters) && $value)
+			if(!in_array($key, $this->filters) || !$value)
 				$conditions->forget($key);
 		}
 	}

@@ -11,8 +11,8 @@ use App\Models\ContentPage;
 
 class DealerController extends Controller
 {
-	protected $filters = array('dealer_sort','province','city','name','postal_code');
-	protected $applied_filters = array('province','city','name','postal_code');
+	protected $filters = array('dealer_sort','province','city','name','postal_code', 'search', 'lat', 'lon', 'place', 'distance');
+	protected $applied_filters = array('province','city','name','postal_code','place', 'search', 'distance');
 
     public function info(Request $request)
 	{
@@ -42,6 +42,36 @@ class DealerController extends Controller
 				$value = explode('-', $value, 2);
 				$conditions->put($value[0],$value[1]);
 			}
+		}
+
+		if(!$conditions->get('province'))  // set local area if no province in url
+		{
+			$loc = getLocation($request);
+			$conditions->put('lat',$loc['lat']);
+			$conditions->put('lon',$loc['lon']);
+			$conditions->put('place',$loc['place']);
+			$data['location'] = $loc;
+		}
+		else
+		{
+			$conditions->forget('place');
+		}
+
+		$this->validateSaveConditions($request, $conditions);
+
+		//distance set
+		if(empty($loc['place'])){
+			$conditions->put('distance','All');
+		}
+
+		if(!$conditions->get('distance'))
+		{
+			$conditions->put('distance','50');
+		}
+
+		if($conditions->get('province'))
+		{
+			$conditions->forget('distance');
 		}
 
 		//Sorting set
@@ -123,7 +153,7 @@ class DealerController extends Controller
 	public function validateSaveConditions($request, &$conditions)
 	{
 		foreach ($conditions->all() as $key => $value) {
-			if(!in_array($key, $this->filters) && $value)
+			if(!in_array($key, $this->filters) || !$value)
 				$conditions->forget($key);
 		}
 	}
@@ -156,6 +186,15 @@ class DealerController extends Controller
 			if(!in_array($key, $this->applied_filters))
 			{
 				$conditions->forget($key);
+			}
+
+			if($key == "distance") // Add all filter for distance
+			{	
+				if($value != 'All')
+				{
+					$value = (int)$value. " KM";
+				}
+				$conditions->put('distance',$value);
 			}
 		}
 		return $conditions;

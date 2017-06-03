@@ -19,25 +19,47 @@
                         @foreach ($applied_filters->all() as $key => $value)
                         <li>
                            <span>{{$key.' : '.$value}}</span>
-                           <a href="#" class="applied-remove">x</a>
+                           <a href="#" class="applied-remove"><i class="fa fa-times"></i></a>
                         </li>
                         @endforeach
                      </ul>
                   </div>
                </div>
 
+               @if(!$applied_filters->has("search"))
                <div class="panel">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Postal Code</h3>
+                     <h3 class="panel-title">Dealer Search</h3>
                   </div>
                   <div class="panel-body">
                      <div class="filter-search">
-                        <input id="postal-input" type="text" placeholder="Enter Postal Code.." />
-                        <input id="postal-submit" type="submit" value="Go" class="btn waves-effect waves-light filter-btn" />
+                        <input id="search-input" type="text" placeholder="Search here.." />
+                        <input id="search-submit" type="submit" value="Go" class="btn waves-effect waves-light filter-btn" />
                      </div>
                   </div>
                </div>
                <!-- panel end -->
+               @endif
+
+               @if(!$applied_filters->has("province") && isset($location['place']))
+               <div class="panel">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">Distance within</h3>
+                  </div>
+                  <div class="panel-body">
+                     <ul class="link-list distance-list">
+                        <li><a id="50" href="#">50 Km</a></li>
+                        <li><a id="100" href="#">100 Km</a></li>
+                        <li><a id="250" href="#">250 Km</a></li>
+                        <li><a id="500" href="#">500 Km</a></li>
+                        <li><a id="1000" href="#">1000 Km</a></li>
+                        <li><a id="All" href="#">All</a></li>
+                     </ul>
+                  </div>
+               </div>
+               @endif
+               <!-- panel end -->
+
                <!-- panel start -->
                @if(isset($sidebar_data["provinces"]))
                <div class="panel">
@@ -176,16 +198,35 @@
    //if image error
    $('img').one('error', function() { this.src = '/assets/images/placeholder.jpg'; });
 
-   $('#postal-submit').on('click', function(){
-      var postal = $('#postal-input').val()
-      if(postal.length >7 || postal.length < 6)
-        return false
-      if(postal[3]!='')
-      {
-        postal = [postal.slice(0, 3), ' ', postal.slice(3)].join(''); //Insert Space if not present in middle
-      }
-      window.location.href = window.location.href+'/postal_code-'+postal
+   // $('#postal-submit').on('click', function(){
+   //    var postal = $('#postal-input').val()
+   //    if(postal.length >7 || postal.length < 6)
+   //      return false
+   //    if(postal[3]!='')
+   //    {
+   //      postal = [postal.slice(0, 3), ' ', postal.slice(3)].join(''); //Insert Space if not present in middle
+   //    }
+   //    window.location.href = window.location.href+'/postal_code-'+postal
+   // })
+
+   //Dealer Search
+   $('#search-submit').on('click', function(){
+      var text = $('#search-input').val()
+      window.location.href = window.location.href+'/search-'+text
    })
+
+   //distance set
+   var distance_id = "{{$applied_filters->get("distance")}}".replace(' KM',''); 
+   if(distance_id)
+   {
+      $('.distance-list #'+distance_id).addClass('active').removeAttr("href"); // set active
+      $('.distance-list a').on('click',function(e){
+        e.preventDefault();
+        $.get( "/setSessionKeyValue/distance/"+$(this).attr('id'), function( data ) {
+          location.reload();
+        });
+      });
+   }
    
 </script>
 @endsection

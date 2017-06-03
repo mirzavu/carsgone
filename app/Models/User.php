@@ -147,9 +147,9 @@ class User extends Authenticatable
                 {
                     $q->where('name', 'like', '%' . $conditions->get('name') . '%');
                 }
-                if ($conditions->get('postal_code'))
+                if ($conditions->get('search'))
                 {
-                    $q->where('postal_code', $conditions->get('postal_code'));
+                    $q->where('name', 'like', '%' . $conditions->get('search') . '%');
                 }
                 return $q;
             }
@@ -164,6 +164,14 @@ class User extends Authenticatable
                 $query->join('cities', 'users.city_id', '=', 'cities.id');
                 $query->where('city_name', $conditions->get('city'));
             }
+        }
+
+        if ($conditions->get('distance') && $conditions->get('distance')!="All")
+        {
+            $lat = $conditions->get('lat');
+            $lon = $conditions->get('lon');
+            $query->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < ".$conditions->get('distance'));
+        
         }
     }
 

@@ -128,7 +128,7 @@ class AppMailer
         $this->from = $data->email;
         $this->fromName = $data->name;
         $this->to = $data->dealer_email;
-        $this->subject = 'Carsgone.com Contact Form';
+        $this->subject = 'Carsgone.com Vehicle Enquiry';
         $this->view = 'emails.dealer_contact_form';
         $this->data = compact('data');
         $this->deliver();

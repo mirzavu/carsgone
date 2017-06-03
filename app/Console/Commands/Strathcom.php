@@ -90,13 +90,12 @@ class Strathcom extends Command
                 $xml        = simplexml_load_string($xmlReader->readOuterXML());
                 $dealer = User::firstOrNew(['partner_id' => 1, 'partner_dealer_id' => $xml->PartyId]);
 
-                $dealer->name = $xml->DealerName;
-                $dealer->email = $xml->Contact->Email;
-                $dealer->address = $xml->Address->AddressLine;
-                $dealer->url = $xml->URI;
-                $dealer->phone = $xml->Contact->Phone;
-                $dealer->fax = $xml->Contact->Fax;
-                $dealer->email = $xml->Contact->Email;
+                $dealer->name = (empty($dealer->name))?$xml->DealerName:$dealer->name;
+                $dealer->email = (empty($dealer->email))?$xml->Contact->Email:$dealer->email;
+                $dealer->address = (empty($dealer->address))?$xml->Address->AddressLine:$dealer->address;
+                $dealer->url = (empty($dealer->url))?$xml->URI:$dealer->url;
+                $dealer->phone = (empty($dealer->phone))?$xml->Contact->Phone:$dealer->phone;
+                $dealer->fax = (empty($dealer->fax))?$xml->Contact->Fax:$dealer->fax;
                 $province_name = (string)$xml->Address->StateOrProvince;
                 $province_name = ($province_name == "Newfoundland and Labrador")? "Newfoundland":$province_name; //Newfoundland and Labrador and Newfoundland are same
                 $province_name = ($province_name == "Yukon")? "Yukon Territory":$province_name; //Yukon Teritory and Yukon are same

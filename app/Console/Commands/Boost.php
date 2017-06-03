@@ -96,11 +96,11 @@ class Boost extends Command
                 $xml = simplexml_load_string( $xmlReader->readOuterXML() );
                 $dealer = User::firstOrNew(['partner_id' => 2, 'partner_dealer_id' => $xml->Dealership_Boost_ID]);
 
-                $dealer->name = $xml->Dealership_Name;
-                $dealer->email = $xml->Dealership_Email;
-                $dealer->address = $xml->Dealership_Address;
-                $dealer->url = $xml->Dealership_Website;
-                $dealer->phone = $xml->Dealership_Phone;
+                $dealer->name = (empty($dealer->name))?$xml->Dealership_Name:$dealer->name;
+                $dealer->email = (empty($dealer->email))?$xml->Dealership_Email:$dealer->email;
+                $dealer->address = (empty($dealer->address))?$xml->Dealership_Address:$dealer->address;
+                $dealer->url = (empty($dealer->url))?$xml->Dealership_Website:$dealer->url;
+                $dealer->phone = (empty($dealer->phone))?$xml->Dealership_Phone:$dealer->phone;
 
                 $province_id = Province::where('province_code',(string) $xml->Dealership_Province)->value('id');
                 $dealer->province_id = $province_id;

@@ -32,7 +32,7 @@
         	<div class="col-sm-12">
             	<div class="panel full">
                 	<div class="panel-heading">
-                    	<h2>Canadian Auto Loans</h2>
+                    	<h1>Canadian Auto Loans</h1>
                     </div>
                     <div class="panel-body">
                     	<h3>Select the Location Nearest You</h3>

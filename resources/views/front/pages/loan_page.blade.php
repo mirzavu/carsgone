@@ -34,7 +34,7 @@
         	<div class="col-sm-12">
             	<div class="panel full">
                     <div class="panel-heading">
-                        <h2>{{$title}}</h2>
+                        <h1>{{$title}}</h1>
                     </div>
                     <div class="panel-body auto-desc">
                     	<div class="excerpt">

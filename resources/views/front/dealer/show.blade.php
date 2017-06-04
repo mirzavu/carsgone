@@ -9,7 +9,7 @@
     <div class="dealer-info">
     	<div class="panel full">
             <div class="panel-heading">
-            	<h2>{{$dealer->name}}</h2>
+            	<h1>{{$dealer->name}}</h1>
             </div>
             <div class="panel-body">
                 <div class="display-flex-outer">

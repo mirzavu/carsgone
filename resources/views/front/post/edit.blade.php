@@ -6,7 +6,6 @@
 <div class="vehicle-post-outer">
  <div class="container">
     <div class="wrapper">
-       {{-- <form id="vehicle-form" method="post" action="/post/create"> --}}
        <div class="post-tab clearfix panel" id="post-edit-form">
           
             <div class="form-section">

@@ -9,7 +9,7 @@
             <div class="col-sm-7">
                <div class="panel full">
                   <div class="panel-heading">
-                     <h2>Contact Us</h2>
+                     <h1>Contact Us</h1>
                   </div>
                   <div class="panel-body">
                      {!! Form::open(['url' => '/contact', 'method' => 'POST', 'id' => 'contact-form']) !!}

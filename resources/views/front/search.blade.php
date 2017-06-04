@@ -11,11 +11,11 @@
                <!-- panel start -->
                <div class="panel">
                   <div class="panel-heading">
-                     <h1>{{ $h1}}</h1>
                      <h3 class="panel-title">Quick Search</h3>
                      <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
+                     <h1>{{ $h1}}</h1>
                      <div class="filter-dropdown">
                         <select id="make-select" name="make">
                            <option value="" disabled selected>Select Make</option>

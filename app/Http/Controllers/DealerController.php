@@ -87,6 +87,8 @@ class DealerController extends Controller
 
 		$title = $this->getTitle($conditions);
 		SEOMeta::setTitle($title['title']);
+		$data['h1'] = trim(str_replace("- Find New and Used Car Dealerships", "",$title['title']));
+		
         SEOMeta::setDescription($title['description']);
 
 		$data['sidebar_data'] = $this->getSidebarData($conditions);

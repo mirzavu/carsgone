@@ -7,7 +7,7 @@
          <div class="dealer-info">
             <div class="panel full">
                <div class="panel-heading">
-                  <h2>CREATE A VEHICLE LISTING</h2>
+                  <h1>CREATE A VEHICLE LISTING</h1>
                </div>
                <div class="panel-body">
                   {!! $content !!}

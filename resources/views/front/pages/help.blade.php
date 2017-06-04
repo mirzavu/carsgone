@@ -6,7 +6,7 @@
       <div class="row">
          <div class="col-sm-12">
             <div class="help-information">
-               <h2>Help & Information</h2>
+               <h1>Help & Information</h1>
                <div class="panel">
                   <div class="panel-heading">
                      <h4>Frequently Asked Questions</h4>

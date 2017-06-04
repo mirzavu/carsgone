@@ -6,7 +6,7 @@
       <div class="wrapper">
          <div class="panel full">
             <div class="panel-heading">
-               <h2>Account Management</h2>
+               <h1>Account Management</h1>
             </div>
             <div class="panel-body">
                <div class="cd-hero vertical-tab">

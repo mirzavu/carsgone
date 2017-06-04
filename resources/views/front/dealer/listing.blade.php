@@ -32,6 +32,7 @@
                      <h3 class="panel-title">Dealer Search</h3>
                   </div>
                   <div class="panel-body">
+                      <h1>{{ $h1}}</h1>
                      <div class="filter-search">
                         <input id="search-input" type="text" placeholder="Search here.." />
                         <input id="search-submit" type="submit" value="Go" class="btn waves-effect waves-light filter-btn" />

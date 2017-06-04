@@ -9690,7 +9690,7 @@ ul.table-list li a{color:#5fc0ed;}
 /* ============ Info Page Start ================= */
 .info-outer{background-color:#ecf0f5; padding:30px 0 10px 0px;}
 .panel.full .panel-heading{background:#3e5062;}
-.panel.full .panel-heading h2{text-transform:uppercase; font-family:'Lato'; font-weight:900; text-align:center; color:#fff; margin-bottom:0;}
+.panel.full .panel-heading h1{text-transform:uppercase; font-family:'Lato'; font-weight:900; text-align:center; color:#fff; margin-bottom:0;}
 .panel.full .panel-body{padding:30px 60px; font-family: 'Roboto';}
 .panel.full .panel-body h3{color:#3e5062; font-weight:400; text-transform:none; letter-spacing:0;}
 .btn{font-family:'Lato'; background:#5fc0ed;}
@@ -9840,7 +9840,7 @@ ul.dealer-info-list{text-align:center;display: inline-block;vertical-align: top;
 
 /* ============ Help & Information Page Start ================= */
 .help-information{margin:54px 5%; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
-.help-information > h2{font-family:'Roboto'; font-weight:700; color:#3e5061; text-align:center; padding:22px 0; margin-bottom:0; /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fdfdfd+0,e3e3e3+100 */
+.help-information > h1{font-family:'Roboto'; font-weight:700; color:#3e5061; text-align:center; padding:22px 0; margin-bottom:0; /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fdfdfd+0,e3e3e3+100 */
 background: #fdfdfd; /* Old browsers */
 background: -moz-linear-gradient(top,  #fdfdfd 0%, #e3e3e3 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top,  #fdfdfd 0%,#e3e3e3 100%); /* Chrome10-25,Safari5.1-6 */
@@ -10094,7 +10094,7 @@ span.required {
 	padding: 6px;
 }
 
-.panel-heading > h1{
+.panel-body > h1{
 	display:none;
 }
 
@@ -10220,7 +10220,7 @@ footer{font-size:14px;}
 .dealer-address-map{height:220px;}
 .single-description-lower{padding:0 15px;}
 
-.panel.full .panel-heading h2{font-size:19px;}
+.panel.full .panel-heading h1{font-size:19px;}
 .panel.full .panel-body,
 .canadian-autoloan .panel.full .panel-body,
 .autoloan-desc .panel.full .panel-body{padding:15px 20px;}
@@ -10261,7 +10261,7 @@ footer{font-size:14px;}
 .dealer-page-outer .fetured-box{width:calc(100% - 20px); margin:10px;}
 
 .help-information{margin:30px 0;}
-.help-information > h2{font-size:21px;}
+.help-information > h1{font-size:21px;}
 .help-information .panel-heading{padding-left:15px;}
 .help-information .panel-heading h4{font-size:18px;}
 .help-information .panel-body{padding:20px 0;}

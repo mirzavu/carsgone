@@ -49,7 +49,9 @@ class SearchController extends Controller
 			$loc = getLocation($request);
 			$conditions->put('lat',$loc['lat']);
 			$conditions->put('lon',$loc['lon']);
-			$conditions->put('place',$loc['place']);
+			if(array_key_exists('place', $loc)){
+				$conditions->put('place',$loc['place']);
+			}
 			$data['location'] = $loc;
 		}
 		else

@@ -130,7 +130,7 @@
         	<div class="container">
             	<div class="row">
                     <div class="col-sm-4 footer-box">
-                    	    <a href="index.html" class="footer-logo"><img src="/assets/images/footer-logo.png" alt="Footer Logo Image" /></a>
+                    	    <a href="/" class="footer-logo"><img src="/assets/images/footer-logo.png" alt="Footer Logo Image" /></a>
                             {{-- <h5>Contact</h5> --}}
                             <p>{!! Helper::setting('address') !!} {!! Helper::setting('postal_code') !!}</p>
                             <p>Email: <a href="mailto:support@carsgone.com">support@carsgone.com</a></p>

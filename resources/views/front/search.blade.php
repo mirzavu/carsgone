@@ -11,6 +11,7 @@
                <!-- panel start -->
                <div class="panel">
                   <div class="panel-heading">
+                     <h1>{{ $h1}}</h1>
                      <h3 class="panel-title">Quick Search</h3>
                      <a href="#" class="sidenav-close">Close</a>
                   </div>

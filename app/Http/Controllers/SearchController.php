@@ -97,6 +97,7 @@ class SearchController extends Controller
 		}
 		// dd($conditions);
 		$title = $this->getTitle($conditions);
+		$data['h1'] = trim($title['title']);
 		SEOMeta::setTitle(trim($title['title']));
         SEOMeta::setDescription(trim($title['description']));
         SEOMeta::addKeyword(['new cars', 'used cars', 'auto classifieds', 'search cars', 'trucks', 'SUVs', 'vans']);

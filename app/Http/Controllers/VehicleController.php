@@ -38,8 +38,8 @@ class VehicleController extends Controller
 			$other_vehicle_text = 'Dealers Other Vehicles';
 		else
 			$other_vehicle_text = 'Related Vehicles';
-		SEO::setTitle($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' in '.$vehicle->user->city->city_name.', '.$vehicle->user->province->province_name.', $'.$vehicle->price);
-        SEO::setDescription($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.$vehicle->trim.' $'.$vehicle->price.' in '.$vehicle->user->city->city_name.', '.$vehicle->user->province->province_name.' for $'.$vehicle->price.'. Check out this '.$vehicle->ext_color->color?? "".' '.$vehicle->bodyStyleGroup->body_style_group_name?? "".' with '.$vehicle->odometer.' kilometers on it for sale from '.$vehicle->user->name);
+		SEO::setTitle($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' in '.$vehicle->user->city->city_name?? "".', '.$vehicle->user->province->province_name?? "".', $'.$vehicle->price);
+        SEO::setDescription($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.$vehicle->trim?? "".' $'.$vehicle->price.' in '.$vehicle->user->city->city_name?? "".', '.$vehicle->user->province->province_name?? "".' for $'.$vehicle->price.'. Check out this '.$vehicle->ext_color->color?? "".' '.$vehicle->bodyStyleGroup->body_style_group_name?? "".' with '.$vehicle->odometer?? "".' kilometers on it for sale from '.$vehicle->user->name?? "");
         SEOMeta::addKeyword(['new cars', 'used cars', $vehicle->make->make_name, $vehicle->model->model_name, $vehicle->make->make_name.' '.$vehicle->model->model_name]);
         SEO::opengraph()->setUrl($request->url());
         SEO::opengraph()->addProperty('type', 'product');

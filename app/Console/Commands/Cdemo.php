@@ -55,7 +55,6 @@ class Cdemo extends Command
      */
     public function handle()
     {
-        $cdemo_feeds = array("cdemo_carsgone.xml","cdemo_carsgone_2.xml");
         $xml_name = "cdemo_carsgone.xml";
         ini_set("max_execution_time",0);
         $starttime = date('Y-m-d H:i:s');

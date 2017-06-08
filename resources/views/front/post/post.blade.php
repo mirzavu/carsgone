@@ -521,6 +521,8 @@
            prevBtn: $('<a class="prev-btn sf-left sf-btn btn grey waves-effect waves-light  " href="#"><i class="icofont icofont-rounded-left"></i> PREV</a>'),
            finishBtn: $('<button id="submit-btn" class="finish-btn btn sf-btn sf-btn-finish waves-effect waves-light" type="submit" value="FINISH">Submit Vehicle</button>'),
            onNext: function(i, wizard) {
+            var myDropzone = Dropzone.forElement("#my-awesome-dropzone");
+            console.log(myDropzone.getUploadingFiles())
                var form = $("#vehicle-form");
                form.validate({
                    rules: {},

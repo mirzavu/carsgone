@@ -522,7 +522,11 @@
            finishBtn: $('<button id="submit-btn" class="finish-btn btn sf-btn sf-btn-finish waves-effect waves-light" type="submit" value="FINISH">Submit Vehicle</button>'),
            onNext: function(i, wizard) {
             var myDropzone = Dropzone.forElement("#my-awesome-dropzone");
-            console.log(myDropzone.getUploadingFiles())
+            if(myDropzone.getUploadingFiles().length)
+            {
+               toastr.warning('Files are being uploaded', 'Please wait')
+               return false;
+            }
                var form = $("#vehicle-form");
                form.validate({
                    rules: {},

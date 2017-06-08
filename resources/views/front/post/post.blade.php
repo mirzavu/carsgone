@@ -524,7 +524,7 @@
             var myDropzone = Dropzone.forElement("#my-awesome-dropzone");
             if(myDropzone.getUploadingFiles().length)
             {
-               toastr.warning('Files are being uploaded', 'Please wait')
+               toastr.warning('Uploading photos', 'Please wait')
                return false;
             }
                var form = $("#vehicle-form");

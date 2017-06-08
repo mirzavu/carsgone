@@ -268,7 +268,7 @@
                                                                                 <tr>
                                                                                     <td class="skr_button1" width="100%" align="center" style="font-family: 'Roboto', sans-serif; font-weight:700; color:#FFFFFF; font-size:12px; line-height:12px;">
                                                                                         <a href="{{url('/vehicle-confirm').'/'.$data['slug'].'/'.$data['token']}}" target="_blank" class="skr_button1" style="font-family: 'Roboto', sans-serif; font-weight:700; color:#FFFFFF; font-size:12px; line-height:12px; text-decoration:none; text-transform: uppercase;">
-                                                                                            Activate you Ad
+                                                                                            Activate Your Ad
              
                                                                                         </a>
                                                                                     </td>   

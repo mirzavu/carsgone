@@ -34,6 +34,10 @@ class VehicleController extends Controller
 		$provinces = Province::orderBy('province_name', 'asc')->pluck('province_name','id');
 
 		$other_vehicle_text = 'Related Vehicles';
+		if(count($vehicle->user) == 0)
+		{
+			abort(404);
+		}
 		if($vehicle->user->featured)
 			$other_vehicle_text = 'Dealers Other Vehicles';
 		else

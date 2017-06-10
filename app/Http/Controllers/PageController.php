@@ -39,7 +39,7 @@ class PageController extends Controller
 	public function contactSend(Request $request, AppMailer $mailer)
 	{
 		//Spam check
-		if(!$this->endsWith($request['email'], ".ru"))
+		if(!$this->endsWith($request['email'], ".ru") && strpos($request['subject'], 'е') == false)
 		{
 			$mailer->sendContactForm($request);
 		}

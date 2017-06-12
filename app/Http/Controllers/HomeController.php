@@ -63,7 +63,7 @@ class HomeController extends Controller
 		$data['location'] = getLocation($request);
 		$data['provinces'] = Cache::remember('home_provinces', 30, function() {
 				    return Province::withCount(['vehicles'=> function ($query) {
-					    $query->where('status_id', 1);
+					    $query->where('vehicles.status_id', 1);
 						}])->orderBy('province_name', 'asc')->get();
 				});
 		$data['makes'] = Cache::remember('home_makes', 30, function() {

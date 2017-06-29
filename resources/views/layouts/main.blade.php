@@ -521,9 +521,11 @@ function initialize() {
    function setLocation(lat, lng, city)
    {
       $.get( "/setLocation?lat="+lat+"&lng="+lng+"&city="+city).done(function( data ) {
-        if(window.location.pathname.indexOf('search')>=0)
+        // Regex - remove city and province param from url
+        var loc = window.location.pathname.replace(/(city|province)-(\w+)(\/|.*)/g,'')
+        if(loc.indexOf('search')>=0)
         {
-          location.reload()
+          window.location.href = loc;
         }
         else
         {

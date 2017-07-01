@@ -125,7 +125,10 @@ class Cdemo extends Command
             if (strcmp($node->getname(), 'vehicle') == 0) {
                 $vehicle_xml = $node;
                 $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['user_id' => $dealer->id, 'vin' => (string)$vehicle_xml->vin]);
-
+                if($vehicle->exists)
+                {
+                    continue;
+                }
                 $vehicle->condition = $vehicle_xml->class == "New Auto"? "new":"used"; 
                 $vehicle->stock = $vehicle_xml->stock;
                 $vehicle->year = (string)$vehicle_xml->year;

@@ -84,7 +84,11 @@ class PostController extends Controller
 		$validator = Validator::make($request->all(), [
             'make_id' => 'required|integer',
             'model_id' => 'required|integer',
-            'year' => 'required|min:1900|max:2020|integer'
+            'year' => 'required|min:1900|max:2020|integer',
+            'postal_code' => [
+            	'required',
+            	'regex:/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/',
+            ]
         ]);
 
         if ($validator->fails()) {

@@ -599,8 +599,17 @@
                                    type: 'POST',
                                    data: $('form').serialize(),
                                    success: function(response) {
-                                       console.log(response)
-                                       window.location = response.url;
+                                    console.log(response)
+                                       if(response.status =="fail")
+                                       {
+                                          $('#submit-btn').prop('disabled', false).html('Submit Vehicle')
+                                          toastr.error(response.error, 'Error')
+                                       }
+                                       else
+                                       {
+                                          window.location = response.url;
+                                       }
+                                       
                                    }
                                });
                            } else {

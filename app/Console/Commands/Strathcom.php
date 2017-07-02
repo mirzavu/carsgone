@@ -140,6 +140,8 @@ class Strathcom extends Command
                 $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['user_id' => $dealer->id, 'partner_vehicle_id' => (string)$xml->SMI_ID]);
                 if($vehicle->exists)
                 {
+                    $vehicle->status_id = 1;
+                    $vehicle->save();
                     continue;
                 }
                 $vehicle->condition = strtolower($xml->SaleClass); 

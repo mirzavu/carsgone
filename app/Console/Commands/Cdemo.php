@@ -127,6 +127,8 @@ class Cdemo extends Command
                 $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['user_id' => $dealer->id, 'vin' => (string)$vehicle_xml->vin]);
                 if($vehicle->exists)
                 {
+                    $vehicle->status_id = 1;
+                    $vehicle->save();
                     continue;
                 }
                 $vehicle->condition = $vehicle_xml->class == "New Auto"? "new":"used"; 

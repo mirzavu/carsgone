@@ -149,6 +149,8 @@ class Boost extends Command
                 
                 if($vehicle->exists)
                 {
+                    $vehicle->status_id = 1;
+                    $vehicle->save();
                     continue;
                 }
                 $vehicle->condition = strtolower($xml->VehicleStatus); 

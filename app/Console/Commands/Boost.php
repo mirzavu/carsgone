@@ -63,7 +63,7 @@ class Boost extends Command
         $ftp_user_name = 'carsgone';
         $ftp_user_pass = 'boost2carsgone';
 
-        // exec("curl -u carsgone:boost2carsgone 'ftp://ftp.boostmotorgroup.com/Export.xml' -o ".$local_file);
+        exec("curl -u carsgone:boost2carsgone 'ftp://ftp.boostmotorgroup.com/Export.xml' -o ".$local_file);
         $xmlReader = new \XMLReader;
         $xmlReader->open($local_file);
         $province_hash = array(

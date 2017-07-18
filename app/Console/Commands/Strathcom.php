@@ -82,7 +82,6 @@ class Strathcom extends Command
           echo 'doh!';
         }
         $out_file_name = str_replace('.zip', '', $file_name); 
-        exit;
         $xmlReader = new \XMLReader();
         $xmlReader->open($out_file_name, null, 1 << 19);
         while ($xmlReader->read()) {

@@ -67,22 +67,22 @@ class Strathcom extends Command
             $filepath = "{$xml_directory}/{$entry}";
             $ext      = pathinfo($entry, PATHINFO_EXTENSION);
             $filename = pathinfo($entry, PATHINFO_FILENAME);
-            if (is_file($filepath) && filectime($filepath) > $latest_ctime && $ext == 'gz') {
+            if (is_file($filepath) && filectime($filepath) > $latest_ctime && $ext == 'zip') {
                 $latest_ctime = filectime($filepath);
                 $xml_file     = $entry;
             }
         }
         $file_name = $xml_directory .'/'. $xml_file;
-        // Raising this value may increase performance
-        $buffer_size = 4096; // read 4kb at a time
-        $out_file_name = str_replace('.gz', '', $file_name); 
-        $file = gzopen($file_name, 'rb');
-        $out_file = fopen($out_file_name, 'wb'); 
-        while (!gzeof($file)) {
-            fwrite($out_file, gzread($file, $buffer_size));
+        $zip = new \ZipArchive;
+        $res = $zip->open($file_name);
+        if ($res === TRUE) {
+          $zip->extractTo($xml_directory);
+          $zip->close();
+        } else {
+          echo 'doh!';
         }
-
-        $out_file = null;
+        $out_file_name = str_replace('.zip', '', $file_name); 
+        exit;
         $xmlReader = new \XMLReader();
         $xmlReader->open($out_file_name, null, 1 << 19);
         while ($xmlReader->read()) {

@@ -14,6 +14,7 @@ use DB;
 use Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\Paginator;
+use SEO;
 use SEOMeta;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -98,8 +99,8 @@ class SearchController extends Controller
 		// dd($conditions);
 		$title = $this->getTitle($conditions);
 		$data['h1'] = trim(str_replace("| Buy Sell Vehicles Nearby", "",$title['title']));
-		SEOMeta::setTitle(trim($title['title']));
-        SEOMeta::setDescription(trim($title['description']));
+		SEO::setTitle(trim($title['title']));
+        SEO::setDescription(trim($title['description']));
         SEOMeta::addKeyword(['new cars', 'used cars', 'auto classifieds', 'search cars', 'trucks', 'SUVs', 'vans']);
 
 		// $lat = 53.421879;

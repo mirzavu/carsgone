@@ -22,6 +22,7 @@ use App\Models\BodyStyle;
 use App\Models\DriveType;
 use App\Models\FuelType;
 use App\Models\TransmissionType;
+use SEO;
 use SEOMeta;
 use DB;
 use Log;
@@ -47,8 +48,8 @@ class HomeController extends Controller
 	public function index(Request $request)
 	{	
 		Log::info($request->session()->all());
-		SEOMeta::setTitle('Used Cars and Auto Loans Canada | Free Auto Classifieds | Buy Sell and Trade at Carsgone.com');
-        SEOMeta::setDescription('Providing an online solution for buying and selling New and Used cars, trucks, vans and SUVs.  Free auto classifieds for private sellers and dealerships at Carsgone.com');
+		SEO::setTitle('Used Cars and Auto Loans Canada | Free Auto Classifieds | Buy Sell and Trade at Carsgone.com');
+        SEO::setDescription('Providing an online solution for buying and selling New and Used cars, trucks, vans and SUVs.  Free auto classifieds for private sellers and dealerships at Carsgone.com');
         SEOMeta::addKeyword(['new cars', 'used cars', 'auto classifieds', 'auto loans Canada', 'trucks', 'SUVs', 'vans']);
 
         //Clear search page filters

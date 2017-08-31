@@ -21,6 +21,7 @@ use App\Models\Province;
 use App\Models\City;
 use Image;
 use File;
+use SEO;
 use SEOMeta;
 use Log;
 
@@ -60,8 +61,8 @@ class PostController extends Controller
 
     public function newPost(Request $request)
 	{	
-		SEOMeta::setTitle('Sell a car online free auto classifieds | Buy Sell & Trade Used Cars Canada');
-        SEOMeta::setDescription('Sell my car free, advertise vehicles free, automotive classified, post or list free online auto listings.');
+		SEO::setTitle('Sell a car online free auto classifieds | Buy Sell & Trade Used Cars Canada');
+        SEO::setDescription('Sell my car free, advertise vehicles free, automotive classified, post or list free online auto listings.');
 		$data['location'] = getLocation($request);
 		$data['content'] = ContentPage::where('slug', 'post-page')->first()->content;
 		$data['makes'] = Make::all();
@@ -73,8 +74,8 @@ class PostController extends Controller
 	{		
 
 		//SEO
-		SEOMeta::setTitle('Sell a car online free auto classifieds | Buy Sell and Trade Used Cars Canada');
-        SEOMeta::setDescription('Sell my car free, advertise vehicles free, automotive classified, post or list free online auto listings');
+		SEO::setTitle('Sell a car online free auto classifieds | Buy Sell and Trade Used Cars Canada');
+        SEO::setDescription('Sell my car free, advertise vehicles free, automotive classified, post or list free online auto listings');
         SEOMeta::addKeyword(['sell', 'used cars', 'auto', 'list vehicle', 'classifieds', 'vehicle']);
 		$request['model_id'] = VehicleModel::where('model_name', $request['model'])->value('id');
 		if(!empty($request['colour_exterior'])) $request['ext_color_id'] = Color::where('color', $request['colour_exterior'])->value('id');

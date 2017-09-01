@@ -168,6 +168,7 @@ class Boost extends Command
                 
                 $body_style = (string) $xml->BodyStyle;
                 $body_style = $body_style == "Pickup Truck"? "Truck" : $body_style;
+                $body_style = $body_style == "Crossover"? "SUV" : $body_style;
 
                 $body_style_id = BodyStyleGroup::where('body_style_group_name',$body_style)->value('id');
                 if($body_style_id)

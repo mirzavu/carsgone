@@ -107,12 +107,13 @@ class PostController extends Controller
 		$vehicle->save();
 		//Change user's lat, long, city, prov from postal code
 		$user->phone = $request['phone'];
-		$user->postal_code = $postal_code = $request['postal_code'];
+		$postal_code = $request['postal_code'];
 		// if($request->role == "dealer")
 		// 	$user->role = "dealer";
 		// else
 		$user->role = "member";
-		$postal_code = substr_replace($postal_code, ' ', 3, 0);
+		$postal_code = ($postal_code[4] == '')? $postal_code: substr_replace($postal_code, ' ', 3, 0);
+		$user->postal_code = $postal_code;
 		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($postal_code);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);

@@ -107,12 +107,13 @@ class PostController extends Controller
 		$vehicle->save();
 		//Change user's lat, long, city, prov from postal code
 		$user->phone = $request['phone'];
-		$user->postal_code = $request['postal_code'];
+		$user->postal_code = $postal_code = $request['postal_code'];
 		// if($request->role == "dealer")
 		// 	$user->role = "dealer";
 		// else
 		$user->role = "member";
-		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($user->postal_code);
+		$postal_code = substr_replace($postal_code, ' ', 3, 0);
+		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($postal_code);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -148,7 +149,6 @@ class PostController extends Controller
         }  
 
 		$user->save();
-
 		//Save Vehicle Images
 		$image_names = explode('^', $request['file_names']);
 		$photos =[];$i=1;

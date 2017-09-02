@@ -11,7 +11,7 @@
                <div class="item-gallery-container ">
                   <div class="item-large">
                      <div class="large-item-head">
-                        <h1>{{$vehicle->year}} {{$vehicle->make->make_name}}, {{$vehicle->model->model_name}} - {{$vehicle->user->city->city_name}}, {{$vehicle->user->province->province_name}}</h1>
+                        <h1>{{$vehicle->year}} {{$vehicle->make->make_name}}, {{$vehicle->model->model_name}} - {{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</h1>
                      </div>
                      <div class="large-item-body">
                         <a href="{{$vehicle->photo()}}" title="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}"><img src="{{$vehicle->photo()}}" alt="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}" /></a>
@@ -325,10 +325,10 @@
                   </div>
                   <div>
                      <ul class="related-link-list">
-                        <li><a href="/search/province-{{$vehicle->user->province->province_name}}/city-{{$vehicle->user->city->city_name}}/make-{{$vehicle->make->make_name}}/model-{{$vehicle->model->model_name}}">{{$vehicle->user->city->city_name}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}}</a></li>
-                        <li><a href="/search/province-{{$vehicle->user->province->province_name}}/city-{{$vehicle->user->city->city_name}}/make-{{$vehicle->make->make_name}}">{{$vehicle->user->city->city_name}} {{$vehicle->make->make_name}}</a></li>
-                        <li><a href="/search/condition-used/province-{{$vehicle->user->province->province_name}}/city-{{$vehicle->user->city->city_name}}">Used Cars {{$vehicle->user->city->city_name}}</a></li>
-                        <li><a href="/auto-dealers/province-{{$vehicle->user->province->province_name}}/city-{{$vehicle->user->city->city_name}}">Car Dealers {{$vehicle->user->city->city_name}}</a></li>
+                        <li><a href="/search/province-{{$vehicle->user->province->province_name or ''}}/city-{{$vehicle->user->city->city_name or ''}}/make-{{$vehicle->make->make_name}}/model-{{$vehicle->model->model_name}}">{{$vehicle->user->city->city_name or ''}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}}</a></li>
+                        <li><a href="/search/province-{{$vehicle->user->province->province_namev}}/city-{{$vehicle->user->city->city_name or ''}}/make-{{$vehicle->make->make_name}}">{{$vehicle->user->city->city_name or ''}} {{$vehicle->make->make_name}}</a></li>
+                        <li><a href="/search/condition-used/province-{{$vehicle->user->province->province_name or ''}}/city-{{$vehicle->user->city->city_name or ''}}">Used Cars {{$vehicle->user->city->city_name or ''}}</a></li>
+                        <li><a href="/auto-dealers/province-{{$vehicle->user->province->province_name or ''}}/city-{{$vehicle->user->city->city_name or ''}}">Car Dealers {{$vehicle->user->city->city_name or ''}}</a></li>
                      </ul>
                   </div>
                </div>

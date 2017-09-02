@@ -76,7 +76,7 @@ class HomeController extends Controller
 		$data['body_style_groups'] = Cache::remember('home_body_style_groups', 30, function() {
 				    return BodyStyleGroup::withCount(['vehicles'=> function ($query) {
 					    $query->where('status_id', 1);
-						}])
+						}])->where('id', '<=', 8)
 						->orderBy('body_style_group_name', 'asc')->get();
 					});
 

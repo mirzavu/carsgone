@@ -167,17 +167,34 @@ class Boost extends Command
 
                 
                 $body_style = (string) $xml->Body_Style;
-                $body_style = $body_style == "Pickup Truck"? "Truck" : $body_style;
-                $body_style = $body_style == "Crossover"? "SUV" : $body_style;
-                $body_style_id = BodyStyleGroup::where('body_style_group_name',$body_style)->value('id');
-                
-                if($body_style_id)
-                    $vehicle->body_style_group_id = $body_style_id;
-                else
-                {   
-                    $email[$i++] = "Body_Style ".(string) $xml->Body_Style;
-                    continue;
+
+                switch ($body_style) {
+                    case 'Pickup Truck':
+                        $body_style = "Truck";
+                        break;
+                    case 'Crossover':
+                        $body_style = "SUV";
+                        break;
+                    case 'Minivan':
+                        $body_style = "Van";
+                        break;
+                    case 'CAR':
+                        $body_style = "Sedan";
+                        break;
+                    case 'Large Pick-up':
+                        $body_style = "Truck";
+                        break;
+                    case '4dr Car':
+                        $body_style = "Sedan";
+                        break;
+                    case 'Compact':
+                        $body_style = "SUV";
+                        break;
                 }
+
+                Log::info($body_style);
+                $vehicle->body_style_group_id = BodyStyleGroup::firstOrCreate(['body_style_group_name' => $body_style])->id;
+
                 $ext_color = Color::firstOrCreate(['color' =>  (string)$xml->Exterior_Colour]);
                 $int_color = Color::firstOrCreate(['color' =>  (string)$xml->Interior_Colour]);
                 $vehicle->ext_color_id = $ext_color->id;
@@ -202,9 +219,9 @@ class Boost extends Command
 
                 $photos =[];
                 foreach($images->Photo as $image) {
-                    array_push($photos, new VehiclePhoto(['position' => (string)$image['number'], 'path' => (string)$image]));
+                    array_push($photos, ['position' => (string)$image['number'], 'path' => (string)$image, 'vehicle_id' => $vehicle->id]);
                 }
-                $vehicle->photos()->saveMany($photos);
+                DB::table('vehicle_photos')->insert($photos);
                 //dd($vehicle->photo());
 
                 $vehicle->options()->delete();
@@ -218,6 +235,7 @@ class Boost extends Command
                 $vehicle->options()->attach($option_ids);
             }
         }
+        arsort($email);
         echo "Start time: ". $starttime;
         echo "\nEnd time: ".  date('Y-m-d H:i:s');
         Log::info($email);

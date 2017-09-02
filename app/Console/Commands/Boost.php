@@ -224,7 +224,7 @@ class Boost extends Command
                 DB::table('vehicle_photos')->insert($photos);
                 //dd($vehicle->photo());
 
-                $vehicle->options()->delete();
+                $vehicle->options()->detach();
 
                 $options = $xml->Features;
                 $option_ids =[];

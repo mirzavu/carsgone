@@ -23,8 +23,8 @@ class SearchController extends Controller
 {
 	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
 	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
-	protected $url_filters = array('make','model', 'province', 'city', 'body', 'seller');
-	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon', 'place','odometer', 'distance', 'transmission', 'content', 'dealer');
+	protected $url_filters = array('make','model', 'province', 'city', 'body', 'seller', 'dealer');
+	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon', 'place','odometer', 'distance', 'transmission', 'content');
 	protected $clear_filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
 	protected $dealer_ids;
 	protected $url_params;

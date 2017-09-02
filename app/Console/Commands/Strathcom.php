@@ -163,7 +163,9 @@ class Strathcom extends Command
                     $vehicle->body_style_group_id = $body_style_id;
                 else
                 {
-                    $email[$i++] = "Body_Style ".(string) $xml->Body_Style;
+                    $b = (string) $xml->Body_Style;
+                    $email[$b] = isset($email[$b])? $email[$b]: 0;
+                    $email[$b]++;
                     continue;
                 }
                 $ext_color = Color::firstOrCreate(['color' =>  (string)$xml->ExteriorColor]);
@@ -201,7 +203,7 @@ class Strathcom extends Command
                 }
                 $vehicle->photos()->saveMany($photos);
 
-                $vehicle->options()->delete();
+                $vehicle->options()->detach();
                 $option_ids =[];
                 foreach($xml->Option as $option) {
                     $option = Option::firstOrCreate(['option' =>  (string)$option->OptionName]);
@@ -213,6 +215,7 @@ class Strathcom extends Command
         }
         echo "Start time: ". $starttime;
         echo "\nEnd time: ".  date('Y-m-d H:i:s');
+        arsort($email);
         Log::info($email);
     }
 }

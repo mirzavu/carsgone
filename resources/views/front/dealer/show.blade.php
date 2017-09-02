@@ -35,7 +35,7 @@
                             </li>
                             @endforeach
                         </ul>
-                        <div class="pad-10"><a id="inventory-btn" href="#" class="waves-effect waves-light btn btn-block">View Inventory</a></div>
+                        <div class="pad-10"><a id="inventory-btn" href="/search/dealer-{{$dealer->name}}" class="waves-effect waves-light btn btn-block">View Inventory</a></div>
                     </div>
                     </div>
                     <div class="display-flex right">
@@ -85,7 +85,7 @@
           <div class="tab-content">
             <ul class="popular-item-list bordered four-col">
               @foreach($makes as $make)
-              <li><a class="dealer-tag" href="/search/make-{{$make->make_name}}">
+              <li><a class="dealer-tag" href="/search/dealer-{{$dealer->name}}/make-{{$make->make_name}}">
                 <h6>{{$make->make_name}} ({{$make->make_count}})</h6>
                 </a></li>
               @endforeach
@@ -96,7 +96,7 @@
           <div class="tab-content">
             <ul class="popular-item-list bordered four-col">
               @foreach($body as $style)
-              <li><a class="dealer-tag" href="/search/body-{{$style->body_style_group_name}}">
+              <li><a class="dealer-tag" href="/search/dealer-{{$dealer->name}}/body-{{$style->body_style_group_name}}">
                 <h6>{{$style->body_style_group_name}} ({{$style->body_count}})</h6>
                 </a></li>
               @endforeach
@@ -107,7 +107,7 @@
           <div class="tab-content">
             <ul class="popular-item-list bordered four-col">
               @foreach($prices as $price)
-              <li><a class="dealer-tag-price" range="{{$price->range}}" href="/search">
+              <li><a class="dealer-tag-price" range="{{$price->range}}" href="/search/dealer-{{$dealer->name}}">
                 <h6>{{$price->range}} ({{$price->count}})</h6>
                 </a></li>
               @endforeach
@@ -118,7 +118,7 @@
           <div class="tab-content">
             <ul class="popular-item-list bordered four-col">
               @foreach($years as $year)
-              <li><a class="dealer-tag-year" year="{{$year->year}}" href="/search">
+              <li><a class="dealer-tag-year" year="{{$year->year}}" href="/search/dealer-{{$dealer->name}}">
                 <h6>{{$year->year}} ({{$year->year_count}})</h6>
                 </a></li>
               @endforeach
@@ -136,30 +136,31 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-  $('#inventory-btn').on('click',function(e){
-      e.preventDefault();
-      $.get( "/removeSessionAll", function(){
-          $.get( "/setSessionKeyValue/dealer/{{$dealer->name}}",function(){
-            window.location = '/search';
-          });
-      });
-  });
-  $('.dealer-tag').on('click',function(e){
-      e.preventDefault();
-      $.get( "/setSessionKeyValue/dealer/{{$dealer->name}}");
-      window.location = $(this).attr('href')
-  });
+  // $('#inventory-btn').on('click',function(e){
+  //     e.preventDefault();
+  //     $.get( "/removeSessionAll", function(){
+  //         $.get( "/setSessionKeyValue/dealer/{{$dealer->name}}",function(){
+  //           window.location = '/search';
+  //         });
+  //     });
+  // });
+  // $('.dealer-tag').on('click',function(e){
+  //     e.preventDefault();
+  //     $.get( "/setSessionKeyValue/dealer/{{$dealer->name}}");
+  //     window.location = $(this).attr('href')
+  // });
+
   $('.dealer-tag-price').on('click',function(e){
       e.preventDefault();
-      $.get( "/setSessionKeyValue/price/"+$(this).attr('range'));
-      $.get( "/setSessionKeyValue/dealer/{{$dealer->name}}");
-      window.location = "/search";
+      $.get( "/setSessionKeyValue/price/"+$(this).attr('range'), function(){
+            window.location = '/search/dealer-{{$dealer->name}}';
+      });
   });
   $('.dealer-tag-year').on('click',function(e){
       e.preventDefault();
-      $.get( "/setSessionKeyValue/year/"+$(this).attr('year')+'-'+$(this).attr('year'));
-      $.get( "/setSessionKeyValue/dealer/{{$dealer->name}}");
-      window.location = "/search";
+      $.get( "/setSessionKeyValue/year/"+$(this).attr('year')+'-'+$(this).attr('year'), function(){
+            window.location = '/search/dealer-{{$dealer->name}}';
+      });
   });
 
   $('img').one('error', function() { this.src = '/assets/images/placeholder.jpg'; });

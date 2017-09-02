@@ -192,7 +192,6 @@ class Boost extends Command
                         break;
                 }
 
-                Log::info($body_style);
                 $vehicle->body_style_group_id = BodyStyleGroup::firstOrCreate(['body_style_group_name' => $body_style])->id;
 
                 $ext_color = Color::firstOrCreate(['color' =>  (string)$xml->Exterior_Colour]);

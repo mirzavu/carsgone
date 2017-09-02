@@ -340,7 +340,7 @@ class UserController extends Controller
         if($vehicle->user->id == $user->id)
         {
             $vehicle->photos()->delete();
-            $vehicle->options()->delete();
+            $vehicle->options()->detach();
             $vehicle->delete();
         }
         return response()->json(['status' => 'success']);

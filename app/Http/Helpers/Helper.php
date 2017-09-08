@@ -11,7 +11,7 @@ class Helper
         return strtoupper($string);
     }
 
-    public static function setting(string $type)
+    public static function setting($type)
     {
     	$setting = Setting::first();
         switch ($type) {

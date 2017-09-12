@@ -816,8 +816,461 @@ span.required {
 	display:none;
 }
 
+/* -- Edmontonautoloan styles --*/
+body{font-family: 'Roboto', sans-serif;font-size:15px;margin:0;background:#eee;}
+.Padded{padding-left:0;padding-right:0;}
+.Rpadded{padding-right:0;}
+.Lpadded{padding-left:0;}
+.remove-margin{margin-left:0;margin-right:0;}
+.clearfix{clear:both;}
+a{outline:none;}
+.navbar-brand{display:none;font-family: 'Roboto', sans-serif;font-size:16px;color:#fff;}
+.navbar-toggle .icon-bar{background:#fff;}
+.navbar-collapse{box-shadow:none;}
+.textbox{padding:10px 15px 11px 15px;font-family: 'Roboto', sans-serif;font-size:14px;color:#333;border:1px solid rgba(0,0,0,0.1);}
+.dtHeight{min-height:250px;}
+/****************************Header Section***********************/
+.Navbar{background:#000;padding:15px 0;}
+.Navbar ul{margin:0;padding:0;position:relative;}
+.Navbar ul li{display:inline-block;}
+.Navbar ul li a{color:rgba(255,255,255,1);font-family: 'Roboto', sans-serif;font-size:14px;padding:10px 25px;display:inline-block;text-align:center;text-transform:capitalize;outline:none;}
+.Navbar ul li:last-child a:hover{background:none;color:#dc5f03;}
+.Navbar ul li a  i{background:#dc5f03;border-radius:5px;width:23px;height:23px;line-height:22px;text-align:center;color:#fff;margin-right:5px;}
+.Navbar ul li a:hover, .Navbar ul li .active{background:#dc5f03;color:#fff;transition:all 0.2s ease-out 0s;}
+.Navbar ul li div{display:none;position:absolute;width:100%;padding:0;top:40px;background:#fff;box-shadow:0 0 2px rgba(0,0,0,0.3);}
+.logo a {display:block;width:100%;}
+.logo a  img{width:100%;}
+.mrecord{border-radius:10px 10px 0 0 !important;cursor:pointer !important;}
+.whiteCar{display:none;}
+/******************************slider***********************************/
+.sliderDt .carousel-inner .overlay{background:rgba(255,255,255,0.1) url("images/pattern-b.png") repeat;width:100%;height:100%;position:absolute;}
+.sliderDt .carousel-inner .item img{width:100%;}
+.sliderDt .carousel-indicators li{background:#fff;width:16px;height:16px;border-radius:50%; margin:5px;}
+.sliderDt .carousel-indicators li:hover,.sliderDt .carousel-indicators .active{background:#dc5f03;}
+.sliderDt .carousel-caption{left:50px;bottom:100px;} 
+.sliderDt .carousel-caption .carousel-dt{background:rgba(0,0,0,0.7);width:580px;padding:25px 35px;position:relative;}
+.sliderDt .carousel-caption .carousel-dt:after{content:"";background:#dc5f03;width:14px;height:100%;left:0;position:absolute;top:0;}
+.sliderDt .carousel-caption .carousel-dt h1{font-family: 'Fjalla One', sans-serif;color:#fff;font-size:36px;text-align:left;margin:0;}
+.sliderDt .carousel-caption .carousel-dt span{font-family: 'Roboto', sans-serif;font-size:20px;color:#fff;line-height:30px;text-align:left;display:block;width:100%;}
+.sliderDt .carousel-caption a{background:#dc5f03;display:inline-block;padding:6px 15px;font-family: 'Roboto', sans-serif;font-size:24px;color:#fff;font-weight:500;margin-top:15px;float:left;text-shadow:none;text-transform:uppercase;}
+/**********************************Works Section***********************/
+.works{padding:35px 0;background:#fff;}
+.works h2{font-family: 'Fjalla One', sans-serif;color:#222;font-size:40px;margin:0;}
+.works span{font-family: 'Roboto', sans-serif;font-size:16px;color:#222;line-height:30px;display:block;width:100%;}
+.works .step{margin:85px 0 15px 0;background:#f5f5f5;border:1px solid #ececec;padding:90px 20px 25px;width:31.5%;float:left;margin-right:30px;}
+.works .step:last-child{margin-right:0;}
+.works .step a{width:160px;height:160px;background:#fff;border-radius:50%;display:inline-block;position:absolute;box-shadow:0 10px 4px -2px rgba(0, 0, 0, 0.2);top:-80px;line-height:160px;left:50%; margin-left:-80px;}
+.works .step h3{font-family: 'Roboto', sans-serif;font-size:24px;color:#222;line-height:30px;display:block;width:100%;font-weight:600;margin-bottom:20px;}
+.works .step p{font-family: 'Roboto', sans-serif;font-size:14px;color:#222;font-weight:300;line-height:24px;padding:0 45px;}
+/*******************Meet your next vehicle Image section***************************/
+.meet {position:relative;}
+.meet .text-center { padding:0 50px 0 0;}
+.meet img { max-width:100%;}
+.meet .overlay { background:rgba(0,0,0,0.7);width:100%;height:100%;position:absolute;}
+.meet .meet-data { position:absolute; right:60px; width:40%; background:transparent; padding:35px 25px; top:10px;}
+.meet .meet-data  h2 {color: #fff;font-family: "Fjalla One",sans-serif;font-size: 40px;margin: 0; text-transform:uppercase; padding-bottom:10px;}
+.meet .meet-data .orange { color:#dc5f03; font:normal 24px "Roboto", sans-serif;}
+.meet .meet-data p{ color: rgb(255, 255, 255); font-size: 14px;font-weight: normal; padding-bottom:18px; padding-top: 10px; line-height:1.7;}
+.meet .meet-data .butto { border: 1px solid #fff; color: #fff; text-align: center; font-size: 16px; font-weight: 600; padding:9px 35px;cursor:pointer;}
+.meet .meet-data .butto:hover { border: 1px solid #dc5f03; color:#dc5f03;}
+/****************************Client**********************************/
+#Client .overlay{background:rgba(0,0,0,0.6);width:100%;height:100%;position:absolute;}
+#Client .carousel-inner .item img{width:100%;}
+#Client .carousel-indicators li{background:#fff;width:16px;height:16px; margin:5px; border-radius:50%;}
+#Client .carousel-indicators li:hover,#Client  .carousel-indicators .active{background:#dc5f03;}
+#Client .carousel-caption{ position:relative !important; width:100%;bottom:0;left:0;padding:75px 0;}
+#Client .carousel-caption h1{font-family: 'Fjalla One', sans-serif;color:#fff;font-size:36px;text-align:center;margin-bottom:25px;margin-top:0;}
+#Client .carousel-caption p{font-family: 'Roboto', sans-serif;font-size:14px;color:#fff;font-weight:300;line-height:24px;padding:15px 25px 45px 25px;border:1px solid #a0a0a0; margin:0 150px;position:relative;}
+#Client .carousel-caption p:before{content:"";width: 0;height: 0;border-left: 20px solid transparent;border-right: 20px solid transparent;border-top: 20px solid #a0a0a0;position:absolute;bottom:-21px;left:50%; margin-left:-10px;}
+#Client .carousel-caption a {display:inline-block;text-align:center;width:auto;}
+#Client .carousel-caption a span{display:inline-block;width:100px;height:100px;border-radius:50%;overflow:hidden;margin-top:50px;float:left;}
+#Client .carousel-caption a em{display:inline-block;width:280px;color:#fff;float:left;margin-top:50px;line-height:100px;text-align:left;padding:0 15px;}
+/***************************contact***********************************/
+.contact{position:relative;overflow:hidden;}
+.contact .address{position:absolute;right:0;top:0;z-index:999;background:#f2f2f2;padding:35px 0;height:100%;width:45%;padding:35px 25px;}
+.contact .address h4{font-family: 'Fjalla One', sans-serif;color:#222;font-size:40px;margin:0;}
+.contact span, .contact form label{font-family: 'Roboto', sans-serif;font-size:14px;color:#757575;line-height:24px;display:block;width:100%;}
+.contact form{margin-top:25px;}
+.contact form div{display:block;width:81%;margin-bottom:15px;}
+.contact form .textbox{width:450px;border:1px solid #dadada;padding:7px 15px;font-family: 'Roboto', sans-serif;font-size:14px;color:#222;}
+.contact form .button{padding:7px 25px;background:#000;color:#fff;font-family: 'Roboto', sans-serif;font-size:18px;border:none;}
+.contact form .button:hover{background:#dc5f03;}
+/**************************Auto loans*****************************************************/
+.works .marg {margin:50px 0;}
+.loans h2{margin:55px 0 0 0;}
+.works .marg  h4 { font-weight:normal;padding-top: 15px;}
+.works .marg .text-center{padding:15px;border:1px solid transparent;cursor:pointer;}
+.works .marg .text-center:hover{  background: #f5f5f5;border: 1px solid #ececec;}
+.works .marg  .inner-space { margin-top:50px;}
+.works .marg a{ color:#000; cursor:pointer;}
+/***********************************************Testimonial*****************************************************/
+#testimonials { padding:0; margin:0; text-align:center;}
+#testimonials .heading { color:#fff; text-align:center; font:bold 24px 'Montserrat', Arial, Helvetica, sans-serif; color:#DC5F03;}
+#testimonials .testiline { color:#fff; text-align:center; margin-bottom:50px; text-transform:uppercase; font:14px 'Roboto', Arial, Helvetica, sans-serif;}
+#testimonials .testislide { padding:0 10px;}
+#testimonials .message { position:relative; padding:30px 70px; background:#fff; color:#666; font:300 14px/22px 'Roboto', Arial, Helvetica, sans-serif; text-align:left;margin:40px 0;}
+#testimonials .message:before { content:url(images/quote.png); position:absolute; top:50%; left:-10px; margin-top:-30px;}
+#testimonials .message:after { content:url(images/testi.png); position:absolute; top:100%; right:50px;}
+#testimonials .name { display:block; width:100%; padding:40px 20px; text-align:right; color:#fff; font:13px 'Roboto', Arial, Helvetica, sans-serif; text-transform:uppercase;}
+#testimonials .namebox { display:inline-block; text-align:center;}
+#testimonials img { display:inline-block; width:60px; height:60px; border-radius:50%; margin-bottom:10px;}
+#testimonials .owl-controls .owl-dots { text-align:center;margin-bottom:15px;}
+#testimonials .owl-controls .owl-dot { display:inline-block; width:18px; height:18px; margin:5px; border-radius:50%; background:#fff;}
+#testimonials .owl-controls .owl-dot.active { background:#DC5F03;}
+/**************************footer-soc****************************************************************/
+.soc,.soc ul { padding:0; margin:0; display:inline-block;}
+.soc li { margin:0; padding:0; list-style:none; display:inline-block; float:left;}
+.soc a { width:32px; height:32px; line-height:32px; display:inline-block; text-align:center; margin:10px 5px; text-decoration:none; background:#fff; color:#dc5f03; border-radius:50%; transition:all .04s ease-out .1s;}
+.soc a:hover { background:#3F3F3F; color:#fff;}
+/****************************************************************************************************/
+footer { margin-bottom:0px; background-color:#dc5f03;}
+footer  .main-b{margin-bottom: 20px; margin-top: 30px;}
+footer h2 { font:600 20px "Roboto", sans-serif; color:#fff; margin-top:30px; margin-bottom:15px; padding-bottom:10px; text-transform: uppercase;}
+footer ul.link { margin:0; padding:0;}
+footer ul.link li {font:14px "Roboto", sans-serif; color:#fff;list-style:none; padding: 3px 0;}
+footer ul.link li a { padding:3px; display:block; font:14px "Roboto", sans-serif; color:#fff; padding: 5px 0 10px;}
+footer ul.link li a:hover { color:#222; padding-left:2px;}
+footer .col-sm-4 .link { overflow:hidden;}
+footer .col-sm-4 .link li { padding-right: 20px; overflow-y: scroll; max-height: 197px;  line-height:1.7;}
+footer .adres	{ margin:70px 0 30px !important;}
+footer .adres i { font-size:18px; padding-right:15px;}
+/****************************************************Copyright************************************************/
+.copyright { background:#101010; border-top:1px solid #444; padding:25px 0; font:14px "Roboto", sans-serif; color:#fff; margin-top: 25px;}
+.copyright p { font-size:12px; color:#fff; margin-bottom:20px;}
+.copyright a { color:#fff;}
+.copyright a:hover { color:#FF0000;}
+/* .contact .address:before{content:"";top:0;left:0;width:130px;height:100%;background:eeeeed;position:absolute;z-index:999;} */
+/**************************************Sitemap**********************************/
+.sitemap { margin:35px 0; padding-bottom:20px;}
+.sitemap h1{ background:#DC5F03;color: #fff;font:600 18px "Roboto", sans-serif;margin: 0;padding: 10px;text-align:left; text-transform: capitalize;}
+.sitemap .site,.sitemap .site-list{ border:1px solid #DC5F03; display:inline-block;margin:0 15px; padding:0 0 10px 0; background:#fff; width:100%;}
+.sitemap ul { list-style:none; display:table; padding:0 20px; width:100%;}
+.sitemap ul li{ display: inline-block; width: 50%; padding-top:12px; float:left;}
+.sitemap .site-list ul li{ display: inline-block; width:100%; padding-top:12px; float:left;}
+.sitemap ul li a, .sitemap .site-list ul li a{ text-decoration:underline; font-size:16px; color:#000; cursor:pointer;  margin-left: 5px;}
+.sitemap .site-list .pic { border: 5px solid #fff;border-radius: 5px; box-shadow: 0 0 10px #999; clear: both; float: left;margin:10px 15px 10px 0;max-width: 100%;}
+.sitemap .site-list	div{ padding: 10px 20px;}
+/*****************************car-list****************************/
+.back-img { background:url('images/12.jpg') top right; repeat:no-repeat;}
+.back-img h2, .back-img span , .back-img h3{ color:#fff !important;}
+.back-img  .example {color: #ccc !important; font-size: 15px; margin-top:25px;}
+.works .portion { margin-top:50px; margin-bottom:50px;}
+.works .portion img { width:100%; background: #ccc;box-shadow: 0 10px 10px #000;padding: 10px;}
+.works .portion h2 { font-size:30px; margin-top:30px; margin-bottom:20px;}
+.works .portion .car-list { list-style:none; margin-left:0; padding-left:0; color:#454545;}
+.works .portion .car-list li { margin-top:8px; color:#fff;}
+.works .seperator {line-height: 0; padding: 8px 0; text-align: center; width: 100%; margin-bottom:20px;}
+.works .seperator span { background: #000; display: inline-block; height: 2px;opacity: 0.15;width: 100px;}
+.works .orange-button { background:#dc5f03;border: medium none;color: #fff; font-family: "Roboto",sans-serif;font-size: 18px; padding: 15px 36px; margin-top: 40px;}
+.works .orange-button:hover { background: #fff; color:#000;}
+/**************************category*******************************/
+.category{background:transparent;padding:15px 0;}
+.category  h1{text-align:center;font:600 35px "Roboto", sans-serif; color:#222;}
+.category span{text-align:center;font:18px/25px "Roboto", sans-serif; color:#222;display:block;width:100%;}
+.category span:last-child{margin:25px 0 45px 0;}
+.category ul{display:table;width:100%;padding:15px 15px 25px 15px;margin:0;}
+.category ul li div ul{padding:0;margin:0;}
+.category ul li{display:inline-block;width:18.9%;float:left;background:#fff;box-shadow:0 0 2px 0 rgba(0, 0, 0, 0.2);margin-right:15px;cursor:pointer;}
+.category ul li:nth-child(3n) div ul{background: #fff none repeat scroll 0 0;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);height: 300px;margin-left: -6px;margin-top: -15px;padding: 15px;}
+.category ul li:last-child{margin-right:0;}
+.category ul li div ul li:first-child {padding:10px;background:#dc5f03;font:600 20px 'Open Sans',sans-serif;color:#fff;text-transform:uppercase;text-align:center;}
+.category ul li div ul li:first-child b{font:500 20px 'Open Sans',sans-serif;}
+.category ul li div ul li{box-shadow:none;text-align:center;display:block;width:100%;background:#fff;font: 13px 'Open Sans',sans-serif;color:#333;padding:10px 10px 0;text-align:left;}
+.category ul li div ul li:last-child{padding-bottom:10px;}
+.category ul li div ul li i{font-size:14px;float:left;padding:3px 6px 0 0;}
+.category ul li div ul .icon{text-align:center;line-height:20px;}
+.category ul li div ul li img{margin:15px 0 15px 0;}
+.category ul li div ul li a,.mrecord b{display:inline-block;padding:8px 25px;border-radius:5px;font:14px 'Open Sans',sans-serif;background:#222;color:#fff;margin:10px 0;text-transform:uppercase;cursor:pointer;}
+.category ul li:hover div ul li a,.mrecord b:hover{background:#dc5f03;transition:all 0.2s ease-out 0s;}
+.NextDt{transform: translateY(50px);transition: transform 0.2s ease-out 0s, opacity 0.5s ease-out 0s;visibility: hidden;padding:15px;margin-bottom:50px;}
+.NextDt button,.location button, .postalcode button, .contactD button, .finalData button{width:auto;padding:10px 15px;background:#222;font:16px 'Roboto',sans-serif;color:#fff;border:none;border-radius:5px;margin-bottom:15px;text-transform:uppercase;display:inline-block;}
+.NextDt button:hover, .location button:hover, .postalcode button:hover, .contactD button:hover, .finalData button:hover{background:#dc5f03;transition:all 0.2s ease-out 0s;}
+.NextDt p{font:14px/20px 'Roboto',sans-serif;color:#222;text-align:center;margin:0;}
+/************************location***************************************/
+.location, .postalcode, .contactD, .finalData{overflow:hidden;}
+.location .container{-webkit-animation-name: fadeInDown;animation-name: fadeInDown;padding:15px;display:none; -webkit-animation-duration: 2s;animation-duration: 2s;-webkit-animation-fill-mode: both;animation-fill-mode: both;overflow}
+.postalcode .container,.contactD .container, .finalData .container{-webkit-animation-name: fadeInDown;animation-name: fadeInDown;padding:15px;display:none; -webkit-animation-duration: 2s;
+animation-duration: 2s;-webkit-animation-fill-mode: both;animation-fill-mode: both;}
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
 
-/* ============================= */
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.location h1, .postalcode h1, .contactD h1, .finalData h1{font:500 30px/35px 'Roboto',sans-serif;color:#333;text-transform:uppercase;}
+.location p, .postalcode p, .contactD p, .finalData p{font:18px 'Open Sans',sans-serif;color:#222;text-transform:uppercase;margin:10px 0 25px 0;}
+.location span, .postalcode span, .contactD span{font:18px 'Open Sans',sans-serif;color:#222;margin:10px 0 25px 0;display:block;width:100%;}
+.location #amount, .location p label{background:transparent;border:none;font:22px 'Open Sans',sans-serif;color:#222;}
+.location .para, .postalcode.para{margin-bottom:10px;}
+.location em{display:block;width:100%;padding:5px 0;text-align:right;font:14px 'Open Sans',sans-serif;color:#222;}
+#slider-range-max{padding:10px;background:transparent;}
+#slider-range-max .ui-slider-range{background:#fff;}
+#slider-range-max .ui-slider-handle{margin:-3px;padding:18px;background:#dc5f03;border-radius:10px;border:none;}
+.backD ul, .postalcode ul, .contactD ul{margin:0;padding:25px 0;text-align:center;margin-top:50px;border-top:2px solid #ccc;width:100%;display:table;}
+.backD ul li, .postalcode ul li, .contactD ul li{display:inline-block;padding:5px 10px;font:14px 'Open Sans',sans-serif;color:#222;cursor:pointer;}
+.backD ul li a, .postalcode ul  li a, .contactD ul li a{width:32px;height:32px;border-radius:50%;background:#222;display:inline-block;line-height:50px;position:relative;}
+.backD ul li a:before, .postalcode ul li a:before , .contactD ul li a:before{background: #ccc none repeat scroll 0 0;content: "";height: 2px;left: 100%;position: absolute;top: 15px;width: 115px;}
+.backD ul li:last-child a:before, .postalcode ul li:last-child a:before, .contactD ul li:last-child a:before{display:none;}
+.backD ul li:hover, .backD ul .active, .postalcode ul li:hover, .postalcode ul .active, .contactD ul li:hover, .contactD ul .active{color:#dc5f03;transition:all 0.2s ease-out 0s;}
+.backD ul li:hover a,.backD ul .active a, .postalcode ul li:hover a, .postalcode ul .active a, .contactD ul li:hover a, .contactD ul .active a{background:#dc5f03;transition:all 0.2s ease-out 0s;}
+.backD ul li:hover a:before, .backD ul .active a:before, .postalcode ul li:hover a:before, .postalcode .active a:before, .contactD ul li:hover a:before, .contactD ul .active a{background:#dc5f03;transition:all 0.2s ease-out 0s;}
+/**************************contactD******************************/
+.contactD h2, .finalData h2{font:500 24px/35px 'Roboto',sans-serif;color:#333;text-transform:uppercase;text-align:center;}
+.contactD .tData, .finalData .tData{display:table;width:100%;margin-bottom:5px;}
+.contactD label, .finalData label {width:30%;float:left;display:inline-block;background:#f7f7f7;font:16px 'Open Sans',sans-serif;color:#333;padding:10px;text-align:left;border:1px solid #ccc;border-right:none;}
+.contactD .textbox, .finalData .textbox{width:70%;float:left;border:1px solid #ccc;}
+.contactD .tLast{background:#333;padding:15px 0 15px 0;margin:15px 0;display:none;}
+.contactD .tLast span{color:#fff;margin-bottom:0;}
+.contactD .tLast b:first-child{padding-top:10px;}
+.contactD .tLast b{font-weight:normal;color:#fff;display:block;width:100%;}
+/**************************finalData******************************/
+#radio {margin-left: 6px !important;}
+.finalData h2{text-align:left;}
+.finalData label{width:40%;}
+.finalData .textbox{width:60%;}
+.finalData .SRange{width:60%;float:left;}
+.finalData .SRange > div{float:left;margin-left:15px;width:45%;}
+.finalData .SRange p{margin:0;}
+.finalData .SRange p #timeValue{margin-left:10px;}
+.finalData .SRange p b{margin-left:25px;}
+.finalData .terms a{color:#333;text-decoration:underline;}
+.finalData .terms a:hover{text-decoration:none;color:#dc5f03;transition:all 0.2s ease-out 0s;}
+.finalData .SRange p label{background:transparent;border:none;padding:4px 0;font-size:13px;}
+.finalData .stData{width:18.6%;background:rgba(255, 255, 255, 1) url("images/arrowD.png") no-repeat scroll 95% center;padding:0 15px;font-family: 'Roboto', sans-serif;font-size:14px;color:#333;border:1px solid #ccc;margin-right:11px;-moz-appearance:none;-webkit-appearance:none; float:left;height:44px;}
+.finalData .stData:last-chid{margin-right:0;}
+.finalData .stData option{padding:10px 15px 11px 15px;font-family: 'Roboto', sans-serif;font-size:14px;color:#333;}
+.finalData .stData:last-child{margin-right:0;}
+.finalData .rdSlider{border-right:1px solid #ccc;}
+.finalData #time, .finalData #month,.finalData #jobtime,.finalData #jobmonth{margin-top:7px;height:7px;}
+.finalData .ui-slider-range{background:#fff;height:7px;}
+.finalData .ui-slider-handle{background:#dc5f03 !important;border:none !important;height:15px !important;width:15px !important;}
+#radio ,#radio div label{width:100%;text-align:center;}
+#radio div label{color:#333;cursor:pointer;}
+#radio > div{width:49%;float:left;position:relative;}
+#radio > div .ui-corner-left,#radio > div .ui-corner-right{position:absolute;opacity:0;left:10px;}
+#radio input[type=radio]:checked  + label {background:#dc5f03;color:#fff;}
+#radio input[type="radio"]:checked + label:before {content:"\f00c";padding:0 5px;font-family:'FontAwesome';}
+/* 
+.finalData .SRange .radio{width:50%;background:#333;padding:10px;float:left;} */
+/*****************************contact**********************************/
+.cnt_box_outer { width:50%; padding:0 15px; display:inline-block; float:left;}
+.cnt_box { background:#f5f5f5; border:1px solid #dadada; width:100%; height:270px; display:table; padding:15px; margin-bottom:5px; font:bold 15px Arial, Helvetica, sans-serif;}
+.cnt_box_outer h2 { background:#dc5f03; color:#fff; font:600 16px 'Open Sans', Arial, Helvetica, sans-serif; padding:10px; text-transform:uppercase;}
+.cnt_box h3 { color:#dc5f03; font:600 16px 'Open Sans', Arial, Helvetica, sans-serif; margin-top:0;}
+.cnt_box a { color:#dc5f03;}
+.clinic { overflow:hidden; height:330px;}
+.map { width:100%; height:300px;}
+
+.cnt_box_outer .textbox { width:100%; border:1px solid #dadada; background:#fafafa; padding:7px 15px; margin-bottom:10px; font-family:'Roboto', sans-serif; font-size:14px; color:#222;}
+.cnt_box_outer .button { padding:10px 30px;background:#000;color:#fff;font-family: 'Roboto', sans-serif;font-size:18px;border:none;}
+.cnt_box_outer .button:hover { background:#dc5f03;}
+/*****************************text-us****************************/
+#textus { position:fixed; right:-320px; top:100px; z-index:1000; background:#f2f2f2; width:320px;}
+#textus h4 { background:#dc5f03; color:#fff; font:bold 24px 'Open Sans', Arial, Helvetica, sans-serif; padding:10px 15px; margin:0; text-transform:uppercase;}
+.textus-open { position:absolute; right:100%; top:0; cursor:pointer;}
+.textus-close { float:right; color:#fff; cursor:pointer;}
+#textus form { padding:15px;}
+#textus label { font:bold 13px/24px Arial, Helvetica, sans-serif; color:#757575; display:block; width:100%;}
+#textus label span { color:#dc5f03;}
+#textus .textbox { width:100%; border:1px solid #dadada; padding:7px 15px; font:14px 'Roboto', Arial, Helvetica, sans-serif; color:#222;}
+#textus .button { padding:7px 25px; background:#000; color:#fff; font:18px 'Roboto', Arial, Helvetica, sans-serif; border:none; margin-top:15px;}
+#textus .button:hover { background:#dc5f03;}
+.finalData .mlabel {width: 45%;}
+.agreeErd #Agree-error{left: 0;
+    position: absolute;
+    top: 15px;}
+/**************************media*******************************/
+.tData { position:relative;}
+label.error { width:auto; position:relative; padding:10px 15px; margin-top:7px; background:#dc5f03; color:#fff; font:600 13px/15px Arial, Helvetica, sans-serif; border-radius:4px; text-shadow:1px 1px 1px rgba(0,0,0,.4);}
+label.error:before { position:absolute; bottom:100%; left:10px; content:""; width:0; height:0; border:9px solid transparent; border-bottom-color:#dc5f03;}
+@media screen and (min-width:992px){.Formvalidate1tData label.error { position:absolute; left:40%; top:100%; margin:0;z-index: 999;}}
+/**************************media*******************************/
+@media screen and (-webkit-min-device-pixel-ratio:1){
+.finalData .stData{padding: 10px 15px;}
+}
+/*for Desktop View (Apply similar to Bootstrap class col-md-)*/
+@media screen and (min-width:992px) and (max-width:1199px)
+{
+.Navbar ul li a{padding:10px 20px;}
+/******************Testimonials**********************//* 
+#Client .carousel-caption{bottom:0px;} */
+#Client .carousel-caption p{padding:15px 25px 15px;}
+#Client .carousel-caption a span, #Client .carousel-caption a em{margin-top:20px;}
+.works .step{width:31.2%;}
+.contact form .textbox{width:100%;}
+.sitemap { padding-bottom:0;}
+/*******************meet*****************************/
+.meet .meet-data { top:0;}
+.meet .meet-data h2 { font-size:35px;}
+.meet .meet-data h5{  padding-bottom: 10px; padding-top:0;}
+/*********************Finance**********************/
+.category ul li{width:19.12%;margin-right:10px;}
+.category ul li:nth-child(3n) div ul{padding:0;}
+.finalData .SRange > div{width:44%;}
+}
+/*for Tablet View (Apply similar to Bootstrap class col-sm-)*/
+@media screen and (min-width:768px) and (max-width:991px)
+{
+.Navbar ul li a{padding:10px 8px;}
+/************************/
+.works .marg .text-center{padding:15px 5px;}
+.sliderDt .carousel-caption{bottom:30px;}
+.sliderDt .carousel-caption .carousel-dt{width:400px;}
+.sliderDt .carousel-caption .carousel-dt h1{font-size:26px;}
+.sliderDt .carousel-caption .carousel-dt span{font-size:15px;}
+.sliderDt .carousel-caption a{font-size:16px;}
+.works .step{width:100%;}
+.contact .address h4{font-size:30px;}
+.contact form .textbox{width:100%;}
+.contact form div{width:100%;}
+.sitemap { padding-bottom:0;}
+/******************Testimonials**********************/
+/*#Client .carousel-caption{bottom:60px;left:-70px;}
+#Client .carousel-caption a{position:absolute;right:-250px;top:40px;}
+#Client .carousel-caption p:before{display:none;}*/
+#Client .carousel-caption p{padding:15px 25px 15px;}
+/*******************meet*****************************/
+.meet .meet-data {width:60%;padding:8px 25px; top:0; right: 0;}
+.meet .meet-data h2 { font-size:30px;}
+.meet .meet-data .orange { font-size:16px;}
+.meet .meet-data p{  padding-bottom: 10px; padding-top:0; line-height:1.4;}
+/*********************Finance**********************/
+.category ul li{width:100%;margin-bottom:30px;}
+.category ul li div ul li{text-align:center;}
+.category ul li:last-child{margin-bottom:0;}
+.category ul li div ul li i{float:none;}
+.category ul li:nth-child(3n) div ul{padding:0;margin-left:0;margin-top:0;background:transparent;height:auto;}
+/****************************finance*****************/
+.contactD label, .finalData label,.contactD .textbox, .finalData .textbox,.finalData .SRange,.finalData .SRange > div, .finalData .stData{width:100%;}
+.contactD label, .finalData label{border-right:1px solid #ccc;text-align:center;}
+.finalData .SRange > div{display:block;margin-bottom:10px;margin-left:0;}
+.finalData .SRange p b{display:block;width:100%;text-align:center;margin-left:0;}
+.finalData #time, .finalData #month,.finalData #jobtime,.finalData #jobmonth{margin-top:15px;height:15px;}
+.finalData .ui-slider-range{background:#fff;height:15px;}
+.finalData .ui-slider-handle{background:#dc5f03 !important;border:none !important;height:20px !important;width:20px !important;}
+.finalData .col-sm-6{padding:0;width:100%;margin-bottom:10px;}
+.backD{margin-bottom:15px;display:table;width:100%;}
+.backD ul{display:none;}
+#radio > div{width:50%;}
+#radio { margin-left: 0 !important;}
+.finalData .SRange p #timeValue{margin-left:0;}
+}
+/*for Mobile View (Apply similar to Bootstrap class col-xs-)*/
+@media screen and (min-width:0) and (max-width:767px)
+{
+.sliderDt .carousel-caption{bottom:0px;left:10px;}
+.sliderDt .carousel-caption .carousel-dt{padding:15px 25px;width:260px;}
+.sliderDt .carousel-caption .carousel-dt h1{font-size:16px;}
+.sliderDt .carousel-caption .carousel-dt span, .sliderDt .carousel-caption a{font-size:12px;}
+.sitemap { padding-bottom:0;}
+/******************Testimonials**********************/
+.navbar-brand{display:block;}
+.category ul li div ul li{font-size:18px;}
+.Navbar ul li, .Navbar ul li a, .Navbar ul li div ul li a{display: block;text-align: center;width: 100%;}
+.Navbar ul li div{position:inherit;height:250px;overflow-y:auto;}
+.Navbar ul li div ul{display: block;text-align: center;width: 100%;}
+.sitemap ul li{width:100%; text-align:center;}
+/****************Work Section***********************/
+.works .step{width:100%;}
+.contact .address{position:inherit;}
+.contact form .textbox,.contact .address, .contact form div{width:100%;}
+/******************Testimonials**********************/
+/*#Client .carousel-caption{bottom:50px;left:-70px;}
+#Client .carousel-caption a{position:absolute;right:-250px;top:40px;}
+#Client .carousel-caption p:before{display:none;}*/
+#Client .carousel-caption p{padding:15px 25px 15px;}
+#event_map { width:100% !important; height:200px !important;}
+/*******************meet*****************************/
+.meet .meet-data {width:95%;padding:8px 25px; top:0; right: 0;}
+.meet .meet-data h2 { font-size:18px;}
+.meet .meet-data .orange { font-size:16px;}
+.meet .meet-data p{  padding-bottom: 10px; padding-top:0; line-height:1.4;}
+.meet .meet-data .butto { padding:6px 25px;}
+/*********************Finance**********************/
+.category ul li{width:100%;margin-bottom:10px;}
+.category ul li div ul li{text-align:center;}
+.category ul li:last-child{margin-bottom:0;}
+.category ul li div ul li i{float:none;}
+.category ul li:nth-child(3n) div ul{top:0; padding:0;margin-left:0;margin-top:0;background:#fff;height:auto;width: 93%;position: absolute;}
+/****************************finance*****************/
+.contactD label, .finalData label,.contactD .textbox, .finalData .textbox,.finalData .SRange,.finalData .SRange > div, .finalData .stData{width:100%;}
+.contactD label, .finalData label{border-right:1px solid #ccc;text-align:center;}
+.finalData .SRange > div{display:block;margin-bottom:10px;margin-left:0;}
+.finalData .SRange p b{display:block;width:100%;text-align:center;margin-left:0;}
+.finalData #time, .finalData #month,.finalData #jobtime,.finalData #jobmonth{margin-top:15px;height:15px;}
+.finalData .ui-slider-range{background:#fff;height:15px;}
+.finalData .ui-slider-handle{background:#dc5f03 !important;border:none !important;height:20px !important;width:20px !important;}
+.finalData .col-sm-6{padding:0;}
+.backD{margin-bottom:15px;display:table;width:100%;}
+.backD ul{display:none;}
+#radio > div{width:50%;}
+#Formvalidate label,#Formvalidate1 .rdlabel1{display:none;}
+.finalData .SRange p #timeValue{margin-left:0;}
+#Formvalidate1 .rdlabel{background:transparent !important;border:none;}
+#radio { margin-left: 0 !important;}
+.finalData .stData{margin-bottom:5px;}
+.category ul{padding:0 !important;}
+.cmargin{margin-top: 330px;}
+.agreeErd{display:table;padding:0 15px !important;width:100%;}
+}
+/*for Small Screen Mobile*/
+@media screen and (max-width:499px)
+{
+.cnt_box_outer { width:100%; float:none;}
+.cnt_box { height:auto; margin-bottom:0;}
+.sliderDt .carousel-caption{display:none;}
+#Client .carousel-caption p { margin:0 15px;}
+#Client .carousel-caption a span { float:none;}
+#Client .carousel-caption a em { line-height:normal; text-align:center;}
+.sitemap .site-list .pic { width:100%;}
+/*******************meet*****************************/
+.meet .meet-data { right: 35px;  padding:10px 0; width:51%;}
+.meet .meet-data h2{font-size: 16px;}
+.meet .text-center { margin-top:10px;}
+.meet .meet-data p , .meet .meet-data .orange { display:none;}
+.meet .meet-data .butto { padding:4px 15px; font-size: 14px;}
+.sitemap .site, .sitemap .site-list { width:90%;}
+/****************************finance*****************/
+.contactD label, .finalData label,.contactD .textbox, .finalData .textbox,.finalData .SRange,.finalData .SRange > div, .finalData .stData{width:100%;}
+.contactD label, .finalData label{border-right:1px solid #ccc;text-align:center;}
+.finalData .SRange > div{display:block;margin-bottom:10px;margin-left:0;}
+.finalData .SRange p b{display:block;width:100%;text-align:center;margin-left:0;}
+.finalData #time, .finalData #month,.finalData #jobtime,.finalData #jobmonth{margin-top:15px;height:15px;}
+.finalData .ui-slider-range{background:#fff;height:15px;}
+.finalData .ui-slider-handle{background:#dc5f03 !important;border:none !important;height:20px !important;width:20px !important;}
+.finalData .col-sm-6{padding:0;}
+.backD{margin-bottom:15px;display:table;width:100%;}
+.backD ul{display:none;}
+#radio > div{width:50%;}
+}
+.mdData{display:none;background:#fff;padding:10px;text-align:center;color:#333;box-shadow:0 0 2px 0 rgba(0, 0, 0, 0.2);border-radius:0px 0 10px 10px;}
+.FinishSubmit{display: none;}
+
+/* -- Edmontonautoloan styles --*/
+
+/* =============================p */
 @media only screen and (max-width: 1140px) {
 .header-search-box{width:270px; margin-left:0;}
 ul.item-list li{width:33.3%;}

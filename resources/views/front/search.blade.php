@@ -67,49 +67,6 @@
                @endif
                <!-- panel end -->
 
-               @if(!$applied_filters->has("condition"))
-               <div class="panel">
-                  <div class="panel-heading">
-                     <h3 class="panel-title">Condition</h3>
-                  </div>
-                  <div class="panel-body">
-                     <div class="item-type-toggle">
-                        <input type="radio" name="condition" id="used" value="used" {{$applied_filters->get("condition")=="used"?'checked="checked"':""}}"/> <label for="used" class="waves-effect waves-light">USED</label>
-                        <input type="radio" name="condition" id="both-condition" value="both" {{$applied_filters->has("condition")?"":'checked="checked"'}}" /> <label for="both" class="waves-effect waves-light"> BOTH</label>
-                        <input type="radio" name="condition" id="new" value="new" {{$applied_filters->get("condition")=="new"?'checked="checked"':""}}"/> <label for="new" class="waves-effect waves-light">NEW</label>
-                     </div>
-                  </div>
-               </div>
-               @endif
-               <!-- panel end -->
-               <!-- panel start -->
-               @if(!$applied_filters->has("seller"))
-               <div class="panel">
-                  <div class="panel-heading">
-                     <h3 class="panel-title">Seller</h3>
-                  </div>
-                  <div class="panel-body">
-                     <div class="item-type-toggle">
-                        <input type="radio" id="dealer" name="seller" value="dealer" {{$applied_filters->get("seller")=="dealer"?'checked="checked"':""}}"/> <label for="dealer" class="waves-effect waves-light">DEALER</label>
-                        <input type="radio" id="both-seller" name="seller" value="both" {{$applied_filters->has("seller")?"":'checked="checked"'}}" /> <label for="both-seller" class="waves-effect waves-light"> BOTH</label>
-                        <input type="radio" id="private" name="seller" value="private" {{$applied_filters->get("seller")=="private"?'checked="checked"':""}}"/> <label for="private" class="waves-effect waves-light">PRIVATE</label>
-                     </div>
-                  </div>
-               </div>
-               @endif
-               <!-- panel end -->
-               <!-- <div class="panel">
-                  <div class="panel-heading">
-                     <h3 class="panel-title">Postal Code</h3>
-                  </div>
-                  <div class="panel-body">
-                     <div class="filter-search">
-                        <input type="text"  value="" placeholder="Enter Postal Code.." />
-                        <input type="submit" value="Go" class="btn waves-effect waves-light filter-btn" />
-                     </div>
-                  </div>
-               </div> -->
-               <!-- panel end -->
                <!-- panel start -->
                @if(isset($sidebar_data["makes"]))
                <div class="panel">
@@ -143,22 +100,6 @@
                @endif
                <!-- panel end -->
 
-               <!-- panel start -->
-               @if(isset($sidebar_data["cities"]))
-               <div class="panel">
-                  <div class="panel-heading">
-                     <h3 class="panel-title">Select City</h3>
-                  </div>
-                  <div class="panel-body">
-                     <ul class="link-list">
-                        @foreach($sidebar_data["cities"] as $city)
-                        <li><a href="{{Request::url()}}/city-{{$city->city_name}}">{{$city->city_name}} ({{$city->vehicles_count}})</a></li>
-                        @endforeach
-                     </ul>
-                  </div>
-               </div>
-               @endif
-               <!-- panel end -->
                
                @if(!$applied_filters->has("transmission"))
                <div class="panel">
@@ -234,48 +175,17 @@
 
             <!-- Main Container Start -->
             <div class="main-container fix-content">
-               <!-- Featured Container start -->
-               @if($featured_vehicles->count())
-               <div class="panel">
-                  <div class="panel-heading">
-                     <h3 class="panel-title">Our Featured List</h3>
-                  </div>
-                  <div class="panel-body">
-                     <div class="featured-list featured-slider">
-                        @foreach($featured_vehicles as $vehicle)
-                        <!-- fetured-box start -->
-                        <div>
-                           <div class="fetured-box">
-                              <a href="/vehicle/{{$vehicle->slug}}">
-                                 <h4>{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}}</h4>
-                                 <div class="featured-img">
-                                    <img src="{{$vehicle->photo()}}" alt=""/>
-                                    <span class="overlay"></span>
-                                 </div>
-                                 <div class="featured-details">
-                                    <div class="price"><i class="fa fa-tag"></i> ${{$vehicle->price}}</div>
-                                    <div class="run"><i class="fa fa-dashboard"></i> {{$vehicle->odometer}}KM</div>
-                                 </div>
-                              </a>
-                           </div>
-                        </div>
-                        @endforeach
-                        <!-- fetured-box end -->
-                     </div>
-                  </div>
-               </div>
-               @endif
-               <!-- Featured Container end -->
+
                <!-- Alert start -->
                <div class="alert" role="alert"> {{ $vehicles->total() }} Vehicles were found with the given criteria</div>
                <!-- Alert end -->
                <!-- Filter start -->
                <div class="filter-container">
                   <div class="filter-box">Sort By</div>
-                  <div class="filter-box">Date<a id="created_at-asc" href="#" class="up"></a><a id="created_at-desc" href="#" class="down"></a></div>
-                  <div class="filter-box">Price<a id="price-asc" href="#" class="up"></a><a id="price-desc" href="#" class="down"></a></div>
-                  <div class="filter-box">Odometer<a id="odometer-asc" href="#" class="up"></a><a id="odometer-desc" href="#" class="down"></a></div>
                   <div class="filter-box">Year<a id="year-asc" href="#" class="up"></a><a id="year-desc" href="#" class="down"></a></div>
+                  <div class="filter-box">Make<a id="make_name-asc" href="#" class="up"></a><a id="make_name-desc" href="#" class="down"></a></div>
+                  <div class="filter-box">Model<a id="model_name-asc" href="#" class="up"></a><a id="model_name-desc" href="#" class="down"></a></div>
+                  <div class="filter-box">Price<a id="price-asc" href="#" class="up"></a><a id="price-desc" href="#" class="down"></a></div>
                </div>
                <!-- Filter end -->
                <!-- Result Container start -->
@@ -309,7 +219,7 @@
                                     <p>{{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</p>
                                     <p>Added {{$vehicle->created_at->diffForHumans()}}</p>
                                     <p>{{$vehicle->bodyStyleGroup->body_style_group_name or ''}} <span class="part">|</span> {{$vehicle->ext_color->color or ''}} <span class="part">|</span> {{$vehicle->transmission}}</p>
-                                    <h4><a href="/dealer/{{$vehicle->user->slug or ''}}">{{$vehicle->user->name or ''}}</a></h4>
+                                    <h4>{{$vehicle->user->name or ''}}</h4>
                                  </div>
                               </div>
                            </div>

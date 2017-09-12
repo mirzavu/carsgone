@@ -42,70 +42,72 @@
 </script>
 <!-- header start -->
 <header>
-	<!-- header upper start -->
-	<div class="header-upper">
-    	<div class="container">
-        	<ul class="upper-nav">
-            	<li id="location-box" class="location-box">
-                <a href="#"><i class="fa fa-map-marker"></i><span> {{ $location['place'] or 'Location'}}</span></a>
-                <div style="position:relative;display:none;">
-                  <span style="display: block;overflow: hidden;padding-right:6px">
-                    <input id="searchTextField"  type="text" name="" placeholder="City or Postal Code" autocomplete="on">
-                  </span>
-                  <a onclick="searchPlace()" class="btn waves-effect waves-light waves-input-wrapper">Go</a>
-                </div>
-              </li>
-              <li><a href="#">Contact: 1-855-328-6002</a></li>
-            </ul>
-            <ul class="upper-nav right">
-            @if (Auth::check())
-              <li id="dashboard-li"><a href="/dashboard">Dashboard</a></li>
-              <li id="logout-li"><a href="/logout">Logout</a></li>
-            @else
-            	<li id="signup-li"><a class="modal-trigger" href="#signup">Sign-Up</a></li>
-              <li id="login-li"><a class="modal-trigger" href="#member">Login</a></li>
-            @endif
-            </ul>
-        </div>
-    </div>
-    <!-- header upper end -->
-    <!-- header lower start -->
-    <div class="header-lower">
-    	<nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" alt="Logo Image" /></a>
-          <a href="/search" class="hero-btn"><span>Browse Cars</span></a>
-          <div class="header-search">
-          <div class="header-search-box">
-            <form id="search-form" action="/searchterm" method="GET">
-          	<input id="search_text" name="search_text" type="text" value="" placeholder="Full content search" class="search-input" required />
-            {{ csrf_field() }}
-            
-            {{-- fa-refresh fa-spin fa-search --}}
-            <button id="search_icon" type="submit" class="search-submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-            </form>
-            </div>
+<div class="Navbar">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="col-sm-3 logo">
+                                   <a href="https://www.edmontonautoloans.com/" id="logo" title="EDMONTON AUTO LOANS" rel="home">
+                 <img src="https://www.edmontonautoloans.com/wp-content/themes/creditapp/images/logo.jpg" alt="EDMONTON AUTO LOANS">
+                </a> 
+                         
+                  </div>
+        <nav class="col-sm-9 text-right">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">Menu</a>
           </div>
-         
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-           <ul class="nav navbar-nav navbar-right">
-                <li {{{ (Request::is('search') ? 'class=active' : '') }}}><a id="browse-link" href="/search"><span>Browse Cars</span></a></li>
-                <li {{{ (Request::is('post') ? 'class=active' : '') }}}><a href="/post"><span>Post Ad</span></a></li>
-                <li {{{ (Request::is('auto-dealers/info') ? 'class=active' : '') }}}><a href="/auto-dealers/info"><span>Dealers</span></a></li>
-                <li {{{ (Request::is('autoloans') ? 'class=active' : '') }}}><a href="/autoloans"><span>Car Loans</span></a></li>
-                <li><a href="/search/seller-private"><span>Private</span></a></li>
-           </ul>
-        </div><!--/.nav-collapse -->
+          <ul class="navbar-collapse collapse collapse-menu padded" id="navbar">
+            <li><a class="active">Home</a></li><li><a href="http://listings2011.boostmotorgroup.com/search.aspx?DealershipID=5715">Inventory</a></li><li><a href="https://www.edmontonautoloans.com/finance/">Finance</a></li><li><a href="https://www.edmontonautoloans.com/reviews/">Reviews</a></li><li><a href="https://www.edmontonautoloans.com/contact/">Contact Us</a></li><li><a><i class="not fa fa-phone"></i>1-855-227-1669</a></li>          </ul>
+        </nav>
       </div>
-    </nav>
     </div>
-    <!-- header lower end -->
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  /**************************************/
+  $("#textus .textus-open").click(function()
+  {
+    $(this).hide();
+    $("#textus").animate({'right':'0'},'slow');
+  });
+  $("#textus .textus-close").click(function()
+  {
+    $("#textus").animate({'right':'-320px'},'slow');
+    $("#textus .textus-open").show('slow');
+  });
+});
+</script>
+
+<div id="textus">
+  <a class="textus-open"><img src="https://www.edmontonautoloans.com/wp-content/themes/creditapp/images/text-us.jpg"></a>
+  <h4>Text Us <a class="textus-close"><i class="fa fa-times-circle"></i></a></h4>
+  <div role="form" class="wpcf7" id="wpcf7-f88-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"></div>
+<form action="/#wpcf7-f88-o1" method="post" class="wpcf7-form theme_1 errorMsgshow" novalidate="novalidate">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="88">
+<input type="hidden" name="_wpcf7_version" value="4.3">
+<input type="hidden" name="_wpcf7_locale" value="en_US">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f88-o1">
+<input type="hidden" name="_wpnonce" value="427bd55f14">
+</div>
+<div><label>Phone*</label><span class="wpcf7-form-control-wrap phone"><input type="text" name="phone" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required textbox number required" aria-required="true" aria-invalid="false"></span></div>
+<div><label>Message<span>*</span></label><span class="wpcf7-form-control-wrap Message"><textarea name="Message" cols="40" rows="3" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required textbox required" aria-required="true" aria-invalid="false"></textarea></span></div>
+<div class="text-right"><input type="submit" value="SUBMIT" class="wpcf7-form-control wpcf7-submit button"><img class="ajax-loader" style="visibility: hidden;"></div>
+<div class="wpcf7-response-output wpcf7-display-none"></div></form></div> <!--<form>
+    <div><label>Email<span>*</span></label><input type="text" class="textbox" required /></div>
+    <div><label>Phone<span>*</span></label><input type="text" class="textbox" required /></div>
+    <div><label>Message<span>*</span></label><textarea class="textbox" required></textarea></div>
+    <div class="text-right"><input type="submit" class="button" value="SUBMIT" /></div>
+  </form>-->
+</div>
+
 </header>
 
 @if(Session::has('success'))

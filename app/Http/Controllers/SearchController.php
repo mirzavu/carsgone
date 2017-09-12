@@ -21,11 +21,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class SearchController extends Controller
 {
-	protected $filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
-	protected $applied_filters = array('province','city','model', 'make', 'year', 'condition','body', 'price', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
-	protected $url_filters = array('make','model', 'province', 'city', 'body', 'seller', 'dealer');
+	protected $filters = array('sort','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
+	protected $applied_filters = array('model', 'make', 'year', 'condition','body', 'price', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
+	protected $url_filters = array('make','model', 'body', 'seller', 'dealer');
 	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon', 'place','odometer', 'distance', 'transmission', 'content');
-	protected $clear_filters = array('sort','province','city','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
+	protected $clear_filters = array('sort','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
 	protected $dealer_ids;
 	protected $url_params;
 
@@ -44,42 +44,9 @@ class SearchController extends Controller
 			}
 		}
 		
+		// dd($conditions);
 
-		if(!$conditions->get('province'))  // set local area if no province in url
-		{
-			$loc = getLocation($request);
-			$conditions->put('lat',$loc['lat']);
-			$conditions->put('lon',$loc['lon']);
-			if(array_key_exists('place', $loc)){
-				$conditions->put('place',$loc['place']);
-			}
-			$data['location'] = $loc;
-		}
-		else
-		{
-			$conditions->forget('place');
-		}
 		$this->validateSaveConditions($request, $conditions);
-
-		//distance set
-		if(empty($loc['place'])){
-			$conditions->put('distance','All');
-		}
-
-		if(!$conditions->get('distance'))
-		{
-			$conditions->put('distance','50');
-		}
-
-		if($conditions->get('dealer')) 
-		{
-			$conditions->forget('distance');
-			$conditions->forget('province');
-		}
-		elseif($conditions->get('province'))
-		{
-			$conditions->forget('distance');
-		}
 		
 		//Sorting set
 		if($conditions->get('sort') && $conditions->get('sort')!="name-desc")
@@ -92,6 +59,8 @@ class SearchController extends Controller
 			$direction = 'desc';
 		}
 
+		// dd($sort);
+
 		if(Auth::check())
 		{
 			$conditions->put('user',Auth::user()->id);
@@ -103,16 +72,6 @@ class SearchController extends Controller
         SEO::setDescription(trim($title['description']));
         SEOMeta::addKeyword(['new cars', 'used cars', 'auto classifieds', 'search cars', 'trucks', 'SUVs', 'vans']);
 
-		// $lat = 53.421879;
-  //       $lon = - 113.4675614;
-        // A different method - replace whereIn with join for dealers
-     //       $ss = Vehicle::join('dealers', 'vehicles.dealer_id', '=', 'dealers.id')
-     // ->select(DB::raw("dealers.id"))
-     // ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < 200")->paginate(15);
-     
-		// $this->dealer_ids = Dealer::addSelect(DB::raw("id, ( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) AS distance"))->havingRaw('distance < '.$conditions->get('distance'))->pluck('id')->toArray();
-		//$query = Vehicle::applyFilter($conditions, $dealer_ids)->orderBy($sort, $direction)->take(8)->get();
-		//dd($query);
 
 		$data['sidebar_data'] = $this->getSidebarData($conditions);
 		
@@ -123,9 +82,9 @@ class SearchController extends Controller
 			            ->groupBy('makes.id')
 			            ->get();
         $data['sort'] = $sort.'-'.$direction; 
-        $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy('vehicles.'.$sort, $direction)->paginate(15);
-        
-        $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
+        $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy($sort, $direction)->paginate(15);
+        // $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
+        // dd($data['vehicles']);
         $data['applied_filters'] = $this->getAppliedFilters($conditions);
         $data['url_params'] = $params;
         $data['logged_in'] = Auth::check();
@@ -138,21 +97,13 @@ class SearchController extends Controller
 	
 	public function getTitle($conditions)
 	{
-		$loc = '';
-		if($conditions->get('province'))
-		{
-			if($conditions->get('city'))
-				$loc = ' in '.$conditions->get('city').", ".$conditions->get('province');
-			else
-				$loc = ' in '.$conditions->get('province');
-		}
 		$price = '';
 		if($conditions->get('price'))
 		{
 			$price = ' within range '.$conditions->get('price');
 		}
-		$title['title'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and Used Cars $price| Buy Sell Vehicles Nearby$loc";
-		$title['description'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and used cars. Auto dealers - private for sale by owner buy and sell cars, trucks, SUVs & vans$loc$price";
+		$title['title'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and Used Cars $price| Buy Sell Vehicles Nearby in Edmonton, Alberta";
+		$title['description'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and used cars. Auto dealers - private for sale by owner buy and sell cars, trucks, SUVs & vans in Edmonton, Alberta$price";
 		return $title;
 	}
 
@@ -171,7 +122,6 @@ class SearchController extends Controller
 		{
 			//$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions, $this->dealer_ids)->selectRaw('count(makes.id) as make_count, make_name')->groupBy('makes.make_name')->orderBy('make_count','desc')->get();
 			$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions)
-				    ->join('makes', 'vehicles.make_id', '=', 'makes.id')
 			            ->selectRaw('count(makes.id) as make_count, makes.make_name')
 				    ->groupBy('makes.make_name')
 			            ->orderBy('make_count','desc')->get();
@@ -180,7 +130,7 @@ class SearchController extends Controller
 		if($conditions->get('make') && !$conditions->get('model'))
 		{
 
-			$sidebar_data['models'] = Vehicle::ApplyFilter($conditions)->join('models', 'vehicles.model_id', '=', 'models.id')->selectRaw('count(models.id) as model_count, model_name')->groupBy('models.model_name')->orderBy('model_count','desc')->get();
+			$sidebar_data['models'] = Vehicle::ApplyFilter($conditions)->selectRaw('count(models.id) as model_count, model_name')->groupBy('models.model_name')->orderBy('model_count','desc')->get();
 
 			// $sidebar_data['models'] = Make::where('make_name',$conditions->get('make'))->first()->models()->withCount(['vehicles' => function($query) use ($conditions){
 			// 	return $query->applyFilter($conditions);
@@ -190,11 +140,11 @@ class SearchController extends Controller
 
 
 		//Get city
-		if($conditions->get('province') && !$conditions->get('city'))
-		{
-			 $province_id= Province::where('province_name','=',$conditions->get('province'))->value('id');
-			 $sidebar_data['cities'] = City::where('province_id','=',$province_id)->withCount('vehicles')->orderBy('city_name', 'asc')->get();
-		}
+		// if($conditions->get('province') && !$conditions->get('city'))
+		// {
+		// 	 $province_id= Province::where('province_name','=',$conditions->get('province'))->value('id');
+		// 	 $sidebar_data['cities'] = City::where('province_id','=',$province_id)->withCount('vehicles')->orderBy('city_name', 'asc')->get();
+		// }
 		return $sidebar_data;
 	}
 

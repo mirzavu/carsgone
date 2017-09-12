@@ -104,69 +104,6 @@ class Vehicle extends Model
         return number_format($value);
     }
 
-    // public function scopeApplyFilter($query, $conditions, $featured=0)
-    // {
-
-    //     return $query->where(function($q) use ($conditions){
-    //         if ($conditions->get('content')) {
-    //             $q->where('text', 'like', '%'.$conditions->get('content').'%' );
-    //         }
-    //         if ($conditions->get('condition')) {
-    //             $q->where('condition', $conditions->get('condition'));
-    //         }
-    //         if ($conditions->get('transmission')) {
-    //             $q->where('transmission', $conditions->get('transmission'));
-    //         }
-    //         if ($conditions->get('price')) {
-    //             $range = explode('-', $conditions->get('price'));
-
-    //             $q->where('price', '>=',$range[0]);
-    //             $q->where('price', '<=',$range[1]);
-    //         }
-    //         if ($conditions->get('odometer')) {
-    //             $range = explode('-', $conditions->get('odometer'));
-
-    //             $q->where('odometer', '>=',$range[0]);
-    //             $q->where('odometer', '<=',$range[1]);
-    //         }
-    //         if ($conditions->get('year')) {
-    //             $range = explode('-', $conditions->get('year'));
-
-    //             $q->where('year', '>=',$range[0]);
-    //             $q->where('year', '<=',$range[1]);
-    //         }
-
-    //         return $q;
-    //     })->whereHas('model', function($q) use ($conditions) {
-    //         if ($conditions->get('model')) {
-    //             $q->where('model_name', $conditions->get('model'));
-    //         }
-    //         return $q;
-    //     })->whereHas('make', function($q) use ($conditions) {
-    //         if ($conditions->get('make')) {
-    //             $q->where('make_name', $conditions->get('make'));
-    //         }
-    //         return $q;
-    //     })->whereHas('dealer.province', function($q) use ($conditions) {
-    //         if ($conditions->get('province')) {
-    //             $q->where('province_name', $conditions->get('province'));
-    //         }
-    //         return $q;
-    //     })->whereHas('dealer', function($q) use ($conditions, $featured) {
-    //         if($featured){
-    //             $q->where('featured', 1);
-    //         }
-    //         if ($conditions->get('lat')) {
-    //             //$conditions->put('distance',5000);
-    //             $lat = $conditions->get('lat');
-    //             $lon = $conditions->get('lon');
-    //             $lat = 53.421879;
-    //             $lon = -113.4675614;
-    //             $q->select(DB::raw("id, ( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) AS distance"))->where('distance','<',$conditions->get('distance')); //3959 for miles
-    //         }
-    //         return $q;
-    //     });
-    // }
 
     function scopeApplyFilter($query, $conditions, $featured = 0)
     {
@@ -176,10 +113,6 @@ class Vehicle extends Model
                 if ($conditions->get('content'))
                 {
                     $q->where('text', 'like', '%' . $conditions->get('content') . '%');
-                }
-                if ($conditions->get('condition'))
-                {
-                    $q->where('condition', $conditions->get('condition'));
                 }
                 if ($conditions->get('transmission'))
                 {
@@ -217,16 +150,23 @@ class Vehicle extends Model
                 return $q;
             }
         );
-        
+
+        if(!$this->_hasJoin($query, 'makes')){
+            $query->join('makes', 'vehicles.make_id', '=', 'makes.id');
+        }
+
+        if(!$this->_hasJoin($query, 'models')){
+            $query->join('models', 'vehicles.model_id', '=', 'models.id');
+        }
+
         if ($conditions->get('model'))
         {
-            $query->join('models', 'vehicles.model_id', '=', 'models.id');
+            
             $query->where('model_name', $conditions->get('model'));
         }
             
         if ($conditions->get('make'))
         {
-            $query->join('makes', 'vehicles.make_id', '=', 'makes.id');
             $query->where('make_name', $conditions->get('make'));
         }
 
@@ -242,53 +182,28 @@ class Vehicle extends Model
             $query->where('users.name', $conditions->get('dealer'));
         }
 
-        if ($conditions->get('province'))
-        {
-            if(!$this->_hasJoin($query, 'users')){
-                $query->join('users', 'vehicles.user_id', '=', 'users.id');
-            }
+        // if ($conditions->get('province'))
+        // {
+        //     if(!$this->_hasJoin($query, 'users')){
+        //         $query->join('users', 'vehicles.user_id', '=', 'users.id');
+        //     }
             
 
-            $query->join('provinces', 'users.province_id', '=', 'provinces.id');
-            $query->where('province_name', $conditions->get('province'));
-        }
+        //     $query->join('provinces', 'users.province_id', '=', 'provinces.id');
+        //     $query->where('province_name', $conditions->get('province'));
+        // }
 
-        if ($conditions->get('city'))
-        {
-            $query->join('cities', 'users.city_id', '=', 'cities.id');
-            $query->where('city_name', $conditions->get('city'));
+        if(!$this->_hasJoin($query, 'users')){
+            $query->join('users', 'vehicles.user_id', '=', 'users.id');
         }
-
-        if ($conditions->get('distance'))
-        {
-            $query->leftJoin('users', 'vehicles.user_id', '=', 'users.id');
-            if($conditions->get('distance')!="All")
-            {
-                $lat = $conditions->get('lat');
-                $lon = $conditions->get('lon');
-                $query->select(DB::raw("users.id"))
-                     ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < ".$conditions->get('distance'));
-            }
-            
-
-        }
-
-        if($featured ==1)
-        {
-            $query->where('users.featured', 1)->orWhere('vehicles.featured', 1);
-        }
+        $query->join('cities', 'users.city_id', '=', 'cities.id');
+        $query->where('city_name', 'Edmonton');
+        
 
         if ($conditions->get('user'))
         {
             $query->leftJoin('vehicle_user', 'vehicles.id', '=', 'vehicle_user.vehicle_id')
             ->select("vehicle_user.user_id AS saved");
-        }
-
-        if ($conditions->get('seller'))
-        {
-            $role = ($conditions->get('seller') == "private"?"member":"dealer");
-            // dd($role);
-            $query->where('users.role', '=',$role);
         }
         $query->addSelect('vehicles.*');
     }

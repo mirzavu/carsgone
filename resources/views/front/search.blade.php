@@ -300,7 +300,7 @@
    $('#price-filter').on('click',function(e){
      min = $('#min-price').html().replace(',', '');
      max = $('#max-price').html().replace(',', '');
-     $.get( "/setSessionKeyValue/price/"+min+'-'+max, function( data ) {
+     $.get( "{{ url('/') }}/setSessionKeyValue/price/"+min+'-'+max, function( data ) {
      location.reload();
      });
      
@@ -309,7 +309,7 @@
    $('#odometer-filter').on('click',function(e){
      min = $('#min-odometer').html().replace(',', '');
      max = $('#max-odometer').html().replace(',', '');
-     $.get( "/setSessionKeyValue/odometer/"+min+'-'+max, function( data ) {
+     $.get( "{{ url('/') }}/setSessionKeyValue/odometer/"+min+'-'+max, function( data ) {
        location.reload();
      });
    });
@@ -317,14 +317,14 @@
    $('#year-filter').on('click',function(e){
      min = $('#min-year').html().replace(',', '');
      max = $('#max-year').html().replace(',', '');
-     $.get( "/setSessionKeyValue/year/"+min+'-'+max, function( data ) {
+     $.get( "{{ url('/') }}/setSessionKeyValue/year/"+min+'-'+max, function( data ) {
        location.reload();
      });
    });
    //set sorting
    $('.filter-box a').on('click',function(e){
      e.preventDefault();
-     $.get( "/setSessionKeyValue/sort/"+$(this).attr('id'), function( data ) {
+     $.get( "{{ url('/') }}/setSessionKeyValue/sort/"+$(this).attr('id'), function( data ) {
        location.reload();
      });
    });

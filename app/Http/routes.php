@@ -12,23 +12,23 @@
 */
 
 
-	Route::get('/', [
-		'uses' => 'HomeController@index', 
-		'as' => 'home'
-	]);
+	// Route::get('/', [
+	// 	'uses' => 'HomeController@index', 
+	// 	'as' => 'home'
+	// ]);
 
-	Route::get('/setLocation', 'HomeController@setLocation');
+	// Route::get('/setLocation', 'HomeController@setLocation');
 
-	Route::get('/fb', 'HomeController@fb');
+	// Route::get('/fb', 'HomeController@fb');
 	Route::get('/searchterm', 'HomeController@searchTerm');  //from homepage
 	Route::get('/getModels/{term}', 'HomeController@getModels');
-	Route::get('/autoloans', 'PageController@autoloan');
-	Route::get('/autoloans/{slug}', 'PageController@viewLoanPage');
+	// Route::get('/autoloans', 'PageController@autoloan');
+	// Route::get('/autoloans/{slug}', 'PageController@viewLoanPage');
 
-	//Credit Application
-	Route::get('/credit-application', 'CreditController@create');
-	Route::post('/credit-application', 'CreditController@send');
-	Route::post('/quick-finance', 'CreditController@quickfinance');
+	// //Credit Application
+	// Route::get('/credit-application', 'CreditController@create');
+	// Route::post('/credit-application', 'CreditController@send');
+	// Route::post('/quick-finance', 'CreditController@quickfinance');
 
 	//edit post
 	Route::get('/vehicles/{id}/edit', 'PostController@editVehicle');

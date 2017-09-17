@@ -48,3 +48,6 @@ add this
         RewriteEngine On
         RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
+
+ln -s /home/edmontonautoloan/carsgone/public/assets /home/edmontonautoloan/public_html/assets
+ln -s /home/edmontonautoloan/carsgone/public /home/edmontonautoloan/public_html/vehicles

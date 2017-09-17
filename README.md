@@ -50,4 +50,4 @@ add this
 </IfModule>
 
 ln -s /home/edmontonautoloan/carsgone/public/assets /home/edmontonautoloan/public_html/assets
-ln -s /home/edmontonautoloan/carsgone/public /home/edmontonautoloan/public_html/vehicles
+ln -s /home/edmontonautoloan/carsgone/public /home/edmontonautoloan/public_html/inventory

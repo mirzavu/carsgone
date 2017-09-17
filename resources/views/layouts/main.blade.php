@@ -127,58 +127,66 @@ $(document).ready(function(){
 <!-- header end --> 
  @yield('content')
     <!-- footer start -->
-    <footer>
-    	<div class="footer-upper">
-        	<div class="container">
-            	<div class="row">
-                    <div class="col-sm-4 footer-box">
-                    	    <a href="/" class="footer-logo"><img src="/assets/images/footer-logo.png" alt="Footer Logo Image" /></a>
-                            {{-- <h5>Contact</h5> --}}
-                            <p>{!! Helper::setting('address') !!} {!! Helper::setting('postal_code') !!}</p>
-                            <p>Email: <a href="mailto:support@carsgone.com">support@carsgone.com</a></p>
-                            <p>Phone: {!! Helper::setting('phone') !!}</p>
-                            <ul class="social-links">
-                            	<li><a href="https://www.facebook.com/Carsgonecom-108789885413"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul> 
-                    </div>
-                    <div class="col-sm-4 footer-box">
-                    	<div class="footer-box-content">
-                    	  <h5>Auto Dealers</h5>
-                        	<ul class="footer-links">
-                            	<li><a href="/auto-dealers">Auto Dealer Listings</a></li>
-                                <li><a href="/auto-dealers/info">Auto Dealer Info</a></li>
-                                <li><a href="/contact">Auto Dealer Contact</a></li>
-                            </ul> 
-                       </div>
-                    </div>
-                    <div class="col-sm-4 footer-box">
-                    	<div class="footer-box-content">
-                    	<h5>Other Info</h5>
-                        	<ul class="footer-links">
-                                <li><a href="/help">Questions &amp; Answers</a></li>
-                                <li><a href="/privacy">Privacy Policy</a></li>
-                                <li><a href="/contact">Contact Us</a></li>
-                            </ul> 
-                         </div>
-                    </div>
-                </div>
+<footer>
+   <div class="container mAlign">
+      <div class="row">
+         <div class="col-sm-12 main-b">
+            <div class="col-sm-2">
+               <h2 class="mAlign">Menu</h2>
+               <ul class="link">
+                  <li><a href="https://www.edmontonautoloans.com/">» Home</a></li>
+                  <li><a href="https://www.edmontonautoloans.com/auto-loan-types-finance-locations/">» Loan Types</a></li>
+                  <li><a href="http://www.edmontonautoloans.com/vehicles/search">» Used Inventory</a></li>
+                  <li><a href="https://www.edmontonautoloans.com/reviews/">» Reviews</a></li>
+                  <li><a href="https://www.edmontonautoloans.com/contact/">» Contact Us</a></li>
+               </ul>
             </div>
-        </div>
-        
-        <div class="footer-lower">
-        	<div class="container">
-            	<div class="row">
-                    <div class="col-sm-12">
-                    	<p class="copyright">&copy; {{ date("Y")}} Carsgone.com All Rights Reserved.</p>
-                    </div>
-                </div>
+            <div class="col-sm-3">
+               <h2 class="mAlign">Hours Of Operation</h2>
+               <ul class="link">
+                  <li>Sales Hours</li>
+                  <li>Monday 9:00 am - 8:00 pm</li>
+                  <li>Tuesday 9:00 am - 8:00 pm</li>
+                  <li>Wednesday 9:00 am - 8:00 pm</li>
+                  <li>Thursday 9:00 am - 8:00 pm</li>
+                  <li>Friday 9:00 am - 7:00 pm</li>
+                  <li>Saturday 9:00 am - 6:00 pm</li>
+                  <li>Sunday 12:00 am - 5:00 pm</li>
+               </ul>
             </div>
-        </div>
-        
-    </footer>
+            <div class="col-sm-4">
+               <h2 class="mAlign">Welcome To Express Car Loans</h2>
+               <ul class="link">
+                  <li>Edmonton Auto Loans is for people with all sorts of credit from perfect, good, and terrible credit. We specialize in rebuilding bad credit, starting new credit, in house finance, new to country &amp; 9 SIN numbers, private car loans, judgements, repossessions, bankruptcy, write offs, collections, bad credit, divorce, consumer proposals, Bad Credit, very bad credit and even the worst credit ever. Bad credit Car Loans in Edmonton is what we do at Edmonton Auto Loans. We specialize in providing auto loans for people wih bad credit. We know that new and used car customers throughout Edmonton and area, sometimes need a little help to find the right auto loan provider. If you think you have a really bad or low credit rating, and have been turned down in the past, chances are we can help. Try the express car loan option now, and we can have you driving in a snap.</li>
+               </ul>
+            </div>
+            <div class="col-sm-3">
+               <ul class="link adres">
+                  <li><a title="6211 104 Street Edmonton AB"><i class="fa fa-map-marker"></i>6211 104 Street Edmonton AB</a></li>
+                  <li><a title="1-855-227-1669​"><i class="fa fa-phone"></i>1-855-227-1669​</a></li>
+                  <li><a title="1-855-227-1669​"><i class="fa fa-headphones"></i>1-855-227-1669​</a></li>
+               </ul>
+               <!--<ul class="soc">
+                  <li><a href="#" target="_blank" title="Facebook"><i class="not fa fa-facebook"></i></a></li><li><a href="#" target="_blank" title="Twitter"><i class="not fa fa-twitter"></i></a></li><li><a href="#" target="_blank" title="Instagram"><i class="not fa fa-instagram"></i></a></li><li><a href="#" target="_blank" title="Youtube"><i class="not fa fa-youtube"></i></a></li><li><a href="#" target="_blank" title="Pinterest"><i class="not fa fa-pinterest-p"></i></a></li>          </ul>-->
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="copyright">
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-8">
+               <div class="col-sm-12 cAlign">©  2017  Edmonton Auto Loans. All rights Reserved.</div>
+            </div>
+            <div class="col-sm-4">
+               <a href="https://www.facebook.com/EdmontonAutoLoans/" target="_blank" style="padding: 4px 11px;background-color:#ffffff;border-radius: 11px;color: #222222;font-size: 17px;"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+               &nbsp; &nbsp;  &nbsp; &nbsp;
+               <a href="#"><img width="120px" src="https://www.edmontonautoloans.com/wp-content/uploads/2017/07/amvic-logo.jpg" alt="amvic logo"></a>
+            </div>
+         </div>
+      </div>
+   </div>
+
     <!-- footer end -->
 
 <div id="member" class="modal member">

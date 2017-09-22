@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="https://www.edmontonautoloans.com/wp-content/themes/creditapp/images/stp3.png" type="image/x-icon">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {!! SEO::generate() !!}
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">

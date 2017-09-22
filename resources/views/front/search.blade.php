@@ -196,7 +196,6 @@
                                     <p>{{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</p>
                                     <p>Added {{$vehicle->created_at->diffForHumans()}}</p>
                                     <p>{{$vehicle->bodyStyleGroup->body_style_group_name or ''}} <span class="part">|</span> {{$vehicle->ext_color->color or ''}} <span class="part">|</span> {{$vehicle->transmission}}</p>
-                                    <h4>{{$vehicle->user->name or ''}}</h4>
                                  </div>
                               </div>
                            </div>

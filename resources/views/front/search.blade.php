@@ -192,7 +192,7 @@
                <div class="result-container">
                   @foreach($vehicles as $vehicle)
                   <div class="item">
-                     <a href="/vehicle/{{$vehicle->slug}}">
+                     <a href="{{ url('/')}}/vehicle/{{$vehicle->slug}}">
                      <div class="item-heading">
                         <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</h3>
                         @if($logged_in )

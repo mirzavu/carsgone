@@ -195,13 +195,6 @@
                      <a href="{{ url('/')}}/vehicle/{{$vehicle->slug}}">
                      <div class="item-heading">
                         <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</h3>
-                        @if($logged_in )
-                           @if(empty($vehicle->saved))
-                           <button vehicle="{{$vehicle->id}}" class="btn save-btn btn-action waves-effect waves-light waves-input-wrapper">Save</button>
-                           @else
-                           <button vehicle="{{$vehicle->id}}" class="btn unsave-btn btn-action waves-effect waves-light waves-input-wrapper">Saved</button>
-                           @endif
-                        @endif
                      </div>
                      </a>
                      <div class="item-body">
@@ -290,7 +283,7 @@
           async: false,
           success : function(data)
           {  
-             var pathname = '/search/'+data;
+             var pathname = '{{ url('/') }}/search/'+data;
              window.location.href = pathname.replace(/\/$/, ""); // remove trailing slash and redirect
           }
        });
@@ -336,79 +329,13 @@
    $('input[name=condition]').change(function() { 
          window.location.href += '/condition-'+this.value;
        });
-   //transmission
-    $('input[name=transmission]').change(function() { 
-      $.get( "/setSessionKeyValue/transmission/"+this.value, function( data ) {
-       location.reload();
-       });
-    });
+
     //Seller
     $('input[name=seller]').change(function() { 
       $.get( "/setSessionKeyValue/seller/"+this.value, function( data ) {
        location.reload();
        });
     });
-   //distance set
-   var distance_id = "{{$applied_filters->get("distance")}}".replace(' KM',''); 
-   if(distance_id)
-   {
-      $('.distance-list #'+distance_id).addClass('active').removeAttr("href"); // set active
-      $('.distance-list a').on('click',function(e){
-        e.preventDefault();
-        $.get( "/setSessionKeyValue/distance/"+$(this).attr('id'), function( data ) {
-          location.reload();
-        });
-      });
-   }
-   
-
-   
-   $('.result-container')
-      .on('click','.save-btn', function(e){
-         e.preventDefault();
-      })
-      .on('mousedown','.save-btn', function(e){
-      var btn = $(this)
-      btn.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');     
- 
-
-      $.ajax({ type: "POST",   
-               url: "/save-vehicle",   
-          accepts: {
-             text: "application/json"
-         },
-          async: true,
-          data: {vehicle_id: btn.attr('vehicle'), "_token": "{{ csrf_token() }}"},
-          success : function(data)
-          {  
-            btn.removeClass('save-btn').addClass('unsave-btn');
-            btn.prop('disabled', false).html('Saved')
-          }
-       });
-   })
-   $('.result-container')
-      .on('click','.unsave-btn',function(e){
-         e.preventDefault();
-      })
-      .on('mousedown','.unsave-btn',function(e){
-      var btn = $(this)
-      btn.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');     
- 
-
-      $.ajax({ type: "POST",   
-               url: "/unsave-vehicle",   
-          accepts: {
-             text: "application/json"
-         },
-          async: true,
-          data: {vehicle_id: btn.attr('vehicle'), "_token": "{{ csrf_token() }}"},
-          success : function(data)
-          {  
-            btn.removeClass('unsave-btn').addClass('save-btn');
-            btn.prop('disabled', false).html('save')
-          }
-       });
-   })    
 
    //Image on error code with support edge browser
    $(document).ready(function(){  

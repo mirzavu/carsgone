@@ -62,7 +62,7 @@
             <a class="navbar-brand">Menu</a>
           </div>
           <ul class="navbar-collapse collapse collapse-menu padded" id="navbar">
-            <li><a class="active">Home</a></li><li><a href="http://listings2011.boostmotorgroup.com/search.aspx?DealershipID=5715">Inventory</a></li><li><a href="https://www.edmontonautoloans.com/finance/">Finance</a></li><li><a href="https://www.edmontonautoloans.com/reviews/">Reviews</a></li><li><a href="https://www.edmontonautoloans.com/contact/">Contact Us</a></li><li><a><i class="not fa fa-phone"></i>1-855-227-1669</a></li>          </ul>
+            <li><a class="active">Home</a></li><li><a href="http://www.edmontonautoloans.com/inventory/search">Inventory</a></li><li><a href="https://www.edmontonautoloans.com/finance/">Finance</a></li><li><a href="https://www.edmontonautoloans.com/reviews/">Reviews</a></li><li><a href="https://www.edmontonautoloans.com/contact/">Contact Us</a></li><li><a><i class="not fa fa-phone"></i>1-855-227-1669</a></li>          </ul>
         </nav>
       </div>
     </div>

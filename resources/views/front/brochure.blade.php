@@ -313,31 +313,7 @@
       </div>
    </div>
    <!-- Car Details Container End -->
-   <!-- Related Links -->
-   <div class="related-item-container">
-      <div class="container">
-         <div class="row">
-            <div class="col-sm-12">
-               <!-- Featured Container start -->
-               <div class="panel panel-default">
-                  <div class="panel-heading">
-                     <h3 class="panel-title">Related Links</h3>
-                  </div>
-                  <div>
-                     <ul class="related-link-list">
-                        <li><a href="/search/province-{{$vehicle->user->province->province_name or ''}}/city-{{$vehicle->user->city->city_name or ''}}/make-{{$vehicle->make->make_name}}/model-{{$vehicle->model->model_name}}">{{$vehicle->user->city->city_name or ''}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}}</a></li>
-                        <li><a href="/search/province-{{$vehicle->user->province->province_name or ''}}/city-{{$vehicle->user->city->city_name or ''}}/make-{{$vehicle->make->make_name}}">{{$vehicle->user->city->city_name or ''}} {{$vehicle->make->make_name}}</a></li>
-                        <li><a href="/search/condition-used/province-{{$vehicle->user->province->province_name or ''}}/city-{{$vehicle->user->city->city_name or ''}}">Used Cars {{$vehicle->user->city->city_name or ''}}</a></li>
-                        <li><a href="/auto-dealers/province-{{$vehicle->user->province->province_name or ''}}/city-{{$vehicle->user->city->city_name or ''}}">Car Dealers {{$vehicle->user->city->city_name or ''}}</a></li>
-                     </ul>
-                  </div>
-               </div>
-               <!-- Featured Container end -->
-            </div>
-         </div>
-      </div>
-   </div>
-   <!-- Related Links End-->
+
    <!-- Credit Application Banner -->
    <div class="related-item-container">
       <div class="container">

@@ -331,7 +331,7 @@
                            <p class="clock">Easy 60-Second Application</p>
                         </div>
                         <div class="small-approval-link">
-                           <a target="_blank" href="/credit-application/?vehicle={{$vehicle->slug}}" class="waves-effect waves-light btn btn-orange small-btn-orange">APPLY CREDIT</a>
+                           <a target="_blank" href="/finance" class="waves-effect waves-light btn btn-orange small-btn-orange">APPLY CREDIT</a>
                         </div>
                      </div>
                   </div>

@@ -101,22 +101,6 @@
                <!-- panel end -->
 
                
-               @if(!$applied_filters->has("transmission"))
-               <div class="panel">
-                  <div class="panel-heading">
-                     <h3 class="panel-title">Transmission</h3>
-                  </div>
-                  <div class="panel-body">
-                     <div class="item-type-toggle">
-                        <input type="radio" name="transmission" id="manual" value="manual" {{$applied_filters->get("transmission")=="manual"?'checked="checked"':""}}"/> <label for="manual" class="waves-effect waves-light">MANUAL</label>
-                        <input type="radio" name="transmission" id="both-transmission" value="both" {{$applied_filters->has("transmission")?"":'checked="checked"'}}" /> <label for="both-transmission" class="waves-effect waves-light"> BOTH</label>
-                        <input type="radio" name="transmission" id="auto" value="auto" {{$applied_filters->get("transmission")=="auto"?'checked="checked"':""}}"/> <label for="auto" class="waves-effect waves-light">AUTO</label>
-                     </div>
-                  </div>
-               </div>
-               @endif
-               <!-- panel start -->
-               
                <!-- price panel start -->
                <div class="panel">
                   <div class="panel-heading">

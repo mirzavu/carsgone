@@ -210,13 +210,7 @@
 
                                  <li>
                                     <div><i class="fa fa-phone"></i>
-                                    <p>
-                                    @if(!empty($vehicle->user->phone))
-                                       {{$vehicle->user->phone}}
-                                    @else
-                                       {{ '--' }}
-                                    @endif
-                                    </p>
+                                    <p>1-855-227-1669</p>
                                     </div>
                                  </li>
                               </ul>

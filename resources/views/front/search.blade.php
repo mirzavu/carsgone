@@ -76,7 +76,7 @@
                   <div class="panel-body">
                      <ul class="link-list">
                         @foreach($sidebar_data["makes"] as $make)
-                        <li><a href="{{Request::url()}}/make-{{$make->make_name}}">{{$make->make_name}} ({{$make->make_count}})</a></li>
+                        <li><a href="{{Request::url()}}/make-{{$make->make_name}}">{{ strtoupper($make->make_name) }} ({{$make->make_count}})</a></li>
                         @endforeach
                      </ul>
                   </div>

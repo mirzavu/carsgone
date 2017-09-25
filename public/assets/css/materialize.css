@@ -1163,7 +1163,7 @@ nav ul a span.badge { position: static; margin-left: 4px; line-height: 0; }
 .btn.disabled:hover, .disabled.btn-large:hover, .btn-floating.disabled:hover, .btn-large.disabled:hover, .btn:disabled:hover, .btn-large:disabled:hover, .btn-large:disabled:hover, .btn-floating:disabled:hover, .btn[disabled]:hover, [disabled].btn-large:hover, .btn-large[disabled]:hover, .btn-floating[disabled]:hover { background-color: #DFDFDF !important; color: #9F9F9F !important; }
 .btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i { font-size: 1.3rem; line-height: inherit; }
 .btn, .btn-large { text-decoration: none; color: #fff; background-color: #dc5f03; text-align: center; transition: .2s ease-out; cursor: pointer; }
-.btn:hover, .btn-large:hover, .btn:focus, .btn:active { background-color: #c14e01; color:#fff;  }
+.btn:hover, .btn-large:hover, .btn:focus, .btn:active { background-color: #253993; color:#fff;  }
 .btn-floating { display: inline-block; color: #fff; position: relative; overflow: hidden; z-index: 1; width: 37px; height: 37px; line-height: 37px; padding: 0; background-color: #dc5f03; border-radius: 50%; transition: .3s; cursor: pointer; vertical-align: middle; }
 .btn-floating i { width: inherit; display: inline-block; text-align: center; color: #fff; font-size: 1.6rem; line-height: 37px; }
 .btn-floating:hover { background-color: #dc5f03; }

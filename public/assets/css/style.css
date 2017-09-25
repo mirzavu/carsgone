@@ -282,7 +282,7 @@ label{margin:0;}
 .filter-dropdown .btn:hover{color:#fff;}
 .price-range-container{width:100%; float:left; padding:20px;}
 .filter-margin{margin-bottom:30px;}
-.price-range-container .btn{background:#cfdbe6; float:left; color:#666; font-weight:400; box-shadow:none; }
+.price-range-container .btn{background:#253993; float:left; color:"white"; font-weight:400; box-shadow:none; }
 .price-range-container .price-range-output{float:right;margin-top: 19px;font-weight:400;color:#6b6ca0;font-size: 12px;line-height: 16px;}
 .price-range-container .price-range-output b{font-weight:400;}
 .noUi-target, .noUi-target * { -webkit-touch-callout:none; -webkit-user-select:none; -ms-touch-action:none; touch-action:none; -ms-user-select:none; -moz-user-select:none; user-select:none; -moz-box-sizing:border-box; box-sizing:border-box }
@@ -411,7 +411,7 @@ ul.table-list li a{color:#dc5f03;}
 .panel.full .panel-heading h1{text-transform:uppercase; font-family:'Lato'; font-weight:900; text-align:center; color:#fff; margin-bottom:0;}
 .panel.full .panel-body{padding:30px 60px; font-family: 'Roboto';}
 .panel.full .panel-body h3{color:#3e5062; font-weight:400; text-transform:none; letter-spacing:0;}
-.btn{font-family:'Lato'; background:#dc5f03;}
+.btn{font-family:'Lato'; background:#253993;}
 .browse-dealership-outer{background:url(../images/browers-dealership.jpg) no-repeat left top; background-size:cover;margin-top: 2%;}
 .browse-dealership{padding:20px 80px; color:#fff;}
 .browse-dealership h3{font-size:42px; line-height:50px; font-weight:700; font-family: 'Roboto'; letter-spacing:5px; word-spacing:11px; margin-bottom:0;}

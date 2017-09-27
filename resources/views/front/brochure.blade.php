@@ -41,16 +41,7 @@
                         <ul>
                            <li class="selected"><a href="#0">Contact</a></li>
                            <li><a href="#0">Description</a></li>
-                           @if($vehicle->user->featured)
                            <li><a href="#0">Finance</a></li>
-                           @endif
-                           <li>
-                              @if($vehicle->user->role == "dealer")
-                              <a href="#0">Dealer</a>
-                              @else
-                              <a href="#0">Private</a>
-                              @endif
-                           </li>
                         </ul>
                      </nav>
                   </div>
@@ -161,7 +152,6 @@
                            </div>
                         </div>
                      </li>
-                     @if($vehicle->user->featured)
                      <li>
                         <div class="contact-dealer-container">
                            <h4>Finance</h4>
@@ -274,31 +264,6 @@
                                  <button id="credit-submit" class="btn waves-effect waves-light" type="submit">Submit</button>
                               </div>
                               {!! Form::close() !!}
-                           </div>
-                        </div>
-                     </li>
-                     @endif
-                     <li>
-                        <div class="single-dealer-container">
-                           <div class="single-dealer-upper">
-                              <div class="dealer-buttons">
-                                 <a href="/dealer/{{$vehicle->user->slug}}" class="btn waves-effect waves-light">View Dealer</a>
-                                 <a id="inventory-btn" class="btn waves-effect waves-light ">View Inventory</a>
-                              </div>
-                           </div>
-                           <div class="single-dealer-mid">
-                              <ul class="table-list">
-                                 <li><a href="/dealer/{{$vehicle->user->slug}}">{{$vehicle->user->name}}</a></li>
-                                 <li>{{$vehicle->user->address}}</li>
-                                 <li>{{$vehicle->user->phone}}</li>
-                                 <li>{{$vehicle->user->fax}}</li>
-                                 <li><a href="{{$vehicle->user->url}}" target="_blank">Seller's Website</a></li>
-                              </ul>
-                           </div>
-                           <div class="single-dealer-lower">
-                              <div class="dealer-address-map">
-                                 <div id='gmap_canvas' style='height:100%;width:100%;'></div>
-                              </div>
                            </div>
                         </div>
                      </li>
@@ -591,8 +556,8 @@ var form = $("#callback-form");
 
 </script>
 <script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}}),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}})});infowindow = new google.maps.InfoWindow({content:'<strong>{{$vehicle->user->name}}</strong><br>{{$vehicle->user->address}}<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
-<script src="https://unpkg.com/react@latest/dist/react.min.js"></script>
-<script src="https://unpkg.com/react-dom@latest/dist/react-dom.min.js"></script>
+<script src="https://unpkg.com/react@15.3.1/dist/react.min.js"></script>
+<script src="https://unpkg.com/react-dom@15.3.1/dist/react-dom.min.js"></script>
 <script src="https://unpkg.com/react-slick@0.13.6/dist/react-slick.min.js"></script>
 <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 <script type="text/babel" src="/assets/js/related.js"></script>

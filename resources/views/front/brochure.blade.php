@@ -411,7 +411,7 @@ form.validate({
     submitHandler: function(form) {
         $('#credit-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
         $.ajax({
-               url: '/credit-application',
+               url: '{{ url('/') }}/credit-application',
                type: 'POST',
                data: $('#finance-form-1').serialize() + '&'+ $('#finance-form-2').serialize()+ '&_token={{ csrf_token() }}' + '&vehicle={{ $vehicle->slug }}&dealer_email={{ $vehicle->user->email }}',
                success: function(response) {

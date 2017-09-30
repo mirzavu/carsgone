@@ -127,7 +127,7 @@ class AppMailer
     {
         $this->from = $data->email;
         $this->fromName = $data->name;
-        $this->to = $data->dealer_email;
+        $this->to = config('mail.from.address');
         $this->subject = 'Carsgone.com Vehicle Enquiry';
         $this->view = 'emails.dealer_contact_form';
         $this->data = compact('data');
@@ -141,7 +141,7 @@ class AppMailer
         $data->model = $vehicle->model->model_name;
         $data->price = $vehicle->price;
         $this->fromName = $data->name." via Carsgone";
-        $this->to = $data->dealer_email;
+        $this->to = config('mail.from.address');
         $this->subject = 'Carsgone.com Finance';
         $this->view = 'emails.dealer_finance_form';
         $this->data = compact('data');

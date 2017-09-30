@@ -74,7 +74,7 @@
                      <h3 class="panel-title">Select Make</h3>
                   </div>
                   <div class="panel-body">
-                     <ul class="link-list">
+                     <ul id="makes-list" class="link-list">
                         @foreach($sidebar_data["makes"] as $make)
                         <li><a href="{{Request::url()}}/make-{{$make->make_name}}">{{ strtoupper($make->make_name) }} ({{$make->make_count}})</a></li>
                         @endforeach
@@ -333,14 +333,15 @@
    //Image on error code with support edge browser
    $(document).ready(function(){  
      $("img").each(function(i,ele){
-        $("<img/>").attr("src",$(ele).attr("src")).on('error', function() {             
+         $("<img/>").attr("src",$(ele).attr("src")).on('error', function() {             
             $(ele).attr( "src", "/assets/images/placeholder.jpg" );
          })
-     });
+      });
      
-    $("img").on("error", function(){      
-      $(this).attr( "src", "/assets/images/placeholder.jpg" );  
-    });
+      $("img").on("error", function(){      
+         $(this).attr( "src", "/assets/images/placeholder.jpg" );  
+      });
+
   });
    
 </script>

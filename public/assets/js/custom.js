@@ -148,22 +148,103 @@ $(document).ready(function() {
 
 
     $timeSlots = $('.link-list');
+    $timeSlots.children(':nth-of-type(n+7)').hide();
     $timeSlots.each(function() {
-        var $times = $(this).children();
+        
+        var $times = $(this).children('li');
+        $this = $(this);
         if ($times.length > 6) {
-            $timeSlots.children(':nth-of-type(n+7)').hide();
+
+            if($(this).is("#makes-list"))
+            {
+                $times.sort(function(a, b) {
+                    //Sort items only for displaying ones alphabetically
+                    if(a.style.display =="none" || b.style.display =="none")
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+                    }
+                     
+                  })
+                $times.sort(function(a, b) {
+                    //Sort again items only for displaying ones alphabetically
+                    if(a.style.display =="none" || b.style.display =="none")
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+                    }
+                     
+                  })
+                $.each($times, function(idx, itm) { 
+                    $this.append(itm); 
+                });
+                
+            }
+
             $(this).append('<span class="more-times">+More</span>');
         }
     });
 
     $timeSlots.on('click', '.more-times', function() {
-        $(this).parent().append('<span class="less-times">Show Less</span>')
+        var list = $(this).parent();
         $(this).prevAll().show().end().remove();
+        if(list.is("#makes-list"))
+        {
+            var $times = list.children('li');
+            $times.sort(function(a, b) {
+                return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+            });
+            $.each($times, function(idx, itm) { 
+                list.append(itm); 
+            });
+
+        }
+        list.append('<span class="less-times">Show Less</span>')
+        
     });
 
     $timeSlots.on('click', '.less-times', function() {
-        $(this).parent().append('<span class="more-times">+ More</span>').children(':nth-of-type(n+7)').hide();
+        var list = $(this).parent();
         $(this).remove();
+        if(list.is("#makes-list"))
+        {
+            var $times = list.children('li');
+            $times.sort(function(a, b) {
+                return parseInt($(b).text().match(/\(([^)]+)\)/)[1])-parseInt($(a).text().match(/\(([^)]+)\)/)[1]);
+            });
+            $.each($times, function(idx, itm) { 
+                list.append(itm); 
+            });
+            list.children(':nth-of-type(n+7)').hide();
+            var $times = list.children('li');
+            $times.sort(function(a, b) {
+                if(a.style.display =="none" || b.style.display =="none")
+                {
+                    return -1;
+                }
+                else
+                {
+                    return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+                }
+            });
+            $.each($times, function(idx, itm) { 
+                list.append(itm); 
+            });
+
+
+        }
+        else
+        {
+            list.children(':nth-of-type(n+7)').hide();
+        }
+        list.append('<span class="more-times">+ More</span>');
+
     });
 
 })

@@ -120,7 +120,7 @@ class SearchController extends Controller
 		$sidebar_data = [];
 		if(!$conditions->get('make'))
 		{
-			//$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions, $this->dealer_ids)->selectRaw('count(makes.id) as make_count, make_name')->groupBy('makes.make_name')->orderBy('make_count','desc')->get();
+
 			$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions)
 			            ->selectRaw('count(makes.id) as make_count, makes.make_name')
 				    ->groupBy('makes.make_name')
@@ -131,11 +131,14 @@ class SearchController extends Controller
 		{
 
 			$sidebar_data['models'] = Vehicle::ApplyFilter($conditions)->selectRaw('count(models.id) as model_count, model_name')->groupBy('models.model_name')->orderBy('model_count','desc')->get();
+		}
 
-			// $sidebar_data['models'] = Make::where('make_name',$conditions->get('make'))->first()->models()->withCount(['vehicles' => function($query) use ($conditions){
-			// 	return $query->applyFilter($conditions);
-			// 	}])->having('vehicles_count', '>', 0)->orderBy('vehicles_count', 'desc')->take(10)->get();
-
+		if(!$conditions->get('body'))
+		{
+			$sidebar_data['body_styles'] = Vehicle::ApplyFilter($conditions)
+			            ->selectRaw('count(body_style_groups.id) as body_count, body_style_groups.body_style_group_name')
+				    ->groupBy('body_style_groups.body_style_group_name')
+			            ->orderBy('body_count','desc')->get();
 		}
 
 

@@ -100,7 +100,23 @@
                @endif
                <!-- panel end -->
 
-               
+               <!-- panel start -->
+               @if(isset($sidebar_data["body_styles"]))
+               <div class="panel">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">Select Body Style</h3>
+                  </div>
+                  <div class="panel-body">
+                     <ul class="link-list">
+                        @foreach($sidebar_data["body_styles"] as $body)
+                        <li><a href="{{Request::url()}}/body-{{$body->body_style_group_name}}">{{$body->body_style_group_name}} ({{$body->body_count}})</a></li>
+                        @endforeach
+                     </ul>
+                  </div>
+               </div>
+               @endif
+               <!-- panel end -->
+
                <!-- price panel start -->
                <div class="panel">
                   <div class="panel-heading">

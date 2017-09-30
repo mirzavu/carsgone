@@ -27,7 +27,7 @@
 
 	// //Credit Application
 	// Route::get('/credit-application', 'CreditController@create');
-	// Route::post('/credit-application', 'CreditController@send');
+	Route::post('/credit-application', 'CreditController@send');
 	Route::post('/quick-finance', 'CreditController@quickfinance');
 
 	//edit post
@@ -42,8 +42,8 @@
 	
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
 
-	Route::post('/save-vehicle', 'PostController@saveVehicle');
-	Route::post('/unsave-vehicle', 'PostController@unsaveVehicle');
+	// Route::post('/save-vehicle', 'PostController@saveVehicle');
+	// Route::post('/unsave-vehicle', 'PostController@unsaveVehicle');
 
 	//Brochure
 	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
@@ -75,27 +75,27 @@
 
 
 //Authentication
-	Route::post('/signup', 'UserController@postSignUp');
-	Route::post('/dealer-signup', 'UserController@postDealerSignUp');
-	Route::post('/login', 'UserController@postSignIn');
-	Route::post('/login-signup', 'UserController@postLoginSignup');
-	Route::get('/logout', 'UserController@logout');
-	Route::get('/loggedInUser', 'UserController@loggedInUser');
-	Route::get('/signup/confirm/{token}', 'UserController@confirmEmail');
+	// Route::post('/signup', 'UserController@postSignUp');
+	// Route::post('/dealer-signup', 'UserController@postDealerSignUp');
+	// Route::post('/login', 'UserController@postSignIn');
+	// Route::post('/login-signup', 'UserController@postLoginSignup');
+	// Route::get('/logout', 'UserController@logout');
+	// Route::get('/loggedInUser', 'UserController@loggedInUser');
+	// Route::get('/signup/confirm/{token}', 'UserController@confirmEmail');
 	Route::get('/token-login/{token}', 'UserController@tokenLogin');
-	Route::get('/vehicle-confirm/{slug}/{token}', 'UserController@confirmVehicle');
+	// Route::get('/vehicle-confirm/{slug}/{token}', 'UserController@confirmVehicle');
 
 //Dashboard
-	Route::get('/dashboard', 'UserController@dashboard')->middleware('auth');
-	Route::post('/change-email', 'UserController@changeEmail');
-	Route::post('/change-password', 'UserController@changePassword');
-	Route::post('/change-postal', 'UserController@changePostalCode');
-	Route::post('/send-reset-link', 'UserController@sendResetLink');
-	Route::post('/reset-password', 'UserController@postResetPassword');
-	Route::get('/reset-password/{token}', 'UserController@getResetPassword');
-	Route::post('/activate-vehicle', 'UserController@activateVehicle');
-	Route::post('/deactivate-vehicle', 'UserController@deactivateVehicle');
-	Route::post('/delete-vehicle', 'UserController@deleteVehicle');
+	// Route::get('/dashboard', 'UserController@dashboard')->middleware('auth');
+	// Route::post('/change-email', 'UserController@changeEmail');
+	// Route::post('/change-password', 'UserController@changePassword');
+	// Route::post('/change-postal', 'UserController@changePostalCode');
+	// Route::post('/send-reset-link', 'UserController@sendResetLink');
+	// Route::post('/reset-password', 'UserController@postResetPassword');
+	// Route::get('/reset-password/{token}', 'UserController@getResetPassword');
+	// Route::post('/activate-vehicle', 'UserController@activateVehicle');
+	// Route::post('/deactivate-vehicle', 'UserController@deactivateVehicle');
+	// Route::post('/delete-vehicle', 'UserController@deleteVehicle');
 
 //Dealers
 	Route::get('/auto-dealers/info', 'DealerController@info');

@@ -159,6 +159,10 @@ class Vehicle extends Model
             $query->join('models', 'vehicles.model_id', '=', 'models.id');
         }
 
+        if(!$this->_hasJoin($query, 'body_style_groups')){
+            $query->join('body_style_groups', 'vehicles.body_style_group_id', '=', 'body_style_groups.id');
+        }
+
         if ($conditions->get('model'))
         {
             
@@ -172,7 +176,6 @@ class Vehicle extends Model
 
         if ($conditions->get('body'))
         {
-            $query->join('body_style_groups', 'vehicles.body_style_group_id', '=', 'body_style_groups.id');
             $query->where('body_style_group_name', $conditions->get('body'));
         }
 

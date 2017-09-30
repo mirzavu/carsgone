@@ -103,8 +103,7 @@ class AppMailer
     {
         $this->from = $data->email;
         $this->fromName = $data->name;
-        $to_address = empty($data->dealer_email) ? config('mail.from.address'):$data->dealer_email;
-        $this->to = $to_address;
+        $this->to = config('mail.from.address');
         $this->subject = 'Credit Application';
         $this->view = 'emails.credit_app';
         $this->data = compact('data');
@@ -128,7 +127,7 @@ class AppMailer
         $this->from = $data->email;
         $this->fromName = $data->name;
         $this->to = config('mail.from.address');
-        $this->subject = 'Carsgone.com Vehicle Enquiry';
+        $this->subject = 'Edmontonautoloans.com Vehicle Enquiry';
         $this->view = 'emails.dealer_contact_form';
         $this->data = compact('data');
         $this->deliver();
@@ -140,9 +139,9 @@ class AppMailer
         $data->make = $vehicle->make->make_name;
         $data->model = $vehicle->model->model_name;
         $data->price = $vehicle->price;
-        $this->fromName = $data->name." via Carsgone";
+        $this->fromName = $data->name;
         $this->to = config('mail.from.address');
-        $this->subject = 'Carsgone.com Finance';
+        $this->subject = 'Edmontonautoloans.com Finance';
         $this->view = 'emails.dealer_finance_form';
         $this->data = compact('data');
         $this->deliver();
@@ -151,8 +150,8 @@ class AppMailer
     
     public function sendQuickFinanceForm($data)
     {
-        $this->fromName = $data->name." via Carsgone";
-        $this->subject = 'Carsgone.com Finance Callback';
+        $this->fromName = $data->name;
+        $this->subject = 'Edmontonautoloans.com Finance Callback';
         $this->view = 'emails.quick_credit_form';
         $this->data = compact('data');
         $this->deliver();

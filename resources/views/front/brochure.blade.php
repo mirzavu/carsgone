@@ -255,7 +255,7 @@
                               </div>
                               <div class="form-group">
                                  <input type="checkbox" class="filled-in" name="privacy" id="filled-in-box" required />
-                                 <label for="filled-in-box">I agree to <a target="_blank" href="/privacy">privacy policy</a></label>
+                                 <label for="filled-in-box">I agree to <a target="_blank" href="/terms-and-conditions/">Terms and Conditions</a></label>
                               </div>
                               
                               <div class="form-group flex">

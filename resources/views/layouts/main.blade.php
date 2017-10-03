@@ -62,7 +62,7 @@
             <a class="navbar-brand">Menu</a>
           </div>
           <ul class="navbar-collapse collapse collapse-menu padded" id="navbar">
-            <li><a href="/">Home</a></li><li><a class="active" href="https://www.edmontonautoloans.com/inventory/search">Inventory</a></li><li><a href="https://www.edmontonautoloans.com/finance/">Finance</a></li><li><a href="https://www.edmontonautoloans.com/reviews/">Reviews</a></li><li><a href="https://www.edmontonautoloans.com/contact/">Contact Us</a></li><li><a><i class="not fa fa-phone"></i>1-855-227-1669</a></li>          </ul>
+            <li><a href="/">Home</a></li><li><a class="active" href="https://www.edmontonautoloans.com/buy/search">Inventory</a></li><li><a href="https://www.edmontonautoloans.com/finance/">Finance</a></li><li><a href="https://www.edmontonautoloans.com/reviews/">Reviews</a></li><li><a href="https://www.edmontonautoloans.com/contact/">Contact Us</a></li><li><a><i class="not fa fa-phone"></i>1-855-227-1669</a></li>          </ul>
         </nav>
       </div>
     </div>

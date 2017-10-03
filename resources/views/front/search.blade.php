@@ -192,14 +192,14 @@
                <div class="result-container">
                   @foreach($vehicles as $vehicle)
                   <div class="item">
-                     <a href="{{ url('/')}}/vehicle/{{$vehicle->slug}}">
+                     <a href="{{ url('/')}}/used/{{$vehicle->slug}}">
                      <div class="item-heading">
                         <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</h3>
                      </div>
                      </a>
                      <div class="item-body">
                         <div class="item-body-left">
-                           <a href="{{ url('/')}}/vehicle/{{$vehicle->slug}}">
+                           <a href="{{ url('/')}}/used/{{$vehicle->slug}}">
                            <img src="{{$vehicle->photo()}}" alt="" />
                            <span class="overlay"></span>
                            </a>

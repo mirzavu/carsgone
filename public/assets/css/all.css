@@ -9347,7 +9347,7 @@ ul.upper-nav li{float:left; border-right:solid 1px #fff;}
 ul.upper-nav.right li{border-right:solid 1px #fff;}
 ul.upper-nav li a{float:left; color:#fff; padding:6px 15px; font-weight:700;}
 ul.upper-nav li a:hover{color:#3d6392;}
-.navbar-default{background:transparent; border:0;}
+/*.navbar-default{background:transparent; border:0;}
 .navbar{min-height:1px; margin:0;}
 .navbar-brand{height:auto; width:225px; padding-left:5px;}
 .navbar-default .navbar-nav > li > a,  .navbar-default .navbar-nav > li > a:focus{color:#dc5f03; font-weight:700;  text-transform:uppercase; padding:8px 12px; border-radius:2px; margin-left:10px; position:relative;}
@@ -9382,6 +9382,7 @@ ul.upper-nav li a:hover{color:#3d6392;}
 .header-search-box .search-input{background:#fff; width:100%; border:0; height:30px; padding:0 10px; color:#6b6ca0; margin:0;}
 .header-search-box .search-input:focus{border:0 !important;}
 .header-search-box .search-submit{width:30px; height:30px; background:#dc5f03; position:absolute; top:0; right:0; border:0; font-family:'fontAwesome'; text-align:center; border-left:solid 2px #5cb9e4; color:#fff; border-radius:0;}  
+*/
 /*Header end*/
 /* Banner container start */
 .banner-container{ background:url(../images/banner.jpg) no-repeat center top; background-size:cover; padding:54px 0; position:relative;}

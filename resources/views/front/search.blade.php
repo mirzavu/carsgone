@@ -346,6 +346,7 @@
       });
 
       $('#search-submit').on('click',function(e){
+        $('.result-container').css({opacity:0.2}).before('<div class="progress"><div class="indeterminate"></div></div>')
         $.ajax({
            url: '{{ url('/') }}/searchterm2',
            type: 'GET',

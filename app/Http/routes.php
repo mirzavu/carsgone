@@ -21,6 +21,7 @@
 
 	// Route::get('/fb', 'HomeController@fb');
 	Route::get('/searchterm', 'HomeController@searchTerm');  //from homepage
+	Route::get('/searchterm2', 'HomeController@searchTerm2');
 	Route::get('/getModels/{term}', 'HomeController@getModels');
 	// Route::get('/autoloans', 'PageController@autoloan');
 	// Route::get('/autoloans/{slug}', 'PageController@viewLoanPage');
@@ -41,6 +42,7 @@
 	Route::get('/removeSessionAll', 'SearchController@removeSessionAll');
 	
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
+	Route::get('/search-list', 'SearchController@searchListData');
 
 	// Route::post('/save-vehicle', 'PostController@saveVehicle');
 	// Route::post('/unsave-vehicle', 'PostController@unsaveVehicle');

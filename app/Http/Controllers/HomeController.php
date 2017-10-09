@@ -123,40 +123,54 @@ class HomeController extends Controller
 		$flags = array('make' => 0,'model' =>0, 'province'=>0, 'city'=>0 );
 		$search_param ='';
 		foreach ($terms as $key => $keyword) {
+
 			if(Make::where('make_name',"LIKE","%$keyword%")->count() && $flags['make']==0)
 			{
+
 				$param = Make::where('make_name',"LIKE","%$keyword%")->first();
 				unset($terms[$key]);
 				$search_param .= "make-".$param->make_name."/";
 				$flags['make']=1;
+
 			}
-			elseif (Province::where('province_name',"=","$keyword")->count()  && $flags['province']==0) 
-			{	
-				$param = Province::where('province_name',"=","$keyword")->first();
-				$search_param .= "province-".$param->province_name."/";
-				unset($terms[$key]);
-				$flags['province']=1;
-			}
+			// elseif (Province::where('province_name',"=","$keyword")->count()  && $flags['province']==0) 
+			// {	
+			// 	$param = Province::where('province_name',"=","$keyword")->first();
+			// 	$search_param .= "province-".$param->province_name."/";
+			// 	unset($terms[$key]);
+			// 	$flags['province']=1;
+			// }
 			elseif (VehicleModel::where('model_name',"=","$keyword")->count()  && $flags['model']==0) 
 			{	
 				$param = VehicleModel::where('model_name',"=","$keyword")->first();
-				$search_param .= "make-".$param->make()->first()->make_name."/model-".$param->model_name."/";
+				if($flags['make'])
+					$search_param .= "model-".$param->model_name."/";
+				else
+					$search_param .= "make-".$param->make()->first()->make_name."/model-".$param->model_name."/";
 				unset($terms[$key]);
 				$flags['model']=1;
 			}
-			elseif (City::where('city_name',"=","$keyword")->count()  && $flags['city']==0) 
-			{	
-				$param = City::where('city_name',"=","$keyword")->first();
-				$search_param .= "province-".$param->province()->first()->province_name."/city-".$param->city_name."/";
-				unset($terms[$key]);
-				$flags['city']=1;
-			}
+			// elseif (City::where('city_name',"=","$keyword")->count()  && $flags['city']==0) 
+			// {	
+			// 	$param = City::where('city_name',"=","$keyword")->first();
+			// 	$search_param .= "province-".$param->province()->first()->province_name."/city-".$param->city_name."/";
+			// 	unset($terms[$key]);
+			// 	$flags['city']=1;
+			// }
 		}
 		if(count($terms))
 		{
 			$content_param = implode(" ", $terms);
 			$request->session()->put('content',$content_param);
 		}
+		return response()->json(['status' => 'success', 'link' => $search_param]);
+	}
+
+	public function searchTerm2(Request $request)
+	{
+		$results = DB::select("SELECT *, MATCH(m.make_name) AGAINST ('{$request->search_text}') as mrel, MATCH(p.model_name) AGAINST ('{$request->search_text}') as prel FROM models p LEFT JOIN `makes` m ON p.make_id = m.id WHERE MATCH(m.make_name) AGAINST ('{$request->search_text}') or MATCH(p.model_name) AGAINST ('{$request->search_text}') ORDER BY mrel+prel DESC, LENGTH(p.model_name) ASC");
+		$search_param ="make-{$results[0]->make_name}/model-{$results[0]->model_name}";
+		
 		return response()->json(['status' => 'success', 'link' => $search_param]);
 	}
 

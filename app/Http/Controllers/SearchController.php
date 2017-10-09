@@ -218,6 +218,18 @@ class SearchController extends Controller
 		
 	}
 
+	public function searchListData(Request $request)
+	{
+		$models = VehicleModel::select(DB::raw('CONCAT(make_name, " ", model_name) AS item'))
+			->join('makes', 'make_id', '=', 'makes.id')
+			->lists('item');
+		// $models = VehicleModel::select(DB::raw('CONCAT(make_name, " ", model_name) AS item,  make_name, model_name'))
+		// 	->join('makes', 'make_id', '=', 'makes.id')
+		// 	->get();  with id
+		return json_encode($models);
+	}
+
+	
 	
 
 }

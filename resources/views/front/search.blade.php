@@ -9,28 +9,18 @@
             <!-- Sidebar Start -->
             <div class="sidebar fix-sidebar">
                <!-- panel start -->
+
                <div class="panel">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Quick Search</h3>
-                     <a href="#" class="sidenav-close">Close</a>
+                     <h3 class="panel-title">Search For</h3>
                   </div>
                   <div class="panel-body">
-                     <h1>{{ $h1}}</h1>
-                     <div class="filter-dropdown">
-                        <select id="make-select" name="make">
-                           <option value="" disabled selected>Select Make</option>
-                           @foreach ($makes as $make)
-                           <option value="{{$make->id}}">{{$make->make_name}}</option>
-                           @endforeach
-                        </select>
-                        <select id="model-select" name="model">
-                           <option value="" disabled selected>Select Model</option>
-                        </select>
-                        <a id="quick_search" class="waves-effect waves-light btn">Search</a>
+                     <div class="filter-search">
+                        <input id="search-input" class="autocomplete" type="text" placeholder="Search here.." />
+                        <button id="search-submit" type="submit" class="btn waves-effect waves-light filter-btn">Go</button>
                      </div>
                   </div>
                </div>
-               <!-- panel end -->
                <!-- panel start -->
                <div class="panel">
                   <div class="panel-heading">
@@ -341,6 +331,34 @@
       $("img").on("error", function(){      
          $(this).attr( "src", "/assets/images/placeholder.jpg" );  
       });
+
+      $.get( "{{ url('/') }}/search-list", function( data ) {
+        var list={};
+        $.each(JSON.parse(data), function(index, row){
+            list[row] = null;
+        })
+        $('input.autocomplete').autocomplete({
+
+          data: list,
+          limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
+          minLength: 3, // The minimum length of the input for the autocomplete to start. Default: 1.
+        });
+      });
+
+      $('#search-submit').on('click',function(e){
+        $.ajax({
+           url: '{{ url('/') }}/searchterm2',
+           type: 'GET',
+           data: 'search_text='+$('#search-input').val()+'&_token={{ csrf_token() }}',
+           success: function(response) {
+            // console.log(response.link);
+               window.location = "{{ url('search/') }}/"+response.link;
+           }
+       });
+      });
+      
+
+      
 
   });
    

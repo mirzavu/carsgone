@@ -155,14 +155,14 @@ $(document).ready(function() {
         $this = $(this);
         if ($times.length > 6) {
 
-            if($(this).is("#makes-list"))
+            if($(this).is("#makes-list") || $(this).is("#models-list"))
             {
                 $times.sort(function(a, b) {
                     //Sort items only for displaying ones alphabetically
                     if(a.style.display =="none" || b.style.display =="none")
                     {
                         return -1;
-                    }
+                    } 
                     else
                     {
                         return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
@@ -194,7 +194,7 @@ $(document).ready(function() {
     $timeSlots.on('click', '.more-times', function() {
         var list = $(this).parent();
         $(this).prevAll().show().end().remove();
-        if(list.is("#makes-list"))
+        if(list.is("#makes-list") || list.is("#models-list"))
         {
             var $times = list.children('li');
             $times.sort(function(a, b) {
@@ -212,7 +212,7 @@ $(document).ready(function() {
     $timeSlots.on('click', '.less-times', function() {
         var list = $(this).parent();
         $(this).remove();
-        if(list.is("#makes-list"))
+        if(list.is("#makes-list") || list.is("#models-list"))
         {
             var $times = list.children('li');
             $times.sort(function(a, b) {

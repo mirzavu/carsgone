@@ -80,7 +80,7 @@
                      <h3 class="panel-title">Select Model</h3>
                   </div>
                   <div class="panel-body">
-                     <ul class="link-list">
+                     <ul id="models-list"  class="link-list">
                         @foreach($sidebar_data["models"] as $model)
                         <li><a href="{{Request::url()}}/model-{{$model->model_name}}">{{$model->model_name}} ({{$model->model_count}})</a></li>
                         @endforeach

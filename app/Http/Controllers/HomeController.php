@@ -168,9 +168,25 @@ class HomeController extends Controller
 
 	public function searchTerm2(Request $request)
 	{
+		$request->search_text = trim($request->search_text);
+		$search_param='';
 		$results = DB::select("SELECT *, MATCH(m.make_name) AGAINST ('{$request->search_text}') as mrel, MATCH(p.model_name) AGAINST ('{$request->search_text}') as prel FROM models p LEFT JOIN `makes` m ON p.make_id = m.id WHERE MATCH(m.make_name) AGAINST ('{$request->search_text}') or MATCH(p.model_name) AGAINST ('{$request->search_text}') ORDER BY mrel+prel DESC, LENGTH(p.model_name) ASC");
-		$search_param ="make-{$results[0]->make_name}/model-{$results[0]->model_name}";
+		if($results)
+		{
+			$search_param ="make-{$results[0]->make_name}/model-{$results[0]->model_name}/";
+			$content = str_ireplace($results[0]->make_name,"",$request->search_text);
+			$content = str_ireplace($results[0]->model_name,"",$content);
+		}
+		else
+		{
+			$content = $request->search_text;
+		}
 		
+		$content = trim($content);
+		if(strlen($content))
+		{
+			$search_param.="content-$content";
+		}
 		return response()->json(['status' => 'success', 'link' => $search_param]);
 	}
 

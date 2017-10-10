@@ -228,15 +228,15 @@ class Boost extends Command
                 DB::table('vehicle_photos')->insert($photos);
                 //dd($vehicle->photo());
 
-                $vehicle->options()->detach();
+                // $vehicle->options()->detach();
 
-                $options = $xml->Features;
-                $option_ids =[];
-                foreach($options->Feature as $option) {
-                    $option = Option::firstOrCreate(['option' =>  (string)$option]);
-                    array_push($option_ids, $option->id);
-                }
-                $vehicle->options()->attach($option_ids);
+                // $options = $xml->Features;
+                // $option_ids =[];
+                // foreach($options->Feature as $option) {
+                //     $option = Option::firstOrCreate(['option' =>  (string)$option]);
+                //     array_push($option_ids, $option->id);
+                // }
+                // $vehicle->options()->attach($option_ids);
             }
         }
         arsort($email);

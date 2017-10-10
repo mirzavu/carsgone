@@ -22,7 +22,7 @@ class Vehicle extends Model
     {
         return [
             'slug' => [
-                'source' => ['year', 'make.make_name', 'model.model_name','user.city.city_name','user.province.province_name'],
+                'source' => ['year', 'make.make_name', 'model.model_name','trim','user.city.city_name','user.province.province_name'],
                 'separator' => '-',
                 'unique' => true,
             ]

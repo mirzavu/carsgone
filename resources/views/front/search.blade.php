@@ -13,6 +13,7 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Search For</h3>
+                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <div class="filter-search">

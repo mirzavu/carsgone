@@ -355,7 +355,7 @@
            success: function(response) {
                console.log(response.link);
                console.log("{{ url('/') }}/search/"+response.link);
-               window.location = "{{ url('/') }}/search/"+response.link;
+               window.location.href = "{{ url('/') }}/search/"+response.link;
            }
        });
       });

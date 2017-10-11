@@ -187,7 +187,7 @@ class HomeController extends Controller
 		{
 			$search_param.="content-$content";
 		}
-		return response()->json(['status' => 'success', 'link' => $search_param], 200);
+		return response()->json(['status' => 'success', 'link' => rtrim($search_param, '/')], 200);
 	}
 
 	public function getModels($make_id)

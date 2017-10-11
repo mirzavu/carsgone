@@ -222,8 +222,11 @@ class Boost extends Command
                 $images = $xml->Images;
 
                 $photos =[];
-                foreach($images->Photo as $image) {
-                    array_push($photos, ['position' => (string)$image['number'], 'path' => (string)$image, 'vehicle_id' => $vehicle->id]);
+                if (is_array($images->Photo) || is_object($images->Photo))
+                {
+                    foreach($images->Photo as $image) {
+                        array_push($photos, ['position' => (string)$image['number'], 'path' => (string)$image, 'vehicle_id' => $vehicle->id]);
+                    }
                 }
                 DB::table('vehicle_photos')->insert($photos);
                 //dd($vehicle->photo());

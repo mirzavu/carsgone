@@ -353,7 +353,8 @@
            type: 'GET',
            data: 'search_text='+$('#search-input').val()+'&_token={{ csrf_token() }}',
            success: function(response) {
-            // console.log(response.link);
+               console.log(response.link);
+               console.log('{{ url('/') }}');
                window.location = "{{ url('/') }}/search/"+response.link;
            }
        });

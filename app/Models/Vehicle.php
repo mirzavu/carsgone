@@ -275,7 +275,10 @@ class Vehicle extends Model
 
         if($featured ==1)
         {
-            $query->where('users.featured', 1)->orWhere('vehicles.featured', 1);
+            $query->where(function ($subquery) {
+                $subquery->where('users.featured', '=', 1)
+                      ->orWhere('vehicles.featured', '=', 1);
+            });
         }
 
         if ($conditions->get('user'))

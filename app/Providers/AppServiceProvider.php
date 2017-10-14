@@ -20,9 +20,9 @@ class AppServiceProvider extends ServiceProvider
             // print_r($query->bindings);echo "<br>";
             // echo $query->time;echo "<br>";
 
-            Log::info($query->sql);
-            Log::info($query->bindings);
-            Log::info($query->time);
+            // Log::info($query->sql);
+            // Log::info($query->bindings);
+            // Log::info($query->time);
         });
     }
 

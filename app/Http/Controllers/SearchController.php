@@ -21,12 +21,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class SearchController extends Controller
 {
-	protected $filters = array('sort','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
-	protected $applied_filters = array('model', 'make', 'year', 'condition','body', 'price', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
-	protected $url_filters = array('make','model', 'body', 'seller', 'dealer');
+	protected $filters = array('sort','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller', 'trim');
+	protected $applied_filters = array('model', 'make', 'year', 'condition','body', 'price', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller', 'trim');
+	protected $url_filters = array('make','model', 'body', 'seller', 'dealer', 'trim');
 	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon', 'place','odometer', 'distance', 'transmission', 'content');
-	protected $clear_filters = array('sort','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller');
-	protected $dealer_ids;
+	protected $clear_filters = array('sort','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller', 'trim');
 	protected $url_params;
 
     public function searchHandler(Request $request, $params=false)

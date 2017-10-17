@@ -168,18 +168,29 @@ class HomeController extends Controller
 
 	public function searchTerm2(Request $request)
 	{
-		$request->search_text = trim($request->search_text);
+		$search = trim($request->search_text);
 		$search_param='';
-		$results = DB::select("SELECT *, MATCH(m.make_name) AGAINST ('{$request->search_text}') as mrel, MATCH(p.model_name) AGAINST ('{$request->search_text}') as prel FROM models p LEFT JOIN `makes` m ON p.make_id = m.id WHERE MATCH(m.make_name) AGAINST ('{$request->search_text}') or MATCH(p.model_name) AGAINST ('{$request->search_text}') ORDER BY mrel+prel DESC, LENGTH(p.model_name) ASC");
+		if(Make::where('make_name',"LIKE","$search")->count())
+		{
+			$search_param .= "make-$search/";
+			Log::info($search_param);
+			return response()->json(['status' => 'success', 'link' => rtrim($search_param, '/')], 200);
+		}
+		if(Vehicle::where('trim',"LIKE","$search")->count())
+		{
+			$search_param .= "trim-$search/";
+			return response()->json(['status' => 'success', 'link' => rtrim($search_param, '/')], 200);
+		}
+		$results = DB::select("SELECT *, MATCH(m.make_name) AGAINST ('{$search}') as mrel, MATCH(p.model_name) AGAINST ('{$search}') as prel FROM models p LEFT JOIN `makes` m ON p.make_id = m.id WHERE MATCH(m.make_name) AGAINST ('{$search}') or MATCH(p.model_name) AGAINST ('{$search}') ORDER BY mrel+prel DESC, LENGTH(p.model_name) ASC");
 		if($results)
 		{
 			$search_param ="make-{$results[0]->make_name}/model-{$results[0]->model_name}/";
-			$content = str_ireplace($results[0]->make_name,"",$request->search_text);
+			$content = str_ireplace($results[0]->make_name,"",$search);
 			$content = str_ireplace($results[0]->model_name,"",$content);
 		}
 		else
 		{
-			$content = $request->search_text;
+			$content = $search;
 		}
 		
 		$content = trim($content);

@@ -118,6 +118,10 @@ class Vehicle extends Model
                 {
                     $q->where('transmission', $conditions->get('transmission'));
                 }
+                if ($conditions->get('trim'))
+                {
+                    $q->where('trim', $conditions->get('trim'));
+                }
                 if ($conditions->get('price'))
                 {
                     $range = explode('-', $conditions->get('price'));

@@ -12,13 +12,13 @@
 
                <div class="panel">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Search For</h3>
+                     <h3 class="panel-title">Keyword Search</h3>
                      <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <div class="filter-search">
                         <input id="search-input" class="autocomplete" type="text" placeholder="Search here.." />
-                        <button id="search-submit" type="submit" class="btn waves-effect waves-light filter-btn">Go</button>
+                        <button id="search-submit" type="submit" class="btn waves-effect waves-light filter-btn"><i class="fa fa-search" style="font-size: 1.8rem;"></i></button>
                      </div>
                   </div>
                </div>
@@ -344,6 +344,13 @@
           limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
           minLength: 3, // The minimum length of the input for the autocomplete to start. Default: 1.
         });
+      });
+
+      $('#search-input').keypress(function(e) {
+          if(e.which == 13) {
+            e.preventDefault();
+            $('#search-submit').click();
+          }
       });
 
       $('#search-submit').on('click',function(e){

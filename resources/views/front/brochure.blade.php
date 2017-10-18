@@ -70,7 +70,7 @@
                               <input name="email" type="email" class="form-control" placeholder="Email" required />
                            </div>
                            <div class="form-group">
-                              <textarea name="message" class="form-control" placeholder="Message" required>I found your listing on Carsgone.com. Please send me more information about the {{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - {{$vehicle->price}}.
+                              <textarea name="message" class="form-control" placeholder="Message" required>I found your listing on Carsgone.com. Please send me more information about the {{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} - ${{$vehicle->price}}.
                               </textarea>
                            </div>
                            <div class="form-group">
@@ -427,7 +427,7 @@ form.validate({
         $.ajax({
             url: form.action,
             type: form.method,
-            data: $(form).serialize() + '&_token={{ csrf_token() }}' + '&dealer_email={{ $vehicle->user->email }}',
+            data: $(form).serialize() + '&_token={{ csrf_token() }}&dealer_email={{ $vehicle->user->email }}&vehicle_slug={{ $vehicle->slug }}',
             success: function(response) {
                 if (response.status == "success") {
                     toastr.success(response.message)

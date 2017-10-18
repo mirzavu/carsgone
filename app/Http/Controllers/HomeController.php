@@ -62,25 +62,25 @@ class HomeController extends Controller
 
 		$data['total'] = Vehicle::count();
 		$data['location'] = getLocation($request);
-		$data['provinces'] = Cache::remember('home_provinces', 30, function() {
+		$data['provinces'] = Cache::remember('home_provinces', 600, function() {
 				    return Province::withCount(['vehicles'=> function ($query) {
 					    $query->where('vehicles.status_id', 1);
 						}])->orderBy('province_name', 'asc')->get();
 				});
-		$data['makes'] = Cache::remember('home_makes', 30, function() {
+		$data['makes'] = Cache::remember('home_makes', 600, function() {
 				    return Make::withCount(['vehicles'=> function ($query) {
 					    $query->where('status_id', 1);
 						}])->having('vehicles_count', '>', 0)->orderBy('make_name', 'asc')->get();
 				});
 
-		$data['body_style_groups'] = Cache::remember('home_body_style_groups', 30, function() {
+		$data['body_style_groups'] = Cache::remember('home_body_style_groups', 600, function() {
 				    return BodyStyleGroup::withCount(['vehicles'=> function ($query) {
 					    $query->where('status_id', 1);
 						}])->where('id', '<=', 8)
 						->orderBy('body_style_group_name', 'asc')->get();
 					});
 
-		$prices = Cache::remember('home_prices', 30, function() {
+		$prices = Cache::remember('home_prices', 600, function() {
 				    return DB::table('vehicles')->select(DB::raw('concat(5000*floor(price/5000),"-",5000*floor(price/5000) + 5000) as `range`,count(*) as `count`'))->where('status_id', 1)->groupBy('range')->orderBy('price', 'asc')->get();
 				});
 

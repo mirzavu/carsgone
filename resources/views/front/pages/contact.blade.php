@@ -12,7 +12,7 @@
                      <h1>Contact Us</h1>
                   </div>
                   <div class="panel-body">
-                     {!! Form::open(['url' => '/contact', 'method' => 'POST', 'id' => 'contact-form']) !!}
+                     <form method="POST" action="{{ url('/') }}/contact" accept-charset="UTF-8" id="contact-form" novalidate="novalidate">
                      <div class="contact-dealer-container">
                         <div class="form-group">
                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => "Enter Name", 'required']) !!}
@@ -30,7 +30,7 @@
                            <button id="submit-btn" class="finish-btn btn waves-effect waves-light" type="submit">Submit</button>
                         </div>
                      </div>
-                     {!! Form::close() !!}
+                     </form>  
                   </div>
                </div>
             </div>

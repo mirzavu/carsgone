@@ -348,6 +348,7 @@
 
       $('#search-input').keypress(function(e) {
           if(e.which == 13) {
+            $('#search-input').off();
             e.preventDefault();
             $('#search-submit').click();
           }

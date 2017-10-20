@@ -152,8 +152,9 @@ class SearchController extends Controller
 		{
 			$price = ' within range '.$conditions->get('price');
 		}
+		$seller = $conditions->get('seller')? $conditions->get('seller').' ':'';
 		$title['title'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and Used Cars $price| Buy Sell Vehicles Nearby$loc";
-		$title['description'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and used cars. Auto dealers - private for sale by owner buy and sell cars, trucks, SUVs & vans$loc$price";
+		$title['description'] = $conditions->get('body').' '.$conditions->get('make').' '.$conditions->get('model')." New and used {$seller}cars. Auto dealers - private for sale by owner buy and sell cars, trucks, SUVs & vans$loc$price";
 		return $title;
 	}
 

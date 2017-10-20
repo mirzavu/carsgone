@@ -116,7 +116,7 @@ class DealerController extends Controller
 				$loc = ' in '.$conditions->get('province');
 		}
 		$title['title'] = "Auto and Truck Dealers - Find New and Used Car Dealerships$loc";
-		$title['description'] = "New and used cars. Auto dealers - private for sale by owner buy and sell cars, trucks, SUVs & vans$loc";
+		$title['description'] = "Auto and Truck Dealers. New and used cars for sale by owner buy and sell cars, trucks, SUVs & vans$loc";
 		return $title;
 	}
 

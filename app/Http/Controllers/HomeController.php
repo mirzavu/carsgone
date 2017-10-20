@@ -120,7 +120,7 @@ class HomeController extends Controller
 
 		$terms = explode(" ",$request->search_text);
 		Log::info($terms);
-		$flags = array('make' => 0,'model' =>0, 'province'=>0, 'city'=>0 );
+		$flags = array('make' => 0,'model' =>0, 'trim'=>0);
 		$search_param ='';
 		foreach ($terms as $key => $keyword) {
 
@@ -150,13 +150,13 @@ class HomeController extends Controller
 				unset($terms[$key]);
 				$flags['model']=1;
 			}
-			// elseif (City::where('city_name',"=","$keyword")->count()  && $flags['city']==0) 
-			// {	
-			// 	$param = City::where('city_name',"=","$keyword")->first();
-			// 	$search_param .= "province-".$param->province()->first()->province_name."/city-".$param->city_name."/";
-			// 	unset($terms[$key]);
-			// 	$flags['city']=1;
-			// }
+			elseif (Vehicle::where('trim',"LIKE","$keyword")->count()  && $flags['trim']==0) 
+			{	
+				$trim = Vehicle::where('trim',"LIKE","$keyword")->value('trim');
+				$search_param .= "trim-".$trim."/";
+				unset($terms[$key]);
+				$flags['trim']=1;
+			}
 		}
 		if(count($terms))
 		{

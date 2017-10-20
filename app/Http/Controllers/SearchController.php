@@ -222,10 +222,13 @@ class SearchController extends Controller
 		$models = VehicleModel::select(DB::raw('CONCAT(make_name, " ", model_name) AS item'))
 			->join('makes', 'make_id', '=', 'makes.id')
 			->lists('item');
+		//get trims having length greater than 2
+		$trims = Vehicle::selectRaw('trim, CHAR_LENGTH(trim) as len')->having('len','>', 2)->groupBy('trim')->lists('trim');
+		$merged = $models->merge($trims);
 		// $models = VehicleModel::select(DB::raw('CONCAT(make_name, " ", model_name) AS item,  make_name, model_name'))
 		// 	->join('makes', 'make_id', '=', 'makes.id')
 		// 	->get();  with id
-		return json_encode($models);
+		return json_encode($merged);
 	}
 
 	

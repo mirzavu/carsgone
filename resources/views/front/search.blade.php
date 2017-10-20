@@ -356,7 +356,7 @@
       $('#search-submit').on('click',function(e){
         $('.result-container').css({opacity:0.2}).before('<div class="progress"><div class="indeterminate"></div></div>')
         $.ajax({
-           url: '{{ url('/') }}/searchterm2',
+           url: '{{ url('/') }}/searchterm',
            type: 'GET',
            data: 'search_text='+$('#search-input').val()+'&_token={{ csrf_token() }}',
            success: function(response) {

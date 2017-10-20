@@ -163,7 +163,7 @@ class HomeController extends Controller
 			$content_param = implode(" ", $terms);
 			$request->session()->put('content',$content_param);
 		}
-		return response()->json(['status' => 'success', 'link' => $search_param]);
+		return response()->json(['status' => 'success', 'link' => rtrim($search_param, '/')]);
 	}
 
 	public function searchTerm2(Request $request)

@@ -122,6 +122,11 @@ class HomeController extends Controller
 		Log::info($terms);
 		$flags = array('make' => 0,'model' =>0, 'trim'=>0);
 		$search_param ='';
+		if(Vehicle::where('trim',"LIKE",$request->search_text)->count())
+		{
+			$search_param .= "trim-".$request->search_text."/";
+			return response()->json(['status' => 'success', 'link' => rtrim($search_param, '/')], 200);
+		}
 		foreach ($terms as $key => $keyword) {
 
 			if(Make::where('make_name',"LIKE","%$keyword%")->count() && $flags['make']==0)

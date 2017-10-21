@@ -23,8 +23,8 @@ class SearchController extends Controller
 {
 	protected $filters = array('sort','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller', 'trim');
 	protected $applied_filters = array('model', 'make', 'year', 'condition','body', 'price', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller', 'trim');
-	protected $url_filters = array('make','model', 'body', 'seller', 'dealer', 'trim');
-	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon', 'place','odometer', 'distance', 'transmission', 'content');
+	protected $url_filters = array('make','model', 'body', 'seller', 'dealer');
+	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon', 'place','odometer', 'distance', 'transmission', 'content', 'trim');
 	protected $clear_filters = array('sort','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller', 'trim');
 	protected $url_params;
 
@@ -50,7 +50,7 @@ class SearchController extends Controller
 		//Sorting set
 		if($conditions->get('sort') && $conditions->get('sort')!="name-desc")
 		{
-			list($sort,$direction) = explode('-',$conditions->get('sort'));
+			$sort = $conditions->get('sort');
 		}
 		else
 		{

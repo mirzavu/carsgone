@@ -473,7 +473,7 @@ $('#next-btn').on('click', function(e) {
         })
 
         if (form.valid() == true) {
-            $('#finance-form-1').fadeOut()
+            $('#finance-form-1').hide()
             $('#finance-form-2').fadeIn()
             $('#quick-info').parent().hide()
         } else {

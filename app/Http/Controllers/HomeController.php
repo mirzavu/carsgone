@@ -124,8 +124,8 @@ class HomeController extends Controller
 		$search_param ='';
 		if(Vehicle::where('trim',"LIKE",$request->search_text)->count())
 		{
-			$search_param .= "trim-".$request->search_text."/";
-			return response()->json(['status' => 'success', 'link' => rtrim($search_param, '/')], 200);
+			$request->session()->put('trim',$request->search_text);
+			return response()->json(['status' => 'success', 'link' => ''], 200);
 		}
 		foreach ($terms as $key => $keyword) {
 
@@ -155,10 +155,10 @@ class HomeController extends Controller
 				unset($terms[$key]);
 				$flags['model']=1;
 			}
-			elseif (Vehicle::where('trim',"LIKE","$keyword")->count()  && $flags['trim']==0) 
+			elseif (Vehicle::where('trim',"LIKE","$keyword")->count()  && $flags['trim']==0)
 			{	
 				$trim = Vehicle::where('trim',"LIKE","$keyword")->value('trim');
-				$search_param .= "trim-".$trim."/";
+				$request->session()->put('trim',$trim);
 				unset($terms[$key]);
 				$flags['trim']=1;
 			}

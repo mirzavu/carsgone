@@ -10,7 +10,7 @@ $(document).ready(function() {
         $(this).parent().parent().children('label').remove()
     })
 
-    $('.modal-trigger').leanModal();
+    $('.modal-trigger').modal();
     /** select box**/
     $('select').material_select();
     /** sliding sidebar for mobile view **/

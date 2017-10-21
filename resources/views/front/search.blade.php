@@ -342,8 +342,12 @@
 
           data: list,
           limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
-          minLength: 3, // The minimum length of the input for the autocomplete to start. Default: 1.
+          onAutocomplete: function(val) {
+            setTimeout(function(){ $('#search-input').focus(); }, 10);
+          },
+          minLength: 2, // The minimum length of the input for the autocomplete to start. Default: 1.
         });
+
       });
 
       $('#search-input').keypress(function(e) {

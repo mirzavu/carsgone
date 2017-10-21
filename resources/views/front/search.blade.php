@@ -361,7 +361,9 @@
            type: 'GET',
            data: 'search_text='+$('#search-input').val()+'&_token={{ csrf_token() }}',
            success: function(response) {
-               window.location.href = "{{ url('/') }}/search/"+response.link;
+              var redirect = "{{ url('/') }}/search/"+response.link;
+              redirect = redirect.replace(/\/$/, "");
+              window.location.href = redirect;
            }
        });
       });

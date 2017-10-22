@@ -1102,6 +1102,9 @@ animation-duration: 2s;-webkit-animation-fill-mode: both;animation-fill-mode: bo
 .agreeErd #Agree-error{left: 0;
     position: absolute;
     top: 15px;}
+
+.dropdown-content li {min-height: 36px;}
+.dropdown-content li > a, .dropdown-content li > span {padding: 8px 15px;font-weight: 400;}
 /**************************media*******************************/
 .tData { position:relative;}
 label.error { width:auto; position:relative; padding:10px 15px; margin-top:7px; background:#dc5f03; color:#fff; font:600 13px/15px Arial, Helvetica, sans-serif; border-radius:4px; text-shadow:1px 1px 1px rgba(0,0,0,.4);}

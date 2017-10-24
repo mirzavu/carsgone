@@ -335,7 +335,7 @@ $(function() {
     // var myDropzone = new Dropzone("#my-awesome-dropzone");
     Dropzone.options.myAwesomeDropzone = {
         // addRemoveLinks: true,
-        url: "{{ url('/') }}save-image",
+        url: "{{ url('/') }}/save-image",
         paramName: "file", // The name that will be used to transfer the file
         headers: {
             'X-CSRF-Token': $('input[name="_token"]').val()

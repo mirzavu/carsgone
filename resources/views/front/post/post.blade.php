@@ -406,7 +406,7 @@
         // var myDropzone = new Dropzone("#my-awesome-dropzone");
         Dropzone.options.myAwesomeDropzone = {
             // addRemoveLinks: true,
-            url: "{{ url('/') }}save-image",
+            url: "{{ url('/') }}/save-image",
             paramName: "file", // The name that will be used to transfer the file
             headers: {
                 'X-CSRF-Token': $('input[name="_token"]').val()
@@ -582,7 +582,7 @@
                 }
                 $('#submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:2.0rem" aria-hidden="true"></i>  SAVING VEHICLE');
                 $.ajax({
-                    url: '{{ url('/')}}post/create',
+                    url: '{{ url('/')}}/post/create',
                     type: 'POST',
                     data: $('form').serialize(),
                     success: function(response) {

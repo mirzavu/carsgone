@@ -553,7 +553,7 @@ var sfw = $("#post-edit-form").stepFormWizard({
                                 type: 'POST',
                                 data: $('form').serialize(),
                                 success: function(response) {
-                                    window.location = response.url;
+                                    location.reload();
                                 }
                             });
         }

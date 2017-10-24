@@ -316,7 +316,7 @@
                                                         <!-- Image -->
                                                         <tr>
                                                             <td align="left" style="font-family: 'Roboto', sans-serif; font-weight:400; color:#555555; font-size:14px; line-height:20px;">
-                                                              	Hello Ray
+                                                              	Hello
                                                             </td>
                                                         </tr>
                                                         <tr>

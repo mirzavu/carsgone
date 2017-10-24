@@ -31,9 +31,7 @@
 	Route::post('/credit-application', 'CreditController@send');
 	Route::post('/quick-finance', 'CreditController@quickfinance');
 
-	//edit post
-	Route::get('/vehicles/{id}/edit', 'PostController@editVehicle');
-	Route::patch('/vehicles/{id}', 'PostController@updateVehicle');
+
 
 	//Search
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');
@@ -68,7 +66,9 @@
 	Route::post('/remove-image-editpost', 'PostController@removeImageEditPost');
 	Route::post('/save-image-editpost', 'PostController@saveImageEditPost');
 	Route::post('/set-main-photo', 'PostController@setMainPhoto');
-
+		//edit post
+	Route::get('/vehicles/{id}/edit', 'PostController@editVehicle');
+	Route::patch('/vehicles/{id}', 'PostController@updateVehicle');
 
 
 //Authentication
@@ -79,7 +79,7 @@
 	// Route::get('/logout', 'UserController@logout');
 	// Route::get('/loggedInUser', 'UserController@loggedInUser');
 	// Route::get('/signup/confirm/{token}', 'UserController@confirmEmail');
-	Route::get('/token-login/{token}', 'UserController@tokenLogin');
+	Route::get('/token-vehicle-edit/{slug}/{token}', 'UserController@tokenEditVehicle');
 	// Route::get('/vehicle-confirm/{slug}/{token}', 'UserController@confirmVehicle');
 
 //Dashboard

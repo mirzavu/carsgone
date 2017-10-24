@@ -80,7 +80,7 @@
 	// Route::get('/loggedInUser', 'UserController@loggedInUser');
 	// Route::get('/signup/confirm/{token}', 'UserController@confirmEmail');
 	Route::get('/token-vehicle-edit/{slug}/{token}', 'UserController@tokenEditVehicle');
-	// Route::get('/vehicle-confirm/{slug}/{token}', 'UserController@confirmVehicle');
+	Route::get('/vehicle-confirm/{slug}/{token}', 'UserController@confirmVehicle');
 
 //Dashboard
 	// Route::get('/dashboard', 'UserController@dashboard')->middleware('auth');

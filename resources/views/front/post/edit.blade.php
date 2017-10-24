@@ -261,6 +261,7 @@
                   <h4>Total <span>$14.95</span></h4>
                   
                </div>
+               <input type="hidden" name="_token" value="{{ csrf_token() }}">
                @endif
                {!! Form::close() !!}
             </div>
@@ -546,11 +547,8 @@ var sfw = $("#post-edit-form").stepFormWizard({
             if (form2.valid() == false) {
                 return false;
             }
-              console.log($('#vehicle-form').attr('action'))
-                    $.get("/loggedInUser", function(data) {
-                        if (data.status == "success") {
-                            $('#submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:2.0rem" aria-hidden="true"></i>  SAVING VEHICLE');
-                            $.ajax({
+              $('#submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:2.0rem" aria-hidden="true"></i>  SAVING VEHICLE');
+                    $.ajax({
                                 url: $('#vehicle-form').attr('action'),
                                 type: 'POST',
                                 data: $('form').serialize(),
@@ -558,10 +556,6 @@ var sfw = $("#post-edit-form").stepFormWizard({
                                     window.location = response.url;
                                 }
                             });
-                        } else {
-                            $('#post-member').openModal();
-                        }
-                    });
         }
 
 
@@ -584,72 +578,4 @@ var sfw = $("#post-edit-form").stepFormWizard({
 })
 </script>
 
-<script type="text/javascript">
-$('#post-signup-link').on('click', function(e) {
-    e.preventDefault();
-    $('#post-member').closeModal();
-    $('#post-signup').openModal();
-});
-
-$('#post-login-link').on('click', function(e) {
-    e.preventDefault();
-    $('#post-signup').closeModal();
-    $('#post-member').openModal();
-});
-
-$('#post-login-submit').on('click', function(e) {
-    toastr.clear()
-    NProgress.start();
-    var data = {
-        email: $('#post-login-email').val(),
-        password: $('#post-login-password').val(),
-        "_token": "{{ csrf_token() }}"
-    }
-    $.post("/login", data).done(function(data) {
-        NProgress.done();
-        if (data.status == "success") {
-            toastr.success('Checkout your saved vehicles in dashboard', 'You have logged in Successfully')
-            $('#post-member').closeModal();
-            $('#signup-li').replaceWith('<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
-            $('#login-li').replaceWith('<li id="logout-li"><a href="#">Logout</a></li>');
-            console.log('aaa')
-            $('#vehicle-form').submit();
-        } else {
-            toastr.error(data.error, 'Error')
-        }
-        console.log(data);
-    });
-});
-
-$('#post-signup-submit').on('click', function(e) {
-    toastr.clear()
-    NProgress.start();
-    if ($('#post-signup-password').val() != $('#post-signup-cpassword').val()) {
-        toastr.error('Passwords do not match', 'Error')
-        NProgress.done();
-        return
-    }
-    var data = {
-        email: $('#post-signup-email').val(),
-        name: $('#post-signup-name').val(),
-        password: $('#post-signup-password').val(),
-        "_token": "{{ csrf_token() }}"
-    }
-    $.post("/signup", data).done(function(data) {
-        NProgress.done();
-        if (data.status == "success") {
-            toastr.success('Checkout your saved vehicles in dashboard', 'Registered Successfully')
-            $('#post-signup').closeModal();
-            $('#signup-li').replaceWith('<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
-            $('#login-li').replaceWith('<li id="logout-li"><a href="#">Logout</a></li>');
-            console.log('aaxa')
-            $('#vehicle-form').submit();
-        } else {
-            toastr.error(data.error, 'Error')
-        }
-        console.log(data);
-    });
-});
-
-</script>
 @endsection

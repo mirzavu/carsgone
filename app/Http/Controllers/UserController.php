@@ -171,11 +171,14 @@ class UserController extends Controller
         return redirect()->action('UserController@dashboard');
     }
 
-    public function tokenLogin($token, Request $request)
+    public function tokenEditVehicle($slug, $token,  Request $request)
     {
         $user = User::whereToken($token)->firstOrFail();
+        $user->verified = true;
+        $user->save();
         Auth::login($user);
-        return redirect()->action('UserController@dashboard');
+        $vehicle_id = $user->vehicles()->where('slug', $slug)->value('id');
+        return redirect()->action('PostController@editVehicle', ['id' => $vehicle_id]);
     }
     
 

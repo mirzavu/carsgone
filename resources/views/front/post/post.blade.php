@@ -382,6 +382,7 @@
                      <h4>Total <span>$14.95</span></h4>
                   </div>
                   <input id="file_names" type="hidden" name="file_names">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
                </form>
             </div>
          </div>
@@ -579,7 +580,7 @@
                 if (form2.valid() == false) {
                     return false;
                 }
-
+                $('#submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:2.0rem" aria-hidden="true"></i>  SAVING VEHICLE');
                 $.ajax({
                     url: '/post/create',
                     type: 'POST',

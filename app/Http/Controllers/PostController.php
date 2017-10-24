@@ -19,6 +19,7 @@ use App\Models\Payment;
 use App\Models\ContentPage;
 use App\Models\Province;
 use App\Models\City;
+use App\Models\User;
 use Image;
 use File;
 use SEO;
@@ -92,7 +93,7 @@ class PostController extends Controller
         	return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
         }
 
-        $user = firstOrCreate(['email'=> $request['email']]);
+        $user = User::firstOrCreate(['email'=> $request['email']]);
         $user->role = "member";
         $user->phone = $request['phone'];
         $user->postal_code = $request['postal_code'];
@@ -100,7 +101,6 @@ class PostController extends Controller
         //Save vehicle
 		$vehicle = $user->vehicles()->create($request->all());
 		$vehicle->slug = null;
-		Log::info('trrr');
 		$vehicle->status_id = 0;
 		$request->session()->flash('success', 'Thank you for listing your ad with Carsgone! Please check your email to activate your vehicle.');
 
@@ -114,9 +114,7 @@ class PostController extends Controller
             	array_push($photos, new VehiclePhoto(['position' => $i++, 'path' => '/uploads/vehicle/'.$image]));
         }
         $vehicle->photos()->saveMany($photos);
-        Log::info('krrr');
         $mailer->sendVehicleConfirmation($user, $vehicle);
-		Log::info('freeee');
         //Payment
 		if ($request->has('free')) {
 		 	return response()->json(['status' => 'done', 'url' => url('post')]);
@@ -386,11 +384,10 @@ class PostController extends Controller
 
 		$user->save();
 
-		
 		if ($request->has('free') || $request->has('paid')) {
 			if(Auth::user()->verified)
 			{
-				$request->session()->flash('success', 'Your changes are saved! Check <a href="/dashboard">Dashboard</a>');
+				$request->session()->flash('success', 'Your changes for the vehicle are saved!');
 			}
 			else
 			{

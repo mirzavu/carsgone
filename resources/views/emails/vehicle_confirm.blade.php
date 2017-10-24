@@ -101,7 +101,7 @@
                               <tr>
                                 <td align="left" class="advertisement_td">
                                   <a href="{{url('/')}}">
-                                  <img style="display:block; border:0px;" src="{{url('/')}}/assets/images/logo.png" alt="logo" width="204" height="40"/>
+                                  <img style="display:block; border:0px;" src="{{url('/')}}/assets/images/logo2.png" alt="logo" width="204" height="40"/>
                                   </a>
                                 </td>
                               </tr>
@@ -611,26 +611,7 @@
                           <td height="5" style="font-size:1px; line-height:1px;">&nbsp;</td>
                         </tr>
                         <!-- Menu -->
-                        <tr>
-                          <td class="skr_menu" align="center" style="font-family: 'Roboto', sans-serif; font-weight:400; font-size:18px; color:#959595; line-height:12px;">
-                            <a class="skr_menu" href="{{ url('/').'/contact'}}" target="_blank" style="font-family: 'Roboto', sans-serif; font-weight:400; font-size:12px; color:#959595; line-height:12px; text-decoration: underline !important; ">
-                            Contact Us 
-                            </a>
-                            <span class="skr_menu" style="font-family: 'Roboto', sans-serif; font-weight:300; font-size:12px; color:#FFFFFF; line-height:12px;">
-                            &nbsp; &nbsp;
-                            </span>
-                            <a class="skr_menu" href="{{ url('/').'/help'}}" target="_blank" style="font-family: 'Roboto', sans-serif; font-weight:400; font-size:12px; color:#959595; line-height:12px; text-decoration: underline !important; ">
-                            Terms of Use
-                            </a>
-                            <span class="skr_menu" style="font-family: 'Roboto', sans-serif; font-weight:300; font-size:12px; color:#FFFFFF; line-height:12px;">
-                            &nbsp; &nbsp;
-                            </span>
-                            <a class="skr_menu" href="{{ url('/').'/privacy'}}" target="_blank" style="font-family: 'Roboto', sans-serif; font-weight:400; font-size:12px; color:#959595; line-height:12px; text-decoration: underline !important;  ">
-                            Privacy Policy
-                            </a>
-                          </td>
-                        </tr>
-                        <!-- End Menu -->
+                        
                         <tr>
                           <td height="10" style="font-size:1px; line-height:1px;">&nbsp;</td>
                         </tr>

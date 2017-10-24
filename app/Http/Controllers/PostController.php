@@ -97,6 +97,8 @@ class PostController extends Controller
         $user->role = "member";
         $user->phone = $request['phone'];
         $user->postal_code = $request['postal_code'];
+        $user->city_id = 1;
+        $user->province_id = 9;
         $user->save();
         //Save vehicle
 		$vehicle = $user->vehicles()->create($request->all());

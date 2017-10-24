@@ -63,7 +63,6 @@ class PostController extends Controller
 	{	
 		SEO::setTitle('Sell a car online free auto classifieds | Buy Sell & Trade Used Cars Canada');
         SEO::setDescription('Sell my car free, advertise vehicles free, automotive classified, post or list free online auto listings.');
-		$data['location'] = getLocation($request);
 		$data['content'] = ContentPage::where('slug', 'post-page')->first()->content;
 		$data['makes'] = Make::all();
 		$data['body_style_groups'] = BodyStyleGroup::all();
@@ -73,10 +72,6 @@ class PostController extends Controller
 	public function create(Request $request, AppMailer $mailer)
 	{		
 
-		//SEO
-		SEO::setTitle('Sell a car online free auto classifieds | Buy Sell and Trade Used Cars Canada');
-        SEO::setDescription('Sell my car free, advertise vehicles free, automotive classified, post or list free online auto listings');
-        SEOMeta::addKeyword(['sell', 'used cars', 'auto', 'list vehicle', 'classifieds', 'vehicle']);
 		$request['model_id'] = VehicleModel::where('model_name', $request['model'])->value('id');
 		if(!empty($request['colour_exterior'])) $request['ext_color_id'] = Color::where('color', $request['colour_exterior'])->value('id');
 		if(!empty($request['colour_interior'])) $request['int_color_id'] = Color::where('color', $request['colour_interior'])->value('id');
@@ -91,65 +86,26 @@ class PostController extends Controller
             	'regex:/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/',
             ]
         ]);
+        Log::info($request->all());
 
         if ($validator->fails()) {
         	return response()->json(['status' => 'fail', 'error' => $validator->errors()->first()]);
         }
 
-        $user = Auth::user();
+        $user = firstOrCreate(['email'=> $request['email']]);
+        $user->role = "member";
+        $user->phone = $request['phone'];
+        $user->postal_code = $request['postal_code'];
+        $user->save();
         //Save vehicle
 		$vehicle = $user->vehicles()->create($request->all());
 		$vehicle->slug = null;
-
+		Log::info('trrr');
 		$vehicle->status_id = 0;
 		$request->session()->flash('success', 'Thank you for listing your ad with Carsgone! Please check your email to activate your vehicle.');
 
 		$vehicle->save();
-		//Change user's lat, long, city, prov from postal code
-		$user->phone = $request['phone'];
-		$postal_code = $request['postal_code'];
-		// if($request->role == "dealer")
-		// 	$user->role = "dealer";
-		// else
-		$user->role = "member";
-		$postal_code = ($postal_code[4] == '')? $postal_code: substr_replace($postal_code, ' ', 3, 0);
-		$user->postal_code = $postal_code;
-		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($postal_code);
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HEADER, false);
-        $loc_json = curl_exec($curl);
-        $retry = 0;
-        $loc_array = json_decode($loc_json);
-        while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
-            $loc_json = curl_exec($curl);
-            $loc_array = json_decode($loc_json);
-            $retry++;
-        }
-        curl_close($curl);
-        if($loc_array->status == "OK")
-        {
-            $user->latitude = $loc_array->results[0]->geometry->location->lat;
-            $user->longitude = $loc_array->results[0]->geometry->location->lng;
-            foreach ($loc_array->results[0]->address_components as $component) 
-            {    
-			    if(in_array("administrative_area_level_1", $component->types))
-			    {
-			    	$province_code = $component->short_name;
-			    }
 
-			    if(in_array("locality", $component->types))
-			    {
-			    	$city_name = $component->long_name;
-			    }
-			}
-			$user->province_id = Province::where('province_code',(string) $province_code)->value('id');
-			$city = City::firstOrCreate(['city_name'=> (string)$city_name,'province_id'=> $user->province_id]);
-			    	$user->city_id = $city->id;
-        }  
-
-		$user->save();
 		//Save Vehicle Images
 		$image_names = explode('^', $request['file_names']);
 		$photos =[];$i=1;
@@ -158,16 +114,16 @@ class PostController extends Controller
             	array_push($photos, new VehiclePhoto(['position' => $i++, 'path' => '/uploads/vehicle/'.$image]));
         }
         $vehicle->photos()->saveMany($photos);
+        Log::info('krrr');
         $mailer->sendVehicleConfirmation($user, $vehicle);
-
+		Log::info('freeee');
         //Payment
 		if ($request->has('free')) {
-		 	return response()->json(['status' => 'done', 'url' => url('dashboard')]);
+		 	return response()->json(['status' => 'done', 'url' => url('post')]);
 		}
 		else
 		{
 			$redirectUrl = $this->payPaypal($vehicle->id);
-
 		    return response()->json(['status' => 'paypal', 'url' => $redirectUrl]);
 		}
 	}
@@ -348,10 +304,6 @@ class PostController extends Controller
 	//Edit Vehicle
 	public function editVehicle(Request $request, $id)
 	{	
-		
-		$data['location'] = getLocation($request);
-		// dd($data['makes']);
-		
 		$data['vehicle'] = Vehicle::withoutGlobalScopes()->findorFail($id);
 		if(!Auth::check() || (Auth::user()->id != $data['vehicle']->user_id))
 		{

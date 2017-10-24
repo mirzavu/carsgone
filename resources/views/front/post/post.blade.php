@@ -344,6 +344,12 @@
                      </div>
                      <div class="row">
                         <div class="col-sm-6 display-table">
+                           <label>Email<span class="required">*</span></label>
+                           <div class="input-box">
+                              <input name="email" type="email" class="form-control" placeholder="Enter Email" required/>
+                           </div>
+                        </div>
+                        <div class="col-sm-6 display-table">
                            <label>Postal Code<span class="required">*</span></label>
                            <div class="input-box">
                               <input name="postal_code" minlength="6" maxlength="7" pattern="^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$" type="text" class="form-control" placeholder="Enter Postal Code" required/>
@@ -382,284 +388,233 @@
       </div>
    </div>
 </div>
-<!-- Post page auth popup -->
-<div id="post-member" class="modal member">
-   <div class="modal-content">
-      <!-- <h5>LOGIN TO CONTINUE</h5> -->
-      <div class="form-group">
-         <label>Email</label>
-         <input id="post-login-email" type="text" class="form-control"/>
-      </div>
-      <div class="form-group">
-         <label>Password</label>
-         <input id="post-login-password" type="password" class="form-control" />
-      </div>
-      <a href="#" class="modal-action modal-close close"><i class="fa fa-times" aria-hidden="true"></i></a>
-   </div>
-   <div class="modal-footer">
-      <a id="post-login-submit" class="btn waves-effect waves-light waves-input-wrapper">POST VEHICLE</a>
-   </div>
-</div>
+
 <!-- Vehicle Post end -->
 @endsection
 @section('javascript')
 <script src="/assets/js/dropzone.js"></script>
 <script>
-   $(function() {
-       var previewNode = document.querySelector("#template");
-       previewNode.id = "";
-       var previewTemplate = previewNode.parentNode.innerHTML;
-       previewNode.parentNode.removeChild(previewNode);
-       var file_prefix = Math.random().toString(36).substr(2, 9); // create a random file prefix to avoid overrite
-   
-       //console.log(previewTemplate);
-       // var myDropzone = new Dropzone("#my-awesome-dropzone");
-       Dropzone.options.myAwesomeDropzone = {
-           // addRemoveLinks: true,
-           url: "/save-image",
-           paramName: "file", // The name that will be used to transfer the file
-           headers: {
-               'X-CSRF-Token': $('input[name="_token"]').val()
-           },
-           maxFilesize: 20, // MB
-           // previewsContainer: "#previews",
-           // dictRemoveFile:         'asdasd',
-           acceptedFiles: "image/*",
-           maxFiles: "10",
-           renameFilename: function(filename) {
-               return file_prefix + '_' + filename;
-           },
-           removedfile: function(file) {
-               $(document).find(file.previewElement).remove();
-               console.log(file)
-               var filename = file_prefix + '_' + file.name;
-               var data = {
-                   file_name: filename,
-                   "_token": "{{ csrf_token() }}"
-               }
-               $.post("/remove-image", data).done(function(data) {
-                   if (data.status == "success") {
-                       toastr.success('Image removed')
-                       var files = $('#file_names').val()
-                       files = files.replace(filename, "");
-                       files = files.replace("^^", "^");
-                       $('#file_names').val(files)
-                       console.log($('#file_names').val())
-                   } else {
-                       toastr.error('Error removing image')
-                   }
-               });
-           },
-           previewTemplate: previewTemplate,
-           accept: function(file, done) {
-             var files = $('#file_names').val()
-             $('#file_names').val(files+file_prefix + '_' + file.name+'^') // Adding ^ as separator
-             done();
-             console.log(this.files.length)
-             if (this.files.length == 1) {
-               $('.dz-image:first').addClass('main-photo')
-             }
-   
-             $('.tooltipped').tooltip({delay: 10});
-           }
-       };
-   
-       $(document.body).on('click', '.rotate', function() {
-           var img = $(this).parent().siblings('.dz-image').children('img');
-           var file_name = $(this).parent().siblings('.dz-details').find('span').text();
-           var degree = parseInt(img.attr('degree'));
-           degree += 90;
-           $(this).parent().siblings('.dz-image').children('img').css({
-               "-webkit-transform": "rotate(" + degree + "deg)",
-               "-moz-transform": "rotate(" + degree + "deg)",
-               "transform": "rotate(" + degree + "deg)" /* For modern browsers(CSS3)  */
-           });
-           img.attr('degree', degree)
-           var data = {
-               file_name: file_name,
-               "_token": "{{ csrf_token() }}"
-           }
-           $.post("/rotate-image", data).done(function(data) {
-   
-           });
-   
-       })
-   
-       $(document.body).on('click', '.set-default', function() {
-           $('.dz-image').removeClass('main-photo');
-           $(this).parent().siblings('.dz-image').addClass('main-photo');
-   
-           // Remove element from files string and add in the beginning
-           var file_name = $(this).parent().siblings('.dz-details').find('span').text();
-           var names = $('#file_names').val().split('^')
-           console.log(file_name)
-           console.log(names)
-           console.log(names.indexOf(file_name))
-           var index = names.indexOf(file_name)
-           names.splice(index, 1);
-           names.unshift(file_name)
-           names = names.join('^')
-           $('#file_names').val(names)
-       })
-   
-       // $("#my-awesome-dropzone").sortable({
-       //     items:'.dz-preview',
-       //     cursor: 'move',
-       //     opacity: 0.5,
-       //     containment: '#image-dropzone',
-       //     distance: 20,
-       //     tolerance: 'pointer'
-       // });
-   
-       //------Form-----multistep----// 
-   
-       var sfw = $("#post-create-form").stepFormWizard({
-           theme: 'sun',
-           height: 'auto',
-           markPrevSteps: true,
-           nextBtn: $('<a class="next-btn sf-right sf-btn btn waves-effect waves-light " href="#">NEXT <i class="icofont icofont-rounded-right"></i></a>'),
-           prevBtn: $('<a class="prev-btn sf-left sf-btn btn grey waves-effect waves-light  " href="#"><i class="icofont icofont-rounded-left"></i> PREV</a>'),
-           finishBtn: $('<button id="submit-btn" class="finish-btn btn sf-btn sf-btn-finish waves-effect waves-light" type="submit" value="FINISH">Submit Vehicle</button>'),
-           onNext: function(i, wizard) {
-            var myDropzone = Dropzone.forElement("#my-awesome-dropzone");
-            if(myDropzone.getUploadingFiles().length)
-            {
-               toastr.warning('Uploading photos', 'Please wait')
-               return false;
+    $(function() {
+        var previewNode = document.querySelector("#template");
+        previewNode.id = "";
+        var previewTemplate = previewNode.parentNode.innerHTML;
+        previewNode.parentNode.removeChild(previewNode);
+        var file_prefix = Math.random().toString(36).substr(2, 9); // create a random file prefix to avoid overrite
+
+        //console.log(previewTemplate);
+        // var myDropzone = new Dropzone("#my-awesome-dropzone");
+        Dropzone.options.myAwesomeDropzone = {
+            // addRemoveLinks: true,
+            url: "/save-image",
+            paramName: "file", // The name that will be used to transfer the file
+            headers: {
+                'X-CSRF-Token': $('input[name="_token"]').val()
+            },
+            maxFilesize: 20, // MB
+            // previewsContainer: "#previews",
+            // dictRemoveFile:         'asdasd',
+            acceptedFiles: "image/*",
+            maxFiles: "10",
+            renameFilename: function(filename) {
+                return file_prefix + '_' + filename;
+            },
+            removedfile: function(file) {
+                $(document).find(file.previewElement).remove();
+                console.log(file)
+                var filename = file_prefix + '_' + file.name;
+                var data = {
+                    file_name: filename,
+                    "_token": "{{ csrf_token() }}"
+                }
+                $.post("/remove-image", data).done(function(data) {
+                    if (data.status == "success") {
+                        toastr.success('Image removed')
+                        var files = $('#file_names').val()
+                        files = files.replace(filename, "");
+                        files = files.replace("^^", "^");
+                        $('#file_names').val(files)
+                        console.log($('#file_names').val())
+                    } else {
+                        toastr.error('Error removing image')
+                    }
+                });
+            },
+            previewTemplate: previewTemplate,
+            accept: function(file, done) {
+                var files = $('#file_names').val()
+                $('#file_names').val(files + file_prefix + '_' + file.name + '^') // Adding ^ as separator
+                done();
+                console.log(this.files.length)
+                if (this.files.length == 1) {
+                    $('.dz-image:first').addClass('main-photo')
+                }
+
+                $('.tooltipped').tooltip({
+                    delay: 10
+                });
             }
-               var form = $("#vehicle-form");
-               form.validate({
-                   rules: {},
-                   // errorClass: "invalid form-error",       
-                   // errorElement : 'div',       
-                   errorPlacement: function(error, element) {
-                       if (element.is('select')) {
-                           error.appendTo(element.parent().parent());
-                       } else {
-                           error.appendTo(element.parent());
-                       }
-   
-                   },
-                   focusInvalid: false,
-                   invalidHandler: function(form, validator) {
-   
-                       if (!validator.numberOfInvalids())
-                           return;
-                       $('html, body').animate({
-                           scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
-                       }, 500);
-                       $(validator.errorList[0].element).focus()
-   
-                   }
-               })
-   
-               if (form.valid() == true) {
-                   return true;
-               } else {
-                   return false;
-               }
-           },
-         onFinish: function(i) {
-               var form2 = $("#contact-info");
-               form2.validate({
-                   rules: {},
-                   // errorClass: "invalid form-error",       
-                   // errorElement : 'div',       
-                   errorPlacement: function(error, element) {
-                       if (element.is('select')) {
-                           error.appendTo(element.parent().parent());
-                       } else {
-                           error.appendTo(element.parent());
-                       }
-   
-                   },
-                   focusInvalid: false,
-                   invalidHandler: function(form2, validator) {
-   
-                       if (!validator.numberOfInvalids())
-                           return;
-                       $('html, body').animate({
-                           scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
-                       }, 500);
-                       $(validator.errorList[0].element).focus()
-   
-                   }
-               })
-   
-               if (form2.valid() == false) {
-                   return false;
-               }
-   
-                       $.get("/loggedInUser", function(data) {
-                           if (data.status == "success") {
-                               $('#submit-btn').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:2.0rem" aria-hidden="true"></i>  SAVING VEHICLE');
-   
-                               $.ajax({
-                                   url: '/post/create',
-                                   type: 'POST',
-                                   data: $('form').serialize(),
-                                   success: function(response) {
-                                    console.log(response)
-                                       if(response.status =="fail")
-                                       {
-                                          $('#submit-btn').prop('disabled', false).html('Submit Vehicle')
-                                          toastr.error(response.error, 'Error')
-                                       }
-                                       else
-                                       {
-                                          window.location = response.url;
-                                       }
-                                       
-                                   }
-                               });
-                           } else {
-                               $('#post-member').openModal();
-                           }
-                       });
-           }
-   
-   
-   
-       });
-       sfw.refresh();
-   
-       $('input.promote-check').on('change', function() {
-           $('input.promote-check').not(this).prop('checked', false);
-       });
-   
-       $("#post-create-form").on('sf-step-after', function(e, from, to, data) {
-               $('html, body').animate({
-                   scrollTop: $('.sf-content').offset().top - 60
-               }, 300);
-               e.preventDefault();
-           })
-   
-       //------Form-----multistep--end--// 
-   
-   })
-</script>
-<script type="text/javascript">
-   
-   $('#post-login-submit').on('click', function(e) {
-       toastr.clear()
-       NProgress.start();
-       var data = {
-           email: $('#post-login-email').val(),
-           password: $('#post-login-password').val(),
-           "_token": "{{ csrf_token() }}"
-       }
-       $.post("/login-signup", data).done(function(data) {
-           NProgress.done();
-           if (data.status == "success") {
-               $('#post-member').closeModal();
-               $('#signup-li').replaceWith('<li id="dashboard-li"><a href="dashboard">Dashboard</a></li>');
-               $('#login-li').replaceWith('<li id="logout-li"><a href="#">Logout</a></li>');
-               $('#submit-btn').trigger('click');
-           } else {
-               toastr.error(data.error, 'Error')
-           }
-       });
-   });
-   
+        };
+
+        $(document.body).on('click', '.rotate', function() {
+            var img = $(this).parent().siblings('.dz-image').children('img');
+            var file_name = $(this).parent().siblings('.dz-details').find('span').text();
+            var degree = parseInt(img.attr('degree'));
+            degree += 90;
+            $(this).parent().siblings('.dz-image').children('img').css({
+                "-webkit-transform": "rotate(" + degree + "deg)",
+                "-moz-transform": "rotate(" + degree + "deg)",
+                "transform": "rotate(" + degree + "deg)" /* For modern browsers(CSS3)  */
+            });
+            img.attr('degree', degree)
+            var data = {
+                file_name: file_name,
+                "_token": "{{ csrf_token() }}"
+            }
+            $.post("/rotate-image", data).done(function(data) {
+
+            });
+
+        })
+
+        $(document.body).on('click', '.set-default', function() {
+            $('.dz-image').removeClass('main-photo');
+            $(this).parent().siblings('.dz-image').addClass('main-photo');
+
+            // Remove element from files string and add in the beginning
+            var file_name = $(this).parent().siblings('.dz-details').find('span').text();
+            var names = $('#file_names').val().split('^')
+            console.log(file_name)
+            console.log(names)
+            console.log(names.indexOf(file_name))
+            var index = names.indexOf(file_name)
+            names.splice(index, 1);
+            names.unshift(file_name)
+            names = names.join('^')
+            $('#file_names').val(names)
+        })
+
+        // $("#my-awesome-dropzone").sortable({
+        //     items:'.dz-preview',
+        //     cursor: 'move',
+        //     opacity: 0.5,
+        //     containment: '#image-dropzone',
+        //     distance: 20,
+        //     tolerance: 'pointer'
+        // });
+
+        //------Form-----multistep----// 
+
+        var sfw = $("#post-create-form").stepFormWizard({
+            theme: 'sun',
+            height: 'auto',
+            markPrevSteps: true,
+            nextBtn: $('<a class="next-btn sf-right sf-btn btn waves-effect waves-light " href="#">NEXT <i class="icofont icofont-rounded-right"></i></a>'),
+            prevBtn: $('<a class="prev-btn sf-left sf-btn btn grey waves-effect waves-light  " href="#"><i class="icofont icofont-rounded-left"></i> PREV</a>'),
+            finishBtn: $('<button id="submit-btn" class="finish-btn btn sf-btn sf-btn-finish waves-effect waves-light" type="submit" value="FINISH">Submit Vehicle</button>'),
+            onNext: function(i, wizard) {
+                var myDropzone = Dropzone.forElement("#my-awesome-dropzone");
+                if (myDropzone.getUploadingFiles().length) {
+                    toastr.warning('Uploading photos', 'Please wait')
+                    return false;
+                }
+                var form = $("#vehicle-form");
+                form.validate({
+                    rules: {},
+                    // errorClass: "invalid form-error",       
+                    // errorElement : 'div',       
+                    errorPlacement: function(error, element) {
+                        if (element.is('select')) {
+                            error.appendTo(element.parent().parent());
+                        } else {
+                            error.appendTo(element.parent());
+                        }
+
+                    },
+                    focusInvalid: false,
+                    invalidHandler: function(form, validator) {
+
+                        if (!validator.numberOfInvalids())
+                            return;
+                        $('html, body').animate({
+                            scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                        }, 500);
+                        $(validator.errorList[0].element).focus()
+
+                    }
+                })
+
+                if (form.valid() == true) {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            onFinish: function(i) {
+                var form2 = $("#contact-info");
+                form2.validate({
+                    rules: {},
+                    // errorClass: "invalid form-error",       
+                    // errorElement : 'div',       
+                    errorPlacement: function(error, element) {
+                        if (element.is('select')) {
+                            error.appendTo(element.parent().parent());
+                        } else {
+                            error.appendTo(element.parent());
+                        }
+
+                    },
+                    focusInvalid: false,
+                    invalidHandler: function(form2, validator) {
+
+                        if (!validator.numberOfInvalids())
+                            return;
+                        $('html, body').animate({
+                            scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+                        }, 500);
+                        $(validator.errorList[0].element).focus()
+
+                    }
+                })
+
+                if (form2.valid() == false) {
+                    return false;
+                }
+
+                $.ajax({
+                    url: '/post/create',
+                    type: 'POST',
+                    data: $('form').serialize(),
+                    success: function(response) {
+                        console.log(response)
+                        if (response.status == "fail") {
+                            $('#submit-btn').prop('disabled', false).html('Submit Vehicle')
+                            toastr.error(response.error, 'Error')
+                        } else {
+                            window.location = response.url;
+                        }
+
+                    }
+                });
+            }
+
+
+
+        });
+        sfw.refresh();
+
+        $('input.promote-check').on('change', function() {
+            $('input.promote-check').not(this).prop('checked', false);
+        });
+
+        $("#post-create-form").on('sf-step-after', function(e, from, to, data) {
+            $('html, body').animate({
+                scrollTop: $('.sf-content').offset().top - 60
+            }, 300);
+            e.preventDefault();
+        })
+
+        //------Form-----multistep--end--// 
+
+    })
 </script>
 @endsection

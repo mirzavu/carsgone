@@ -168,7 +168,7 @@ class UserController extends Controller
         Auth::login($user);
         $user->vehicles()->where('slug', $slug)->update(['status_id' => 1]);
         $request->session()->flash('success', 'Your Vehicle is activated successfully!');
-        return redirect()->action('UserController@dashboard');
+        return redirect()->action('SearchController@searchHandler');
     }
 
     public function tokenEditVehicle($slug, $token,  Request $request)

@@ -30,23 +30,16 @@
                         </div>
                         <div class="col-sm-6 display-table">
                            <label>Make<span class="required">*</span></label>
-                           <div class="select-box">
-                              <select id="make-select" name="make_id" required>
-                                 <option value="" disabled selected>Select Make</option>
-                                 @foreach ($makes as $make)
-                                 <option value="{{$make->id}}">{{$make->make_name}}</option>
-                                 @endforeach
-                              </select>
+                           <div class="input-box">
+                              <input id="make-autocomplete" name="make_name" type="text" maxlength="60" class="form-control autocomplete" placeholder="Enter Make" required />
                            </div>
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-sm-6 display-table">
                            <label>Model<span class="required">*</span></label>
-                           <div class="select-box">
-                              <select id="model-select" name="model" required>
-                                 <option value="" disabled selected>Select Model</option>
-                              </select>
+                           <div class="input-box">
+                              <input id="model-autocomplete" name="model_name" type="text" maxlength="60" class="form-control autocomplete" placeholder="Enter Model" required />
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
@@ -615,6 +608,35 @@
         })
 
         //------Form-----multistep--end--// 
+
+        $.get( "{{ url('/') }}/get-makes-json", function( data ) {
+            var list={};
+           $.each(JSON.parse(data), function(index, row){
+               list[row] = null;
+           })
+
+           $('#make-autocomplete').autocomplete({
+
+                data: list,
+                limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                  $.get( "{{ url('/') }}/get-models-json/"+val, function( data ) {
+                     console.log(data)
+                    var model_list={};
+                    $.each(JSON.parse(data), function(index, row){
+                        model_list[row] = null;
+                    })
+                    $('#model-autocomplete').autocomplete({
+
+                         data: model_list,
+                         limit: 5,
+                    });
+                  });
+                },
+                minLength: 2, // The minimum length of the input for the autocomplete to start. Default: 1.
+           });
+
+         });
 
     })
 </script>

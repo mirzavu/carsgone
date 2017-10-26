@@ -41,6 +41,9 @@
 	
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
 	Route::get('/search-list', 'SearchController@searchListData');
+	Route::get('/get-makes-json', 'SearchController@getMakesJson');
+	Route::get('/get-models-json/{make_name}', 'SearchController@getModelsJson');
+	
 
 	// Route::post('/save-vehicle', 'PostController@saveVehicle');
 	// Route::post('/unsave-vehicle', 'PostController@unsaveVehicle');
@@ -80,7 +83,9 @@
 	// Route::get('/loggedInUser', 'UserController@loggedInUser');
 	// Route::get('/signup/confirm/{token}', 'UserController@confirmEmail');
 	Route::get('/token-vehicle-edit/{slug}/{token}', 'UserController@tokenEditVehicle');
+	Route::get('/token-vehicle-delete/{slug}/{token}', 'UserController@tokenDeleteVehicle');
 	Route::get('/vehicle-confirm/{slug}/{token}', 'UserController@confirmVehicle');
+
 
 //Dashboard
 	// Route::get('/dashboard', 'UserController@dashboard')->middleware('auth');

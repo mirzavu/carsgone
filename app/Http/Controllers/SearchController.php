@@ -231,6 +231,20 @@ class SearchController extends Controller
 		return json_encode($merged);
 	}
 
+	public function getMakesJson(Request $request)
+	{
+		$makes = Make::lists('make_name');
+		return json_encode($makes);
+	}
+
+	public function getModelsJson($make_name, Request $request)
+	{
+		$make_id = Make::where('make_name', $make_name)->value('id');
+		$models = VehicleModel::where('make_id', $make_id)->lists('model_name');
+		return json_encode($models);
+	}
+
+
 	
 	
 

@@ -180,6 +180,15 @@ class UserController extends Controller
         $vehicle_id = $user->vehicles()->where('slug', $slug)->value('id');
         return redirect()->action('PostController@editVehicle', ['id' => $vehicle_id]);
     }
+
+    public function tokenDeleteVehicle($slug, $token,  Request $request)
+    {
+        $user = User::whereToken($token)->firstOrFail();
+        Auth::login($user);
+        $vehicle_id = $user->vehicles()->where('slug', $slug)->delete();
+        $request->session()->flash('success', 'Your Vehicle is deleted!');
+        return redirect()->action('SearchController@searchHandler');
+    }
     
 
     public function changeEmail(Request $request, AppMailer $mailer)

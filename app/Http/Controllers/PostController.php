@@ -72,8 +72,9 @@ class PostController extends Controller
 
 	public function create(Request $request, AppMailer $mailer)
 	{		
-
-		$request['model_id'] = VehicleModel::where('model_name', $request['model'])->value('id');
+		$make = Make::firstOrCreate(['make_name' => $request['make_name']]);
+		$request['make_id'] = $make->id;
+		$request['model_id'] = VehicleModel::firstOrCreate(['model_name' => $request['model_name'], 'make_id' => $make->id])->id;
 		if(!empty($request['colour_exterior'])) $request['ext_color_id'] = Color::where('color', $request['colour_exterior'])->value('id');
 		if(!empty($request['colour_interior'])) $request['int_color_id'] = Color::where('color', $request['colour_interior'])->value('id');
 		if(!empty($request['fuel'])) $request['fuel_id'] = FuelType::where('fuel_type', $request['fuel'])->value('id');

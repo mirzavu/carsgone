@@ -420,7 +420,7 @@
                     file_name: filename,
                     "_token": "{{ csrf_token() }}"
                 }
-                $.post("/remove-image", data).done(function(data) {
+                $.post("{{ url('/') }}/remove-image", data).done(function(data) {
                     if (data.status == "success") {
                         toastr.success('Image removed')
                         var files = $('#file_names').val()
@@ -464,7 +464,7 @@
                 file_name: file_name,
                 "_token": "{{ csrf_token() }}"
             }
-            $.post("/rotate-image", data).done(function(data) {
+            $.post("{{ url('/') }}/rotate-image", data).done(function(data) {
 
             });
 

@@ -357,7 +357,7 @@ $(function() {
                 vehicle_id: {{ $vehicle->id}},
                 "_token": "{{ csrf_token() }}"
             }
-            $.post("/remove-image-editpost", data).done(function(data) {
+            $.post("{{ url('/') }}/remove-image-editpost", data).done(function(data) {
                 if (data.status == "success") {
                     toastr.success('Image removed')
                     // var files = $('#file_names').val()
@@ -382,7 +382,7 @@ $(function() {
                 "_token": "{{ csrf_token() }}"
             }
           // this.files.length++  
-          $.post("/save-image-editpost", data).done(function(data) {
+          $.post("{{ url('/') }}/save-image-editpost", data).done(function(data) {
                 if (data.status == "success") {
                     toastr.success('Image Added')
                     // var files = $('#file_names').val()
@@ -413,7 +413,7 @@ $(function() {
             var mockFile = { name: name, size: 1 };
             drop.files.push(mockFile)
             drop.emit("addedfile", mockFile);
-            drop.emit("thumbnail", mockFile, image.path);
+            drop.emit("thumbnail", mockFile, "{{ url('/') }}"+image.path);
             drop.emit("complete", mockFile);
           })
 
@@ -461,7 +461,7 @@ $(function() {
             file_name: file_name,
             "_token": "{{ csrf_token() }}"
         }
-        $.post("/set-main-photo", data).done(function(data) {
+        $.post("{{ url('/') }}/set-main-photo", data).done(function(data) {
                 if (data.status == "success") {
                     toastr.success('Set main photo')
                 } else {

@@ -44,6 +44,8 @@
 
 	Route::post('/save-vehicle', 'PostController@saveVehicle');
 	Route::post('/unsave-vehicle', 'PostController@unsaveVehicle');
+	Route::get('/get-makes-json', 'SearchController@getMakesJson');
+	Route::get('/get-models-json/{make_name}', 'SearchController@getModelsJson');
 
 	//Brochure
 	Route::get('/vehicle/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');

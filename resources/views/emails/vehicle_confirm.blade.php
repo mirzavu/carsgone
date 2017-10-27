@@ -291,7 +291,7 @@
                             <table class="left_section" width="190" border="0" align="left" cellpadding="0" cellspacing="0" style="mso-table-lspace:0pt; mso-table-rspace:0pt;">
                               <tr>
                                 <td align="center" class="advertisement_td">
-                                  <img class="car" style="display:block; border:0px;" src="{{ url('/').ltrim($data['photo'], '/')}}" alt="{{ $data['year'].' '.$data['make'].' '.$data['model']}}" width="190" height="143"/>
+                                  <img class="car" style="display:block; border:0px;" src="{{ url('/').$data['photo']}}" alt="{{ $data['year'].' '.$data['make'].' '.$data['model']}}" width="190" height="143"/>
                                 </td>
                               </tr>
                             </table>

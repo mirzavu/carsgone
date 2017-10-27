@@ -609,7 +609,7 @@
 
         //------Form-----multistep--end--// 
 
-        $.get( "{{ url('/') }}/get-makes-json", function( data ) {
+        $.get( "https://www.carsgone.com/get-makes-json", function( data ) {
             var list={};
            $.each(JSON.parse(data), function(index, row){
                list[row] = null;
@@ -620,7 +620,7 @@
                 data: list,
                 limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
                 onAutocomplete: function(val) {
-                  $.get( "{{ url('/') }}/get-models-json/"+val, function( data ) {
+                  $.get( "https://www.carsgone.com/get-models-json/"+val, function( data ) {
                      console.log(data)
                     var model_list={};
                     $.each(JSON.parse(data), function(index, row){

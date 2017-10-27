@@ -442,7 +442,7 @@ $(function() {
             file_name: file_name,
             "_token": "{{ csrf_token() }}"
         }
-        $.post("/rotate-image", data).fail(function(xhr, status, error) {
+        $.post("{{ url('/') }}/rotate-image", data).fail(function(xhr, status, error) {
             var obj = JSON.parse(xhr.responseText);
               toastr.error(obj.error.message)
         });

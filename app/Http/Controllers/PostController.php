@@ -98,14 +98,14 @@ class PostController extends Controller
         $user->role = "member";
         $user->phone = $request['phone'];
         $user->postal_code = $request['postal_code'];
-        $user->city_id = 1;
-        $user->province_id = 9;
+        $user->city_id = City::where('city_name', 'Edmonton')->value('id');
+        $user->province_id = Province::where('province_name', 'Alberta')->value('id');
         $user->save();
         //Save vehicle
 		$vehicle = $user->vehicles()->create($request->all());
 		$vehicle->slug = null;
 		$vehicle->status_id = 0;
-		$request->session()->flash('success', 'Thank you for listing your ad with Carsgone! Please check your email to activate your vehicle.');
+		$request->session()->flash('success', 'Thank you for listing your ad with Edmontonautoloans! Please check your email to activate your vehicle.');
 
 		$vehicle->save();
 

@@ -191,7 +191,7 @@
                      <div class="item-body">
                         <div class="item-body-left">
                            <a href="{{ url('/')}}/used/{{$vehicle->slug}}">
-                           <img src="{{url('/').$vehicle->photo()}}" alt="" />
+                           <img src="{{ $vehicle->photo()}}" alt="" />
                            <span class="overlay"></span>
                            </a>
                         </div>

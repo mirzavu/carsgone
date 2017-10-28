@@ -14,7 +14,7 @@
                         <h1>{{$vehicle->year}} {{$vehicle->make->make_name}}, {{$vehicle->model->model_name}} {{$vehicle->trim}}</h1>
                      </div>
                      <div class="large-item-body">
-                        <a href="{{url('/').$vehicle->photo()}}" title="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}"><img src="{{url('/').$vehicle->photo()}}" alt="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}" /></a>
+                        <a href="{{$vehicle->photo()}}" title="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}"><img src="{{$vehicle->photo()}}" alt="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}" /></a>
                      </div>
                   </div>
                   <div class="item-images">

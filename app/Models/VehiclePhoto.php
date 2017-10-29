@@ -15,7 +15,15 @@ class VehiclePhoto extends Model
     }
 
     public function getPathAttribute($value)
-    {
-        return preg_replace("/^http:/i", "https:", $value);
+    { 
+        if($value[0] == '/')
+        {
+            $value = url('/').$value;
+        }
+        else
+        {
+            $value = preg_replace("/^http:/i", "https:", $value);
+        }
+        return $value;
     }
 }

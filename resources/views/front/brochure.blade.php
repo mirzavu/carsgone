@@ -20,7 +20,7 @@
                   <div class="item-images">
                      <ul class="item-image-list">
                         @foreach ($vehicle->photos as $photo)
-                        <li><a href="{{url('/').$photo->path}}" title="Can use keyboard arrows to navigate photos"><img src="{{url('/').$photo->path}}" alt="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}" /></a></li>
+                        <li><a href="{{$photo->path}}" title="Can use keyboard arrows to navigate photos"><img src="{{$photo->path}}" alt="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}" /></a></li>
                         @endforeach
                      </ul>
                   </div>

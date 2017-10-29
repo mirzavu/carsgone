@@ -413,7 +413,7 @@ $(function() {
             var mockFile = { name: name, size: 1 };
             drop.files.push(mockFile)
             drop.emit("addedfile", mockFile);
-            drop.emit("thumbnail", mockFile, "{{ url('/') }}"+image.path);
+            drop.emit("thumbnail", mockFile, image.path);
             drop.emit("complete", mockFile);
           })
 

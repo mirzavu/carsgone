@@ -156,6 +156,20 @@ class Boost extends Command
                 {
                     $vehicle->status_id = 1;
                     $vehicle->save();
+                    if($vehicle->photos()->count() == 0)
+                    {
+                        // $vehicle->photos()->delete();
+                        $images = $xml->Images;
+
+                        $photos =[];
+                        if (is_array($images->Photo) || is_object($images->Photo))
+                        {
+                            foreach($images->Photo as $image) {
+                                array_push($photos, ['position' => (string)$image['number'], 'path' => (string)$image, 'vehicle_id' => $vehicle->id]);
+                            }
+                        }
+                        DB::table('vehicle_photos')->insert($photos);
+                    }
                     continue;
                 }
                 $vehicle->condition = strtolower($xml->VehicleStatus); 
@@ -216,19 +230,7 @@ class Boost extends Command
                 //$vehicle->slug = null;
                 $vehicle->save();
                 //echo $vehicle->slug;exit;
-                $vehicle->photos()->delete();
-                //$vehicle->options()->delete();
-
-                $images = $xml->Images;
-
-                $photos =[];
-                if (is_array($images->Photo) || is_object($images->Photo))
-                {
-                    foreach($images->Photo as $image) {
-                        array_push($photos, ['position' => (string)$image['number'], 'path' => (string)$image, 'vehicle_id' => $vehicle->id]);
-                    }
-                }
-                DB::table('vehicle_photos')->insert($photos);
+                
                 //dd($vehicle->photo());
 
                 // $vehicle->options()->detach();

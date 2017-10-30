@@ -333,7 +333,7 @@
          $(this).attr( "src", "/assets/images/placeholder.jpg" );  
       });
 
-      $.get( "{{ url('/') }}/search-list", function( data ) {
+      $.get( "{{ url('/') }}/search-list",{ "_": $.now()}, function( data ) {
         var list={};
         $.each(JSON.parse(data), function(index, row){
             list[row] = null;

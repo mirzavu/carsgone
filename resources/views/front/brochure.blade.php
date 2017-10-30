@@ -148,7 +148,11 @@
                                  <tr>
                                     <td colspan="2"><p>{!!$vehicle->text!!}</p></td>
                                  </tr>
+                                 <tr>
+                                    <td colspan="2"><button id="resend-email" class="btn waves-effect waves-light btn">Edit this Vehicle</button></td>
+                                 </tr>
                               </table>
+                              
                            </div>
                         </div>
                      </li>
@@ -513,46 +517,67 @@ $("#quick-info").change(function() {
 });
 
 var form = $("#callback-form");
-            form.validate({
-                rules: {},
-                // errorClass: "invalid form-error",       
-                // errorElement : 'div',       
-                errorPlacement: function(error, element) {
-                    if (element.is('select')) {
-                        error.appendTo(element.parent().parent());
-                    } else {
-                        error.appendTo(element.parent());
-                    }
+form.validate({
+    rules: {},
+    // errorClass: "invalid form-error",       
+    // errorElement : 'div',       
+    errorPlacement: function(error, element) {
+        if (element.is('select')) {
+            error.appendTo(element.parent().parent());
+        } else {
+            error.appendTo(element.parent());
+        }
 
-                },
-                focusInvalid: false,
-                invalidHandler: function(form, validator) {
+    },
+    focusInvalid: false,
+    invalidHandler: function(form, validator) {
 
-                    if (!validator.numberOfInvalids())
-                        return;
-                    $('html, body').animate({
-                        scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
-                    }, 500);
-                    $(validator.errorList[0].element).focus()
+        if (!validator.numberOfInvalids())
+            return;
+        $('html, body').animate({
+            scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+        }, 500);
+        $(validator.errorList[0].element).focus()
 
-                },
-                submitHandler: function(form) {
-                  $('#quick-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
-                    $.ajax({
-                             url: form.action,
-                             type: form.method,
-                             data: $(form).serialize()+'&_token={{ csrf_token() }}&dealer_email={{ $vehicle->user->email }}',
-                             success: function(response) {
-                                 if(response.status == "success")
-                                 {
-                                    toastr.success(response.message)
-                                    $('#quick-submit').prop('disabled', false).html('Submit')
-                                    $("#callback-form").get(0).reset();
-                                 }
-                             }
-                         });
-                }
-            })
+    },
+    submitHandler: function(form) {
+      $('#quick-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
+        $.ajax({
+                 url: form.action,
+                 type: form.method,
+                 data: $(form).serialize()+'&_token={{ csrf_token() }}&dealer_email={{ $vehicle->user->email }}',
+                 success: function(response) {
+                     if(response.status == "success")
+                     {
+                        toastr.success(response.message)
+                        $('#quick-submit').prop('disabled', false).html('Submit')
+                        $("#callback-form").get(0).reset();
+                     }
+                 }
+             });
+    }
+})
+
+$('#resend-email').on('click', (e) => {
+   e.preventDefault();
+   $('#resend-email').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  Sending Email');
+   $.ajax({
+                 url: '{{ url('/') }}/resend-vehicle-email',
+                 type: 'POST',
+                 data: { 
+                           vehicle: '{{ $vehicle->slug }}',
+                           _token: '{{ csrf_token() }}'
+                       },
+                 success: function(response) {
+                     if(response.status == "success")
+                     {
+                        toastr.success(response.message)
+                        $('#resend-email').prop('disabled', false).html('Resend Email');
+                     }
+                 }
+             });
+
+})
 
 </script>
 <script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}}),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}})});infowindow = new google.maps.InfoWindow({content:'<strong>{{$vehicle->user->name}}</strong><br>{{$vehicle->user->address}}<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>

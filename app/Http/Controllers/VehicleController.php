@@ -108,4 +108,14 @@ class VehicleController extends Controller
 		return response()->json(['status' => 'success', 'message' => 'Your message is sent successfully! You will hear back from us soon.']);
 	}
 
+	public function resendVehicleEmail(Request $request, AppMailer $mailer)
+	{
+		$vehicle = Vehicle::whereSlug($request->vehicle)->first();
+		$user = $vehicle->user;
+		$mailer->sendVehicleConfirmation($user, $vehicle);
+		return response()->json(['status' => 'success', 'message' => 'Links to edit the vehicle is sent to your email address.']);
+	}
+
+	
+
 }

@@ -53,6 +53,8 @@
 	Route::get('/vehicle-related/{slug}', 'VehicleController@relatedVehicle')->where('slug', '.*');
 	Route::post('/contact-dealer', 'VehicleController@contactDealer');
 	Route::post('/finance', 'VehicleController@finance');
+	Route::post('/resend-vehicle-email', 'VehicleController@resendVehicleEmail');
+	
 
 	//Private Vehicles
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');

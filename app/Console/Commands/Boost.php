@@ -156,9 +156,11 @@ class Boost extends Command
                 {
                     $vehicle->status_id = 1;
                     $vehicle->save();
-                    if($vehicle->photos()->count() == 0)
+                
+                    if(!empty($xml->Images->Photo) && VehiclePhoto::wherePath($xml->Images->Photo)->count() == 0)
                     {
-                        // $vehicle->photos()->delete();
+                        Log::info($xml->Images->Photo);
+                        $vehicle->photos()->delete();
                         $images = $xml->Images;
 
                         $photos =[];

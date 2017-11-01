@@ -12,8 +12,12 @@
 	</tr>
 	@endif
 	<tr>
-		<th>Name</th>
-		<td>{{$data->name}}</td>
+		<th>First Name</th>
+		<td>{{$data->first_name}}</td>
+	</tr>
+	<tr>
+		<th>Last Name</th>
+		<td>{{$data->last_name}}</td>
 	</tr>
 	<tr>
 		<th>Phone Number</th>

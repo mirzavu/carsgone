@@ -30,7 +30,7 @@ class CreditController extends Controller
 	{
 		Log::info($request);
 		$data = $request;
-		$vehicle = Vehicle::whereSlug($data->slug)->first();
+		$vehicle = Vehicle::whereSlug($data->vehicle)->first();
 		if($vehicle === null)
 		{
 			$data->set_vehicle = false;
@@ -49,6 +49,30 @@ class CreditController extends Controller
 		{
 			$request->session()->flash('success', 'Your Credit Application is sent successfully!');
 		}
+		return response()->json(['status' => 'success']);
+	}
+
+	
+	public function sendShort(Request $request, AppMailer $mailer)
+	{
+		
+		$data = $request;
+		$vehicle = Vehicle::whereSlug($data->vehicle)->first();
+		Log::info($vehicle);
+		if($vehicle === null)
+		{
+			$data->set_vehicle = false;
+		}
+		else
+		{
+			$data->set_vehicle = true;
+			$data->year = $vehicle->year;
+			$data->make = $vehicle->make->make_name;
+			$data->model = $vehicle->model->model_name;
+		}
+		Log::info($data);
+		$mailer->sendCreditApp($data);
+
 		return response()->json(['status' => 'success']);
 	}
 

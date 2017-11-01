@@ -29,6 +29,7 @@
 	// //Credit Application
 	// Route::get('/credit-application', 'CreditController@create');
 	Route::post('/credit-application', 'CreditController@send');
+	Route::post('/short-application', 'CreditController@sendShort');
 	Route::post('/quick-finance', 'CreditController@quickfinance');
 
 

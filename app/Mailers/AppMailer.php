@@ -102,7 +102,7 @@ class AppMailer
     public function sendCreditApp($data)
     {
         $this->from = $data->email;
-        $this->fromName = $data->name;
+        $this->fromName = $data->first_name.' '.$data->last_name;
         $this->to = config('mail.from.address');
         $this->subject = 'Credit Application';
         $this->view = 'emails.credit_app';

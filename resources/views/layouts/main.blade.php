@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
-<link href="/assets/css/all.css" rel="stylesheet" type="text/css">
-{{-- <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+{{-- <link href="/assets/css/all.css" rel="stylesheet" type="text/css">--}}
+<link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/materialize.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/slick.css" rel="stylesheet" type="text/css">
@@ -19,7 +19,7 @@
 <link href="/assets/css/toastr.min.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/step-form-wizard-all.css" rel="stylesheet" type="text/css">
 <link href="/assets/css/dropzone.css" rel="stylesheet" type="text/css">
-<link href="/assets/css/style.css" rel="stylesheet" type="text/css"> --}}
+<link href="/assets/css/style.css" rel="stylesheet" type="text/css"> 
 
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

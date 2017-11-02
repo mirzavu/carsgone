@@ -129,6 +129,21 @@ class Cdemo extends Command
                 {
                     $vehicle->status_id = 1;
                     $vehicle->save();
+
+                    if(!empty($vehicle_xml->image) && VehiclePhoto::wherePath($vehicle_xml->image)->count() == 0)
+                    {
+                        Log::info($vehicle_xml->image);
+                        $vehicle->photos()->delete();
+
+                        $photos =[];
+                        if (is_array($vehicle_xml->image) || is_object($vehicle_xml->image))
+                        {
+                            foreach($vehicle_xml->image as $image) {
+                                array_push($photos, ['position' => (string)$image['rank'], 'path' => (string)$image, 'vehicle_id' => $vehicle->id]);
+                            }
+                        }
+                        DB::table('vehicle_photos')->insert($photos);
+                    }
                     continue;
                 }
                 $vehicle->condition = $vehicle_xml->class == "New Auto"? "new":"used"; 
@@ -175,13 +190,13 @@ class Cdemo extends Command
                 }
                 $vehicle->photos()->saveMany($photos);
 
-                $vehicle->options()->delete();
-                $option_ids =[];
-                foreach($vehicle_xml->option as $option) {
-                    $option = Option::firstOrCreate(['option' =>  (string)$option]);
-                    array_push($option_ids, $option->id);
-                }
-                $vehicle->options()->attach($option_ids);
+                // $vehicle->options()->delete();
+                // $option_ids =[];
+                // foreach($vehicle_xml->option as $option) {
+                //     $option = Option::firstOrCreate(['option' =>  (string)$option]);
+                //     array_push($option_ids, $option->id);
+                // }
+                // $vehicle->options()->attach($option_ids);
     
                 
             }

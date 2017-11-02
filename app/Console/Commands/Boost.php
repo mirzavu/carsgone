@@ -151,6 +151,22 @@ class Boost extends Command
                 {
                     $vehicle->status_id = 1;
                     $vehicle->save();
+
+                    if(!empty($xml->Images->Photo) && VehiclePhoto::wherePath($xml->Images->Photo)->count() == 0)
+                    {
+                        Log::info($xml->Images->Photo);
+                        $vehicle->photos()->delete();
+                        $images = $xml->Images;
+
+                        $photos =[];
+                        if (is_array($images->Photo) || is_object($images->Photo))
+                        {
+                            foreach($images->Photo as $image) {
+                                array_push($photos, ['position' => (string)$image['number'], 'path' => (string)$image, 'vehicle_id' => $vehicle->id]);
+                            }
+                        }
+                        DB::table('vehicle_photos')->insert($photos);
+                    }
                     continue;
                 }
                 $vehicle->condition = strtolower($xml->VehicleStatus); 
@@ -223,15 +239,15 @@ class Boost extends Command
                 DB::table('vehicle_photos')->insert($photos);
                 //dd($vehicle->photo());
 
-                $vehicle->options()->detach();
+                // $vehicle->options()->detach();
 
-                $options = $xml->Features;
-                $option_ids =[];
-                foreach($options->Feature as $option) {
-                    $option = Option::firstOrCreate(['option' =>  (string)$option]);
-                    array_push($option_ids, $option->id);
-                }
-                $vehicle->options()->attach($option_ids);
+                // $options = $xml->Features;
+                // $option_ids =[];
+                // foreach($options->Feature as $option) {
+                //     $option = Option::firstOrCreate(['option' =>  (string)$option]);
+                //     array_push($option_ids, $option->id);
+                // }
+                // $vehicle->options()->attach($option_ids);
             }
         }
         arsort($email);

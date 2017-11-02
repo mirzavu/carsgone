@@ -141,6 +141,22 @@ class Strathcom extends Command
                 {
                     $vehicle->status_id = 1;
                     $vehicle->save();
+
+                    if(!empty($xml->ImageAttachment) && VehiclePhoto::wherePath($xml->ImageAttachment)->count() == 0)
+                    {
+                        Log::info($xml->ImageAttachment);
+                        $vehicle->photos()->delete();
+
+                        $photos =[];
+                        if (is_array($images->Photo) || is_object($images->Photo))
+                        {
+                            $pos = 1;
+                            foreach($xml->ImageAttachment as $image) {
+                                array_push($photos, ['position' => $pos++, 'path' => (string)$image->URI, 'vehicle_id' => $vehicle->id]);
+                            }
+                        }
+                        DB::table('vehicle_photos')->insert($photos);
+                    }
                     continue;
                 }
                 $vehicle->condition = strtolower($xml->SaleClass); 
@@ -203,13 +219,13 @@ class Strathcom extends Command
                 }
                 $vehicle->photos()->saveMany($photos);
 
-                $vehicle->options()->detach();
-                $option_ids =[];
-                foreach($xml->Option as $option) {
-                    $option = Option::firstOrCreate(['option' =>  (string)$option->OptionName]);
-                    array_push($option_ids, $option->id);
-                }
-                $vehicle->options()->attach($option_ids);
+                // $vehicle->options()->detach();
+                // $option_ids =[];
+                // foreach($xml->Option as $option) {
+                //     $option = Option::firstOrCreate(['option' =>  (string)$option->OptionName]);
+                //     array_push($option_ids, $option->id);
+                // }
+                // $vehicle->options()->attach($option_ids);
             }
             
         }

@@ -148,7 +148,7 @@ class Strathcom extends Command
                         $vehicle->photos()->delete();
 
                         $photos =[];
-                        if (is_array($images->Photo) || is_object($images->Photo))
+                        if (is_array($xml->ImageAttachment) || is_object($xml->ImageAttachment))
                         {
                             $pos = 1;
                             foreach($xml->ImageAttachment as $image) {

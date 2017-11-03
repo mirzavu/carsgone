@@ -141,10 +141,10 @@ class Strathcom extends Command
                 {
                     $vehicle->status_id = 1;
                     $vehicle->save();
-                    Log::info($xml->ImageAttachment->URI);
+                    
                     if(!empty($xml->ImageAttachment->URI) && VehiclePhoto::wherePath($xml->ImageAttachment->URI)->count() == 0)
                     {
-                        Log::info($xml->ImageAttachment);
+                        Log::info($xml->ImageAttachment->URI);
                         $vehicle->photos()->delete();
 
                         $photos =[];

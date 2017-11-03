@@ -324,14 +324,10 @@
    //Image on error code with support edge browser
    $(document).ready(function(){  
      $("img").each(function(i,ele){
-         $("<img/>").attr("src",$(ele).attr("src")).on('error', function() {             
+         $("<img/>").attr("src",$(ele).attr("src")).on('error', function() {
+            $(ele).parent().removeClass('add-overlay');               
             $(ele).attr( "src", "/assets/images/placeholder.jpg" );
          })
-      });
-     
-      $("img").on("error", function(){
-         $(this).parent().removeClass('add-overlay');      
-         $(this).attr( "src", "/assets/images/placeholder.jpg" );  
       });
 
       $.get( "{{ url('/') }}/search-list",{ "_": $.now()}, function( data ) {

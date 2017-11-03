@@ -425,8 +425,11 @@ form.validate({
     }
 })
 
-$('img').one('error', function() {
-    this.src = '/assets/images/placeholder.jpg';
+$("img").each(function(i,ele){
+   $("<img/>").attr("src",$(ele).attr("src")).on('error', function() {
+      $(ele).parent().removeClass('add-overlay');               
+      $(ele).attr( "src", "/assets/images/placeholder.jpg" );
+   })
 });
 
 $('#inventory-btn').on('click', function(e) {

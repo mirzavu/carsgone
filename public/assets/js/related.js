@@ -33,7 +33,7 @@ class Related extends React.Component {
                 	<h4>{item.year+' '+item.make.make_name+' '+item.model.model_name}</h4>
                     <div className="featured-img">
                     	<img src={src} alt={item.make.make_name+' '+item.model.model_name} onError={(e)=>{e.target.src='/assets/images/placeholder.jpg'}}/>
-                        <span className="overlay"></span>
+                        <span className={'overlay '+item.add_overlay}></span>
                     </div>
                     <div className="featured-details">
                     	<div className="price"><i className="fa fa-tag"></i> ${item.price}</div>

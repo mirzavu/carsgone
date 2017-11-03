@@ -329,7 +329,8 @@
          })
       });
      
-      $("img").on("error", function(){      
+      $("img").on("error", function(){
+         $(this).parent().removeClass('add-overlay');      
          $(this).attr( "src", "/assets/images/placeholder.jpg" );  
       });
 

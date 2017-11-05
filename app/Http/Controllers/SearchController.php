@@ -219,7 +219,7 @@ class SearchController extends Controller
 
 	public function searchListData(Request $request)
 	{
-		$models = VehicleModel::select(DB::raw('CONCAT(make_name, " ", model_name) AS item'))
+		$models = VehicleModel::has('vehicles')->select(DB::raw('CONCAT(make_name, " ", model_name) AS item'))
 			->join('makes', 'make_id', '=', 'makes.id')
 			->lists('item');
 		//get trims having length greater than 2

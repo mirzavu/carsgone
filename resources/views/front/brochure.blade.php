@@ -148,9 +148,12 @@
                                  <tr>
                                     <td colspan="2"><p>{!!$vehicle->text!!}</p></td>
                                  </tr>
+                                 @if(!empty($vehicle->user->role == 'member'))
                                  <tr>
                                     <td colspan="2"><button id="resend-email" class="btn waves-effect waves-light btn">Edit this Vehicle</button></td>
                                  </tr>
+                                 @endif
+                                 
                               </table>
                               
                            </div>

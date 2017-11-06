@@ -51,6 +51,7 @@ class SearchController extends Controller
 		if($conditions->get('sort') && $conditions->get('sort')!="name-desc")
 		{
 			$sort = $conditions->get('sort');
+			list($sort, $direction) = explode('-', $sort);
 		}
 		else
 		{
@@ -58,7 +59,7 @@ class SearchController extends Controller
 			$direction = 'desc';
 		}
 
-		// dd($sort);
+		// dd($sort.$direction);
 
 		if(Auth::check())
 		{

@@ -8,7 +8,11 @@
 	@if($data->set_vehicle)
 	<tr>
 		<th>Vehicle</th>
-		<td>{{$data->year}} {{$data->make}} {{$data->model}}</td>
+		<td>{{$data->year}} {{$data->make}} {{$data->model}}, ${{$data->price}}</td>
+	</tr>
+	<tr>
+		<th></th>
+		<td><a href="{{ url('/').'/used/'.$data->vehicle }}">Vehicle Link</a></td>
 	</tr>
 	@endif
 	<tr>

@@ -41,6 +41,7 @@ class CreditController extends Controller
 			$data->year = $vehicle->year;
 			$data->make = $vehicle->make->make_name;
 			$data->model = $vehicle->model->model_name;
+			$data->price = $vehicle->price;
 		}
 		$mailer->sendCreditApp($data);
 
@@ -69,6 +70,7 @@ class CreditController extends Controller
 			$data->year = $vehicle->year;
 			$data->make = $vehicle->make->make_name;
 			$data->model = $vehicle->model->model_name;
+			$data->price = $vehicle->price;
 		}
 		Log::info($data);
 		$mailer->sendCreditApp($data);

@@ -217,7 +217,7 @@
 
                                  <li>
                                     <div><i class="fa fa-phone"></i>
-                                    <p>1-855-227-1669</p>
+                                    <p>{{ $vehicle->role=="dealer"? '1-855-227-1669':$vehicle->user->phone}}</p>
                                     </div>
                                  </li>
                               </ul>

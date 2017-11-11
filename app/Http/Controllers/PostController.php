@@ -66,7 +66,7 @@ class PostController extends Controller
         SEO::setDescription('Sell my car free, advertise vehicles free, automotive classified, post or list free online auto listings.');
 		$data['content'] = ContentPage::where('slug', 'post-page')->first()->content;
 		$data['makes'] = Make::all();
-		$data['body_style_groups'] = BodyStyleGroup::all();
+		$data['body_style_groups'] = BodyStyleGroup::orderBy('body_style_group_name', 'asc')->get();
 		return view('front.post.post', $data);
 	}
 
@@ -119,14 +119,7 @@ class PostController extends Controller
         $vehicle->photos()->saveMany($photos);
         $mailer->sendVehicleConfirmation($user, $vehicle);
         //Payment
-		if ($request->has('free')) {
-		 	return response()->json(['status' => 'done', 'url' => url('post')]);
-		}
-		else
-		{
-			$redirectUrl = $this->payPaypal($vehicle->id);
-		    return response()->json(['status' => 'paypal', 'url' => $redirectUrl]);
-		}
+		return response()->json(['status' => 'done', 'url' => url('post')]);
 	}
 
 	public function payPaypal($vehicle_id)
@@ -387,23 +380,17 @@ class PostController extends Controller
 
 		$user->save();
 
-		if ($request->has('free') || $request->has('paid')) {
-			if(Auth::user()->verified)
-			{
-				$request->session()->flash('success', 'Your changes for the vehicle are saved!');
-			}
-			else
-			{
-				$request->session()->flash('success', 'Your changes are saved! Verify your email address to publish your vehicle');
-			}
-		 	return response()->json(['status' => 'done', 'url' => url('post')]);
+
+		if(Auth::user()->verified)
+		{
+			$request->session()->flash('success', 'Your changes for the vehicle are saved!');
 		}
 		else
 		{
-			$redirectUrl = $this->payPaypal($vehicle->id);
-
-		    return response()->json(['status' => 'paypal', 'url' => $redirectUrl]);
+			$request->session()->flash('success', 'Your changes are saved! Verify your email address to publish your vehicle');
 		}
+	 	return response()->json(['status' => 'done', 'url' => url('post')]);
+
 	}
 
 }

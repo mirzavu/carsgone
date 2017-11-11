@@ -249,11 +249,9 @@
                            <div class="select-box">
                               <select name="fuel">
                                  <option value="" disabled selected>Select Fuel Type</option>
-                                 <option>Unleaded</option>
-                                 <option>Leaded</option>
-                                 <option>Premium</option>
-                                 <option>Diesel</option>
+                                 <option>Gasoline</option>
                                  <option>Electric</option>
+                                 <option>Diesel</option>
                               </select>
                            </div>
                         </div>
@@ -319,13 +317,9 @@
                   <fieldset>
                      <div class="row">
                         <div class="col-sm-6 display-table">
-                           <label>Seller Type<span class="required">*</span></label>
-                           <div class="select-box">
-                              <select name="role" required>
-                                 <option value="" disabled selected>Select</option>
-                                 <option value="dealer">Dealer</option>
-                                 <option value="member">Private</option>
-                              </select>
+                           <label>Email<span class="required">*</span></label>
+                           <div class="input-box">
+                              <input name="email" type="email" class="form-control" placeholder="Enter Email" required/>
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
@@ -336,12 +330,7 @@
                         </div>
                      </div>
                      <div class="row">
-                        <div class="col-sm-6 display-table">
-                           <label>Email<span class="required">*</span></label>
-                           <div class="input-box">
-                              <input name="email" type="email" class="form-control" placeholder="Enter Email" required/>
-                           </div>
-                        </div>
+                        
                         <div class="col-sm-6 display-table">
                            <label>Postal Code<span class="required">*</span></label>
                            <div class="input-box">
@@ -355,24 +344,6 @@
                         <h4>On Our Website!</h4>
                         <p>For 30 days your <span>Ad will appear</span> on the site for <span>FREE</span></p>
                      </div>
-                     <div class="promote-vehicle-right">
-                        <input name="free" type="checkbox" class="filled-in promote-check" checked id="vehicle-price-free">
-                        <label for="vehicle-price-free" class="promote-label">FREE</label>
-                     </div>
-                  </div>
-                  <div class="promote-vehicle">
-                     <div class="promote-vehicle-left">
-                        <p>For <span>30 days</span> your ad will appear in the <span>"Featured Vehicles"</span> sections and enjoy<br /> <span>increased visibility</span> in the <span>search results.</span></p>
-                     </div>
-                     <div class="promote-vehicle-right">
-                        <input type="checkbox" class="filled-in promote-check" id="vehicle-price">
-                        <label for="vehicle-price" class="promote-label"><span>$</span>14.95</label>
-                     </div>
-                  </div>
-                  <div class="promote-vehicle paypal">
-                     <p>Payments are accepted through <span>PayPal</span>. Click <span>Submit</span> to continue.</p>
-                     <img src="/assets/images/paypal.jpg" alt="" />
-                     <h4>Total <span>$14.95</span></h4>
                   </div>
                   <input id="file_names" type="hidden" name="file_names">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">

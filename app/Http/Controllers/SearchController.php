@@ -173,16 +173,22 @@ class SearchController extends Controller
 		{
 			//$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions, $this->dealer_ids)->selectRaw('count(makes.id) as make_count, make_name')->groupBy('makes.make_name')->orderBy('make_count','desc')->get();
 			$sidebar_data['makes'] = Vehicle::ApplyFilter($conditions)
-				    ->join('makes', 'vehicles.make_id', '=', 'makes.id')
-			            ->selectRaw('count(makes.id) as make_count, makes.make_name')
-				    ->groupBy('makes.make_name')
-			            ->orderBy('make_count','desc')->get();
+			    ->join('makes', 'vehicles.make_id', '=', 'makes.id')
+		        ->selectRaw('count(makes.id) as make_count, makes.make_name')
+				->where('makes.make_name', '!=', '')
+			    ->groupBy('makes.make_name')
+		        ->orderBy('make_count','desc')->get();
 		}
 		//Get models
 		if($conditions->get('make') && !$conditions->get('model'))
 		{
 
-			$sidebar_data['models'] = Vehicle::ApplyFilter($conditions)->join('models', 'vehicles.model_id', '=', 'models.id')->selectRaw('count(models.id) as model_count, model_name')->groupBy('models.model_name')->orderBy('model_count','desc')->get();
+			$sidebar_data['models'] = Vehicle::ApplyFilter($conditions)
+				->join('models', 'vehicles.model_id', '=', 'models.id')
+				->selectRaw('count(models.id) as model_count, model_name')
+				->where('model_name', '!=', '')
+				->groupBy('models.model_name')
+				->orderBy('model_count','desc')->get();
 
 			// $sidebar_data['models'] = Make::where('make_name',$conditions->get('make'))->first()->models()->withCount(['vehicles' => function($query) use ($conditions){
 			// 	return $query->applyFilter($conditions);
@@ -195,7 +201,11 @@ class SearchController extends Controller
 		if($conditions->get('province') && !$conditions->get('city'))
 		{
 			 $province_id= Province::where('province_name','=',$conditions->get('province'))->value('id');
-			 $sidebar_data['cities'] = City::where('province_id','=',$province_id)->withCount('vehicles')->orderBy('city_name', 'asc')->get();
+			 $sidebar_data['cities'] = City::where('province_id','=',$province_id)
+			 	->withCount('vehicles')
+			 	->where('city_name', '!=', '')
+			 	->orderBy('city_name', 'asc')
+			 	->get();
 		}
 		return $sidebar_data;
 	}

@@ -284,7 +284,7 @@
                            <div class="single-dealer-upper">
                               <div class="dealer-buttons">
                                  <a href="/dealer/{{$vehicle->user->slug}}" class="btn waves-effect waves-light">View Dealer</a>
-                                 <a id="inventory-btn" class="btn waves-effect waves-light ">View Inventory</a>
+                                 <a id="inventory-btn" href="/search/dealer-{{$vehicle->user->name}}" class="btn waves-effect waves-light ">View Inventory</a>
                               </div>
                            </div>
                            <div class="single-dealer-mid">
@@ -492,14 +492,6 @@ $('img').one('error', function() {
     this.src = '/assets/images/placeholder.jpg';
 });
 
-$('#inventory-btn').on('click', function(e) {
-    e.preventDefault();
-    $.get("/removeSessionAll", function() {
-        $.get("/setSessionKeyValue/dealer/{{$vehicle->user->name}}", function() {
-            window.location = '/search';
-        });
-    });
-});
 // console.log("{{$vehicle->user->featured}}")
 if ({{ $vehicle->user->featured }} == 0) {
     $('.cd-slider-nav .cd-marker').width('33.3%')

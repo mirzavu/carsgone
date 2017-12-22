@@ -13,8 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\Inspire::class,
         Commands\Boost::class,
+        Commands\Strathcom::class,
     ];
 
     /**

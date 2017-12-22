@@ -301,6 +301,7 @@ $('#make-select').on('change',function(){
         $.ajax({ type: "GET",   
              url: "{{ url('getModels/') }}/"+id,   
              async: true,
+             cache: false,
              success : function(data)
              {  var models = jQuery.parseJSON(data);
                 model_html = '<option value="" disabled selected>Select Model</option>';

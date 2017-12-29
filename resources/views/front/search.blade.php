@@ -239,13 +239,13 @@
 <script type="text/javascript">
    //preset price, odometer, year
    @php $price = $applied_filters->get("price"); @endphp
-   var price_all = '{{ $price or '0-60000' }}';
+   var price_all = '{{ $price or '0-120000' }}';
    var price = price_all.split("-");
    @php $odometer = $applied_filters->get("odometer"); @endphp
-   var odometer_all = '{{ $odometer or '0-80000' }}';
+   var odometer_all = '{{ $odometer or '0-120000' }}';
    var odometer = odometer_all.split("-");
    @php $year = $applied_filters->get("year"); @endphp
-   var year_all = '{{ $year or '2000-2017' }}';
+   var year_all = '{{ $year or '2000-2018' }}';
    var year = year_all.split("-");
 </script>
 <!-- main container outer end -->

@@ -66,7 +66,7 @@ $(document).ready(function() {
     /** related corousel **/
     $('.related-slider').slick({
         dots: false,
-        infinite: true,
+        infinite: false,
         speed: 300,
         slidesToShow: 5,
         slidesToScroll: 5,
@@ -281,7 +281,7 @@ $(window).resize(callback2);
 /** range slider **/
 
 var snapSlider = document.getElementById('price-range');
-
+console.log(price)
 noUiSlider.create(snapSlider, {
     start: [price[0], price[1]],
     decimals: 0,
@@ -292,7 +292,7 @@ noUiSlider.create(snapSlider, {
     range: {
         'min': 0,
 
-        'max': 60000
+        'max': 120000
     },
     format: wNumb({
         decimals: 0,
@@ -322,7 +322,7 @@ noUiSlider.create(odometerSlider, {
     range: {
         'min': 0,
 
-        'max': 80000
+        'max': 120000
     },
     format: wNumb({
         decimals: 0,
@@ -352,7 +352,7 @@ noUiSlider.create(yearSlider, {
     range: {
         'min': 2000,
 
-        'max': 2017
+        'max': 2018
     },
     format: wNumb({
         decimals: 0

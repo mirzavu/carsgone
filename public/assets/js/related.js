@@ -47,7 +47,7 @@ class Related extends React.Component {
 
 	var settings = {
       	dots: false,
-        infinite: true,
+        infinite: false,
         speed: 300,
         slidesToShow: 5,
         slidesToScroll: 5,

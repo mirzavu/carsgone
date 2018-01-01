@@ -162,7 +162,8 @@ $(document).ready(function(){
             </div>
             <div class="col-sm-3">
                <ul class="link adres">
-                  <li><a title="6211 104 Street Edmonton AB"><i class="fa fa-map-marker"></i>10384 51 Ave NW, Edmonton, AB T6H 5X6</a></li>
+                  <li><a title="6211 104 Street Edmonton AB"><i class="fa fa-map-marker"></i>10384 51 Ave NW, <br> 
+                  Edmonton, AB T6H 5X6</a></li>
                   <li><a title="1-855-227-1669​"><i class="fa fa-phone"></i>1-855-227-1669​</a></li>
                   <li><a title="1-855-227-1669​"><i class="fa fa-headphones"></i>1-855-227-1669​</a></li>
                </ul>

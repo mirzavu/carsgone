@@ -56,7 +56,7 @@ class SearchController extends Controller
 		else
 		{
 			$sort = 'price';
-			$direction = 'desc';
+			$direction = 'asc';
 		}
 
 		// dd($sort.$direction);

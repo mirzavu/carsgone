@@ -82,7 +82,16 @@ class SearchController extends Controller
 			            ->groupBy('makes.id')
 			            ->get();
         $data['sort'] = $sort.'-'.$direction; 
-        $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy($sort, $direction)->paginate(15);
+
+        if($sort == 'price')
+        {
+			$data['vehicles'] = Vehicle::applyFilter($conditions)->where('price', '>', 0)->orderBy($sort, $direction)->paginate(15);
+        }
+        else
+        {
+        	$data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy($sort, $direction)->paginate(15);
+        }
+        
         // $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();
         // dd($data['vehicles']);
         $data['applied_filters'] = $this->getAppliedFilters($conditions);

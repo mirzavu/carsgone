@@ -4249,7 +4249,7 @@ noUiSlider.create(odometerSlider, {
     range: {
         'min': 0,
 
-        'max': 120000
+        'max': 350000
     },
     format: wNumb({
         decimals: 0,

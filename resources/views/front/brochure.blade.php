@@ -14,7 +14,7 @@
                         <h1>{{$vehicle->year}} {{$vehicle->make->make_name}}, {{$vehicle->model->model_name}} {{$vehicle->trim}}</h1>
                      </div>
                      <div class="large-item-body">
-                        <a class="{{$vehicle->add_overlay}}" href="{{$vehicle->photo()}}" title="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}"><img src="{{$vehicle->photo()}}" alt="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}" /></a>
+                        <a class="{{$vehicle->add_overlay}}-big" href="{{$vehicle->photo()}}" title="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}"><img src="{{$vehicle->photo()}}" alt="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}" /></a>
                      </div>
                   </div>
                   <div class="item-images">
@@ -537,6 +537,14 @@ $("body").bind("DOMNodeInserted", function() {
 if('{{$vehicle->add_overlay}}')
    {
       $('figure').addClass('add-overlay');
+      $('figure').removeClass('add-overlay-big');
+      var popup_src = $('figure > img').attr('src');
+      if(popup_src == '{{$vehicle->photo()}}')
+      {
+         $('figure').removeClass('add-overlay');
+         $('figure').addClass('add-overlay-big');
+      }
+      
    }
 })
 

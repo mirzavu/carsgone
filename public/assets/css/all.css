@@ -9496,8 +9496,13 @@ a.sidenav-close {display:none;background: #253993;border-radius: 4px;float: righ
 .fetured-box{width:165px; display:inline-block; vertical-align:top; margin:10px; text-align:center;}
 .fetured-box h4{font-size:13px; color:#3e5062; margin:0; background:#cfdbe6; border-radius:3px; padding:4px; margin-bottom:3px; letter-spacing:0.5px;}
 .featured-img, .featured-img img{width:100%; float:left; position:relative;}
-.overlay {  z-index: 3; position: absolute; top: 0; left: 0; display: block; background: rgba(0, 0, 0, 0.3); width: 100%; height: 100%; opacity: 0;  transition: .3s ease;}
-.overlay:before {content: "\f055"; font-family:'fontAwesome';  position: absolute; top: 60%;  left: 50%; display: inline-block; transition: .3s ease; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); font-size: 24px; line-height: 32px;  color:#fff;}
+.slick-track .slick-slide .fetured-box .featured-img{position: relative;float: left;}
+.slick-track .slick-slide .fetured-box .featured-img:before { content: ""; z-index: 3; position: absolute; top: 0; left: 0; display: block; background: url('../images/overlay.png');background-size: cover; width: 100%; height:  18%; opacity: 1; background-repeat: no-repeat; }
+.add-overlay{position: relative;float: left;}
+.add-overlay-big:before { content: ""; z-index: 3; position: absolute; top: 0; left: 0; display: block; background: url('../images/overlay.png'); width: 100%; height: 100%; background-size: 150%; opacity: 1; background-repeat: no-repeat; }
+.add-overlay:before { content: ""; z-index: 3; position: absolute; top: 0; left: 0; display: block; background: url('../images/overlay.png');background-size: cover; width: 100%; height:  18%; opacity: 1; background-repeat: no-repeat; }
+.slick-list.draggable .slick-track li.slick-slide{ position: relative; }
+/* .overlay:before {content: "\f055"; font-family:'fontAwesome';  position: absolute; top: 60%;  left: 50%; display: inline-block; transition: .3s ease; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); font-size: 24px; line-height: 32px;  color:#fff;} */
 /*.featured-img img{height:124px;}*/
 .featured-img,.item-body-left{overflow:hidden;}
 .featured-img img,.item-body-left img{transition:all .1s ease;}

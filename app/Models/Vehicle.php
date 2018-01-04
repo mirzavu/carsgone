@@ -95,7 +95,14 @@ class Vehicle extends Model
 
     public function getPriceAttribute($value)
     {
-        return number_format($value);
+        if($value == 0) {
+            return 'Contact';
+        }
+        else
+        {
+            return '$'.number_format($value);
+        }
+        
     }
 
     public function setOdometerAttribute($value)

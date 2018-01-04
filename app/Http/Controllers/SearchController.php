@@ -55,7 +55,7 @@ class SearchController extends Controller
 		}
 		else
 		{
-			$sort = 'created_at';
+			$sort = 'price';
 			$direction = 'desc';
 		}
 

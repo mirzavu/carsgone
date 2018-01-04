@@ -36,7 +36,7 @@ class Related extends React.Component {
                         <span className={'overlay '+item.add_overlay}></span>
                     </div>
                     <div className="featured-details">
-                    	<div className="price"><i className="fa fa-tag"></i> ${item.price}</div>
+                    	<div className="price"><i className="fa fa-tag"></i> {item.price}</div>
                         <div className="run"><i className="fa fa-dashboard"></i> {item.odometer} KM</div>
                     </div>
                     </a>

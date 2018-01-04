@@ -26,7 +26,7 @@
                   </div>
                </div>
                <div class="vehicle-info-small clearfix">
-                  <div class="info-item pull-left">${{$vehicle->price}}</div>
+                  <div class="info-item pull-left">{{$vehicle->price}}</div>
                   <div class="info-item pull-left">{{$vehicle->odometer}} Km</div>
                   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
                   <div class="addthis_inline_share_toolbox pull-right"></div>
@@ -60,7 +60,7 @@
                               <input name="email" type="email" class="form-control" placeholder="Email" required />
                            </div>
                            <div class="form-group">
-                              <textarea name="message" class="form-control" placeholder="Message" required>I found your listing on Edmontonautoloans.com. Please send me more information about the {{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} for ${{$vehicle->price}}.
+                              <textarea name="message" class="form-control" placeholder="Message" required>I found your listing on Edmontonautoloans.com. Please send me more information about the {{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} for {{$vehicle->price}}.
                               </textarea>
                            </div>
                            <div class="form-group">

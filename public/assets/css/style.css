@@ -1579,3 +1579,8 @@ ul.item-stats li div i {
 
 
 
+
+@media screen and (min-width: 1200px) {
+.draggable.slick-list .slick-track li.slick-slide{  height: 85px}
+.slick-slide img{ width:100%; height:auto;}
+}

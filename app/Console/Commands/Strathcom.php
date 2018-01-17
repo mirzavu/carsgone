@@ -91,6 +91,10 @@ class Strathcom extends Command
                 $dealer = User::firstOrNew(['partner_id' => 1, 'partner_dealer_id' => $xml->PartyId]);
 
                 $dealer->name = (empty($dealer->name))?$xml->DealerName:$dealer->name;
+                if($dealer->name != 'Toyota on the Trail' && $dealer->name != 'Wheaton Honda' && $dealer->name != 'Don Wheaton Chevrolet Buick GMC Cadillac Ltd')
+                {
+                    continue;
+                }
                 $dealer->email = (empty($dealer->email))?$xml->Contact->Email:$dealer->email;
                 $dealer->address = (empty($dealer->address))?$xml->Address->AddressLine:$dealer->address;
                 $dealer->url = (empty($dealer->url))?$xml->URI:$dealer->url;
@@ -145,11 +149,20 @@ class Strathcom extends Command
                 if($vehicle->exists)
                 {
                     $vehicle->status_id = 1;
+                    $ask_price = 0;$sale_price = 0;
+                    foreach($xml->VehiclePricing as $price) {
+                        if($price->VehiclePricingType == 'Asking Price')
+                            $ask_price = $price->VehiclePrice;
+                        else
+                            $sale_price = $price->VehiclePrice;
+                    }
+                    $price = empty($sale_price)? $ask_price: $sale_price;
+                    $vehicle->price = ($price < 500000) ? (int)$price : 500000;
                     $vehicle->save();
-                    
-                    if(!empty($xml->ImageAttachment->URI) && VehiclePhoto::wherePath($xml->ImageAttachment->URI)->count() == 0)
+                    echo $xml->ImageAttachment->count().'#'.VehiclePhoto::where('vehicle_id', $vehicle->id)->count().'|';
+                    if(!empty($xml->ImageAttachment->URI) && (VehiclePhoto::wherePath($xml->ImageAttachment->URI)->count() == 0 || $xml->ImageAttachment->count() != VehiclePhoto::where('vehicle_id', $vehicle->id)->count()))
                     {
-                        Log::info($xml->ImageAttachment->URI);
+                        echo $xml->ImageAttachment->URI;
                         $vehicle->photos()->delete();
 
                         $photos =[];
@@ -199,8 +212,16 @@ class Strathcom extends Command
                 $vehicle->odometer = (int)$xml->DeliveryMileage;
                 $vehicle->doors = (int)$xml->DoorsQuantity;
                 $vehicle->passenger = (int)$xml->Seats;
-                
-                $vehicle->price = ($xml->VehiclePricing->VehiclePrice < 500000) ? (int)$xml->VehiclePricing->VehiclePrice : 500000;
+
+                $ask_price = 0;$sale_price = 0;
+                foreach($xml->VehiclePricing as $price) {
+                    if($price->VehiclePricingType == 'Asking Price')
+                        $ask_price = $price->VehiclePrice;
+                    else
+                        $sale_price = $price->VehiclePrice;
+                }
+                $price = empty($sale_price)? $ask_price: $sale_price;
+                $vehicle->price = ($price < 500000) ? (int)$price : 500000;
                 $vehicle->text = (string)$xml->VehicleNote;
                 $vehicle->stock = $xml->VehicleStock;
                 $vehicle->trim = (string)$xml->TrimCode;

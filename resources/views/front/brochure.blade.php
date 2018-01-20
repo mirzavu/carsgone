@@ -522,7 +522,7 @@ $('.datepicker').pickadate({
 
 });
 
-$('#resend-email').on('click', (e) => {
+$('#resend-email').on('click', function(e) {
    e.preventDefault();
    $('#resend-email').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  Sending Email');
    $.ajax({

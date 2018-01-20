@@ -201,7 +201,7 @@
                                  {{-- <div class="item-detail-left"><img src="/assets/images/placeholder.jpg" alt="" /></div> --}}
                                  <div class="item-detail-right">
                                     <p>{{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</p>
-                                    <p>Added {{$vehicle->created_at->diffForHumans()}}</p>
+                                    <!-- <p>Added {{$vehicle->created_at->diffForHumans()}}</p> -->
                                     <p>{{$vehicle->bodyStyleGroup->body_style_group_name or ''}} <span class="part">|</span> {{$vehicle->ext_color->color or ''}} <span class="part">|</span> {{$vehicle->transmission}}</p>
                                  </div>
                               </div>

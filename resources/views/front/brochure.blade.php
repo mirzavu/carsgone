@@ -42,6 +42,7 @@
                            <li class="selected"><a href="#0">Contact</a></li>
                            <li><a href="#0">Description</a></li>
                            <li><a href="#0">Finance</a></li>
+                           <li><a href="#0">Dealer</a></li>
                         </ul>
                      </nav>
                   </div>
@@ -267,6 +268,16 @@
                            </div>
                         </div>
                      </li>
+                     <li>
+                        <div class="contact-dealer-container">
+                           <h4>{{$vehicle->user->name}}</h4>
+                           <div class="single-dealer-lower">
+                              <div class="dealer-address-map">
+                                 <div id='gmap_canvas' style='height:100%;width:100%;'></div>
+                              </div>
+                           </div>
+                           
+                     </li>
                   </ul>
                   <!-- .cd-hero-slider -->
                </div>
@@ -445,7 +456,7 @@ $('#inventory-btn').on('click', function(e) {
 });
 // console.log("{{$vehicle->user->featured}}")
 if ({{ $vehicle->user->featured }} == 0) {
-    $('.cd-slider-nav .cd-marker').width('33.3%')
+    $('.cd-slider-nav .cd-marker').width('25%')
 }
 
 $('#next-btn').on('click', function(e) {

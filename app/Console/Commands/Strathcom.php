@@ -145,6 +145,10 @@ class Strathcom extends Command
                 {
                     continue;
                 }
+                if($xml->VehicleStock == 'T0778A')
+                {
+                    continue;
+                }
                 $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['user_id' => $dealer->id, 'partner_vehicle_id' => (string)$xml->SMI_ID]);
                 if($vehicle->exists)
                 {

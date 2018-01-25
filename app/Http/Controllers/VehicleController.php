@@ -31,7 +31,7 @@ class VehicleController extends Controller
 	{	
 
 		$location = getLocation($request);
-		$vehicle = Vehicle::with('user')->with('make')->with('model')->where('slug',$slug)->first();
+		$vehicle = Vehicle::with('user')->with('make')->with('model')->where(['slug' => $slug, 'status_id' => 1])->first();
 		if(!$vehicle)
 		{
 			return redirect('/search');

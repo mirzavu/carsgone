@@ -97,6 +97,17 @@ class User extends Authenticatable
         }
     }
 
+    public function getUrlAttribute($value)
+    {
+        if ( $ret = parse_url($value) ) {
+
+           if ( !isset($ret["scheme"]) ) {
+                $value = "http://{$value}";
+           }
+        }
+        return $value;
+    }
+
     public function getVehicleCountAttribute()
     {
         return $this->attributes['vehicle_count'] = $this->vehicles()->count();

@@ -146,7 +146,7 @@ class Boost extends Command
             {
                 
                 $xml = simplexml_load_string( $xmlReader->readOuterXML() );
-                if($dealer->name != 'Canada Wide Auto Sales' && $dealer->name != 'Derrick Dodge')
+                if($dealer->name != 'Edmonton Auto Loans')
                 {
                     continue;
                 }

@@ -261,7 +261,7 @@ a.sidenav-close {display:none;background: #253993;border-radius: 4px;float: righ
 .part{margin: 0 2px;color:#666;}
 .item-detail p{color:#666;font-size:13px;text-transform: uppercase;}
 .item-detail-right p:first-child{color: #2061c5;font-size: 16px; margin: 0;line-height: 24px;}
-.item-detail-right p{color: #666666;font-size: 15px; margin: 0;line-height: 22px;}
+.item-detail-right p{color: #666666;font-size: 14px; margin: 0;line-height: 19px;}
 .item-detail-right h4{color: #2061c5;font-size: 18px;margin: 0;line-height: 26px;}
 .item-body-right-lower h5{color:#2061c5;font-size:14px;margin: 0 0 2px;text-transform:uppercase;letter-spacing: 1.25px;padding: 0 9px;}
 ul.item-stats{width:100%;height: 100%; display:inline-block; vertical-align:top;}
@@ -1527,7 +1527,7 @@ ul.upper-nav.right li:last-child{border:0 !important;}
 ul.item-stats li div{line-height: 16px;font-size: 11px;}
 ul.item-stats li div i{line-height: 16px;font-size: 11px;}
 .item-detail-right h4{font-size: 10px;}
-.item-detail-right p{font-size: 11px;line-height: 14px;}
+.item-detail-right p{font-size: 8px;line-height: 13px;}
 .item-detail-right h4{line-height: 14px;}
 .dealer-all-number a {width: 96%;  float: left;  margin: 5px 2% !important;}
 
@@ -1561,8 +1561,8 @@ ul.item-stats li div {
     padding: 4px 8px;
 }
 .item-detail-right p {
-    font-size: 8px;
-    line-height: 11px;
+    font-size: 7px;
+    line-height: 8px;
 }
 ul.item-stats li div i {
     line-height: 11px;

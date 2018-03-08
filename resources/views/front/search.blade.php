@@ -202,7 +202,12 @@
                                  <div class="item-detail-right">
                                     <p>{{$vehicle->user->city->city_name or ''}}, {{$vehicle->user->province->province_name or ''}}</p>
                                     <!-- <p>Added {{$vehicle->created_at->diffForHumans()}}</p> -->
-                                    <p>{{$vehicle->bodyStyleGroup->body_style_group_name or ''}} <span class="part">|</span> {{$vehicle->ext_color->color or ''}} <span class="part">|</span> {{$vehicle->transmission}}</p>
+                                    <p>Body Style: <strong>{{$vehicle->bodyStyleGroup->body_style_group_name or ''}}</strong></p>
+                                    <p>Color: <strong>{{$vehicle->ext_color->color or ''}}</strong></p>
+                                    <p>Transmission: <strong>{{$vehicle->transmission}}</strong></p>
+                                    <p>Engine: <strong>{{$vehicle->engine_description}}L I-{{$vehicle->engine_cylinders}}</strong></p>
+                                    <p>Stock: <strong>{{$vehicle->stock}}</strong></p>
+                                    <p>VIN: <strong>{{$vehicle->vin}}</strong></p>
                                  </div>
                               </div>
                            </div>

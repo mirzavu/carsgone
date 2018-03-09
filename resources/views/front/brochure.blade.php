@@ -26,8 +26,11 @@
                   </div>
                </div>
                <div class="vehicle-info-small clearfix">
-                  <div class="info-item pull-left">{{$vehicle->price}}</div>
-                  <div class="info-item pull-left">{{$vehicle->odometer}} Km</div>
+                  <div>
+                     <div class="info-item">{{$vehicle->price}}</div>
+                     <div class="info-item">{{$vehicle->odometer}} Km</div>
+                  </div>
+                  
                   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
                   <div class="addthis_inline_share_toolbox pull-right"></div>
                </div>

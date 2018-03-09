@@ -220,11 +220,11 @@
                                     <div><i class="fa fa-dashboard"></i> {{$vehicle->odometer}}KM</div>
                                  </li>
 
-                                 <li>
+                                 <!--<li>
                                     <div><i class="fa fa-phone"></i>
                                     <p>{{ $vehicle->user->role=="dealer"? '1-855-227-1669':$vehicle->user->phone}}</p>
                                     </div>
-                                 </li>
+                                 </li>-->
                               </ul>
                            </div>
                         </div>

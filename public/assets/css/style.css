@@ -265,9 +265,9 @@ a.sidenav-close {display:none;background: #253993;border-radius: 4px;float: righ
 .item-detail-right h4{color: #2061c5;font-size: 18px;margin: 0;line-height: 26px;}
 .item-body-right-lower h5{color:#2061c5;font-size:14px;margin: 0 0 2px;text-transform:uppercase;letter-spacing: 1.25px;padding: 0 9px;}
 ul.item-stats{width:100%;height: 100%; display:inline-block; vertical-align:top;}
-ul.item-stats li{width:100%;height: 34%; float:left; padding:5px; padding-bottom:0; }
-ul.item-stats li div{width:100%;float:left;font-size:16px; line-height:22px;color:#3e5062;margin:0;background:#cfdbe6;border-radius:3px;padding: 8px;margin-bottom:0;letter-spacing:0.5px;font-weight:700;text-align:center;}
-ul.item-stats li div i{float:left;line-height:22px;font-size: 22px;}
+ul.item-stats li{width:100%;height: 34%; float:left; padding:5px; margin: 5px;padding-bottom:0; }
+ul.item-stats li div{width:100%;float:left;font-size:29px; line-height:32px;color:#3e5062;margin:0;background:#cfdbe6;border-radius:3px;padding: 13px;margin-bottom:0;letter-spacing:1px;font-weight:700;text-align:center;}
+ul.item-stats li div i{float:left;line-height:31px;font-size: 29px;}
 ul.applied-list{width:100%; display:inline-block; vertical-align:top; background:#f2f2f2;}
 ul.applied-list li{padding:8px 15px; border-left:solid 5px #dc5f03; color:#666; background:#fff; margin:3px 0; font-weight:700; color:#666;  position:relative;}
 ul.applied-list li a{float:left; background:#ee6e73; border-radius:6px; float:left; font-size:16px; color:#fff; position:absolute; top:10px; right:10px; width:20px; height:20px; line-height:20px; text-align:center; font-weight:400; text-shadow:1px 1px 1px rgba(0,0,0,0.1); }
@@ -407,7 +407,7 @@ ul.table-list li a{color:#dc5f03;}
 .dealer-address-map{width:100%; height:320px; float:left; background:#f0f0f0; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
 .panel-default > .panel-heading{background:#3e5062;text-align: center;}
 .vehicle-info-small{margin-bottom: 45px;font-size: 26px;font-weight: 600;}
-.vehicle-info-small > .info-item{float: left;border: solid 3px #3e5062;background-color: #e8e7e7;color: #3e5062;padding: 11px;border-radius: 5px;margin-right: 2px;}
+.vehicle-info-small .info-item{float: left;border: solid 3px #3e5062;background-color: #e8e7e7;color: #3e5062;padding: 11px;border-radius: 5px;margin-right: 2px;}
 .addthis_inline_share_toolbox{clear:none !important;padding: 5px;}
 /* ============ Car Detail Page Start ================= */
 
@@ -1285,7 +1285,7 @@ label.error:before { position:absolute; bottom:100%; left:10px; content:""; widt
 ul.item-list li{width:33.3%;}
 .popular-container h4{font-size:20px;}
 .footer-box-content{padding-left:15%; padding-right:15%;}
-ul.item-stats li div{font-size:14px;}
+ul.item-stats li div{font-size:25px;}
 }
 
 /* ============================= */
@@ -1524,8 +1524,8 @@ ul.upper-nav.right li:last-child{border:0 !important;}
 .item-detail-left{width:110px;}
 .item-detail-right{padding:6px;}
 .item-body-left{max-width:100%;}
-ul.item-stats li div{line-height: 16px;font-size: 11px;}
-ul.item-stats li div i{line-height: 16px;font-size: 11px;}
+ul.item-stats li div{line-height: 22px;font-size: 11.5px;}
+ul.item-stats li div i{line-height: 22px;font-size: 11.5px;}
 .item-detail-right h4{font-size: 10px;}
 .item-detail-right p{font-size: 8px;line-height: 13px;}
 .item-detail-right h4{line-height: 14px;}
@@ -1553,9 +1553,12 @@ ul.item-stats li div i{line-height: 16px;font-size: 11px;}
 
 .dealer-info-list li{width:100%;}
 ul.item-stats li div {
-    line-height: 11px;
-    font-size: 8px;
+    line-height: 18px;
+    font-size: 10px;
     padding: 3px;
+}
+ul.item-stats li{
+	margin:3px;
 }
 .item-heading {
     padding: 4px 8px;
@@ -1565,8 +1568,8 @@ ul.item-stats li div {
     line-height: 8px;
 }
 ul.item-stats li div i {
-    line-height: 11px;
-    font-size: 11px;
+    line-height: 18px;
+    font-size: 10px;
 }
 .item-detail-right h4 {
     font-size: 8px;

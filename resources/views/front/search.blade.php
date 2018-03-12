@@ -207,7 +207,6 @@
                                     <p>Transmission: <strong>{{$vehicle->transmission}}</strong></p>
                                     <p>Engine: <strong>{{$vehicle->engine_description}}L I-{{$vehicle->engine_cylinders}}</strong></p>
                                     <p>Stock: <strong>{{$vehicle->stock}}</strong></p>
-                                    <p>VIN: <strong>{{$vehicle->vin}}</strong></p>
                                  </div>
                               </div>
                            </div>

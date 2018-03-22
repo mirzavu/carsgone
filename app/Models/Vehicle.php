@@ -224,8 +224,8 @@ class Vehicle extends Model
         if(!$this->_hasJoin($query, 'users')){
             $query->join('users', 'vehicles.user_id', '=', 'users.id');
         }
-        $query->join('cities', 'users.city_id', '=', 'cities.id');
-        $query->where('city_name', 'Edmonton');
+        // $query->join('cities', 'users.city_id', '=', 'cities.id');
+        // $query->where('city_name', 'Edmonton');
         
 
         if ($conditions->get('user'))

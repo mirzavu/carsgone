@@ -155,6 +155,7 @@ class Boost extends Command
                 if($vehicle->exists)
                 {
                     $vehicle->status_id = 1;
+                    $vehicle->price = ($xml->Price2 < 500000) ? (int)$xml->Price2 : 500000;
                     $vehicle->save();
                     
                     // Log::info(gettype($xml->Images->Photo));

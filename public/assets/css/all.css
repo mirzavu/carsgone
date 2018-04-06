@@ -10104,6 +10104,78 @@ span.required {
 	display:none;
 }
 
+/* vehicle info redesign */
+.vehicle-info-leftD{
+	width: 60%;
+	float: left;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0px 0px 4px 3px #d9d9d9;
+}
+.paddZ{padding: 0px;}
+.firstRow{padding: 15px;}
+.firstRow:first-child{border-bottom: 1px solid #ddd;}
+.firstRow:last-child{color: #434343;}
+.topLeft{
+	width: 55px;
+	height: 55px;
+	background: #3E5062;
+	border-radius: 50%;
+	color: #FEFEFE;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 40px;
+}
+.topRight{
+	width: calc(100% - 55px);
+	font-size: 16px;
+	font-weight: 400;
+	padding-left: 15px !important;
+	line-height: 28px;
+}
+.topRight .leftTitle{
+	color: #848484;
+}
+.topRight .rightValue{
+	color: #000;
+}
+.vehicle-info-rightD{
+	width: 40%;
+	float: left;
+	padding-left: 20px;
+}
+.distanceD{
+	background: #3b5161;
+	color: #f3f3f3;
+	text-align: center;
+	padding: 8px 0px;
+	border-radius: 5px;
+	font-size: 18px;
+	font-weight: 600;
+	letter-spacing: 1px;
+}
+.vehicle-info-rightD img{margin: auto;height: 35px;}
+.at-resp-share-element .at-share-btn{
+	margin: 10px 0px 10px !important;
+	padding: 7px 6px !important;
+	width: 56%;
+}
+.at-resp-share-element .at-share-btn:last-child{
+	width: 42%;
+	margin-left: 2% !important;
+}
+.addthis_inline_share_toolbox {padding: 0px;width: 100%;}
+.carProof{
+	border: 1px solid #ccc;
+	padding: 5px;
+	border-radius: 5px;
+}
+/* vehicle info redesign end */
+
+
+
+
 /* -- Edmontonautoloan styles --*/
 body{font-family: 'Roboto', sans-serif;font-size:15px;margin:0;background:#eee;}
 .Padded{padding-left:0;padding-right:0;}
@@ -10560,6 +10632,12 @@ label.error:before { position:absolute; bottom:100%; left:10px; content:""; widt
 .FinishSubmit{display: none;}
 
 /* -- Edmontonautoloan styles --*/
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+.vehicle-info-leftD, .vehicle-info-rightD{width: 100%}
+.vehicle-info-rightD{padding-left: 0px;margin-top: 15px;}
+}
+
 
 /* =============================p */
 @media only screen and (max-width: 1140px) {

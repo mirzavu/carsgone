@@ -25,14 +25,42 @@
                      </ul>
                   </div>
                </div>
-               <div class="vehicle-info-small clearfix">
+               <!-- <div class="vehicle-info-small clearfix">
                   <div>
                      <div class="info-item">{{$vehicle->price}}</div>
                      <div class="info-item">{{$vehicle->odometer}} Km</div>
                   </div>
-                  
-                  <!-- Go to www.addthis.com/dashboard to customize your tools --> 
                   <div class="addthis_inline_share_toolbox pull-right"></div>
+               </div> -->
+			   <div class="vehicle-info-small clearfix">
+                  <div class="vehicle-info-leftD">
+					  <div class="col-md-12 col-xs-12 firstRow paddZ">
+						  <div class="col-md-12 col-xs-12 topLeft paddZ">
+							 <i class="fa fa-dollar"></i>
+						  </div>
+						  <div class="col-md-12 col-xs-12 topRight paddZ">
+							 <div class="col-md-12 col-xs-12 paddZ">
+								<div class="pull-left leftTitle">Was</div>
+								<div class="pull-right rightValue">$1000</div>
+							 </div>
+							 <div class="col-md-12 col-xs-12 paddZ">
+								<div class="pull-left leftTitle">Total Discounts</div>
+								<div class="pull-right rightValue">-$1000</div>
+							 </div>
+						  </div>
+					  </div>
+					  <div class="col-md-12 col-xs-12 firstRow paddZ">
+						 <div class="pull-left">Our Price</div>
+						 <div class="pull-right">{{$vehicle->price}}</div>
+					  </div>
+                  </div>
+				  <div class="vehicle-info-rightD">
+					<div class="col-md-12 col-xs-12 distanceD paddZ">{{$vehicle->odometer}} Km</div>
+					<div class="addthis_inline_share_toolbox pull-left"></div>
+					<div class="col-md-12 col-xs-12 paddZ carProof">
+						<img src="https://www.drivewheaton.ca/wp-content/themes/strathcom/assets/dist/img/carproof-logo.png" class="img-responsive" alt="carproof image">
+					</div>
+				  </div>
                </div>
             </div>
             <div class="col-md-6 col-md-offset-0 col-sm-10 col-sm-offset-1 half-right">

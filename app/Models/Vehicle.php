@@ -102,7 +102,17 @@ class Vehicle extends Model
         {
             return '$'.number_format($value);
         }
-        
+    }
+
+    public function getMrpAttribute($value)
+    {
+        if($value) {
+            return '$'.number_format($value);
+        }
+        else
+        {
+            return $this->price;
+        }
     }
 
     public function setOdometerAttribute($value)

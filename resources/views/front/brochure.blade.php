@@ -41,11 +41,11 @@
 						  <div class="col-md-12 col-xs-12 topRight paddZ">
 							 <div class="col-md-12 col-xs-12 paddZ">
 								<div class="pull-left leftTitle">Was</div>
-								<div class="pull-right rightValue">$1000</div>
+								<div class="pull-right rightValue">{{$vehicle->mrp}}</div>
 							 </div>
 							 <div class="col-md-12 col-xs-12 paddZ">
 								<div class="pull-left leftTitle">Total Discounts</div>
-								<div class="pull-right rightValue">-$1000</div>
+								<div class="pull-right rightValue">{{$discount}}</div>
 							 </div>
 						  </div>
 					  </div>

@@ -47,13 +47,14 @@ class VehicleController extends Controller
 			$other_vehicle_text = 'Dealers Other Vehicles';
 		else
 			$other_vehicle_text = 'Related Vehicles';
-		SEO::setTitle($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.($vehicle->trim?: "").' in Edmonton, Alberta $'.$vehicle->price);
+		$discount = $this->getDiscount($vehicle);
+		SEO::setTitle($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.($vehicle->trim?: "").' in Edmonton, Alberta '.$vehicle->price);
         SEO::setDescription($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.($vehicle->trim?: "").' $'.$vehicle->price.' in Edmonton, Alberta for $'.$vehicle->price.'. Check out this '.($vehicle->ext_color?$vehicle->ext_color->color: "").' '.($vehicle->bodyStyleGroup?$vehicle->bodyStyleGroup->body_style_group_name: "").' with '.($vehicle->odometer?: "").' kilometers on it for sale from '.($vehicle->user->name?: ""));
         SEOMeta::addKeyword(['new cars', 'used cars', $vehicle->make->make_name, $vehicle->model->model_name, $vehicle->make->make_name.' '.$vehicle->model->model_name]);
         SEO::opengraph()->setUrl($request->url());
         SEO::opengraph()->addProperty('type', 'product');
         SEO::opengraph()->addImage($vehicle->photo());
-		return view('front.brochure', compact('vehicle','location','other_vehicle_text','provinces'));
+		return view('front.brochure', compact('vehicle','location','other_vehicle_text','provinces', 'discount'));
 	}
 
 	public function relatedVehicle(Request $request, $slug)
@@ -81,6 +82,14 @@ class VehicleController extends Controller
 		// $results3 = $results2->get();
 		$results->splice(10); //take 10 in total
 		return $results->toJson();
+	}
+
+	public function getDiscount($vehicle) {
+		$price = str_replace(array('$', ','),"",$vehicle->price);
+		$mrp = str_replace(array('$', ','),"",$vehicle->mrp);
+		$price = $price == 'Contact'? 0:(int)$price;
+		$mrp = $mrp? (int)$mrp:0;
+		return $price-$mrp;
 	}
 
 	public function contactDealer(Request $request, AppMailer $mailer)

@@ -157,6 +157,8 @@ class Boost extends Command
                     $vehicle->status_id = 1;
                     $vehicle->price = ($xml->Price2 < 500000) ? (int)$xml->Price2 : 500000;
                     $vehicle->mrp = ($xml->Price < 500000) ? (int)$xml->Price : 500000;
+                    $vehicle->carproof = (string)$xml->CarProof;
+                    
                     $vehicle->save();
                     
                     // Log::info(gettype($xml->Images->Photo));

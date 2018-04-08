@@ -11,7 +11,7 @@ use Log;
 class Vehicle extends Model
 {
     use Sluggable;
-    protected $fillable = ['user_id', 'make_id', 'model_id', 'year','odometer', 'partner_vehicle_id', 'transmission', 'price', 'trim', 'body_style_group_id','ext_color_id', 'int_color_id','doors','passenger','text','drive_type_id', 'engine_cylinders', 'fuel_id', 'engine_description'  ];
+    protected $fillable = ['user_id', 'make_id', 'model_id', 'year','odometer', 'partner_vehicle_id', 'transmission', 'price', 'trim', 'body_style_group_id','ext_color_id', 'int_color_id','doors','passenger','text','drive_type_id', 'engine_cylinders', 'fuel_id', 'engine_description', 'carproof'  ];
 
     protected $appends = ['add_overlay'];
 

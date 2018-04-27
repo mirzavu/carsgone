@@ -96,7 +96,7 @@ class Vehicle extends Model
     public function getPriceAttribute($value)
     {
         if($value == 0) {
-            return 'Contact';
+            return 'call';
         }
         else
         {

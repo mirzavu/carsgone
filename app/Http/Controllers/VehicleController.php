@@ -61,27 +61,34 @@ class VehicleController extends Controller
 	{
 
 		$vehicle = Vehicle::with('user')->where('slug',$slug)->first();	
-		$paid_vehicles = Vehicle::leftJoin('users', 'vehicles.user_id', '=', 'users.id')
+		/*$paid_vehicles = Vehicle::leftJoin('users', 'vehicles.user_id', '=', 'users.id')
 								->select('vehicles.*')
 								->where(['make_id' => $vehicle->make_id])
 								->where(function ($query) {
 						    		$query->where('vehicles.featured', '=', 1)
 						         		  ->orWhere('users.featured', '=', 1)->take(8);
-										})->with('make')->with('model')->with('photos')->get();
+										})->with('make')->with('model')->with('photos')->get();*/
 		// dd($paid_vehicles);
 		$related = Vehicle::where(['make_id' => $vehicle->make_id, 'model_id'=>$vehicle->model_id])
 							->with('make')->with('model')->with('photos')
 							->take(8)->get();
-		$results = $paid_vehicles->merge($related);
-		if($vehicle->user->featured)
+		if($related->count() < 6)
 		{
-			$user_vehicles = Vehicle::where('user_id',$vehicle->user->id)->with('make')->with('model')->with('photos')->take(10)->get();
-			// dd($user_vehicles)
-			$results = $user_vehicles->merge($results);
+			$related_makes = Vehicle::where(['make_id' => $vehicle->make_id])
+							->with('make')->with('model')->with('photos')
+							->take(8)->get();
+			$related = $related->merge($related_makes);
+			if($related->count() < 6)
+			{
+				$related_styles = Vehicle::where(['body_style_group_id' => $vehicle->body_style_group_id])
+							->with('make')->with('model')->with('photos')
+							->take(8)->get();
+				$related = $related->merge($related_styles);
+			}
 		}
-		// $results3 = $results2->get();
-		$results->splice(10); //take 10 in total
-		return $results->toJson();
+
+		$related->splice(10); //take 10 in total
+		return $related->toJson();
 	}
 
 	public function getDiscount($vehicle) {

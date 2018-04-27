@@ -86,8 +86,9 @@ class VehicleController extends Controller
 				$related = $related->merge($related_styles);
 			}
 		}
-
-		$related->splice(10); //take 10 in total
+		$related = $related->except($vehicle->id);
+		$related->splice(11); //take 10 in total
+		// dd($related);
 		return $related->toJson();
 	}
 

@@ -216,7 +216,12 @@
                                     <div><i class="fa fa-tag"></i>{{$vehicle->price}}</div>
                                  </li>
                                  <li>
-                                    <div><i class="fa fa-dashboard"></i> {{$vehicle->odometer}}KM</div>
+                                    <div><i class="fa fa-dashboard"></i> 
+                                    @if($vehicle->odometer == 0)
+                                    <a href="tel:18552271669">call</a>
+                                    @else
+                                    {{$vehicle->odometer}}KM
+                                    @endif</div>
                                  </li>
 
                                  <!--<li>

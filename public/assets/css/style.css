@@ -889,6 +889,39 @@ span.required {
 	padding: 5px;
 	border-radius: 5px;
 }
+
+
+.modal#enquiryModal{
+	position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+	background-color: transparent;
+    z-index: 1050;
+    display: none;
+    outline: 0;
+	max-height: 100%;
+	width: 100%;
+}
+
+.modal#enquiryModal .modal-content{padding: 0px;}
+.modal#enquiryModal .modal-dialog {
+    width: 370px;
+}
+#enquiryModal .modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+#enquiryModal .modal-header .close {
+    margin-top: 1px;
+}
+#enquiryModal .close {
+    font-size: 30px;
+    color: #3e5062;
+    opacity: .8;
+}
 /* vehicle info redesign end */
 
 
@@ -1354,6 +1387,8 @@ label.error:before { position:absolute; bottom:100%; left:10px; content:""; widt
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 .vehicle-info-leftD, .vehicle-info-rightD{width: 100%}
 .vehicle-info-rightD{padding-left: 0px;margin-top: 15px;}
+.modal#enquiryModal {padding-right: 0px;}
+.modal#enquiryModal .modal-dialog{width: auto;}
 }
 
 

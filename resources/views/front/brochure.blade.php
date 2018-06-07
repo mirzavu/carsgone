@@ -33,34 +33,32 @@
                   <div class="addthis_inline_share_toolbox pull-right"></div>
                </div> -->
 			   <div class="vehicle-info-small clearfix">
-                  @if($vehicle->price != 'call')
                   <div class="vehicle-info-leftD">
-   					  <div class="col-md-12 col-xs-12 firstRow paddZ">
-   						  <div class="col-md-12 col-xs-12 topLeft paddZ">
-   							 <i class="fa fa-dollar"></i>
-   						  </div>
-   						  <div class="col-md-12 col-xs-12 topRight paddZ">
-   							 <div class="col-md-12 col-xs-12 paddZ">
-   								<div class="pull-left leftTitle">Was</div>
-   								<div class="pull-right rightValue">{{$vehicle->mrp}}</div>
-   							 </div>
-   							 <div class="col-md-12 col-xs-12 paddZ">
-   								<div class="pull-left leftTitle">Total Discounts</div>
-   								<div class="pull-right rightValue">{{$discount}}</div>
-   							 </div>
-   						  </div>
-   					  </div>
-   					  <div class="col-md-12 col-xs-12 firstRow paddZ">
-   						 <div class="pull-left">Our Price</div>
-   						 <div class="pull-right">{{$vehicle->price}}</div>
-   					  </div>
+					  <div class="col-md-12 col-xs-12 firstRow paddZ">
+						  <div class="col-md-12 col-xs-12 topLeft paddZ">
+							 <i class="fa fa-dollar"></i>
+						  </div>
+						  <div class="col-md-12 col-xs-12 topRight paddZ">
+							 <div class="col-md-12 col-xs-12 paddZ">
+								<div class="pull-left leftTitle">Was</div>
+								<div class="pull-right rightValue">{{$vehicle->mrp}}</div>
+							 </div>
+							 <div class="col-md-12 col-xs-12 paddZ">
+								<div class="pull-left leftTitle">Total Discounts</div>
+								<div class="pull-right rightValue">{{$discount}}</div>
+							 </div>
+						  </div>
+					  </div>
+					  <div class="col-md-12 col-xs-12 firstRow paddZ">
+						 <div class="pull-left">Our Price</div>
+						 <div class="pull-right">{{$vehicle->price}}</div>
+					  </div>
                   </div>
-                  @endif
 				  <div class="vehicle-info-rightD">
 					<div class="col-md-12 col-xs-12 distanceD paddZ">{{$vehicle->odometer}} Km</div>
 					<div class="addthis_inline_share_toolbox pull-left"></div>
 					<div class="col-md-12 col-xs-12 paddZ carProof">
-						<a href="{{$vehicle->carproof}}#"><img src="https://www.drivewheaton.ca/wp-content/themes/strathcom/assets/dist/img/carproof-logo.png" class="img-responsive" alt="carproof image"></a>
+						<a style="cursor: pointer;" data-toggle="modal" data-target="#enquiryModal"><img src="https://www.drivewheaton.ca/wp-content/themes/strathcom/assets/dist/img/carproof-logo.png" class="img-responsive" alt="carproof image"></a>
 					</div>
 				  </div>
                </div>
@@ -375,6 +373,41 @@
    <!-- Related Item Container End -->
 </div>
 <!-- main container outer end -->
+
+<div class="modal fade" id="enquiryModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+		<div class="modal-header">
+          <h4 class="modal-title">Request for Carproof</h4>
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+		<div class="modal-body">
+			<form method="POST" action="#" accept-charset="UTF-8" id="enquiry-form" novalidate="novalidate"><input name="_token" type="hidden" value="">
+				<div class="form-group">
+					<label>Message Sent Succesfully</label>
+				</div>
+				<div class="form-group">
+					<input name="name" type="text" class="form-control" placeholder="Name" required="" aria-required="true">
+				</div>
+				<div class="form-group">
+					<input name="email" type="email" class="form-control" placeholder="Email" required="" aria-required="true">
+				</div>
+				<div class="form-group">
+					<input name="phone" type="number" class="form-control" placeholder="Phone" required="" aria-required="true">
+				</div>
+				<div class="form-group">
+					<textarea name="message" class="form-control" placeholder="Comments" required="" aria-required="true"></textarea>
+				</div>
+				<div>
+					<button id="enquiry-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
+				</div>
+			</form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
 
 
 @endsection

@@ -33,27 +33,29 @@
                   <div class="addthis_inline_share_toolbox pull-right"></div>
                </div> -->
 			   <div class="vehicle-info-small clearfix">
+                  @if($vehicle->price != 'call')
                   <div class="vehicle-info-leftD">
-					  <div class="col-md-12 col-xs-12 firstRow paddZ">
-						  <div class="col-md-12 col-xs-12 topLeft paddZ">
-							 <i class="fa fa-dollar"></i>
-						  </div>
-						  <div class="col-md-12 col-xs-12 topRight paddZ">
-							 <div class="col-md-12 col-xs-12 paddZ">
-								<div class="pull-left leftTitle">Was</div>
-								<div class="pull-right rightValue">{{$vehicle->mrp}}</div>
-							 </div>
-							 <div class="col-md-12 col-xs-12 paddZ">
-								<div class="pull-left leftTitle">Total Discounts</div>
-								<div class="pull-right rightValue">{{$discount}}</div>
-							 </div>
-						  </div>
-					  </div>
-					  <div class="col-md-12 col-xs-12 firstRow paddZ">
-						 <div class="pull-left">Our Price</div>
-						 <div class="pull-right">{{$vehicle->price}}</div>
-					  </div>
+   					  <div class="col-md-12 col-xs-12 firstRow paddZ">
+   						  <div class="col-md-12 col-xs-12 topLeft paddZ">
+   							 <i class="fa fa-dollar"></i>
+   						  </div>
+   						  <div class="col-md-12 col-xs-12 topRight paddZ">
+   							 <div class="col-md-12 col-xs-12 paddZ">
+   								<div class="pull-left leftTitle">Was</div>
+   								<div class="pull-right rightValue">{{$vehicle->mrp}}</div>
+   							 </div>
+   							 <div class="col-md-12 col-xs-12 paddZ">
+   								<div class="pull-left leftTitle">Total Discounts</div>
+   								<div class="pull-right rightValue">{{$discount}}</div>
+   							 </div>
+   						  </div>
+   					  </div>
+   					  <div class="col-md-12 col-xs-12 firstRow paddZ">
+   						 <div class="pull-left">Our Price</div>
+   						 <div class="pull-right">{{$vehicle->price}}</div>
+   					  </div>
                   </div>
+                  @endif
 				  <div class="vehicle-info-rightD">
 					<div class="col-md-12 col-xs-12 distanceD paddZ">{{$vehicle->odometer}} Km</div>
 					<div class="addthis_inline_share_toolbox pull-left"></div>

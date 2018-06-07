@@ -202,12 +202,18 @@
                <legend>Contact Info</legend>
                <fieldset>
                  <div class="row">
-                     <div class="col-sm-6 display-table">
+                     <!-- <div class="col-sm-6 display-table">
                         <label>Seller Type<span class="required">*</span></label>
                         <div class="select-box">
                            {!! Form::select('role', ['dealer' => 'Dealer','member' => 'Private'], null, ['required' ]) !!}
                         </div>
-                     </div>
+                     </div> -->
+                     <div class="col-sm-6 display-table">
+                       <label>Email<span class="required">*</span></label>
+                       <div class="input-box">
+                          {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => "Eg: Enter Email"]) !!}
+                       </div>
+                    </div>
                      <div class="col-sm-6 display-table">
                         <label>Phone<span class="required">*</span></label>
                         <div class="input-box">
@@ -224,45 +230,14 @@
                      </div>
                   </div>
                 </fieldset>
-               @if($vehicle->featured)
-                <div class="promote-vehicle">
-                  <div class="promote-vehicle-left">
-                     <h4>Your Ad is featured!</h4>
-                     <p>Your ad appears in the <span>search results</span> on the site for <span>30 days</span></p>
-                  </div>
-                  <div class="promote-vehicle-right">
-                     <label for="vehicle-price-free">29 days remaining</label>
-                  </div>
-               </div>
-                <input name="paid" type="hidden" value="paid">
-               @else
+
                <div class="promote-vehicle">
                   <div class="promote-vehicle-left">
                      <h4>On Our Website!</h4>
                      <p>For 30 days your <span>Ad will appear</span> on the site for <span>FREE</span></p>
                   </div>
-                  <div class="promote-vehicle-right">
-                     <input name="free" type="checkbox" class="filled-in promote-check" checked id="vehicle-price-free">
-                     <label for="vehicle-price-free">FREE</label>
-                  </div>
-               </div>
-               <div class="promote-vehicle">
-                  <div class="promote-vehicle-left">
-                     <p>For <span>30 days</span> your ad will appear in the <span>"Featured Vehicles"</span> sections and enjoy<br /> <span>increased visibility</span> in the <span>search results.</span></p>
-                  </div>
-                  <div class="promote-vehicle-right">
-                     <input type="checkbox" class="filled-in promote-check" id="vehicle-price">
-                     <label for="vehicle-price"><span>$</span>14.95</label>
-                  </div>
-               </div>
-               <div class="promote-vehicle paypal">
-                  <p>Payments are accepted through <span>PayPal</span>. Click <span>Submit</span> to continue.</p>
-                  <img src="/assets/images/paypal.jpg" alt="" />
-                  <h4>Total <span>$14.95</span></h4>
-                  
                </div>
                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-               @endif
                {!! Form::close() !!}
             </div>
           

@@ -31,7 +31,7 @@
                         <div class="col-sm-6 display-table">
                            <label>Make<span class="required">*</span></label>
                            <div class="input-box">
-                              <input id="make-autocomplete" name="make_name" type="text" maxlength="60" class="form-control autocomplete" placeholder="Enter Make" required />
+                              <input id="make-autocomplete" name="make_name" type="text" maxlength="60" class="form-control autocomplete" placeholder="Enter Make" autocomplete="off" required />
                            </div>
                         </div>
                      </div>
@@ -39,7 +39,7 @@
                         <div class="col-sm-6 display-table">
                            <label>Model<span class="required">*</span></label>
                            <div class="input-box">
-                              <input id="model-autocomplete" name="model_name" type="text" maxlength="60" class="form-control autocomplete" placeholder="Enter Model" required />
+                              <input id="model-autocomplete" name="model_name" type="text" maxlength="60" class="form-control autocomplete" placeholder="Enter Model" autocomplete="off" required />
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
@@ -57,13 +57,13 @@
                         <div class="col-sm-6 display-table">
                            <label>Price<span class="required">*</span></label>
                            <div class="input-box">
-                              <input type="text" class="form-control" name="price" placeholder="Price eg: $12,000" minlength="3" required/>
+                              <input type="text" class="form-control" name="price" placeholder="Price eg: $12,000" minlength="3" autocomplete="off" required/>
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">
                            <label>Mileage</label>
                            <div class="input-box">
-                              <input type="text" class="form-control" name="odometer" placeholder="Mileage eg: 12,000" />
+                              <input type="text" class="form-control" name="odometer" autocomplete="off" placeholder="Mileage eg: 12,000" />
                            </div>
                         </div>
                      </div>

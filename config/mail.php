@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => env('MAIL_FROM', 'support@carsgone.com'), 'name' => "Edmontonautoloans"],
+    'from' => ['address' => env('MAIL_FROM', 'support@carsgone.com'), 'name' => "EdmontonAutoLoans"],
 
     /*
     |--------------------------------------------------------------------------

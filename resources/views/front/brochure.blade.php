@@ -33,6 +33,7 @@
                   <div class="addthis_inline_share_toolbox pull-right"></div>
                </div> -->
 			   <div class="vehicle-info-small clearfix">
+               @if($vehicle->price != 'call')
                   <div class="vehicle-info-leftD">
 					  <div class="col-md-12 col-xs-12 firstRow paddZ">
 						  <div class="col-md-12 col-xs-12 topLeft paddZ">
@@ -54,6 +55,7 @@
 						 <div class="pull-right">{{$vehicle->price}}</div>
 					  </div>
                   </div>
+                  @endif
 				  <div class="vehicle-info-rightD">
 					<div class="col-md-12 col-xs-12 distanceD paddZ">{{$vehicle->odometer}} Km</div>
 					<div class="addthis_inline_share_toolbox pull-left"></div>
@@ -73,7 +75,7 @@
                            <li class="selected"><a href="#0">Contact</a></li>
                            <li><a href="#0">Description</a></li>
                            <li><a href="#0">Finance</a></li>
-                           <li><a href="#0">Dealer</a></li>
+                           <li><a href="#0">Map</a></li>
                         </ul>
                      </nav>
                   </div>
@@ -83,7 +85,7 @@
                         <div class="contact-dealer-container">
                            <div class="dealer-number"><a href="tel:18552271669" class="btn waves-effect waves-light "><i class="fa fa-phone"></i> 1-855-227-1669</a></div>
                            
-                           <h4>Contact Dealer</h4>
+                           <h4>Contact Seller</h4>
                            {!! Form::open(['url' => '/contact-dealer', 'method' => 'POST', 'id' => 'contact-form']) !!}
                            <div class="form-group">
                               <input name="name" type="text" class="form-control" placeholder="Name" required/>
@@ -143,7 +145,7 @@
                                  @endif
                                  @if(!empty($vehicle->stock))
                                  <tr>
-                                    <td><strong>Stock</strong></td>
+                                    <td><strong>Private</strong></td>
                                     <td>{{$vehicle->stock}}</td>
                                  </tr>
                                  @endif

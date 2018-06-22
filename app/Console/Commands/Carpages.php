@@ -79,11 +79,10 @@ class Carpages extends Command
 
         foreach ($lines as $line) {
             
-            echo "<pre>";print_r($line);exit;
-            if($line[0]=='30893')
+            if(isset($line[0]) && $line[0]=='30893')
             {
                 
-                $dealer_id='2415';
+                $dealer_id='1133';
                 $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['user_id' => $dealer_id, 'partner_vehicle_id' => (string)$line[1]]);
                 
                 if($vehicle->exists)

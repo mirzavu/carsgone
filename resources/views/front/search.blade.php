@@ -205,7 +205,7 @@
                                     <p>Body Style: <strong>{{$vehicle->bodyStyleGroup->body_style_group_name or ''}}</strong></p>
                                     <p>Color: <strong>{{$vehicle->ext_color->color or ''}}</strong></p>
                                     <p>Transmission: <strong>{{$vehicle->transmission}}</strong></p>
-                                    <p>Engine: <strong>{{$vehicle->engine_description}}L I-{{$vehicle->engine_cylinders}}</strong></p>
+                                    <p>Engine: <strong>{{$vehicle->engine_description}} {{$vehicle->engine_cylinders}}</strong></p>
                                     <p>Private: <strong>{{$vehicle->stock}}</strong></p>
                                  </div>
                               </div>

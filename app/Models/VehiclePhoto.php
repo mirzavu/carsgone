@@ -16,7 +16,11 @@ class VehiclePhoto extends Model
 
     public function getPathAttribute($value)
     { 
-        if($value[0] == '/')
+        if(!isset($value[0]))
+        {
+            return $value;
+        }
+        else if($value[0] == '/')
         {
             $value = url('/').$value;
         }

@@ -161,7 +161,7 @@ class Carpages extends Command
                 $vehicle->int_color_id = $int_color->id;
                 $vehicle->odometer = $line[9];
                 $vehicle->doors = (int)$line[20];
-                $vehicle->transmission = (string)$xml->Transmission == "Automatic"? 'auto' : 'manual';
+                $vehicle->transmission = (string)$line[12] == "Automatic"? 'auto' : 'manual';
                 $vehicle->price = ($line[10] < 500000) ? (int)$line[10] : 500000;
                 $vehicle->text = (string)$line[15];
                 $vehicle->stock = $line[5];

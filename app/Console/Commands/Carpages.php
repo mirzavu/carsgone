@@ -79,7 +79,7 @@ class Carpages extends Command
 
         foreach ($lines as $line) {
             
-
+            echo "<pre>";print_r($line);exit;
             if($line[0]=='30893')
             {
                 
@@ -96,19 +96,18 @@ class Carpages extends Command
                     
                     // Log::info(gettype($xml->Images->Photo));
                         
-                    if(!empty($xml->Images->Photo) && VehiclePhoto::wherePath($xml->Images->Photo)->count() == 0)
+                    $images = explode(';', $line[17]);
+
+                    if(count($images) && VehiclePhoto::wherePath($images[0])->count() == 0)
                     {
-
                         $vehicle->photos()->delete();
-                        $images = $xml->Images;
-
                         $photos =[];
-                        if (is_array($images->Photo) || is_object($images->Photo))
-                        {
-                            foreach($images->Photo as $image) {
-                                array_push($photos, ['position' => (string)$image['number'], 'path' => (string)$image, 'vehicle_id' => $vehicle->id]);
-                            }
+                        $i=0;
+                        foreach($images as $image) {
+                            array_push($photos, ['position' => (string)$i, 'path' => (string)$image, 'vehicle_id' => $vehicle->id]);
+                            $i++;
                         }
+                        
                         DB::table('vehicle_photos')->insert($photos);
                     }
                     continue;

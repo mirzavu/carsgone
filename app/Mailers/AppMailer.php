@@ -103,7 +103,7 @@ class AppMailer
     {
         $this->from = $data->email;
         $this->fromName = $data->first_name.' '.$data->last_name;
-        $this->to = config('mail.from.address');
+        $this->to = ['raymondr44@gmail.com', 'rir38@shaw.ca'];
         $this->subject = 'Credit Application';
         $this->view = 'emails.credit_app';
         $this->data = compact('data');

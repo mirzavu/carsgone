@@ -79,7 +79,7 @@ class PostController extends Controller
 		$sql = "SELECT post_content FROM cr_posts where id=696";
 		$result = $con->query($sql);
 		$row = $result->fetch_assoc();
-		var_dump($row);exit;
+		$data['content'] = $row['post_content'];
 		return view('front.post.sellcontent', $data);
 	}
 

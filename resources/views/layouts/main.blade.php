@@ -46,7 +46,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <div class="col-sm-3 logo">
+        <div class="col-sm-3 logo" style="padding-left: 0px;">
                                    <a href="https://www.edmontonautoloans.com/" id="logo" title="EDMONTON AUTO LOANS" rel="home">
                  <img src="https://www.edmontonautoloans.com/wp-content/themes/creditapp/images/logo.jpg" alt="EDMONTON AUTO LOANS">
                 </a> 

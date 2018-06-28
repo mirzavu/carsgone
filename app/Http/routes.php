@@ -67,6 +67,7 @@
 
 	//Post Vehicle
 	Route::get('/promote-vehicle/{id}', 'PostController@payPaypal')->where('id', '[0-9]+');
+	Route::get('/sell', 'PostController@sellPage');
 	Route::get('/post', 'PostController@newPost');
 	Route::get('/post/done', 'PostController@getDone');
 	Route::post('/post/create', 'PostController@create');

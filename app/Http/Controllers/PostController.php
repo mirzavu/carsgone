@@ -70,6 +70,19 @@ class PostController extends Controller
 		return view('front.post.post', $data);
 	}
 
+	public function sellPage(Request $request)
+	{	
+		SEO::setTitle('Sell a car online free auto classifieds | Buy Sell & Trade Used Cars Canada');
+        SEO::setDescription('Sell my car free, advertise vehicles free, automotive classified, post or list free online auto listings.');
+		// $data['content'] = ContentPage::where('slug', 'post-page')->first()->content;
+		$con = mysqli_connect("localhost","cre02","$!Jc%h;XEPT,","credit01");
+		$sql = "SELECT post_content FROM cr_posts where id=696";
+		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
+		var_dump($row);exit;
+		return view('front.post.sellcontent', $data);
+	}
+
 	public function create(Request $request, AppMailer $mailer)
 	{		
 		$make = Make::firstOrCreate(['make_name' => $request['make_name']]);

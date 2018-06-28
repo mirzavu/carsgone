@@ -46,13 +46,13 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <div class="col-sm-3 logo" style="padding-left: 0px;">
+        <div class="col-sm-3 logo" style="padding: 0px;">
                                    <a href="https://www.edmontonautoloans.com/" id="logo" title="EDMONTON AUTO LOANS" rel="home">
                  <img src="https://www.edmontonautoloans.com/wp-content/themes/creditapp/images/logo.jpg" alt="EDMONTON AUTO LOANS">
                 </a> 
                          
                   </div>
-        <nav class="col-sm-9 text-right">
+        <nav class="col-sm-9 text-right" style="padding: 0px;">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
               <span class="icon-bar"></span>

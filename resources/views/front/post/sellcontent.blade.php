@@ -11,7 +11,11 @@
                </div>
                <div class="panel-body">
                   {!! $content !!}
+                  <br>
+                  <br>
+                  <div style="text-align: center;">
                   <a href="https://www.edmontonautoloans.com/buy/post" class="waves-effect waves-light btn">Create Post</a>
+                  </div>
                </div>
             </div>
          </div>

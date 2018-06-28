@@ -77,7 +77,7 @@ class PostController extends Controller
 		// $data['content'] = ContentPage::where('slug', 'post-page')->first()->content;
 		$con = mysqli_connect("localhost","cre02","$!Jc%h;XEPT,","credit01");
 		$sql = "SELECT post_content FROM cr_posts where id=696";
-		$result = $conn->query($sql);
+		$result = $con->query($sql);
 		$row = $result->fetch_assoc();
 		var_dump($row);exit;
 		return view('front.post.sellcontent', $data);

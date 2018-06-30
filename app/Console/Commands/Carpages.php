@@ -187,8 +187,8 @@ class Carpages extends Command
                 $vehicle->transmission = (string)$line[12] == "Automatic"? 'auto' : 'manual';
                 $vehicle->price = ($line[10] < 500000) ? (int)$line[10] : 500000;
                 $vehicle->text = (string)$line[15];
-                $vehicle->stock = $line[5];
-                $vehicle->trim = (string)$line[7];
+                $vehicle->stock = (string)$line[7];
+                $vehicle->trim = $line[5];
                 $vehicle->engine_cylinders = (string)$line[18];
                 $vehicle->save();
                 //echo $vehicle->slug;exit;

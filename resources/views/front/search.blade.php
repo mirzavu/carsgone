@@ -206,7 +206,7 @@
                                     <p>Color: <strong>{{$vehicle->ext_color->color or ''}}</strong></p>
                                     <p>Transmission: <strong>{{$vehicle->transmission}}</strong></p>
                                     <p>Engine: <strong>{{$vehicle->engine_description}} {{$vehicle->engine_cylinders}}</strong></p>
-                                    <p>Private: <strong>{{$vehicle->stock}}</strong></p>
+                                    <p>Stock: <strong>{{$vehicle->stock}}</strong></p>
                                  </div>
                               </div>
                            </div>

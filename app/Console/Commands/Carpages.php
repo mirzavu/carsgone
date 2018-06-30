@@ -124,11 +124,16 @@ class Carpages extends Command
                 $vehicle->model_id = $model->id;
 
                 
-                $body_style = $line[6];
+                $body_style = trim($line[6]);
+
+                if(in_array($body_style, ['Motorcycle','']))
 
                 switch ($body_style) {
                     case 'Pickup Truck':
                         $body_style = "Truck";
+                        break;
+                    case 'Coupe':
+                        $body_style = "Coupe";
                         break;
                     case 'Crossover':
                         $body_style = "SUV";
@@ -150,6 +155,21 @@ class Carpages extends Command
                         break;
                     case 'Compact':
                         $body_style = "SUV";
+                        break;
+                    case 'Commercial':
+                        $body_style = "Truck";
+                        break;
+                    case 'Wagon':
+                        $body_style = "Wagon";
+                        break;
+                    case 'Motorcycle':
+                        $body_style = "Motorcycle";
+                        break;
+                    case 'Sedan':
+                        $body_style = "Sedan";
+                        break;
+                    default:
+                        $body_style = 'Truck';
                         break;
                 }
 

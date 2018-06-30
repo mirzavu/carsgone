@@ -126,7 +126,10 @@ class Carpages extends Command
                 
                 $body_style = trim($line[6]);
 
-                if(in_array($body_style, ['Motorcycle','']))
+                if(in_array($body_style, ['Motorcycle']))
+                {
+                    continue;
+                }
 
                 switch ($body_style) {
                     case 'Pickup Truck':

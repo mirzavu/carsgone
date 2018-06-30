@@ -35,7 +35,7 @@
 			   <div class="vehicle-info-small clearfix">
                @if($vehicle->price != 'call')
                   <div class="vehicle-info-leftD">
-					  <div class="col-md-12 col-xs-12 firstRow paddZ">
+					  <!-- <div class="col-md-12 col-xs-12 firstRow paddZ">
 						  <div class="col-md-12 col-xs-12 topLeft paddZ">
 							 <i class="fa fa-dollar"></i>
 						  </div>
@@ -49,7 +49,7 @@
 								<div class="pull-right rightValue">{{$discount}}</div>
 							 </div>
 						  </div>
-					  </div>
+					  </div> -->
 					  <div class="col-md-12 col-xs-12 firstRow paddZ">
 						 <div class="pull-left">Our Price</div>
 						 <div class="pull-right">{{$vehicle->price}}</div>

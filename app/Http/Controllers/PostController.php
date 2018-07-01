@@ -111,7 +111,7 @@ class PostController extends Controller
         $user->role = "member";
         $user->phone = $request['phone'];
         $user->postal_code = $request['postal_code'];
-        $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($postal_code);
+        $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($user->postal_code);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

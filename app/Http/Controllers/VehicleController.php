@@ -43,6 +43,18 @@ class VehicleController extends Controller
 		{
 			abort(404);
 		}
+		if($vehicle->user->role == "member")
+		{
+			if(empty($vehicle->user->phone))
+				$phone = false;
+			else
+				$phone = $vehicle->user->phone;
+		}
+		else
+		{
+			$phone = '1-855-227-1669';
+		}
+		
 		if($vehicle->user->featured)
 			$other_vehicle_text = 'Dealers Other Vehicles';
 		else
@@ -54,7 +66,7 @@ class VehicleController extends Controller
         SEO::opengraph()->setUrl($request->url());
         SEO::opengraph()->addProperty('type', 'product');
         SEO::opengraph()->addImage($vehicle->photo());
-		return view('front.brochure', compact('vehicle','location','other_vehicle_text','provinces', 'discount'));
+		return view('front.brochure', compact('vehicle','location','other_vehicle_text','provinces', 'discount', 'phone'));
 	}
 
 	public function relatedVehicle(Request $request, $slug)

@@ -51,7 +51,7 @@
 						  </div>
 					  </div> -->
 					  <div class="col-md-12 col-xs-12 firstRow paddZ">
-						 <div class="pull-left">Our Price</div>
+						 <div class="pull-left">List Price</div>
 						 <div class="pull-right">{{$vehicle->price}}</div>
 					  </div>
                   </div>
@@ -83,7 +83,9 @@
                   <ul class="cd-hero-slider">
                      <li class="selected">
                         <div class="contact-dealer-container">
-                           <div class="dealer-number"><a href="tel:18552271669" class="btn waves-effect waves-light "><i class="fa fa-phone"></i> 1-855-227-1669</a></div>
+                           @if($phone!= '--')
+                           <div class="dealer-number"><a href="tel:18552271669" class="btn waves-effect waves-light "><i class="fa fa-phone"></i> {{ $phone }}</a></div>
+                           @endif
                            
                            <h4>Contact Seller</h4>
                            {!! Form::open(['url' => '/contact-dealer', 'method' => 'POST', 'id' => 'contact-form']) !!}
@@ -628,7 +630,9 @@ if('{{$vehicle->add_overlay}}')
 })
 
 </script>
-<script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}}),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}})});infowindow = new google.maps.InfoWindow({content:'<strong>{{$vehicle->user->name}}</strong><br>{{$vehicle->user->address}}<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+<script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}}),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng({{$vehicle->user->latitude}},{{$vehicle->user->longitude}})});infowindow = new google.maps.InfoWindow({content:'<strong>{{$vehicle->user->name}}</strong><br>{{$vehicle->user->address}}<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);
+   infowindow.close(); //close label box
+   }google.maps.event.addDomListener(window, 'load', init_map);</script>
 <script src="https://unpkg.com/react@15.3.1/dist/react.min.js"></script>
 <script src="https://unpkg.com/react-dom@15.3.1/dist/react-dom.min.js"></script>
 <script src="https://unpkg.com/react-slick@0.13.6/dist/react-slick.min.js"></script>

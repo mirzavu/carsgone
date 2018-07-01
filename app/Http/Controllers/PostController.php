@@ -111,7 +111,7 @@ class PostController extends Controller
         $user->role = "member";
         $user->phone = $request['phone'];
         $user->postal_code = $request['postal_code'];
-        $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($user->postal_code);
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyC9Ezjr9wYfklK30LP4GhgL4dVbvaCbesQ&address=".urlencode($user->postal_code);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -148,7 +148,7 @@ class PostController extends Controller
         
         $user->province_id = Province::where('province_name', 'Alberta')->value('id');
         $user->city_id = City::where('city_name', 'Edmonton')->value('id');
-        
+
         $user->save();
         //Save vehicle
 		$vehicle = $user->vehicles()->create($request->all());
@@ -403,10 +403,7 @@ class PostController extends Controller
 		$user = Auth::user();
 		$user->phone = $request['phone'];
 		$user->postal_code = $request['postal_code'];
-		if($request->role == "dealer")
-			$user->role = "dealer";
-		else
-			$user->role = "member";
+		$user->role = "member";
 		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($user->postal_code);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);

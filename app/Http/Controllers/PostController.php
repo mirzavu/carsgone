@@ -111,8 +111,44 @@ class PostController extends Controller
         $user->role = "member";
         $user->phone = $request['phone'];
         $user->postal_code = $request['postal_code'];
-        $user->city_id = City::where('city_name', 'Edmonton')->value('id');
+        $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($postal_code);
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        $loc_json = curl_exec($curl);
+        $retry = 0;
+        $loc_array = json_decode($loc_json);
+        while($loc_array->status == "UNKNOWN_ERROR" && $retry < 5){
+            $loc_json = curl_exec($curl);
+            $loc_array = json_decode($loc_json);
+            $retry++;
+        }
+        curl_close($curl);
+        if($loc_array->status == "OK")
+        {
+            $user->latitude = $loc_array->results[0]->geometry->location->lat;
+            $user->longitude = $loc_array->results[0]->geometry->location->lng;
+            foreach ($loc_array->results[0]->address_components as $component) 
+            {    
+			    if(in_array("administrative_area_level_1", $component->types))
+			    {
+			    	$province_code = $component->short_name;
+			    }
+
+			    if(in_array("locality", $component->types))
+			    {
+			    	$city_name = $component->long_name;
+			    }
+			}
+			$user->province_id = Province::where('province_code',(string) $province_code)->value('id');
+			$city = City::firstOrCreate(['city_name'=> (string)$city_name,'province_id'=> $user->province_id]);
+			    	$user->city_id = $city->id;
+        } 
+        
         $user->province_id = Province::where('province_name', 'Alberta')->value('id');
+        $user->city_id = City::where('city_name', 'Edmonton')->value('id');
+        
         $user->save();
         //Save vehicle
 		$vehicle = $user->vehicles()->create($request->all());

@@ -206,7 +206,11 @@
                                     <p>Color: <strong>{{$vehicle->ext_color->color or ''}}</strong></p>
                                     <p>Transmission: <strong>{{$vehicle->transmission}}</strong></p>
                                     <p>Engine: <strong>{{$vehicle->engine_description}} {{$vehicle->engine_cylinders}}</strong></p>
-                                    <p>Stock: <strong>{{$vehicle->stock}}</strong></p>
+                                    @if($vehicle->user->role=="member")
+                                    <p>Seller: <strong>Private</strong></p>
+                                    @else
+                                    <p>Seller: <strong>Dealer</strong></p>
+                                    @endif
                                  </div>
                               </div>
                            </div>

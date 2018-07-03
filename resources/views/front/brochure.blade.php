@@ -175,6 +175,17 @@
                                     <td>{{$vehicle->int_color->color}}</td>
                                  </tr>
                                  @endif
+                                 @if(($vehicle->user->role=="member"))
+                                 <tr>
+                                    <td><strong>Seller</strong></td>
+                                    <td>Private</td>
+                                 </tr>
+                                 @else
+                                 <tr>
+                                    <td><strong>Seller</strong></td>
+                                    <td>Dealer</td>
+                                 </tr>
+                                 @endif
                                  @if(!empty($vehicle->passenger))
                                  <tr>
                                     <td><strong>Passengers</strong></td>

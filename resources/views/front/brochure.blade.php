@@ -192,9 +192,44 @@
                                     <td>{{$vehicle->passenger}}</td>
                                  </tr>
                                  @endif
+                                 @if(!empty($vehicle->user->role == 'member'))
                                  <tr>
                                     <td colspan="2"><p>{!!$vehicle->text!!}</p></td>
                                  </tr>
+                                 @else
+                                 <tr>
+                                 <td colspan="2">
+                                 <p></p>
+                                    <p>EdmontonAutoLoans.com  - All Credit 100% Accepted!</p>
+                                    <p>FOR QUICKER RESPONSE CALL OR TEXT 780-907-4401</p>
+                                    <p><strong>Financing available for any credit.</strong></p>
+                                    <p>All credit accepted! Just go to EdmontonAutoLoans.com and complete the mobile friendly credit application form.
+
+                                    You will be pre-approved within moments of your auto loans application being reviewed.
+
+                                    We offer financing on all vehicles including private, equity loans, dealers inventory, cash back loans, trade ins, and refinancing options.
+
+                                    We offer the very best interest rates available from 3.99%. O.A.C. Excellent, Good, Poor, Or Very Poor, all APPROVED!
+
+                                    For express approvals just text "APPROVED" to 780-907-4401 now, and we will respond immediately.
+
+                                    Super quick and easy to apply. Check out our Google reviews! EdmontonAutoLoans.com
+
+                                    Financing Made Quick and Easy. Text us now at 780-907-4401 to get started.</p>
+                                    <p><strong>Free Auto Financing Options.</strong> Looking to sell, trade or buy a car, truck or SUV. One stop shop for all your vehicle financing needs.
+
+                                    Go to EdmontonAutoLoans.com and <strong>Post your vehicle for FREE</strong>, and buyers will be able to apply for an auto loan directly on your vehicle.
+
+                                    This service is completely free, and will give more potential buyers the option to finance your private vehicle though EdmotnonAutoLoans.com.</p>
+                                    <p>Need a car loan on a private, or dealer vehicle? We offer cash back auto loans, equity auto loans, and offer finance solutions for every situation.
+
+                                    All credit is 100% accepted and approved. 20 plus years of experience. Check out our Google reviews.</p>
+                                    <p><strong>For express approval text "Approved" to 780-907-4401.</strong></p>
+                                    <p>A Carproof and AMVIC Mechanical report are included on all dealer inventory.</p>
+                                 </td>
+                                 </tr>
+                                
+                                 @endif
                                  @if(!empty($vehicle->user->role == 'member'))
                                  <tr>
                                     <td colspan="2"><button id="resend-email" class="btn waves-effect waves-light btn">Edit this Vehicle</button></td>

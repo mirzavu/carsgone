@@ -4,7 +4,7 @@
 <div class="vehicle-post-outer">
    <div class="container">
       <div class="wrapper">
-         <div class="dealer-info">
+         <!-- <div class="dealer-info">
             <div class="panel full">
                <div class="panel-heading">
                   <h1>CREATE A VEHICLE LISTING</h1>
@@ -13,7 +13,7 @@
                   {!! $content !!}
                </div>
             </div>
-         </div>
+         </div> -->
          <div class="post-tab clearfix panel" id="post-create-form">
             <div class="form-section">
                <form id="vehicle-form" method="post" action="/post/create">

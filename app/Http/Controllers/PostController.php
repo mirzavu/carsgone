@@ -76,7 +76,7 @@ class PostController extends Controller
         SEO::setDescription('Sell my car free, advertise vehicles free, automotive classified, post or list free online auto listings.');
 		// $data['content'] = ContentPage::where('slug', 'post-page')->first()->content;
 		$con = mysqli_connect("localhost","cre02","$!Jc%h;XEPT,","credit01");
-		$sql = "SELECT post_content FROM cr_posts where id=696";
+		$sql = "SELECT post_content FROM cr_posts where id=694";
 		$result = $con->query($sql);
 		$row = $result->fetch_assoc();
 		$data['content'] = $row['post_content'];

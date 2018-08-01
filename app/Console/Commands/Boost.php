@@ -88,6 +88,10 @@ class Boost extends Command
         $new_dealers = "";
         $email = [];$i=0;
 
+        Vehicle::whereHas('User', function($q){
+                $q->where('partner_id', '2');
+            })->update(['status_id' => 2]);
+
         while( $xmlReader->read() ) {
 
         //We've found a dealer in the XML stream and it's not an END_ELEMENT

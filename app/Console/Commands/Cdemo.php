@@ -71,6 +71,10 @@ class Cdemo extends Command
         fwrite($file, $xml_str);
         fclose($file);
         $xmldata     = simplexml_load_file($xmlfile);
+
+        Vehicle::whereHas('User', function($q){
+                $q->where('partner_id', '3');
+            })->update(['status_id' => 2]);
         
         foreach ($xmldata->children() as $node) {
             if (strcmp($node->getname(), 'dealer_info') == 0) {

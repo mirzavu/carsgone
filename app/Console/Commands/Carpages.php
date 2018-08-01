@@ -77,6 +77,9 @@ class Carpages extends Command
         $new_dealers = "";
         $email = [];$i=0;
 
+
+        Vehicle::where('user_id', 1133)->update(['status_id' => 2]);
+        $i=0;
         foreach ($lines as $line) {
             
             if(isset($line[0]) && $line[0]=='30893')
@@ -111,6 +114,7 @@ class Carpages extends Command
                     }
                     continue;
                 }
+                $i++;
                 $vehicle->condition = 'used'; 
                 $vehicle->status_id = 1;
                 $vehicle->year = $line[2];

@@ -59,7 +59,7 @@
 	Route::post('/contact-dealer', 'VehicleController@contactDealer');
 	Route::post('/finance', 'VehicleController@finance');
 	Route::post('/resend-vehicle-email', 'VehicleController@resendVehicleEmail');
-	
+	Route::post('/carproof', 'VehicleController@carproofRequest');
 
 	//Private Vehicles
 	Route::get('/search/{params}', 'SearchController@searchHandler')->where('params', '.*');

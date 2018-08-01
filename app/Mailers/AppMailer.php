@@ -133,6 +133,18 @@ class AppMailer
         $this->deliver();
     }
 
+    public function sendCarproofRequest($data)
+    {
+        $this->from = $data->email;
+        $this->fromName = $data->name;
+        $this->to = config('mail.from.address');
+        $this->to = 'mirza.ekm@gmail.com';
+        $this->subject = 'Edmontonautoloans.com Carproof Request';
+        $this->view = 'emails.carproof';
+        $this->data = compact('data');
+        $this->deliver();
+    }
+
     public function sendDealerFinanceForm($data, $vehicle)
     {
         $data->year = $vehicle->year;

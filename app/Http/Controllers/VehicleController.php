@@ -122,6 +122,13 @@ class VehicleController extends Controller
 		return response()->json(['status' => 'success', 'message' => 'Your message is sent successfully! You will hear back from us soon.']);
 	}
 
+	public function carproofRequest(Request $request, AppMailer $mailer)
+	{	
+		$mailer->sendCarproofRequest($request);
+		return response()->json(['status' => 'success', 'message' => 'Your message is sent successfully! You will hear back from us soon.']);
+	}
+
+
 	public function finance(Request $request, AppMailer $mailer)
 	{	
 		$vehicle = Vehicle::whereslug($request['vehicle'])->first();
@@ -129,17 +136,6 @@ class VehicleController extends Controller
 		return response()->json(['status' => 'success', 'message' => 'Your message is sent successfully! You will hear back from us soon.']);
 	}
 
-	public function makeOffer(Request $request, AppMailer $mailer)
-	{
-		$mailer->sendOffer($request);
-		return response()->json(['status' => 'success', 'message' => 'Your message is sent successfully! You will hear back from us soon.']);
-	}
-	
-	public function tradeVehicleForm(Request $request, AppMailer $mailer)
-	{
-		$mailer->sendtradeVehicleForm($request);
-		return response()->json(['status' => 'success', 'message' => 'Your message is sent successfully! You will hear back from us soon.']);
-	}
 
 	public function resendVehicleEmail(Request $request, AppMailer $mailer)
 	{

@@ -147,7 +147,7 @@
                                  @endif
                                  @if(!empty($vehicle->stock))
                                  <tr>
-                                    <td><strong>Private</strong></td>
+                                    <td><strong>Stock</strong></td>
                                     <td>{{$vehicle->stock}}</td>
                                  </tr>
                                  @endif
@@ -432,7 +432,7 @@
 		  <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 		<div class="modal-body">
-			<form method="POST" action="#" accept-charset="UTF-8" id="enquiry-form" novalidate="novalidate"><input name="_token" type="hidden" value="">
+			<form method="POST" action="/carproof" accept-charset="UTF-8" id="carproof-form" novalidate="novalidate"><input name="_token" type="hidden" value="">
 				<div class="form-group">
 					<label>Message Sent Succesfully</label>
 				</div>
@@ -449,7 +449,7 @@
 					<textarea name="message" class="form-control" placeholder="Comments" required="" aria-required="true"></textarea>
 				</div>
 				<div>
-					<button id="enquiry-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
+					<button id="carproof-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>
 				</div>
 			</form>
         </div>
@@ -500,6 +500,47 @@ form.validate({
                     toastr.success(response.message)
                     $('#dealer-submit').prop('disabled', false).html('Submit')
                     $("#contact-form").get(0).reset();
+                }
+            }
+        });
+    }
+})
+
+var form = $("#carproof-form");
+form.validate({
+    rules: {},
+    // errorClass: "invalid form-error",       
+    // errorElement : 'div',       
+    errorPlacement: function(error, element) {
+        if (element.is('select')) {
+            error.appendTo(element.parent().parent());
+        } else {
+            error.appendTo(element.parent());
+        }
+
+    },
+    focusInvalid: false,
+    invalidHandler: function(form, validator) {
+
+        if (!validator.numberOfInvalids())
+            return;
+        $('html, body').animate({
+            scrollTop: $(validator.errorList[0].element).parent().offset().top - 20
+        }, 500);
+        $(validator.errorList[0].element).focus()
+
+    },
+    submitHandler: function(form) {
+        $('#carproof-submit').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin" style="font-size:1.3rem" aria-hidden="true"></i>  PROCESSING');
+        $.ajax({
+            url: form.action,
+            type: form.method,
+            data: $(form).serialize() + '&_token={{ csrf_token() }}',
+            success: function(response) {
+                if (response.status == "success") {
+                    toastr.success(response.message)
+                    $('#carproof-submit').prop('disabled', false).html('Submit')
+                    $("#carproof-form").get(0).reset();
                 }
             }
         });

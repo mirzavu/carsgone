@@ -30,7 +30,7 @@ class VehicleController extends Controller
 	{	
 
 		$location = getLocation($request);
-		$vehicle = Vehicle::with('user')->with('make')->with('model')->where('slug',$slug)->firstOrFail();
+		$vehicle = Vehicle::with('user')->with('make')->with('model')->where('slug',$slug)->where('status_id', 1)->firstOrFail();
 		$provinces = Province::orderBy('province_name', 'asc')->pluck('province_name','id');
 
 		$other_vehicle_text = 'Related Vehicles';

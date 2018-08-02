@@ -128,7 +128,7 @@ class DealerController extends Controller
 		SEO::setTitle($data['dealer']->name." in ".$data['dealer']->city->city_name.", ".$data['dealer']->province->province_name);
 
         SEO::setDescription($data['dealer']->name." in ".$data['dealer']->city->city_name.", ".$data['dealer']->province->province_name." is a car dealership selling cars, trucks, vans and SUVs. You can also apply for ".$data['dealer']->city->city_name.", ".$data['dealer']->province->province_name." auto loans.");	
-		$data['recent'] = Vehicle::where('user_id',$data['dealer']->id)->orderBy('created_at', 'desc')->take(6)->get();
+		$data['recent'] = Vehicle::where('user_id',$data['dealer']->id)->where('status_id', 1)->orderBy('created_at', 'desc')->take(6)->get();
 		
 		$data['makes'] = Vehicle::where('user_id',$data['dealer']->id)->where('status_id', 1)->join('makes', 'vehicles.make_id', '=', 'makes.id')
 			            ->selectRaw('count(makes.id) as make_count, makes.make_name')

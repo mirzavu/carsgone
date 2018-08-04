@@ -214,10 +214,10 @@ class Vehicle extends Model
             $query->where('body_style_group_name', $conditions->get('body'));
         }
 
-        if ($conditions->get('dealer'))
+        if ($conditions->get('seller'))
         {
             $query->join('users', 'vehicles.user_id', '=', 'users.id');
-            $query->where('users.name', $conditions->get('dealer'));
+            $query->where('users.role', $conditions->get('seller'));
         }
 
         // if ($conditions->get('province'))

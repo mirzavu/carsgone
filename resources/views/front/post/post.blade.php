@@ -24,8 +24,13 @@
                      <div class="row">
                         <div class="col-sm-6 display-table">
                            <label>Year<span class="required">*</span></label>
-                           <div class="input-box">
-                              <input name="year" type="text" minlength="4" maxlength="4" class="form-control" placeholder="Enter Year" required />
+                           <div class="select-box">
+                              <select name="year">
+                                 <option value="" disabled selected>Select Year</option>
+                                 @for($yr = 2019;$yr>=1928;$yr--)
+                                 <option value="{{$yr}}">{{$yr}}</option>
+                                 @endfor
+                              </select>
                            </div>
                         </div>
                         <div class="col-sm-6 display-table">

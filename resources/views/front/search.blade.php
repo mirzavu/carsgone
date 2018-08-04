@@ -241,7 +241,7 @@
                                  <li>
                                     <div><i class="fa fa-dashboard"></i> 
                                     @if($vehicle->odometer == 0)
-                                    <a href="tel:18552271669">call</a>
+                                    <a href="tel:18552271669">N/A</a>
                                     @else
                                     {{$vehicle->odometer}}KM
                                     @endif</div>

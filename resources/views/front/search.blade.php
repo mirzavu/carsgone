@@ -348,7 +348,7 @@
 
     //Seller
     $('input[name=seller]').change(function() { 
-      $.get( "/setSessionKeyValue/seller/"+this.value, function( data ) {
+      $.get( "{{ url('/') }}/setSessionKeyValue/seller/"+this.value, function( data ) {
        location.reload();
        });
     });

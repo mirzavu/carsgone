@@ -91,8 +91,8 @@ class Carpages extends Command
                 if($vehicle->exists)
                 {
                     $vehicle->status_id = 1;
-                    $vehicle->price = ($line[10] < 500000) ? (int)$line[10] : 500000;
-                    $vehicle->mrp = ($line[11] < 500000) ? (int)$line[11] : 500000;
+                    $vehicle->price = ($line[11] < 500000) ? (int)$line[11] : 500000;
+                    $vehicle->mrp = ($line[12] < 500000) ? (int)$line[12] : 500000;
                     
                     $vehicle->save();
                     
@@ -182,22 +182,22 @@ class Carpages extends Command
 
                 $vehicle->body_style_group_id = BodyStyleGroup::firstOrCreate(['body_style_group_name' => $body_style])->id;
 
-                $ext_color = Color::firstOrCreate(['color' =>  $line[13]]);
-                $int_color = Color::firstOrCreate(['color' =>  $line[14]]);
+                $ext_color = Color::firstOrCreate(['color' =>  $line[14]]);
+                $int_color = Color::firstOrCreate(['color' =>  $line[15]]);
                 $vehicle->ext_color_id = $ext_color->id;
                 $vehicle->int_color_id = $int_color->id;
-                $vehicle->odometer = $line[9];
+                $vehicle->odometer = $line[10];
                 $vehicle->doors = (int)$line[20];
-                $vehicle->transmission = (string)$line[12] == "Automatic"? 'auto' : 'manual';
-                $vehicle->price = ($line[10] < 500000) ? (int)$line[10] : 500000;
-                $vehicle->text = (string)$line[15];
+                $vehicle->transmission = (string)$line[13] == "Automatic"? 'auto' : 'manual';
+                $vehicle->price = ($line[11] < 500000) ? (int)$line[11] : 500000;
+                $vehicle->text = (string)$line[16];
                 $vehicle->stock = (string)$line[7];
                 $vehicle->trim = $line[5];
-                $vehicle->engine_cylinders = (string)$line[18];
+                $vehicle->engine_cylinders = (string)$line[19];
                 $vehicle->save();
                 //echo $vehicle->slug;exit;
 
-                $images = explode(';', $line[17]);
+                $images = explode(';', $line[18]);
 
                 if(count($images) && VehiclePhoto::wherePath($images[0])->count() == 0)
                 {

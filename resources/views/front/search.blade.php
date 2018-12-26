@@ -62,21 +62,6 @@
                @endif
                <!-- panel end -->
 
-               @if(!$applied_filters->has("seller"))
-               <div class="panel">
-                  <div class="panel-heading">
-                     <h3 class="panel-title">Seller</h3>
-                  </div>
-                  <div class="panel-body">
-                     <div class="item-type-toggle">
-                        <input type="radio" name="seller" id="dealer" value="dealer" {{$applied_filters->get("seller")=="dealer"?'checked="checked"':""}}"/> <label for="dealer" class="waves-effect waves-light">DEALER</label>
-                        <input type="radio" name="seller" id="both-seller" value="both" {{$applied_filters->has("seller")?"":'checked="checked"'}}" /> <label for="both" class="waves-effect waves-light"> BOTH</label>
-                        <input type="radio" name="seller" id="private" value="member" {{$applied_filters->get("seller")=="private"?'checked="checked"':""}}"/> <label for="private" class="waves-effect waves-light">PRIVATE</label>
-                     </div>
-                  </div>
-               </div>
-               @endif
-
                <!-- panel start -->
                @if(isset($sidebar_data["makes"]))
                <div class="panel">

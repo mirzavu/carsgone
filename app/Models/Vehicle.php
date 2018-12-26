@@ -232,9 +232,9 @@ class Vehicle extends Model
             if($conditions->get('distance')!="All")
             {
                 $lat = $conditions->get('lat');
-                $lon = $conditions->get('lon');
+                $lng = $conditions->get('lng');
                 $query->select(DB::raw("users.id"))
-                     ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < ".$conditions->get('distance'));
+                     ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lng) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < ".$conditions->get('distance'));
             }
             
 

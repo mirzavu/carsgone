@@ -44,9 +44,27 @@ class SearchController extends Controller
 		}
 		
 		// dd($conditions);
-
 		$this->validateSaveConditions($request, $conditions);
-		
+		$lat = $request->cookie('lat');
+		$lng = $request->cookie('lng');
+		$conditions->put('lat',$lat);
+		$conditions->put('lng',$lng);
+
+		//distance set
+        if(empty($lat)){
+            $conditions->put('distance','All');
+        }
+
+        if(!$conditions->get('distance'))
+        {
+            $conditions->put('distance','50');
+        }
+
+        if($conditions->get('city'))
+        {
+            $conditions->forget('distance');
+        }
+
 		//Sorting set
 		if($conditions->get('sort') && $conditions->get('sort')!="name-desc")
 		{
@@ -58,8 +76,7 @@ class SearchController extends Controller
 			$sort = 'price';
 			$direction = 'asc';
 		}
-		$lat = $request->cookie('lat');
-		$lng = $request->cookie('lng');
+		
 		// dd($sort.$direction);
 
 		if(Auth::check())

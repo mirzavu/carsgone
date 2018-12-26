@@ -281,7 +281,6 @@ $(window).resize(callback2);
 /** range slider **/
 
 var snapSlider = document.getElementById('price-range');
-console.log(price)
 noUiSlider.create(snapSlider, {
     start: [price[0], price[1]],
     decimals: 0,

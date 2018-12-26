@@ -17,7 +17,7 @@ use Illuminate\Pagination\Paginator;
 use SEO;
 use SEOMeta;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+use Cookie;
 
 class SearchController extends Controller
 {
@@ -58,7 +58,8 @@ class SearchController extends Controller
 			$sort = 'price';
 			$direction = 'asc';
 		}
-
+		$lat = $request->cookie('lat');
+		$lng = $request->cookie('lng');
 		// dd($sort.$direction);
 
 		if(Auth::check())

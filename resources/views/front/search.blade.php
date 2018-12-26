@@ -296,6 +296,12 @@
 
 </div>
 </div>
+
+<!-- main container outer end -->
+@endsection
+@section('javascript')
+
+<script src="/assets/js/js.cookie.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script>
 function getLocation() {
@@ -325,9 +331,8 @@ function showError(error) {
 
 
 function showPosition(position) {
-  var x = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude; 
-  console.log(x)
+  Cookies.set('lat', position.coords.latitude);
+  Cookies.set('lng', position.coords.longitude);
 }
 getLocation();
 </script>
@@ -352,9 +357,7 @@ getLocation();
    var year_all = '{{ $year or '2000-2018' }}';
    var year = year_all.split("-");
 </script>
-<!-- main container outer end -->
-@endsection
-@section('javascript')
+
 <script type="text/javascript">
    // Filter remove
    $('.applied-remove').on('click',function(event){

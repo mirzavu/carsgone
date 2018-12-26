@@ -155,8 +155,8 @@ class Boost extends Command
                 if($vehicle->exists)
                 {
                     $vehicle->status_id = 1;
-                    $vehicle->price = ($xml->Price2 < 500000) ? (int)$xml->Price2 : 500000;
-                    $vehicle->mrp = ($xml->Price < 500000) ? (int)$xml->Price : 500000;
+                    $price = (int)$xml->Price;
+                    $vehicle->price = ($price < 500000) ? $price : 500000;
                     $vehicle->carproof = (string)$xml->CarProof;
                     
                     $vehicle->save();
@@ -229,7 +229,8 @@ class Boost extends Command
                 $vehicle->doors = (int)$xml->Doors;
                 $vehicle->passenger = (int)$xml->Seats;
                 $vehicle->transmission = (string)$xml->Transmission == "Manual"? 'manual' : 'auto';
-                $vehicle->price = ($xml->Price2 < 500000) ? (int)$xml->Price2 : 500000;
+                $price = (int)$xml->Price;
+                $vehicle->price = ($price < 500000) ? $price : 500000;
                 $vehicle->text = (string)$xml->Description;
                 $vehicle->stock = $xml->Stock_Number;
                 $vehicle->trim = (string)$xml->SubModel_Trim;

@@ -220,6 +220,26 @@ class Vehicle extends Model
             $query->where('users.role', $conditions->get('seller'));
         }
 
+        if ($conditions->get('city'))
+        {
+            $query->join('cities', 'users.city_id', '=', 'cities.id');
+            $query->where('city_name', $conditions->get('city'));
+        }
+
+        if ($conditions->get('distance'))
+        {
+            $query->leftJoin('users', 'vehicles.user_id', '=', 'users.id');
+            if($conditions->get('distance')!="All")
+            {
+                $lat = $conditions->get('lat');
+                $lon = $conditions->get('lon');
+                $query->select(DB::raw("users.id"))
+                     ->whereRaw("( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($lon) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) < ".$conditions->get('distance'));
+            }
+            
+
+        }
+
         // if ($conditions->get('province'))
         // {
         //     if(!$this->_hasJoin($query, 'users')){

@@ -186,7 +186,9 @@ class Cdemo extends Command
                 $vehicle->certification = (string)$vehicle_xml->certified_line;
                 $vehicle->passenger = (int)$vehicle_xml->passengers;
                 $vehicle->mrp = (int)$vehicle_xml->msrp;
-                $vehicle->price = (int)$vehicle_xml->standard_price;
+                $standard_price = (int)$vehicle_xml->standard_price;
+                $special_price = (int)$vehicle_xml->special_price;
+                $vehicle->price = $special_price > 0? $special_price : $standard_price;
                 $vehicle->status_id = 1;
                 $vehicle->text = (string)$vehicle_xml->special_mention;
                 $vehicle->vin = (string)$vehicle_xml->vin;

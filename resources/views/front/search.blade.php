@@ -267,7 +267,45 @@
       </div>
    </div>
    <!-- Main Container End -->
+
+   <div id="myModalss" class="modal fade">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                <h4 class="modal-title">Subscribe our Newsletter</h4>
+
+            </div>
+
+            <div class="modal-body">
+
+                <p>Subscribe to our mailing list to get the latest updates straight in your inbox.</p>
+
+               
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        // $("#myModalss").modal('show');
+
+    });
+
+</script>
 <script type="text/javascript">
    //preset price, odometer, year
    @php $price = $applied_filters->get("price"); @endphp

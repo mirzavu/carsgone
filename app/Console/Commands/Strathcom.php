@@ -91,18 +91,17 @@ class Strathcom extends Command
                 $dealer = User::firstOrNew(['partner_id' => 1, 'partner_dealer_id' => $xml->PartyId]);
 
                 $dealer->name = (empty($dealer->name))?$xml->DealerName:$dealer->name;
-                if($dealer->name != 'Toyota on the Trail' && $dealer->name != 'Wheaton Honda' && $dealer->name != 'Don Wheaton Chevrolet Buick GMC Cadillac Ltd')
-                {
-                    continue;
-                }
+                
                 $dealer->email = (empty($dealer->email))?$xml->Contact->Email:$dealer->email;
                 $dealer->address = (empty($dealer->address))?$xml->Address->AddressLine:$dealer->address;
                 $dealer->url = (empty($dealer->url))?$xml->URI:$dealer->url;
                 $dealer->phone = (empty($dealer->phone))?$xml->Contact->Phone:$dealer->phone;
                 $dealer->fax = (empty($dealer->fax))?$xml->Contact->Fax:$dealer->fax;
                 $province_name = (string)$xml->Address->StateOrProvince;
-                $province_name = ($province_name == "Newfoundland and Labrador")? "Newfoundland":$province_name; //Newfoundland and Labrador and Newfoundland are same
-                $province_name = ($province_name == "Yukon")? "Yukon Territory":$province_name; //Yukon Teritory and Yukon are same
+                if($province_name != 'Alberta')
+                {
+                    continue;
+                }
                 $province_id = Province::where('province_name',$province_name)->value('id');
                 $dealer->province_id = $province_id;
                 $city = City::firstOrCreate(['city_name'=> (string)$xml->Address->City,'province_id'=> $province_id]);
@@ -141,7 +140,7 @@ class Strathcom extends Command
 
             if($xmlReader->name == 'Vehicle' && $xmlReader->nodeType == \XMLReader::ELEMENT) {
                 $xml = simplexml_load_string( $xmlReader->readOuterXML() );
-                if($dealer->name != 'Toyota on the Trail' && $dealer->name != 'Wheaton Honda' && $dealer->name != 'Don Wheaton Chevrolet Buick GMC Cadillac Ltd')
+                if($dealer->province_id != 9) //If not Alberta
                 {
                     continue;
                 }

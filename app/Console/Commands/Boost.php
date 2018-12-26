@@ -146,7 +146,7 @@ class Boost extends Command
             {
                 
                 $xml = simplexml_load_string( $xmlReader->readOuterXML() );
-                if($dealer->name != 'Toyota on the Trail' && $dealer->name != 'Wheaton Honda' && $dealer->name != 'Don Wheaton Chevrolet Oldsmobile Ltd')
+                if($dealer->province_id != 9) //If not Alberta
                 {
                     continue;
                 }

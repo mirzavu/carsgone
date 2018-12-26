@@ -50,7 +50,7 @@ class SearchController extends Controller
 		$conditions->put('lat',$lat);
 		$conditions->put('lng',$lng);
 		$conditions->put('lat',53.5444);
-		$conditions->put('lng',113.490);
+		$conditions->put('lng',-113.490);
 
 		//distance set
         if(empty($lat)){
@@ -59,7 +59,7 @@ class SearchController extends Controller
 
         if(!$conditions->get('distance'))
         {
-            $conditions->put('distance','15000000');
+            $conditions->put('distance','50');
         }
 
         if($conditions->get('city'))

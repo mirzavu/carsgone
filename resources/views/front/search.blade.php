@@ -43,7 +43,7 @@
                   </div>
                </div>
                <!-- panel end -->
-               @if(!$applied_filters->has("province") && isset($location['place']))
+               @if($applied_filters->has("lat"))
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Distance within</h3>

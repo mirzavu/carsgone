@@ -49,6 +49,8 @@ class SearchController extends Controller
 		$lng = $request->cookie('lng');
 		$conditions->put('lat',$lat);
 		$conditions->put('lng',$lng);
+		$conditions->put('lat',53.5444);
+		$conditions->put('lng',113.490);
 
 		//distance set
         if(empty($lat)){
@@ -57,7 +59,7 @@ class SearchController extends Controller
 
         if(!$conditions->get('distance'))
         {
-            $conditions->put('distance','50');
+            $conditions->put('distance','15000000');
         }
 
         if($conditions->get('city'))
@@ -108,6 +110,7 @@ class SearchController extends Controller
         else
         {
         	$data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy($sort, $direction)->paginate(15);
+        	// exit;
         }
         
         // $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy(DB::raw('RAND()'))->take(8)->get();

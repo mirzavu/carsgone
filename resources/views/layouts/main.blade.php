@@ -71,45 +71,6 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-$(document).ready(function(){
-  /**************************************/
-  $("#textus .textus-open").click(function()
-  {
-    $(this).hide();
-    $("#textus").animate({'right':'0'},'slow');
-  });
-  $("#textus .textus-close").click(function()
-  {
-    $("#textus").animate({'right':'-320px'},'slow');
-    $("#textus .textus-open").show('slow');
-  });
-});
-</script>
-
-<div id="textus">
-  <a class="textus-open"><img src="https://www.edmontonautoloans.com/wp-content/themes/creditapp/images/text-us.jpg"></a>
-  <h4>Text Us <a class="textus-close"><i class="fa fa-times-circle"></i></a></h4>
-  <div role="form" class="wpcf7" id="wpcf7-f88-o1" lang="en-US" dir="ltr">
-<div class="screen-reader-response"></div>
-<form action="/#wpcf7-f88-o1" method="post" class="wpcf7-form theme_1 errorMsgshow" novalidate="novalidate">
-<div style="display: none;">
-<input type="hidden" name="_wpcf7" value="88">
-<input type="hidden" name="_wpcf7_version" value="4.3">
-<input type="hidden" name="_wpcf7_locale" value="en_US">
-<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f88-o1">
-<input type="hidden" name="_wpnonce" value="427bd55f14">
-</div>
-<div><label>Phone*</label><span class="wpcf7-form-control-wrap phone"><input type="text" name="phone" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required textbox number required" aria-required="true" aria-invalid="false"></span></div>
-<div><label>Message<span>*</span></label><span class="wpcf7-form-control-wrap Message"><textarea name="Message" cols="40" rows="3" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required textbox required" aria-required="true" aria-invalid="false"></textarea></span></div>
-<div class="text-right"><input type="submit" value="SUBMIT" class="wpcf7-form-control wpcf7-submit button"><img class="ajax-loader" style="visibility: hidden;"></div>
-<div class="wpcf7-response-output wpcf7-display-none"></div></form></div> <!--<form>
-    <div><label>Email<span>*</span></label><input type="text" class="textbox" required /></div>
-    <div><label>Phone<span>*</span></label><input type="text" class="textbox" required /></div>
-    <div><label>Message<span>*</span></label><textarea class="textbox" required></textarea></div>
-    <div class="text-right"><input type="submit" class="button" value="SUBMIT" /></div>
-  </form>-->
-</div>
 
 </header>
 

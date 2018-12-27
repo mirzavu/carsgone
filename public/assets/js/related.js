@@ -16,7 +16,6 @@ class Related extends React.Component {
 		var slug = window.location.pathname.split('/').pop();
 	    return $.getJSON(base_url+'/vehicle-related/'+slug)
 	      .then((data) => {
-	      	console.log(data)
 	        this.setState({ vehicles: data });
 	      });
 	}

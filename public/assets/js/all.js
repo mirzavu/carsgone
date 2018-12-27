@@ -4082,7 +4082,7 @@ $(document).ready(function() {
         $this = $(this);
         if ($times.length > 6) {
 
-            if($(this).is("#makes-list") || $(this).is("#models-list"))
+            if($(this).is("#makes-list") || $(this).is("#models-list") || $(this).is("#cities-list"))
             {
                 $times.sort(function(a, b) {
                     //Sort items only for displaying ones alphabetically
@@ -4121,7 +4121,7 @@ $(document).ready(function() {
     $timeSlots.on('click', '.more-times', function() {
         var list = $(this).parent();
         $(this).prevAll().show().end().remove();
-        if(list.is("#makes-list") || list.is("#models-list"))
+        if(list.is("#makes-list") || list.is("#models-list") || list.is("#cities-list"))
         {
             var $times = list.children('li');
             $times.sort(function(a, b) {
@@ -4139,7 +4139,7 @@ $(document).ready(function() {
     $timeSlots.on('click', '.less-times', function() {
         var list = $(this).parent();
         $(this).remove();
-        if(list.is("#makes-list") || list.is("#models-list"))
+        if(list.is("#makes-list") || list.is("#models-list") || list.is("#cities-list"))
         {
             var $times = list.children('li');
             $times.sort(function(a, b) {

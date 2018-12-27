@@ -180,7 +180,11 @@ class SearchController extends Controller
 		// if($conditions->get('province') && !$conditions->get('city'))
 		// {
 		// 	 $province_id= Province::where('province_name','=',$conditions->get('province'))->value('id');
-		// 	 $sidebar_data['cities'] = City::where('province_id','=',$province_id)->withCount('vehicles')->orderBy('city_name', 'asc')->get();
+		$sidebar_data['cities'] = City::where('province_id','=',9)
+			->withCount('vehicles')
+			->having('vehicles_count', '>', 0)
+			->orderBy('vehicles_count','desc')
+			->get();
 		// }
 		return $sidebar_data;
 	}

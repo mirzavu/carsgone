@@ -95,6 +95,23 @@
                <!-- panel end -->
 
                <!-- panel start -->
+               @if(isset($sidebar_data["cities"]))
+               <div class="panel">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">Select City</h3>
+                  </div>
+                  <div class="panel-body">
+                     <ul  id="cities-list" class="link-list">
+                        @foreach($sidebar_data["cities"] as $city)
+                        <li><a href="{{Request::url()}}/city-{{$city->city_name}}">{{$city->city_name}} ({{$city->vehicles_count}})</a></li>
+                        @endforeach
+                     </ul>
+                  </div>
+               </div>
+               @endif
+               <!-- panel end -->
+
+               <!-- panel start -->
                @if(isset($sidebar_data["body_styles"]))
                <div class="panel">
                   <div class="panel-heading">

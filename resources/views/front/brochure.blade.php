@@ -192,11 +192,8 @@
                                     <td>{{$vehicle->passenger}}</td>
                                  </tr>
                                  @endif
-                                 @if(!empty($vehicle->user->role == 'member'))
-                                 <tr>
-                                    <td colspan="2"><p>{!!$vehicle->text!!}</p></td>
-                                 </tr>
-                                 @else
+
+                                 @if($vehicle->user->name == 'Edmonton Auto Loans')
                                  <tr>
                                  <td colspan="2">
                                  <p></p>
@@ -228,8 +225,13 @@
                                     <p>A Carproof and AMVIC Mechanical report are included on all dealer inventory.</p>
                                  </td>
                                  </tr>
-                                
+                                 @else
+                                 <tr>
+                                    <td colspan="2"><p>{!!$vehicle->text!!}</p></td>
+                                 </tr>
                                  @endif
+
+
                                  @if(!empty($vehicle->user->role == 'member'))
                                  <tr>
                                     <td colspan="2"><button id="resend-email" class="btn waves-effect waves-light btn">Edit this Vehicle</button></td>

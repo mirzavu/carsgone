@@ -110,7 +110,22 @@
                </div>
                @endif
                <!-- panel end -->
-
+              <div class="panel">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">Filter by Year</h3>
+                  </div>
+                  <div class="panel-body">
+                     <div class="price-range-container">
+                        <div id="year-range" class="filter-margin"></div>
+                        <button id="year-filter" class="waves-effect waves-light btn">FILTER</button>
+                        <p class="price-range-output">
+                           <span><b id="min-year"></b></span> &mdash;
+                           <span><b id="max-year"></b></span>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <!-- panel end -->
                <!-- price panel start -->
                <div class="panel">
                   <div class="panel-heading">
@@ -147,22 +162,7 @@
                <!-- panel end -->
 
                <!-- Year panel start -->
-               <div class="panel">
-                  <div class="panel-heading">
-                     <h3 class="panel-title">Filter by Year</h3>
-                  </div>
-                  <div class="panel-body">
-                     <div class="price-range-container">
-                        <div id="year-range" class="filter-margin"></div>
-                        <button id="year-filter" class="waves-effect waves-light btn">FILTER</button>
-                        <p class="price-range-output">
-                           <span><b id="min-year"></b></span> &mdash;
-                           <span><b id="max-year"></b></span>
-                        </p>
-                     </div>
-                  </div>
-               </div>
-               <!-- panel end -->
+               
 
             </div>
             <!-- Sidebar end -->

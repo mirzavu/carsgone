@@ -56,6 +56,10 @@ class SearchController extends Controller
         if(empty($lat)){
             $conditions->put('distance','All');
         }
+        else
+        {
+        	$data['lat'] = $lat;
+        }
 
         if(!$conditions->get('distance'))
         {

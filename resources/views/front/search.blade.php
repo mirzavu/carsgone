@@ -43,7 +43,7 @@
                   </div>
                </div>
                <!-- panel end -->
-               @if($applied_filters->has("lat"))
+               @if($lat)
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Distance within</h3>
@@ -54,7 +54,6 @@
                         <li><a id="100" href="#">100 Km</a></li>
                         <li><a id="250" href="#">250 Km</a></li>
                         <li><a id="500" href="#">500 Km</a></li>
-                        <li><a id="1000" href="#">1000 Km</a></li>
                         <li><a id="All" href="#">All</a></li>
                      </ul>
                   </div>
@@ -287,7 +286,6 @@
 @section('javascript')
 
 <script src="/assets/js/js.cookie.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script>
 function getLocation() {
   if (navigator.geolocation) {
@@ -413,6 +411,19 @@ getLocation();
        });
     });
 
+    //distance set
+   var distance_id = "{{$applied_filters->get("distance")}}".replace(' KM',''); 
+   if(distance_id)
+   {
+      $('.distance-list #'+distance_id).addClass('active').removeAttr("href"); // set active
+      $('.distance-list a').on('click',function(e){
+        e.preventDefault();
+        $.get( "/setSessionKeyValue/distance/"+$(this).attr('id'), function( data ) {
+          location.reload();
+        });
+      });
+   }
+
    //Image on error code with support edge browser
    $(document).ready(function(){  
      $("img").each(function(i,ele){
@@ -465,6 +476,102 @@ getLocation();
       
 
   });
+
+
+   
+/** range slider **/
+
+var snapSlider = document.getElementById('price-range');
+noUiSlider.create(snapSlider, {
+    start: [price[0], price[1]],
+    decimals: 0,
+    thousand: ',',
+    snap: false,
+    connect: true,
+    step: 1000,
+    range: {
+        'min': 0,
+
+        'max': 120000
+    },
+    format: wNumb({
+        decimals: 0,
+        thousand: ','
+    })
+});
+
+
+var snapValues = [
+    document.getElementById('min-price'),
+    document.getElementById('max-price')
+];
+
+snapSlider.noUiSlider.on('update', function(values, handle) {
+    snapValues[handle].innerHTML = values[handle];
+});
+
+var odometerSlider = document.getElementById('odometer-range');
+
+noUiSlider.create(odometerSlider, {
+    start: [odometer[0], odometer[1]],
+    decimals: 0,
+    thousand: ',',
+    snap: false,
+    connect: true,
+    step: 1000,
+    range: {
+        'min': 0,
+
+        'max': 350000
+    },
+    format: wNumb({
+        decimals: 0,
+        thousand: ','
+    })
+});
+
+
+var odometerValues = [
+    document.getElementById('min-odometer'),
+    document.getElementById('max-odometer')
+];
+
+odometerSlider.noUiSlider.on('update', function(values, handle) {
+    odometerValues[handle].innerHTML = values[handle];
+});
+
+var yearSlider = document.getElementById('year-range');
+
+noUiSlider.create(yearSlider, {
+    start: [year[0], year[1]],
+    decimals: 0,
+    thousand: ',',
+    snap: false,
+    connect: true,
+    step: 1,
+    range: {
+        'min': 2000,
+
+        'max': 2018
+    },
+    format: wNumb({
+        decimals: 0
+    })
+});
+
+
+var yearValues = [
+    document.getElementById('min-year'),
+    document.getElementById('max-year')
+];
+
+yearSlider.noUiSlider.on('update', function(values, handle) {
+    yearValues[handle].innerHTML = values[handle];
+});
+
+
    
 </script>
+
+
 @endsection

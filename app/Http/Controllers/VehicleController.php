@@ -43,18 +43,12 @@ class VehicleController extends Controller
 		{
 			abort(404);
 		}
-		if($vehicle->user->role == "member")
-		{
-			if(empty($vehicle->user->phone))
-				$phone = false;
-			else
-				$phone = $vehicle->user->phone;
-		}
-		else
-		{
-			$phone = '1-855-227-1669';
-		}
 		
+		if(empty($vehicle->user->phone))
+			$phone = false;
+		else
+			$phone = $vehicle->user->phone;
+
 		if($vehicle->user->featured)
 			$other_vehicle_text = 'Dealers Other Vehicles';
 		else

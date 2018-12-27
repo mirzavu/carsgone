@@ -126,7 +126,7 @@ class AppMailer
     {
         $this->from = $data->email;
         $this->fromName = $data->name;
-        $this->to = config('mail.from.address');
+        $this->to = $data->dealer_email;
         $this->subject = 'Edmontonautoloans.com Vehicle Enquiry';
         $this->view = 'emails.dealer_contact_form';
         $this->data = compact('data');

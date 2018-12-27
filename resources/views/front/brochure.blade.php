@@ -74,7 +74,9 @@
                         <ul>
                            <li class="selected"><a href="#0">Contact</a></li>
                            <li><a href="#0">Description</a></li>
+                           @if($vehicle->user->role == 'member' || $vehicle->user->name == 'Edmonton Auto Loans')
                            <li><a href="#0">Finance</a></li>
+                           @endif
                            <li><a href="#0">Map</a></li>
                         </ul>
                      </nav>
@@ -243,6 +245,7 @@
                            </div>
                         </div>
                      </li>
+                     @if($vehicle->user->role == 'member' || $vehicle->user->name == 'Edmonton Auto Loans')
                      <li>
                         <div class="contact-dealer-container">
                            <h4>Finance this vehicle</h4>
@@ -351,6 +354,7 @@
                            </div>
                         </div>
                      </li>
+                     @endif
                      <li>
                         <div class="contact-dealer-container">
                            <h4>{{$vehicle->user->name}}</h4>
@@ -598,6 +602,10 @@ form.validate({
     }
 })
 
+if ("{{ $vehicle->user->role == 'member' || $vehicle->user->name == 'Edmonton Auto Loans' }}" != '') {
+   $('.cd-slider-nav .cd-marker').width('25%')
+}
+
 $("img").each(function(i,ele){
    $("<img/>").attr("src",$(ele).attr("src")).on('error', function() {
       $(ele).parent().removeClass('add-overlay');               
@@ -613,10 +621,7 @@ $('#inventory-btn').on('click', function(e) {
         });
     });
 });
-// console.log("{{$vehicle->user->featured}}")
-if ({{ $vehicle->user->featured }} == 0) {
-    $('.cd-slider-nav .cd-marker').width('25%')
-}
+
 
 $('#next-btn').on('click', function(e) {
    var form = $("#finance-form-1");

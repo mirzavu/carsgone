@@ -9415,7 +9415,7 @@ ul.advance-search .dropdown-content li{min-height:56px; line-height:56px !import
  }
 .cd-slider-nav nav, .cd-slider-nav ul, .cd-slider-nav li, .cd-slider-nav a { height: 100%; }
 .cd-slider-nav nav { display: inline-block; position: relative; vertical-align:top; width:88%; box-shadow:none; }
-.cd-slider-nav .cd-marker { position: absolute; bottom: 0; left: 0; width: 25%; height: 100%; color: #f9a026; background-color: #fff; box-shadow: inset 0 3px 0 currentColor; -webkit-transition: -webkit-transform 0.2s, box-shadow 0.2s; -moz-transition: -moz-transform 0.2s, box-shadow 0.2s; transition: transform 0.2s, box-shadow 0.2s; }
+.cd-slider-nav .cd-marker { position: absolute; bottom: 0; left: 0; width: 33.34%; height: 100%; color: #f9a026; background-color: #fff; box-shadow: inset 0 3px 0 currentColor; -webkit-transition: -webkit-transform 0.2s, box-shadow 0.2s; -moz-transition: -moz-transform 0.2s, box-shadow 0.2s; transition: transform 0.2s, box-shadow 0.2s; }
 .cd-slider-nav .cd-marker.item-2 { -webkit-transform: translateX(100%); -moz-transform: translateX(100%); -ms-transform: translateX(100%); -o-transform: translateX(100%); transform: translateX(100%); }
 .cd-slider-nav .cd-marker.item-3 { -webkit-transform: translateX(200%); -moz-transform: translateX(200%); -ms-transform: translateX(200%); -o-transform: translateX(200%); transform: translateX(200%); }
 .cd-slider-nav .cd-marker.item-4 { -webkit-transform: translateX(300%); -moz-transform: translateX(300%); -ms-transform: translateX(300%); -o-transform: translateX(300%); transform: translateX(300%); }

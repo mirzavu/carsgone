@@ -417,6 +417,7 @@ getLocation();
    //set sorting
    $('.filter-box a').on('click',function(e){
      e.preventDefault();
+     $('.result-container').css({opacity:0.2}).before('<div class="progress"><div class="indeterminate"></div></div>')
      $.get( "{{ url('/') }}/setSessionKeyValue/sort/"+$(this).attr('id'), function( data ) {
        location.reload();
      });

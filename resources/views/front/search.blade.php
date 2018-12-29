@@ -333,6 +333,7 @@ function showError(error) {
 function showPosition(position) {
   Cookies.set('lat', position.coords.latitude);
   Cookies.set('lng', position.coords.longitude);
+  location.reload();
 }
 getLocation();
 </script>
@@ -435,7 +436,7 @@ getLocation();
       $('.distance-list #'+distance_id).addClass('active').removeAttr("href"); // set active
       $('.distance-list a').on('click',function(e){
         e.preventDefault();
-        $.get( "/setSessionKeyValue/distance/"+$(this).attr('id'), function( data ) {
+        $.get( "{{ url('/') }}/setSessionKeyValue/distance/"+$(this).attr('id'), function( data ) {
           location.reload();
         });
       });

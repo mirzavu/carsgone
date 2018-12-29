@@ -442,7 +442,7 @@ getLocation();
       $('.distance-list a').on('click',function(e){
         e.preventDefault();
         $.get( "{{ url('/') }}/setSessionKeyValue/distance/"+$(this).attr('id'), function( data ) {
-          // location.reload();
+          location.reload();
         });
       });
    }

@@ -305,10 +305,15 @@
 <script src="/assets/js/js.cookie.js"></script>
 <script>
 function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  var lat = Cookies.get('lat')
+  console.log('lattt', lat)
+  if (lat == null) {
+    if(navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    else
+      console.log("Geolocation is not supported by this browser.");
   } else {
-    console.log("Geolocation is not supported by this browser.");
+    
   }
 }
 
@@ -437,7 +442,7 @@ getLocation();
       $('.distance-list a').on('click',function(e){
         e.preventDefault();
         $.get( "{{ url('/') }}/setSessionKeyValue/distance/"+$(this).attr('id'), function( data ) {
-          location.reload();
+          // location.reload();
         });
       });
    }

@@ -390,6 +390,7 @@ getLocation();
    $('#price-filter').on('click',function(e){
      min = $('#min-price').html().replace(',', '');
      max = $('#max-price').html().replace(',', '');
+     $('.result-container').css({opacity:0.2}).before('<div class="progress"><div class="indeterminate"></div></div>')
      $.get( "{{ url('/') }}/setSessionKeyValue/price/"+min+'-'+max, function( data ) {
      location.reload();
      });
@@ -399,6 +400,7 @@ getLocation();
    $('#odometer-filter').on('click',function(e){
      min = $('#min-odometer').html().replace(',', '');
      max = $('#max-odometer').html().replace(',', '');
+     $('.result-container').css({opacity:0.2}).before('<div class="progress"><div class="indeterminate"></div></div>')
      $.get( "{{ url('/') }}/setSessionKeyValue/odometer/"+min+'-'+max, function( data ) {
        location.reload();
      });
@@ -407,6 +409,7 @@ getLocation();
    $('#year-filter').on('click',function(e){
      min = $('#min-year').html().replace(',', '');
      max = $('#max-year').html().replace(',', '');
+     $('.result-container').css({opacity:0.2}).before('<div class="progress"><div class="indeterminate"></div></div>')
      $.get( "{{ url('/') }}/setSessionKeyValue/year/"+min+'-'+max, function( data ) {
        location.reload();
      });
@@ -441,6 +444,7 @@ getLocation();
       $('.distance-list #'+distance_id).addClass('active').removeAttr("href"); // set active
       $('.distance-list a').on('click',function(e){
         e.preventDefault();
+        $('.result-container').css({opacity:0.2}).before('<div class="progress"><div class="indeterminate"></div></div>')
         $.get( "{{ url('/') }}/setSessionKeyValue/distance/"+$(this).attr('id'), function( data ) {
           location.reload();
         });

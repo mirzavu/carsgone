@@ -220,6 +220,10 @@ class Vehicle extends Model
             $query->where('users.role', $conditions->get('seller'));
         }
 
+        if(!$this->_hasJoin($query, 'users')){
+            $query->join('users', 'vehicles.user_id', '=', 'users.id');
+        }
+
         if ($conditions->get('city'))
         {
             $query->join('cities', 'users.city_id', '=', 'cities.id');
@@ -228,7 +232,6 @@ class Vehicle extends Model
 
         if ($conditions->get('distance'))
         {
-            $query->leftJoin('users', 'vehicles.user_id', '=', 'users.id');
             if($conditions->get('distance')!="All")
             {
                 $lat = $conditions->get('lat');
@@ -251,9 +254,7 @@ class Vehicle extends Model
         //     $query->where('province_name', $conditions->get('province'));
         // }
 
-        if(!$this->_hasJoin($query, 'users')){
-            $query->join('users', 'vehicles.user_id', '=', 'users.id');
-        }
+        
         // $query->join('cities', 'users.city_id', '=', 'cities.id');
         // $query->where('city_name', 'Edmonton');
         

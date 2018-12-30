@@ -21,9 +21,9 @@ use Cookie;
 
 class SearchController extends Controller
 {
-	protected $filters = array('sort','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller', 'trim');
-	protected $applied_filters = array('model', 'make', 'year', 'condition','body', 'price', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller', 'trim');
-	protected $url_filters = array('make','model', 'body', 'seller', 'dealer');
+	protected $filters = array('sort','model', 'make', 'year', 'condition','body', 'price', 'lat', 'lon', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller', 'trim', 'city');
+	protected $applied_filters = array('model', 'make', 'year', 'condition','body', 'price', 'place', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller', 'trim', 'city');
+	protected $url_filters = array('make','model', 'body', 'seller', 'dealer',  'city');
 	protected $session_filters = array('year','sort','condition', 'price', 'lat', 'lon', 'place','odometer', 'distance', 'transmission', 'content', 'trim');
 	protected $clear_filters = array('sort','model', 'make', 'year', 'condition','body', 'price', 'odometer', 'distance', 'transmission', 'content', 'dealer', 'seller', 'trim');
 	protected $url_params;
@@ -49,8 +49,10 @@ class SearchController extends Controller
 		$lng = $request->cookie('lng');
 		$conditions->put('lat',$lat);
 		$conditions->put('lng',$lng);
-		$conditions->put('lat',53.5444);
-		$conditions->put('lng',-113.490);
+		if($lat > 0)
+			$conditions->put('lat',53.5444);
+		if($lng > 0)
+			$conditions->put('lng',-113.490);
 
 		//distance set
         if(empty($lat)){
@@ -181,12 +183,14 @@ class SearchController extends Controller
 		// if($conditions->get('province') && !$conditions->get('city'))
 		// {
 		// 	 $province_id= Province::where('province_name','=',$conditions->get('province'))->value('id');
-		$sidebar_data['cities'] = City::where('province_id','=',9)
-			->withCount('vehicles')
-			->having('vehicles_count', '>', 0)
-			->orderBy('vehicles_count','desc')
-			->get();
-		// }
+		if(empty($conditions->get('lat')) && !$conditions->get('city'))
+		{
+			$sidebar_data['cities'] = City::where('province_id','=',9)
+				->withCount('vehicles')
+				->having('vehicles_count', '>', 0)
+				->orderBy('vehicles_count','desc')
+				->get();
+		}
 		return $sidebar_data;
 	}
 

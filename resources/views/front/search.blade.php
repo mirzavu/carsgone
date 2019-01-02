@@ -188,7 +188,7 @@
             <div class="main-container fix-content">
 
                <!-- Alert start -->
-               <div class="alert" role="alert"> {{ $vehicles->total() }} Vehicles were found with the given criteria</div>
+               <div class="alert" role="alert"> {{ $vehicles->total() }} Vehicles from local dealers were found with the given criteria</div>
                <!-- Alert end -->
                <!-- Filter start -->
                <div class="filter-container">
@@ -201,7 +201,7 @@
                <!-- Filter end -->
                <!-- Result Container start -->
                <div class="result-container">
-                  @foreach($vehicles as $vehicle)
+                  @foreach($vehicles as $key => $vehicle)
                   <div class="item">
                      <a href="{{ url('/')}}/used/{{$vehicle->slug}}">
                      <div class="item-heading">
@@ -258,6 +258,24 @@
                         </div>
                      </div>
                   </div>
+                  @if($key == 3 || $key == 14)
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                         <h3 class="panel-title">Express Approval</h3>
+                      </div>
+                      <div class="small-approval-box">
+                         <div class="approval small-approval">
+                            <div class="small-approval-text">
+                               <h3>100% credit acceptance</h3>
+                               <p class="clock">Easy 60-Second Application</p>
+                            </div>
+                            <div class="small-approval-link">
+                               <a target="_blank" href="/finance" class="waves-effect waves-light btn btn-orange small-btn-orange">APPLY CREDIT</a>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                    @endif
                   @endforeach
                </div>
                <!-- Result Container end -->  

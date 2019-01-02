@@ -86,10 +86,10 @@
                      <li class="selected">
                         <div class="contact-dealer-container">
                            @if($phone!= '--')
-                           <div class="dealer-number"><a href="tel:18552271669" class="btn waves-effect waves-light "><i class="fa fa-phone"></i> {{ $phone }}</a></div>
+                           <div class="dealer-number"><a href="tel:{{ $phone }}" class="btn waves-effect waves-light "><i class="fa fa-phone"></i> {{ $phone }}</a></div>
                            @endif
                            
-                           <h4>Contact Seller</h4>
+                           <h4>Contact {{$vehicle->user->name}}</h4>
                            {!! Form::open(['url' => '/contact-dealer', 'method' => 'POST', 'id' => 'contact-form']) !!}
                            <div class="form-group">
                               <input name="name" type="text" class="form-control" placeholder="Name" required/>

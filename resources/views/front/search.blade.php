@@ -229,7 +229,7 @@
                                     @if($vehicle->user->role=="member")
                                     <p>Seller: <strong>Private</strong></p>
                                     @else
-                                    <p>Seller: <strong>Dealer</strong></p>
+                                    <p>Seller: <strong>{{$vehicle->user->name or ''}}</strong></p>
                                     @endif
                                  </div>
                               </div>

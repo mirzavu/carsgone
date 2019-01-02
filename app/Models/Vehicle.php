@@ -95,7 +95,7 @@ class Vehicle extends Model
 
     public function getPriceAttribute($value)
     {
-        if($value == 0) {
+        if($value <=800) {
             return 'call';
         }
         else

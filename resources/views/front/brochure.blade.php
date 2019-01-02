@@ -98,8 +98,7 @@
                               <input name="email" type="email" class="form-control" placeholder="Email" required />
                            </div>
                            <div class="form-group">
-                              <textarea name="message" class="form-control" placeholder="Message" required>I found your listing on Edmontonautoloans.com. Please send me more information about the {{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} for {{$vehicle->price}}.
-                              </textarea>
+                              <textarea name="message" class="form-control" placeholder="Message" required>Hi, I'm interested in the {{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}}{{ $vehicle->price == "call"? '':' for '.$vehicle->price}}. Please contact me.</textarea>
                            </div>
                            <div class="form-group">
                               <button id="dealer-submit" class="btn waves-effect waves-light btn-block" type="submit">Submit</button>

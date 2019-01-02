@@ -59,9 +59,9 @@
 				  <div class="vehicle-info-rightD">
 					<div class="col-md-12 col-xs-12 distanceD paddZ">{{$vehicle->odometer ==0?'N/A':$vehicle->odometer.' Km'}} </div>
 					<div class="addthis_inline_share_toolbox pull-left"></div>
-					<div class="col-md-12 col-xs-12 paddZ carProof">
+					<!-- <div class="col-md-12 col-xs-12 paddZ carProof">
 						<a style="cursor: pointer;" data-toggle="modal" data-target="#enquiryModal"><img src="https://www.drivewheaton.ca/wp-content/themes/strathcom/assets/dist/img/carproof-logo.png" class="img-responsive" alt="carproof image"></a>
-					</div>
+					</div> -->
 				  </div>
                </div>
             </div>
@@ -95,7 +95,10 @@
                               <input name="name" type="text" class="form-control" placeholder="Name" required/>
                            </div>
                            <div class="form-group">
-                              <input name="email" type="email" class="form-control" placeholder="Email" required />
+                              <input id="phone" name="phone" type="text" class="form-control" placeholder="Phone – Optional" />
+                           </div>
+                           <div class="form-group">
+                              <input id="email" name="email" type="email" class="form-control" placeholder="Email – Optional" />
                            </div>
                            <div class="form-group">
                               <textarea name="message" class="form-control" placeholder="Message" required>Hi, I'm interested in the {{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}}{{ $vehicle->price == "call"? '':' for '.$vehicle->price}}. Please contact me.</textarea>
@@ -429,7 +432,7 @@
 </div>
 <!-- main container outer end -->
 
-<div class="modal fade" id="enquiryModal">
+<!-- <div class="modal fade" id="enquiryModal">
     <div class="modal-dialog">
       <div class="modal-content">
 		<div class="modal-header">
@@ -460,7 +463,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   
   
 
@@ -472,7 +475,18 @@
 <script type="text/javascript">
 var form = $("#contact-form");
 form.validate({
-    rules: {},
+    rules: {
+       phone: {
+           required: function(element) {
+               return $("#email").val().length == 0;
+           }
+       },
+       email: {
+           required: function(element) {
+               return $("#phone").val().length == 0;
+           }
+       }
+   },
     // errorClass: "invalid form-error",       
     // errorElement : 'div',       
     errorPlacement: function(error, element) {

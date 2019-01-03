@@ -386,7 +386,7 @@
                <!-- Featured Container start -->
                <div class="panel panel-default">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Express Approval</h3>
+                     <h3 class="panel-title">Sponsored Advertisement</h3>
                   </div>
                   <div class="small-approval-box">
                      <div class="approval small-approval">

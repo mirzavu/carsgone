@@ -100,7 +100,7 @@ class Boost extends Command
                 $dealer->email = (empty($dealer->email))?$xml->Dealership_Email:$dealer->email;
                 $dealer->address = (empty($dealer->address))?$xml->Dealership_Address:$dealer->address;
                 $dealer->url = (empty($dealer->url))?$xml->Dealership_Website:$dealer->url;
-                $dealer->phone = (empty($dealer->phone))?$xml->Dealership_Phone:$dealer->phone;
+                $dealer->phone = (empty($dealer->phone) || $dealer->phone == "--")?$xml->Dealership_Phone:$dealer->phone;
 
                 $province_id = Province::where('province_code',(string) $xml->Dealership_Province)->value('id');
                 $dealer->province_id = $province_id;

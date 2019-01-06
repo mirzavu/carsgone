@@ -146,7 +146,7 @@ class Boost extends Command
             {
                 
                 $xml = simplexml_load_string( $xmlReader->readOuterXML() );
-                if($dealer->province_id != 9) //If not Alberta
+                if($dealer->province_id != 9 || $dealer->name == "Edmonton Auto Loans") //If not Alberta
                 {
                     continue;
                 }

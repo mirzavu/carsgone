@@ -203,14 +203,14 @@
                <div class="result-container">
                   @foreach($vehicles as $key => $vehicle)
                   <div class="item">
-                     <a href="{{ url('/')}}/online/{{$vehicle->slug}}">
+                     <a href="{{ url('/')}}/finance/{{$vehicle->slug}}">
                      <div class="item-heading">
                         <h3 class="item-title">{{$vehicle->year}} {{$vehicle->make->make_name}} {{$vehicle->model->model_name}} {{$vehicle->trim}}</h3>
                      </div>
                      </a>
                      <div class="item-body">
                         <div class="item-body-left">
-                           <a class="{{$vehicle->add_overlay}}-big" href="{{ url('/')}}/online/{{$vehicle->slug}}">
+                           <a class="{{$vehicle->add_overlay}}-big" href="{{ url('/')}}/finance/{{$vehicle->slug}}">
                            <img src="{{ $vehicle->photo()}}" alt="" />
                            <span class="overlay"></span>
                            </a>

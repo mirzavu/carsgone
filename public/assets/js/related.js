@@ -28,7 +28,7 @@ class Related extends React.Component {
 			var src = '';
       	return <div>
               	<div className="fetured-box">
-                <a href={base_url+"/used/"+item.slug}>
+                <a href={base_url+"/finance/"+item.slug}>
                 	<h4>{item.year+' '+item.make.make_name+' '+item.model.model_name}</h4>
                     <div className="featured-img">
                     	<img src={src} alt={item.make.make_name+' '+item.model.model_name} onError={(e)=>{e.target.src='/assets/images/placeholder.jpg'}}/>

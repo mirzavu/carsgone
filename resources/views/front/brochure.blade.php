@@ -231,7 +231,7 @@
                                  </tr>
                                  @else
                                  <tr>
-                                    <td colspan="2"><p>{!!$vehicle->text!!}</p></td>
+                                    <td colspan="2"><p></p></td>
                                  </tr>
                                  @endif
 

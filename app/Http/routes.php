@@ -54,7 +54,7 @@
 	// Route::post('/unsave-vehicle', 'PostController@unsaveVehicle');
 
 	//Brochure
-	Route::get('/used/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
+	Route::get('/online/{slug}', 'VehicleController@showVehicle')->where('slug', '.*');
 	Route::get('/vehicle-related/{slug}', 'VehicleController@relatedVehicle')->where('slug', '.*');
 	Route::post('/contact-dealer', 'VehicleController@contactDealer');
 	Route::post('/finance', 'VehicleController@finance');

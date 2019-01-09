@@ -54,9 +54,9 @@ class VehicleController extends Controller
 		else
 			$other_vehicle_text = 'Related Vehicles';
 		$discount = $this->getDiscount($vehicle);
-		SEO::setTitle($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.($vehicle->trim?: "").' in Edmonton, Alberta '.$vehicle->price);
+		SEO::setTitle('Finance '.$vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.($vehicle->trim?: "").' in Edmonton, Alberta '.$vehicle->price);
         SEO::setDescription($vehicle->year.' '.$vehicle->make->make_name.' '.$vehicle->model->model_name.' '.($vehicle->trim?: "").' '.$vehicle->price.' in Edmonton, Alberta for '.$vehicle->price.'. Check out this '.($vehicle->ext_color?$vehicle->ext_color->color: "").' '.($vehicle->bodyStyleGroup?$vehicle->bodyStyleGroup->body_style_group_name: "").' with '.($vehicle->odometer?: "").' kilometers on it for sale from '.($vehicle->user->name?: ""));
-        SEOMeta::addKeyword(['new cars', 'used cars', $vehicle->make->make_name, $vehicle->model->model_name, $vehicle->make->make_name.' '.$vehicle->model->model_name]);
+        SEOMeta::addKeyword(['Finance', 'new cars', 'used cars', $vehicle->make->make_name, $vehicle->model->model_name, $vehicle->make->make_name.' '.$vehicle->model->model_name]);
         SEO::opengraph()->setUrl($request->url());
         SEO::opengraph()->addProperty('type', 'product');
         SEO::opengraph()->addImage($vehicle->photo());

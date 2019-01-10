@@ -26,9 +26,12 @@ class Vehicle extends Model
     {
         return [
             'slug' => [
-                'source' => ['year', 'make.make_name', 'model.model_name','trim','user.city.city_name','user.province.province_name'],
+                'source' => ['year', 'make.make_name', 'model.model_name','trim','user.city.city_name','user.province.province_name','price','odometer'],
                 'separator' => '-',
                 'unique' => true,
+                'method' => function ($string, $separator) {
+                    return strtolower(str_replace(" ",$separator,$string))."{$separator}kilometers";
+                }
             ]
         ];
     }

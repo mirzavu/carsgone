@@ -13,7 +13,7 @@
 
 
 	// Route::get('/', [
-	// 	'uses' => 'HomeController@index', 
+	// 	'uses' => 'HomeController@index',
 	// 	'as' => 'home'
 	// ]);
 
@@ -43,12 +43,12 @@
 	Route::get('/search', 'SearchController@searchHandler');
 	Route::get('/setSessionKeyValue/{key}/{value}', 'SearchController@setSessionKeyValue');
 	Route::get('/removeSessionAll', 'SearchController@removeSessionAll');
-	
+
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
 	Route::get('/search-list', 'SearchController@searchListData');
 	Route::get('/get-makes-json', 'SearchController@getMakesJson');
 	Route::get('/get-models-json/{make_name}', 'SearchController@getModelsJson');
-	
+
 
 	// Route::post('/save-vehicle', 'PostController@saveVehicle');
 	// Route::post('/unsave-vehicle', 'PostController@unsaveVehicle');
@@ -118,7 +118,14 @@
 	Route::get('/privacy', 'PageController@privacy');
 	Route::get('/contact', 'PageController@contact');
 	Route::post('/contact', 'PageController@contactSend');
-
+	Route::get('/upload', 'Uploadimage@index');
+	Route::post('upload', function () {
+	    request()->file('file')->store(
+	    'my-file',
+	    's3'
+	    );
+	})->name('upload');
+	Auth::routes();
 //Route::auth();
 
 /****  ADMIN PANEL **********/
@@ -135,7 +142,7 @@
     	Route::get('settings', 'AdminController@settings');
     	Route::patch('settings', 'AdminController@settingUpdate');
     	Route::auth();
-	});	
+	});
 
 /****  ADMIN PANEL END**********/
 
@@ -145,7 +152,7 @@
 	Route::get('/brochure-sitemap2.txt', function(){
 		return response()->file(base_path()."/brochure-sitemap2.txt");
 	});
-	
+
 
 // Route::group(
 //                 [
@@ -162,3 +169,7 @@
 //                     Route::get('dashboard', 'AdminController@dashboard');
 //                     Route::get('/', 'AdminController@redirect');
 //                 });
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

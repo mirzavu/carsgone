@@ -125,7 +125,6 @@
 	    's3'
 	    );
 	})->name('upload');
-	Auth::routes();
 //Route::auth();
 
 /****  ADMIN PANEL **********/

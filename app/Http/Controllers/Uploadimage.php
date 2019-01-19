@@ -31,7 +31,7 @@ class Uploadimage extends Controller
   public function index()
   {
     //$photos =[];
-    $storage_null_url = DB::table('vehicle_photos')->where([['path', '!=', ''],['storage_url', '=', '']])->get();
+    $storage_null_url = DB::table('vehicle_photos')->where([['path', '!=', ''],['storage_url', '=', NULL]])->get();
     //var_dump($storage_null_url);
     foreach ($storage_null_url as $key) {
       if ($key->path) {

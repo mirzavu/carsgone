@@ -85,7 +85,7 @@ class Cdemo extends Command
                 $dealer->name = (empty($dealer->name))?$dealer_xml->dealer_name:$dealer->name;
                 $dealer->address = (empty($dealer->address))?$dealer_xml->dealer_address:$dealer->address;
                 $dealer->url = (empty($dealer->url))?$dealer_xml->dealer_website:$dealer->url;
-                $dealer->phone = (empty($dealer->phone))?$dealer_xml->dealer_phone:$dealer->phone;
+                $dealer->phone = (empty($dealer->phone) || $dealer->phone == "--"))?$dealer_xml->dealer_phone:$dealer->phone;
                 $dealer->fax = (empty($dealer->fax))?$dealer_xml->dealer_fax:$dealer->fax;
 
                 $province_id = Province::where('province_code',(string) $dealer_xml->dealer_province)->value('id');

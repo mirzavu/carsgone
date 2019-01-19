@@ -95,7 +95,7 @@ class Strathcom extends Command
                 $dealer->email = (empty($dealer->email))?$xml->Contact->Email:$dealer->email;
                 $dealer->address = (empty($dealer->address))?$xml->Address->AddressLine:$dealer->address;
                 $dealer->url = (empty($dealer->url))?$xml->URI:$dealer->url;
-                $dealer->phone = (empty($dealer->phone) || $dealer->phone == "--"))?$xml->Contact->Phone:$dealer->phone;
+                $dealer->phone = (empty($dealer->phone) || $dealer->phone == "--")?$xml->Contact->Phone:$dealer->phone;
                 $dealer->fax = (empty($dealer->fax))?$xml->Contact->Fax:$dealer->fax;
                 $province_name = (string)$xml->Address->StateOrProvince;
                 if($province_name != 'Alberta')

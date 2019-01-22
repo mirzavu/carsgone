@@ -58,12 +58,14 @@
                   @endif
 				  <div class="vehicle-info-rightD">
 					<div class="col-md-12 col-xs-12 distanceD paddZ">{{$vehicle->odometer ==0?'N/A':$vehicle->odometer.' Km'}} </div>
-					<div class="addthis_inline_share_toolbox pull-left"></div>
+					
 					<!-- <div class="col-md-12 col-xs-12 paddZ carProof">
 						<a style="cursor: pointer;" data-toggle="modal" data-target="#enquiryModal"><img src="https://www.drivewheaton.ca/wp-content/themes/strathcom/assets/dist/img/carproof-logo.png" class="img-responsive" alt="carproof image"></a>
 					</div> -->
 				  </div>
+               <div class="addthis_inline_share_toolbox pull-left"></div>
                </div>
+
             </div>
             <div class="col-md-6 col-md-offset-0 col-sm-10 col-sm-offset-1 half-right">
                <!-- Tabs start -->

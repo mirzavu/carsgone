@@ -47,7 +47,7 @@ class Uploadimage extends Controller
         $filePath = 'used/car/'.$vehicle_slug.$page;
         $file_contents=file_get_contents($key->path);
         if ($file_contents) {
-          $a=Storage::disk('s3')->put($filePath, $file_contents);
+          $a=Storage::disk('s3')->put($filePath, $file_contents, 'public');
           if($a)
           {
             $new_url=Storage::disk('s3')->url($filePath);

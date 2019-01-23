@@ -50,7 +50,11 @@ class Uploadimage extends Controller
           $a=Storage::disk('s3')->put($filePath, $file_contents, 'public');
           if($a)
           {
-            $new_url=Storage::disk('s3')->url($filePath);
+            $new_urls=Storage::disk('s3')->url($filePath);
+            echo $new_urls."<br>";
+            //$snew_url='http://images.edmontonautoloans.com/'.$filePath;
+            $new_url=str_replace("https://s3.ca-central-1.amazonaws.com/","http://",$new_urls);
+            //echo $new_url;
             if ($new_url)
             {
               echo 'Inserted To amazones3 <br>';

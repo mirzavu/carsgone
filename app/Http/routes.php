@@ -45,6 +45,8 @@
 	Route::get('/removeSessionAll', 'SearchController@removeSessionAll');
 
 	Route::get('/removeFilter/{params}', 'SearchController@removeFilter')->where('params', '.*');
+	Route::get('/resetFilter', 'SearchController@resetFilter');
+	
 	Route::get('/search-list', 'SearchController@searchListData');
 	Route::get('/get-makes-json', 'SearchController@getMakesJson');
 	Route::get('/get-models-json/{make_name}', 'SearchController@getModelsJson');

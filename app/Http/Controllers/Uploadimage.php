@@ -31,6 +31,7 @@ class Uploadimage extends Controller
   public function index()
   {
     ini_set('memory_limit', '2G');
+    ini_set('max_execution_time', 0);
     $storage_null_url = DB::table('vehicle_photos')->where([['path', '!=', ''],['storage_url', '=', NULL]])->get();
 
     foreach ($storage_null_url as $key) {

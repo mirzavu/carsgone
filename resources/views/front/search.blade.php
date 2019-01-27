@@ -14,7 +14,6 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Keyword Search</h3>
-                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <div class="filter-search">
@@ -27,7 +26,7 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Filters Applied</h3>
-                     <a href="#" class="sidenav-close">Close</a>
+                     <a href="#" class="reset-filter">RESET</a>
                   </div>
                   <div class="panel-body">
                      <ul class="applied-list">
@@ -414,6 +413,24 @@ getLocation();
           }
        });
    })
+
+   //reset button
+   $('.reset-filter').on('click',function(event){
+     event.preventDefault ? event.preventDefault() : (event.returnValue = false)
+     $('.result-container').css({opacity:0.2}).before('<div class="progress"><div class="indeterminate"></div></div>')
+       $.ajax({ type: "GET",   
+          url: "{{ url('resetFilter') }}",   
+          accepts: {
+             text: "application/json"
+         },
+          async: false,
+          success : function(data)
+          {  
+             var pathname = '{{ url('/') }}/search';
+             window.location.href = pathname.replace(/\/$/, ""); // remove trailing slash and redirect
+          }
+       });
+   })
    
    //set price
    $('#price-filter').on('click',function(e){
@@ -631,16 +648,19 @@ yearSlider.noUiSlider.on('update', function(values, handle) {
 </script>
 <script>
 $(document).ready(function(){
-//   $('.slide-nav').click(function(){
-//      $('.slide-nav-close').show();
-//   }); 
-        $('.slide-nav').click(function() {
+    if(Cookies.get('nav') == "open"){
+      $('body').addClass('sidebar-open'); 
+      $('.slide-nav-close').show();
+    }
+    $('.slide-nav').click(function() {
+        Cookies.set('nav', 'open');
         $('body').addClass('sidebar-open'); 
         $('.slide-nav-close').show();
         return false;
     });
 
     $('.sidebar-overlay, .sidenav-close, .slide-nav-close').click(function() {
+        Cookies.set('nav', 'close');
         $('body').removeClass('sidebar-open');
         $('.slide-nav-close').hide();
         return false;

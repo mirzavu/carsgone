@@ -203,7 +203,7 @@ ul.social-links li a:hover{ background:#4dc3ff; color:#fff; }
 .sidebar{width: 29%;float:left;padding-right: 34px; font-weight: 700; color: #666;}
 .slide-nav{display:none;}
 .slide-nav, .slide-nav:hover, .slide-nav:focus{ position: fixed; left: 0;   top: 200px; background: #dc5f03; color:#fff; font-weight:700; padding: 10px; border-radius: 0 5px 5px 0; z-index:9999; box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
-a.sidenav-close, a.reset-filter {display:none;background: #253993;border-radius: 4px;float: right;font-size: 17px;color: #fff;position: absolute;top: 10px;right: 10px;padding: 0px 7px;height: 24px;text-align: center;text-shadow: ;}
+a.reset-filter {display:block;background: #253993;border-radius: 4px;float: right;font-size: 17px;color: #fff;position: absolute;top: 10px;right: 10px;padding: 0px 7px;height: 24px;text-align: center;text-shadow: ;}
 .main-container{width:71%; float:right;}
 .panel{border:0; border-radius:2px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
 .panel-heading{background:#dc5f03; border-radius:2px 2px 0 0;}
@@ -1408,7 +1408,7 @@ ul.item-stats li div{font-size:25px;}
 /* ============================= */
 @media only screen and (max-width: 1050px) {
 .hero-btn{display:block;}
-a.sidenav-close {display:block}
+a.sidenav-close, a.reset-filter {display:block}
 .navbar-nav{margin-top:7.5px;}
 .navbar-default .navbar-nav > li > a{margin-left:0; border-radius:0; padding:8px 10px;}
 .navbar-default .navbar-nav > li > a:before{display:none !important;}

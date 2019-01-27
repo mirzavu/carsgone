@@ -220,6 +220,13 @@ class SearchController extends Controller
 		echo $param_list;
 	}
 
+	public function resetFilter(Request $request)
+	{
+		
+		Log::info($request->session()->all());
+		$request->session()->forget([ 'distance', 'price', 'year', 'sort']);
+	}
+
 	public function getAppliedFilters($conditions)
 	{
 		foreach ($conditions->all() as $key => $value) {

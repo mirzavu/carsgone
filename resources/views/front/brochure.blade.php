@@ -233,7 +233,7 @@
                                  </tr>
                                  @else
                                  <tr>
-                                    <td colspan="2"><p style="font-size: 12px;">Although every attempt is made to ensure the accuracy of the vehicle data shown here, due to the possibility of human error, we cannot guarantee the accuracy of the vehicle information, the availability of this vehicle, or the accuracy of photos displayed. Please contact the dealership directly for verification or if you would like more information on this vehicle.</p></td>
+                                    <td colspan="2"><p style="font-size: 10px;">Although every attempt is made to ensure the accuracy of the vehicle data shown here, due to the possibility of human error, we cannot guarantee the accuracy of the vehicle information, the availability of this vehicle, or the accuracy of photos displayed. Please contact the dealership directly for verification, or if you would like more information on this vehicle. The vehicle shown here is owned by the dealership displayed in the description and contact fields of this brochure. All inventories are displayed as part of the auto dealers syndicated marketing efforts with national and local marketing firms.</p></td>
                                  </tr>
                                  @endif
 

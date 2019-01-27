@@ -6,6 +6,7 @@
       <div class="row">
          <div class="col-sm-12">
             <a href="#" class="slide-nav"><i class="fa fa-filter" aria-hidden="true"></i> Filter</a>
+            <a href="#" class="slide-nav-close"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
             <!-- Sidebar Start -->
             <div class="sidebar fix-sidebar">
                <!-- panel start -->
@@ -26,6 +27,7 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Filters Applied</h3>
+                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <ul class="applied-list">
@@ -133,12 +135,15 @@
                   </div>
                   <div class="panel-body">
                      <div class="price-range-container">
-                        <div id="year-range" class="filter-margin"></div>
-                        <button id="year-filter" class="waves-effect waves-light btn">FILTER</button>
+                       <div class="price-range-text-holder">
+                           <button id="year-filter" class="waves-effect waves-light btn">FILTER</button>
                         <p class="price-range-output">
                            <span><b id="min-year"></b></span> &mdash;
                            <span><b id="max-year"></b></span>
                         </p>
+                       </div>
+                        <div id="year-range" class="filter-margin"></div>
+                        
                      </div>
                   </div>
                </div>
@@ -150,12 +155,15 @@
                   </div>
                   <div class="panel-body">
                      <div class="price-range-container">
-                        <div id="price-range" class="filter-margin"></div>
-                        <button type="submit" id="price-filter" class="waves-effect waves-light btn">FILTER</button>
+                         <div class="price-range-text-holder">
+                             <button type="submit" id="price-filter" class="waves-effect waves-light btn">FILTER</button>
                         <p class="price-range-output">
                            <span>$<b id="min-price"></b></span> &mdash;
                            <span>$<b id="max-price"></b></span>
                         </p>
+                         </div>
+                        <div id="price-range" class="filter-margin"></div>
+                        
                      </div>
                   </div>
                </div>
@@ -167,12 +175,15 @@
                   </div>
                   <div class="panel-body">
                      <div class="price-range-container">
-                        <div id="odometer-range" class="filter-margin"></div>
-                        <button id="odometer-filter" class="waves-effect waves-light btn">FILTER</button>
+                         <div class="price-range-text-holder">
+                             <button id="odometer-filter" class="waves-effect waves-light btn">FILTER</button>
                         <p class="price-range-output">
                            <span><b id="min-odometer"></b>Km</span> &mdash;
                            <span><b id="max-odometer"></b>Km</span>
                         </p>
+                         </div>
+                        <div id="odometer-range" class="filter-margin"></div>
+                        
                      </div>
                   </div>
                </div>
@@ -617,6 +628,24 @@ yearSlider.noUiSlider.on('update', function(values, handle) {
 
 
    
+</script>
+<script>
+$(document).ready(function(){
+//   $('.slide-nav').click(function(){
+//      $('.slide-nav-close').show();
+//   }); 
+        $('.slide-nav').click(function() {
+        $('body').addClass('sidebar-open'); 
+        $('.slide-nav-close').show();
+        return false;
+    });
+
+    $('.sidebar-overlay, .sidenav-close, .slide-nav-close').click(function() {
+        $('body').removeClass('sidebar-open');
+        $('.slide-nav-close').hide();
+        return false;
+    });
+});
 </script>
 
 

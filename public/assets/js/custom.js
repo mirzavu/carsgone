@@ -15,7 +15,7 @@ $(document).ready(function() {
     $('select').material_select();
     /** sliding sidebar for mobile view **/
     $('.slide-nav').click(function() {
-        $('body').addClass('sidebar-open');
+        $('body').addClass('sidebar-open');        
         return false;
     });
 

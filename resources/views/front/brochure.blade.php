@@ -223,7 +223,7 @@
 
                                     Go to EdmontonAutoLoans.com and <strong>Post your vehicle for FREE</strong>, and buyers will be able to apply for an auto loan directly on your vehicle.
 
-                                    This service is completely free, and will give more potential buyers the option to finance your private vehicle though EdmotnonAutoLoans.com.</p>
+                                    This service is completely free, and will give more potential buyers the option to finance your private vehicle though EdmontonAutoLoans.com.</p>
                                     <p>Need a car loan on a private, or dealer vehicle? We offer cash back auto loans, equity auto loans, and offer finance solutions for every situation.
 
                                     All credit is 100% accepted and approved. 20 plus years of experience. Check out our Google reviews.</p>
@@ -413,9 +413,9 @@
                      <div class="approval-box">
                         <div class="text">
                            <div class="para-holder">
-                               <p class="white-para">Get financing approved now for a <span class="orange-color">2016 Chevrolet Silverado 1500 LT</span>.
-                                This Black, Automatic, truck, with <span class="orange-color">38,987 Kms</span>, is located in Edmotnon, Alberta.
-                                Get your auto loan and funding pre-approved now for <span class="orange-color">$45,895</span>.
+                               <p class="white-para">Get financing approved now for a <span class="orange-color">{{$vehicle->year}} {{$vehicle->make->make_name}}, {{$vehicle->model->model_name}} {{$vehicle->trim}}</span>.
+                                This Black, Automatic, truck, with <span class="orange-color">{{$vehicle->odometer ==0?'N/A':$vehicle->odometer.' Km'}}</span>, is located in {{$vehicle->user->city->city_name}}, Alberta.
+                                Get your auto loan and funding pre-approved now for <span class="orange-color">{{$vehicle->price}}</span>.
                             All Credit 100% Accepted!</p>
                             <a class="style-btn" href="#"><span class="icon"></span>Apply Now</a>
                            </div>                            

@@ -403,6 +403,28 @@
                   </div>
                </div>
                <!-- Featured Container end -->
+               
+               <!-- Featured Container start -->
+               <div class="panel panel-default custom-panel">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">Sponsored Advertisement</h3>
+                  </div>
+                  <div class="small-approval-box">
+                     <div class="approval-box">
+                        <div class="text">
+                           <div class="para-holder">
+                               <p class="white-para">Get financing approved now for a <span class="orange-color">2016 Chevrolet Silverado 1500 LT</span>.
+                                This Black, Automatic, truck, with <span class="orange-color">38,987 Kms</span>, is located in Edmotnon, Alberta.
+                                Get your auto loan and funding pre-approved now for <span class="orange-color">$45,895</span>.
+                            All Credit 100% Accepted!</p>
+                            <a class="style-btn" href="#"><span class="icon"></span>Apply Now</a>
+                           </div>                            
+                            <div class="right-side-img"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- Featured Container end -->
             </div>
          </div>
       </div>

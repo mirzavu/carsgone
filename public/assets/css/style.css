@@ -1759,6 +1759,154 @@ ul.item-stats li div i {
 .panel .panel-body .filter-margin {
     margin-bottom: 10px !important;
 }
+
+/* banner start */
+.approval-box{
+    background-image: url(../images/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+        padding: 0px 0px 0px 20px;
+        height: 250px;
+    overflow: hidden;
+    margin: 0px 0px 0px 0px;
+    float: left;
+    width: 100%;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.approval-box .para-holder{
+    float: left;
+    width: 57%;
+    margin: 35px 0px;
+}
+.approval-box p.white-para{
+    color: white;
+    font-size: 19px;
+    line-height: 30px;
+    margin: 0px 0px 30px 0px;
+    text-align: justify;
+}
+.approval-box p.white-para .orange-color{
+    color: #dc5f03;
+    font-weight: bold;
+}
+.approval-box a.style-btn{
+    position: relative;
+    display: inline-block;
+    background-color: #dc5f03;
+    color: #fff;
+    padding: 3px 10px 3px 43px;
+    margin: 0px 0px 0px 10px;
+    border-radius: 5px;
+    font-size: 16px;    
+    font-weight: 600;
+    text-decoration: none;
+}
+.approval-box a.style-btn span.icon{     
+    position: absolute;
+    display: block;
+    left: -10px;
+    top: -7px;
+    width: 45px;
+    height: 45px; 
+    border-radius: 50px;
+    border: 2px solid #8f4108;    
+    background-color: #dc5f03;
+    background-image: url(../images/tick.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.custom-panel .panel-heading{
+    border: none;
+}
+.right-side-img{
+    background-image: url(../images/right-side.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 394px;
+    height: 250px;
+    float: right;
+}
+/* banner end */
+
+
+
+/* responsive style start */
+@media only screen and (min-width: 566px) and (max-width: 750px){
+    .approval-box{
+        overflow: hidden;
+    height: 194px;
+    }
+    
+}
+@media only screen and (min-width: 320px) and (max-width: 566px){
+    .approval-box{
+        background-image: url(../images/banner-mob.jpg);
+            background-position: unset;
+        padding: 20px 20px 30px 20px;
+        overflow: auto;
+        height: auto;
+    }
+    .approval-box p.white-para {
+    margin: 109% 0px 20px 0px;
+    font-size: 18px;
+    line-height: 25px;
+            text-align: justify;
+}
+    .approval-box .para-holder {
+    width: 100%;
+        text-align: center;
+}
+    .right-side-img{
+        display: none;
+    }
+}
+@media only screen and (min-width: 880px) and (max-width: 991px){
+    .approval-box .para-holder {
+    width: 50%;
+    margin: 36px 0px;
+}
+    .approval-box p.white-para {
+    font-size: 15px;
+    line-height: 30px;
+}
+}
+@media only screen and (min-width: 749px) and (max-width: 879px){
+    .approval-box .para-holder {
+    width: 40%;
+    margin: 29px 0px;
+}
+    .approval-box p.white-para {
+        font-size: 14px;
+    line-height: 20px;
+}
+
+
+}
+@media only screen and (min-width: 566px) and (max-width: 748px){
+     .approval-box .para-holder {
+    width: 40%;
+    margin: 12px 0px;
+}
+    .approval-box p.white-para {
+    font-size: 12px;
+    line-height: 20px;
+    margin: 0px 0px 12px 0px;
+}
+    .right-side-img {
+    width: 300px;
+    height: 194px;
+}
+}
+@media only screen and (min-width: 566px) and (max-width: 604px){
+    .approval-box p.white-para{
+            height: 120px;
+    overflow: hidden;
+    }
+}
+/* responsive style end  */
+
+
 @media only screen and (min-width: 320px) and (max-width: 370px){
     .sidebar {
         width: 246px;

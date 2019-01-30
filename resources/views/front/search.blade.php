@@ -6,7 +6,7 @@
       <div class="row">
          <div class="col-sm-12">
             <a href="#" class="slide-nav"><i class="fa fa-filter" aria-hidden="true"></i> Filter</a>
-            <a href="#" class="slide-nav-close"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
+            <!-- <a href="#" class="slide-nav-close"><i class="fa fa-times" aria-hidden="true"></i> Close</a> -->
             <!-- Sidebar Start -->
             <div class="sidebar fix-sidebar">
                <!-- panel start -->
@@ -14,6 +14,7 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Keyword Search</h3>
+                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <div class="filter-search">
@@ -48,6 +49,7 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Distance within</h3>
+                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <ul class="link-list distance-list">
@@ -67,6 +69,7 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Select Make</h3>
+                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <ul id="makes-list" class="link-list">
@@ -83,6 +86,7 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Select Model</h3>
+                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <ul id="models-list"  class="link-list">
@@ -100,6 +104,7 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Select City</h3>
+                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <ul  id="cities-list" class="link-list">
@@ -117,6 +122,7 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Select Body Style</h3>
+                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <ul class="link-list">
@@ -131,11 +137,12 @@
               <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Filter by Year</h3>
+                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <div class="price-range-container">
                        <div class="price-range-text-holder">
-                           <button id="year-filter" class="waves-effect waves-light btn">FILTER</button>
+                           <button id="year-filter" style="display:none;" class="waves-effect waves-light btn">FILTER</button>
                         <p class="price-range-output">
                            <span><b id="min-year"></b></span> &mdash;
                            <span><b id="max-year"></b></span>
@@ -151,11 +158,12 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Filter by Price</h3>
+                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <div class="price-range-container">
                          <div class="price-range-text-holder">
-                             <button type="submit" id="price-filter" class="waves-effect waves-light btn">FILTER</button>
+                             <button type="submit" style="display:none;" id="price-filter" class="waves-effect waves-light btn">FILTER</button>
                         <p class="price-range-output">
                            <span>$<b id="min-price"></b></span> &mdash;
                            <span>$<b id="max-price"></b></span>
@@ -171,11 +179,12 @@
                <div class="panel">
                   <div class="panel-heading">
                      <h3 class="panel-title">Filter by Odometer</h3>
+                     <a href="#" class="sidenav-close">Close</a>
                   </div>
                   <div class="panel-body">
                      <div class="price-range-container">
                          <div class="price-range-text-holder">
-                             <button id="odometer-filter" class="waves-effect waves-light btn">FILTER</button>
+                             <button style="display:none;" id="odometer-filter" class="waves-effect waves-light btn">FILTER</button>
                         <p class="price-range-output">
                            <span><b id="min-odometer"></b>Km</span> &mdash;
                            <span><b id="max-odometer"></b>Km</span>
@@ -583,6 +592,9 @@ var snapValues = [
 snapSlider.noUiSlider.on('update', function(values, handle) {
     snapValues[handle].innerHTML = values[handle];
 });
+snapSlider.noUiSlider.on('set', function(values, handle) {
+    $('#price-filter').click()
+});
 
 var odometerSlider = document.getElementById('odometer-range');
 
@@ -613,6 +625,9 @@ var odometerValues = [
 odometerSlider.noUiSlider.on('update', function(values, handle) {
     odometerValues[handle].innerHTML = values[handle];
 });
+odometerSlider.noUiSlider.on('set', function(values, handle) {
+    $('#odometer-filter').click()
+});
 
 var yearSlider = document.getElementById('year-range');
 
@@ -641,6 +656,9 @@ var yearValues = [
 
 yearSlider.noUiSlider.on('update', function(values, handle) {
     yearValues[handle].innerHTML = values[handle];
+});
+yearSlider.noUiSlider.on('set', function(values, handle) {
+    $('#year-filter').click()
 });
 
 

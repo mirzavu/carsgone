@@ -417,7 +417,7 @@
                                 This Black, Automatic, truck, with <span class="orange-color">{{$vehicle->odometer ==0?'N/A':$vehicle->odometer.' Km'}}</span>, is located in {{$vehicle->user->city->city_name}}, Alberta.
                                 Get your auto loan and funding pre-approved now for <span class="orange-color">{{$vehicle->price}}</span>.
                             All Credit 100% Accepted!</p>
-                            <a class="style-btn" href="#"><span class="icon"></span>Apply Now</a>
+                            <a class="style-btn" href="/finance/"><span class="icon"></span>Apply Now</a>
                            </div>                            
                             <div class="right-side-img"></div>
                         </div>

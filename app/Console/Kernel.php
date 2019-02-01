@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\Strathcom::class,
         Commands\Carpages::class,
         Commands\Cdemo::class,
+        Commands\ImageUpload::class,
     ];
 
     /**

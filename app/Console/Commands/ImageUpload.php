@@ -91,15 +91,8 @@ class ImageUpload extends Command
                 Log::info($new_url);
                 if ($new_url)
                 {
-                  echo 'Inserted To amazones3 <br>';
                   //array_push($photos, ['storage_url' => (string)$new_url]);
                   $b=DB::table('vehicle_photos')->where('id', '=', $key->id)->update(['storage_url' => (string)$new_url]);
-                  if($b)
-                  {
-                    echo 'inserted to DB<br><br>';
-                  }else {
-                    echo 'failed insert Database<br><br>';
-                  }
                 }else {
                   echo 'failed insert amazones3<br>';
                 }

@@ -83,13 +83,12 @@ class ImageUpload extends Command
             curl_close ($ch);
 
             if ($retcode == 200) {
-              $a=Storage::disk('s3')->put($filePath, $raw, 'public');
+              $a=Storage::disk('s3')->put($filePath, (string)$raw, 'public');
               if($a)
               {
                 $new_urls=Storage::disk('s3')->url($filePath);
                 
                 $new_url=str_replace("https://s3.ca-central-1.amazonaws.com/","http://",$new_urls);
-                Log::info($new_url);
                 if ($new_url)
                 {
                   //array_push($photos, ['storage_url' => (string)$new_url]);

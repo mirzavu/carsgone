@@ -23,7 +23,7 @@ class Related extends React.Component {
 	render(){
 		const vehiclehtml = this.state.vehicles.map((item, i) => {
 		if(item.photos.length>0)
-			var src = item.photos[0].path;
+			var src = item.photos[0].storage_url;
 		else
 			var src = '';
       	return <div>

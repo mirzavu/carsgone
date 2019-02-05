@@ -20,7 +20,7 @@
                   <div class="item-images">
                      <ul class="item-image-list">
                         @foreach ($vehicle->photos as $photo)
-                        <li><a class="{{$vehicle->add_overlay}}" href="{{$photo->path}}" title="Can use keyboard arrows to navigate photos"><img src="{{$photo->path}}" alt="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}" /></a></li>
+                        <li><a class="{{$vehicle->add_overlay}}" href="{{$photo->storage_url}}" title="Can use keyboard arrows to navigate photos"><img src="{{$photo->storage_url}}" alt="{{$vehicle->make->make_name}} {{$vehicle->model->model_name}}" /></a></li>
                         @endforeach
                      </ul>
                   </div>
@@ -58,10 +58,7 @@
                   @endif
 				  <div class="vehicle-info-rightD">
 					<div class="col-md-12 col-xs-12 distanceD paddZ">{{$vehicle->odometer ==0?'N/A':$vehicle->odometer.' Km'}} </div>
-					
-					<!-- <div class="col-md-12 col-xs-12 paddZ carProof">
-						<a style="cursor: pointer;" data-toggle="modal" data-target="#enquiryModal"><img src="https://www.drivewheaton.ca/wp-content/themes/strathcom/assets/dist/img/carproof-logo.png" class="img-responsive" alt="carproof image"></a>
-					</div> -->
+
 				  </div>
                <div class="addthis_inline_share_toolbox pull-left"></div>
                </div>

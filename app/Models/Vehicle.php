@@ -78,7 +78,7 @@ class Vehicle extends Model
 
     public function photo()
     {
-        return $this->photos()->value('path');
+        return $this->photos()->value('storage_url');
     }
 
     public function options()

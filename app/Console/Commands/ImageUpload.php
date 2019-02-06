@@ -88,7 +88,7 @@ class ImageUpload extends Command
               {
                 $new_urls=Storage::disk('s3')->url($filePath);
                 
-                $new_url=str_replace("https://s3.ca-central-1.amazonaws.com/","http://",$new_urls);
+                $new_url=str_replace("https://s3.ca-central-1.amazonaws.com/","https://",$new_urls);
                 if ($new_url)
                 {
                   //array_push($photos, ['storage_url' => (string)$new_url]);

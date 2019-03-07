@@ -112,7 +112,7 @@ class SearchController extends Controller
 
         if($sort == 'price')
         {
-			$data['vehicles'] = Vehicle::applyFilter($conditions)->where('price', '>', 800)->orderBy($sort, $direction)->paginate(15);
+			$data['vehicles'] = Vehicle::applyFilter($conditions)->where('price', '>', 7500)->orderBy($sort, $direction)->paginate(15);
         }
         else
         {

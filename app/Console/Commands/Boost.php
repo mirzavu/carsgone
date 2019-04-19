@@ -153,9 +153,12 @@ class Boost extends Command
                 
                 if($vehicle->exists)
                 {
-                    $vehicle->status_id = 1;
-                    $vehicle->save();
-
+                    if(!empty($xml->Images->Photo))
+                    {
+                        $vehicle->status_id = 1;
+                        $vehicle->save();
+                    }
+                    
                     if(!empty($xml->Images->Photo) && VehiclePhoto::wherePath($xml->Images->Photo)->count() == 0)
                     {
                         Log::info($xml->Images->Photo);
@@ -237,10 +240,20 @@ class Boost extends Command
                 $images = $xml->Images;
 
                 $photos =[];
-                foreach($images->Photo as $image) {
-                    array_push($photos, ['position' => (string)$image['number'], 'path' => (string)$image, 'vehicle_id' => $vehicle->id]);
+
+                if(empty($xml->Images->Photo))
+                {
+                    $vehicle->status_id = 2;
+                    $vehicle->save();
                 }
-                DB::table('vehicle_photos')->insert($photos);
+                else {
+                    foreach($images->Photo as $image) {
+                        array_push($photos, ['position' => (string)$image['number'], 'path' => (string)$image, 'vehicle_id' => $vehicle->id]);
+                    }
+                    DB::table('vehicle_photos')->insert($photos);
+                }
+
+                
                 //dd($vehicle->photo());
 
                 // $vehicle->options()->detach();

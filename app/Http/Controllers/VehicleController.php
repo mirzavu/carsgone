@@ -58,18 +58,19 @@ class VehicleController extends Controller
 		$paid_vehicles = Vehicle::leftJoin('users', 'vehicles.user_id', '=', 'users.id')
 								->select('vehicles.*')
 								->where(['make_id' => $vehicle->make_id])
+								->where(['status_id' => 1])
 								->where(function ($query) {
 						    		$query->where('vehicles.featured', '=', 1)
 						         		  ->orWhere('users.featured', '=', 1)->take(8);
 										})->with('make')->with('model')->with('photos')->get();
 		// dd($paid_vehicles);
-		$related = Vehicle::where(['make_id' => $vehicle->make_id, 'model_id'=>$vehicle->model_id])
+		$related = Vehicle::where(['make_id' => $vehicle->make_id, 'model_id'=>$vehicle->model_id, 'status_id' => 1])
 							->with('make')->with('model')->with('photos')
 							->take(8)->get();
 		$results = $paid_vehicles->merge($related);
 		if($vehicle->user->featured)
 		{
-			$user_vehicles = Vehicle::where('user_id',$vehicle->user->id)->with('make')->with('model')->with('photos')->take(10)->get();
+			$user_vehicles = Vehicle::where('user_id',$vehicle->user->id)->where(['status_id' => 1])->with('make')->with('model')->with('photos')->take(10)->get();
 			// dd($user_vehicles)
 			$results = $user_vehicles->merge($results);
 		}

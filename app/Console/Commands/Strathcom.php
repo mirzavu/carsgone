@@ -144,12 +144,15 @@ class Strathcom extends Command
                 $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['user_id' => $dealer->id, 'partner_vehicle_id' => (string)$xml->SMI_ID]);
                 if($vehicle->exists)
                 {
-                    $vehicle->status_id = 1;
-                    $vehicle->save();
+                    if(!empty($xml->ImageAttachment->URI))
+                    {
+                        $vehicle->status_id = 1;
+                        $vehicle->save();
+                    }
+                    
                     
                     if(!empty($xml->ImageAttachment->URI) && VehiclePhoto::wherePath($xml->ImageAttachment->URI)->count() == 0)
                     {
-                        Log::info($xml->ImageAttachment->URI);
                         $vehicle->photos()->delete();
 
                         $photos =[];
@@ -219,10 +222,19 @@ class Strathcom extends Command
                 $vehicle->photos()->delete();
                 $photos =[];
                 $pos = 1;
-                foreach($xml->ImageAttachment as $image) {
-                    array_push($photos, new VehiclePhoto(['position' => $pos++, 'path' => (string)$image->URI]));
+
+                if(empty($xml->ImageAttachment->URI))
+                {
+                    $vehicle->status_id = 2;
+                    $vehicle->save();
                 }
-                $vehicle->photos()->saveMany($photos);
+                else {
+
+                    foreach($xml->ImageAttachment as $image) {
+                        array_push($photos, new VehiclePhoto(['position' => $pos++, 'path' => (string)$image->URI]));
+                    }
+                    $vehicle->photos()->saveMany($photos);
+                }
 
                 // $vehicle->options()->detach();
                 // $option_ids =[];

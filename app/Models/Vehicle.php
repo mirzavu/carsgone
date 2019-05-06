@@ -213,7 +213,7 @@ class Vehicle extends Model
                 // {
                 //     $q->orWhere('vehicles.featured', 1);
                 // }
-                $q->where('vehicles.status_id',1);
+                $q->where('vehicles.status_id',1)->where('vehicles.created_at', '>', DB::raw('DATE_SUB(NOW(),INTERVAL 1 YEAR)'));
                 return $q;
             }
         );

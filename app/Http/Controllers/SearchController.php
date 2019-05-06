@@ -123,7 +123,7 @@ class SearchController extends Controller
 			            ->groupBy('makes.id')
 			            ->get();
         $data['sort'] = $sort.'-'.$direction; 
-        $data['vehicles'] = Vehicle::applyFilter($conditions)->orderBy('vehicles.'.$sort, $direction)->paginate(15);
+        $data['vehicles'] = Vehicle::applyFilter($conditions)->where('vehicles.created_at', '>', DB::raw('DATE_SUB(NOW(),INTERVAL 1 YEAR)'))->orderBy('vehicles.'.$sort, $direction)->paginate(15);
         
         $data['featured_vehicles'] = Vehicle::applyFilter($conditions, 1)->orderBy('vehicles.id', 'desc')->take(8)->get();
         //DB::raw('RAND()')

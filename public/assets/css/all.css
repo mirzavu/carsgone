@@ -10302,36 +10302,50 @@ ul.pricing-list li:nth-child(3){margin-left:0; margin-right:0;}
 
 @media screen and (max-width: 600px) {
 
-ul.item-stats li,
-.dashboard ul.item-stats li{padding:1px 7px;}
-.item-body-left img{height: auto;}
-ul.item-stats li div{padding: 4px;}
-.item-detail-right p:first-child{display: none;}
-.item-body-right-lower h5{margin-bottom:6px;}
-.single-desc .cd-slider-nav a{font-size:12px;}
+	ul.item-stats li,
+	.dashboard ul.item-stats li{padding:1px 7px;}
+	.item-body-left img{height: auto;}
+	ul.item-stats li div{padding: 4px;}
+	.item-detail-right p:first-child{display: none;}
+	.item-body-right-lower h5{margin-bottom:6px;}
+	.single-desc .cd-slider-nav a{font-size:12px;}
 
-.dealer-info-list li{width:50%;}
+	.dealer-info-list li{width:50%;}
 
-.dealer-page-outer .cd-slider-nav li a{font-size:16px; line-height:22px; padding:10px;}
-.vertical-tab .cd-slider-nav a > i{display:none;}
-.vertical-tab .cd-slider-nav,.vertical-tab:before{width:55px;}
-.vertical-tab .tab-content{padding:15px;}
-.vertical-tab .contact-dealer-container{padding:0;}
-.current-info{padding:12px 5px;}
-.promote-vehicle.paypal,.post-tab .tab-content > fieldset{padding:25px;}
-.promote-vehicle.paypal h4{border-left:0;}
-.post-tab .tab-content > fieldset > span{position:relative; top:0; left:0; float:left;}
-.post-tab .tab-content > fieldset > h4{font-size:20px; padding-left:42px;}
-.sf-nav li{text-align:center;}
-.sf-nav-subtext{display:none;}
-.popular-item-list.bordered.four-col li{padding:0 10px;}
-.related-link-list{display: block;}
-.related-link-list li{width: 100%;}
-.fetured-box{width: 80%;}
-.featured-details .price, .featured-details .run{width:100%;}
-#post-create-form label:not(.promote-label){ display: none; }
-#credit_wizard label{ display: none; }
-#quick-box label{ display: none; }
+	.dealer-page-outer .cd-slider-nav li a{font-size:16px; line-height:22px; padding:10px;}
+	.vertical-tab .cd-slider-nav a > i{display:none;}
+	.vertical-tab .cd-slider-nav,.vertical-tab:before{width:55px;}
+	.vertical-tab .tab-content{padding:15px;}
+	.vertical-tab .contact-dealer-container{padding:0;}
+	.current-info{padding:12px 5px;}
+	.promote-vehicle.paypal,.post-tab .tab-content > fieldset{padding:25px;}
+	.promote-vehicle.paypal h4{border-left:0;}
+	.post-tab .tab-content > fieldset > span{position:relative; top:0; left:0; float:left;}
+	.post-tab .tab-content > fieldset > h4{font-size:20px; padding-left:42px;}
+	.sf-nav li{text-align:center;}
+	.sf-nav-subtext{display:none;}
+	.popular-item-list.bordered.four-col li{padding:0 10px;}
+	.related-link-list{display: block;}
+	.related-link-list li{width: 100%;}
+	.fetured-box{width: 80%;}
+	.featured-details .price, .featured-details .run{width:100%;}
+	#post-create-form label:not(.promote-label){ display: none; }
+	#credit_wizard label{ display: none; }
+	#quick-box label{ display: none; }
+	.header-upper > .container {
+		justify-content: center;
+	}
+	.header-upper > .container, .upper-nav, ul.upper-nav li a {
+		display: flex;
+	}
+	ul.upper-nav li a span {
+		font-size: 11px;
+	}
+	ul.upper-nav li a {
+	    font-size: 11px;
+	}
+
+
 }
 /* ============================= */
 /* ! Layout for mobile(portrait) version   */

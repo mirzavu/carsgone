@@ -10336,7 +10336,7 @@ ul.pricing-list li:nth-child(3){margin-left:0; margin-right:0;}
 		justify-content: center;
 	}
 	.header-upper > .container, .upper-nav, ul.upper-nav li a {
-		display: flex;
+		display: flex !important;
 	}
 	ul.upper-nav li a span {
 		font-size: 11px;
@@ -10354,7 +10354,7 @@ ul.pricing-list li:nth-child(3){margin-left:0; margin-right:0;}
 @media screen and (max-width: 479px) {
 body { font-size:13px; line-height:22px;}
 .hero-btn{margin:18px 0 0 0;}
-ul.upper-nav li a{padding:3px 10px;}
+ul.upper-nav li a{padding:3px 7px;}
 .cd-slider-nav a{font-size:12px; padding:6px 0;}
 .cd-slider-nav a span{font-size:16px; line-height:20px;}
 ul.item-list li{width:100%;}

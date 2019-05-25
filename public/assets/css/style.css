@@ -815,6 +815,20 @@ span.required {
 .panel-body > h1{
 	display:none;
 }
+.addthis_inline_share_toolbox {
+    padding: 0px;
+    width: 100%;
+}
+.at-share-btn-elements {
+    display: flex;
+}
+.at-share-btn-elements a.at-share-btn:first-child {
+    margin-left: 0px !important;
+}
+
+.at-share-btn-elements a.at-share-btn {
+    margin: 10px 2% !important;
+}
 
 
 /* ============================= */

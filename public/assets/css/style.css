@@ -829,6 +829,9 @@ span.required {
 .at-share-btn-elements a.at-share-btn {
     margin: 10px 2% !important;
 }
+.item-gallery-container .slick-slide {
+	max-height: 72px;
+}
 
 
 /* ============================= */

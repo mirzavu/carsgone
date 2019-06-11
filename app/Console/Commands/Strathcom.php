@@ -140,6 +140,7 @@ class Strathcom extends Command
             }
 
             if($xmlReader->name == 'Vehicle' && $xmlReader->nodeType == \XMLReader::ELEMENT) {
+
                 $xml = simplexml_load_string( $xmlReader->readOuterXML() );
                 $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['user_id' => $dealer->id, 'partner_vehicle_id' => (string)$xml->SMI_ID]);
                 if($vehicle->exists)
@@ -147,6 +148,14 @@ class Strathcom extends Command
                     if(!empty($xml->ImageAttachment->URI))
                     {
                         $vehicle->status_id = 1;
+
+                        $created_at = $xml->VehicleReceivedDate;
+                        $updated_at = $xml->VehicleReceivedDate;
+                        $time = strtotime($created_at);
+                        $vehicle->created_at = date('Y-m-d H:i:s',$time);
+                        $time = strtotime($updated_at);
+                        $vehicle->updated_at = date('Y-m-d H:i:s',$time);
+
                         $vehicle->save();
                     }
                     
@@ -217,6 +226,12 @@ class Strathcom extends Command
                 $drive_type = DriveType::firstOrCreate(['drive_type'=>(string) $xml->DriveTrain]);
                 $vehicle->drive_type_id = $drive_type->id;
                 $vehicle->certification = (string)$xml->CertificationIssuer;
+                $created_at = $xml->VehicleReceivedDate;
+                $updated_at = $xml->VehicleReceivedDate;
+                $time = strtotime($created_at);
+                $vehicle->created_at = date('Y-m-d H:i:s',$time);
+                $time = strtotime($updated_at);
+                $vehicle->updated_at = date('Y-m-d H:i:s',$time);
                 $vehicle->save();
 
                 $vehicle->photos()->delete();

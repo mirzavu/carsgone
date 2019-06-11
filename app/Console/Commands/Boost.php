@@ -156,6 +156,12 @@ class Boost extends Command
                     if(!empty($xml->Images->Photo))
                     {
                         $vehicle->status_id = 1;
+                        $created_at = $xml->Entry_Date;
+                        $updated_at = $xml->Last_Change_Date;
+                        $time = strtotime($created_at);
+                        $vehicle->created_at = date('Y-m-d H:i:s',$time);
+                        $time = strtotime($updated_at);
+                        $vehicle->updated_at = date('Y-m-d H:i:s',$time);
                         $vehicle->save();
                     }
                     
@@ -231,6 +237,12 @@ class Boost extends Command
                 $vehicle->engine_description = (string)$xml->Engine_Capacity;
                 $vehicle->engine_cylinders = (string)$xml->Cylinders;
                 //$vehicle->slug = null;
+                $created_at = $xml->Entry_Date;
+                $updated_at = $xml->Last_Change_Date;
+                $time = strtotime($created_at);
+                $vehicle->created_at = date('Y-m-d H:i:s',$time);
+                $time = strtotime($updated_at);
+                $vehicle->updated_at = date('Y-m-d H:i:s',$time);
                 $vehicle->save();
                 //echo $vehicle->slug;exit;
                 $vehicle->photos()->delete();

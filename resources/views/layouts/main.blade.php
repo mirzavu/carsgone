@@ -126,7 +126,7 @@
             </div>
             <div class="col-sm-3">
                <ul class="link adres">
-                  <li><a title="6211 104 Street Edmonton AB"><i class="fa fa-map-marker"></i>9220 58 Ave NW, Edmonton, AB, T6E-0G7</a></li>
+                  <li><a title="6211 104 Street Edmonton AB"><i class="fa fa-map-marker"></i>#101 9220 58 Ave NW, Edmonton, AB, T6E-0G7</a></li>
                   <li><a title="1-855-227-1669​"><i class="fa fa-phone"></i>1-855-227-1669​</a></li>
                   <li><a title="1-855-227-1669​"><i class="fa fa-headphones"></i>1-855-227-1669​</a></li>
                </ul>

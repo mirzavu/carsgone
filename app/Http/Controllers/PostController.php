@@ -114,7 +114,7 @@ class PostController extends Controller
 		$user->role = "member";
 		$postal_code = ($postal_code[4] == '')? $postal_code: substr_replace($postal_code, ' ', 3, 0);
 		$user->postal_code = $postal_code;
-		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($postal_code);
+		$url = "https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($postal_code)."&key=AIzaSyDH7ZiOu0kvpl-nJ2AeVJbzxQYHTeIKTLI";
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -412,7 +412,7 @@ class PostController extends Controller
 			$user->role = "dealer";
 		else
 			$user->role = "member";
-		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($user->postal_code);
+		$url = "https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($user->postal_code)."&key=AIzaSyDH7ZiOu0kvpl-nJ2AeVJbzxQYHTeIKTLI";
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

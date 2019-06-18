@@ -75,8 +75,8 @@ class FeedExport extends Command
                 $csv[$j][]=$vehicle->transmission;
                 $csv[$j][]=$vehicle->engine_cylinders;
                 $csv[$j][]=$vehicle->condition;
-                $csv[$j][]=$vehicle->ext_color->color;
-                $csv[$j][]=$vehicle->int_color->color;
+                $csv[$j][]=$vehicle->ext_color->color?? "";
+                $csv[$j][]=$vehicle->int_color->color?? "";
                 $csv[$j][]=$vehicle->bodyStyleGroup->body_style_group_name;
                 $csv[$j][]=$vehicle->odometer;
                 $csv[$j][]=null;

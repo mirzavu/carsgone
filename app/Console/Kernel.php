@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\Boost::class,
         Commands\Cdemo::class,
         Commands\Strathcom::class,
+        Commands\FeedExport::class,
     ];
 
     /**

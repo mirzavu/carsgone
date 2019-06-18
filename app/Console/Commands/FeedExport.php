@@ -58,6 +58,7 @@ class FeedExport extends Command
         $i = 1;
         Vehicle::with('user')
             ->where('vehicles.created_at', '>', DB::raw('DATE_SUB(NOW(),INTERVAL 1 YEAR)'))
+            ->where('status_id', '1')
             ->chunk(10000, function($vehicles) use (&$i) {
             $columns = array('DealerName', 'DealerID',    'VIN', 'StockNumber', 'Year',    'Make',    'Model',   'Trim',    'Engine',  'Transmission',    'Cylinders',   'Type',    'ExteriorColor',   'InteriorColor',   'BodyStyle',   'Mileage', 'DriveTrain',  'ListingPrice',    'Description', 'Photos',  'Doors',   'DetailPageURL',   'InventoryDate');
             $csv[0] = $columns;

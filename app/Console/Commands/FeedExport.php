@@ -104,6 +104,6 @@ class FeedExport extends Command
         fclose ($csv_handler);
         $csvh = fopen ($path,'r');
         @$login_result=ftp_login($ftp_conn, 'aultec', 'C8GtrQZGJwAj'); 
-        if($login_result) $upload_result=ftp_fput($ftp_conn, 'export'.$i.'.csv', $csvh, FTP_ASCII);
+        if($login_result) $upload_result=ftp_fput($ftp_conn, 'carsgone.csv', $csvh, FTP_ASCII);
     }
 }

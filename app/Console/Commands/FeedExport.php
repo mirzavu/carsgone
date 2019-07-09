@@ -81,7 +81,7 @@ class FeedExport extends Command
             $csv[$j][]=$vehicle->bodyStyleGroup->body_style_group_name?? "";
             $csv[$j][]=$vehicle->odometer;
             $csv[$j][]=null;
-            $csv[$j][]=$vehicle->price;
+            $csv[$j][]=str_replace( ',', '', $vehicle->price );
             $csv[$j][]=$vehicle->text;
             $photo_str = [];
             foreach ($vehicle->photos as $photo)

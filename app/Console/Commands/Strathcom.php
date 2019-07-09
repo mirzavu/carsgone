@@ -142,6 +142,10 @@ class Strathcom extends Command
             if($xmlReader->name == 'Vehicle' && $xmlReader->nodeType == \XMLReader::ELEMENT) {
 
                 $xml = simplexml_load_string( $xmlReader->readOuterXML() );
+                if($dealer->id == 1307) //Skip dealer
+                {
+                    continue;
+                }
                 $vehicle = Vehicle::withoutGlobalScopes()->firstOrNew(['user_id' => $dealer->id, 'partner_vehicle_id' => (string)$xml->SMI_ID]);
                 if($vehicle->exists)
                 {

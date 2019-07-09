@@ -62,6 +62,8 @@ class FeedExport extends Command
         $csv[0] = $columns;
         $j=1;
         foreach ($vehicles as $vehicle) {
+            if($vehicle->user->id == 1307)
+                continue;
             $csv[$j][]=$vehicle->user->name;
             $csv[$j][]=$vehicle->user->id;
             $csv[$j][]=$vehicle->vin;

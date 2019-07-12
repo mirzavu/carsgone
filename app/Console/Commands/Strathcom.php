@@ -54,6 +54,9 @@ class Strathcom extends Command
      */
     public function handle()
     {
+        error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
         $latest_ctime = 0;
         $vehicle_cnt = 0;
         $vehicle_upd = 0;
@@ -76,13 +79,16 @@ class Strathcom extends Command
         $zip = new \ZipArchive;
         $res = $zip->open($file_name);
         if ($res === TRUE) {
-          $zip->extractTo($xml_directory);
+            echo "aa";
+          $extract = $zip->extractTo($xml_directory);
+          if ($extract){
+           echo 'Zip File Extracted';
+            }
           $zip->close();
         } else {
           echo 'doh!';
         }
         $out_file_name = str_replace('.zip', '', $file_name); 
-        echo $out_file_name;
         $xmlReader = new \XMLReader();
         $xmlReader->open($out_file_name, null, 1 << 19);
         while ($xmlReader->read()) {
@@ -162,10 +168,8 @@ class Strathcom extends Command
                     $price = empty($sale_price)? $ask_price: $sale_price;
                     $vehicle->price = ($price < 500000) ? (int)$price : 500000;
                     $vehicle->save();
-                    echo $xml->ImageAttachment->count().'#'.VehiclePhoto::where('vehicle_id', $vehicle->id)->count().'|';
                     if(!empty($xml->ImageAttachment->URI) && (VehiclePhoto::wherePath($xml->ImageAttachment->URI)->count() == 0 || $xml->ImageAttachment->count() != VehiclePhoto::where('vehicle_id', $vehicle->id)->count()))
                     {
-                        echo $xml->ImageAttachment->URI;
                         $vehicle->photos()->delete();
 
                         $photos =[];

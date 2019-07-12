@@ -91,6 +91,11 @@ ini_set('display_errors', 1);
         $out_file_name = str_replace('.zip', '', $file_name); 
         $xmlReader = new \XMLReader();
         $xmlReader->open($out_file_name, null, 1 << 19);
+
+        Vehicle::whereHas('User', function($q){
+                $q->where('partner_id', '1');
+            })->update(['status_id' => 2]);
+        
         while ($xmlReader->read()) {
             if ($xmlReader->name === 'Dealer' && $xmlReader->nodeType == \XMLReader::ELEMENT) {
                 $xml        = simplexml_load_string($xmlReader->readOuterXML());
@@ -141,7 +146,7 @@ ini_set('display_errors', 1);
                 $dealer->save();
                 echo "\nDealer Name : " . $dealer->name . ' : Dealer ID: '.$dealer->id."\n";
                 $dealer_cnt++;
-                Vehicle::where('user_id', $dealer->id)->update(['status_id' => 2]);
+                // Vehicle::where('user_id', $dealer->id)->update(['status_id' => 2]);
             }
 
             if($xmlReader->name == 'Vehicle' && $xmlReader->nodeType == \XMLReader::ELEMENT) {

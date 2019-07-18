@@ -142,7 +142,7 @@ class Strathcom extends Command
             if($xmlReader->name == 'Vehicle' && $xmlReader->nodeType == \XMLReader::ELEMENT) {
 
                 $xml = simplexml_load_string( $xmlReader->readOuterXML() );
-                if($dealer->id == 1307) //Skip dealer
+                if($dealer->id == 1307 || $dealer->id == 1347) //Skip dealer
                 {
                     continue;
                 }

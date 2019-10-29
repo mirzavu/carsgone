@@ -216,7 +216,7 @@
 </div>
 </div>
 <script src="/assets/js/modernizr.js"></script> <!-- Modernizr -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKsvinm7jgttOZYmtlyIEhEt5l7ZL7-yM&sensor=false&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWHe3unYFspi_9GiYkhhHhqqNF1K76zJg&sensor=false&libraries=places"></script>
 <script src="/assets/js/all.js"></script>
 {{-- <script src="/assets/js/jquery-2.2.2.min.js"></script> 
 <script src="/assets/js/bootstrap.min.js"></script>

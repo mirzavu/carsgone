@@ -377,7 +377,7 @@ function showPosition(position) {
   Cookies.set('lng', position.coords.longitude);
   location.reload();
 }
-getLocation();
+// getLocation();
 </script>
 <script type="text/javascript">
 
